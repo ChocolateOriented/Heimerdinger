@@ -47,12 +47,6 @@ public class TestController extends BaseController {
 		List<UserEntity>userList = new ArrayList<>(users.values());
 		return getDataTable(userList);
 	}
-//	@ApiOperation("获取用户列表")
-//	@GetMapping("/list")
-//	public Rest<List<UserEntity>> userList() {
-//		List<UserEntity> userList = new ArrayList<>(users.values());
-//		return Rest.success("成功",userList);
-//	}
 
 	@ApiOperation("获取用户详细")
 	@ApiOperationSupport(author = "lijingxiang")

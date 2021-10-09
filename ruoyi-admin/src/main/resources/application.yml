@@ -136,8 +136,6 @@ knife4j:
     enableFilterMultipartApiMethodType: POST
     language: zh-CN
     enableAfterScript: true
-    enableHomeCustom: true
-    homeCustomLocation: classpath:test/home.md
     enableSearch: true
     enableDebug: true
     enableOpenApi: true
