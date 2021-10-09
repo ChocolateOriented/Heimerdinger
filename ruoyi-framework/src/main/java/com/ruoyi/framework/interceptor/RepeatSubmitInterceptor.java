@@ -8,7 +8,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.annotation.RepeatSubmit;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.Rest;
 import com.ruoyi.common.utils.ServletUtils;
 
 /**
@@ -31,8 +31,8 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter
             {
                 if (this.isRepeatSubmit(request, annotation))
                 {
-                    AjaxResult ajaxResult = AjaxResult.error(annotation.message());
-                    ServletUtils.renderString(response, JSONObject.toJSONString(ajaxResult));
+                    Rest rest = Rest.error(annotation.message());
+                    ServletUtils.renderString(response, JSONObject.toJSONString(rest));
                     return false;
                 }
             }

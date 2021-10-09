@@ -1,27 +1,28 @@
 package com.ruoyi.common.core.page;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * 表格分页数据对象
- * 
+ *
  * @author ruoyi
  */
-public class TableDataInfo implements Serializable
+public class TableDataInfo<T> implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
-    /** 总记录数 */
+    @ApiModelProperty(value = "总记录数", example = "200")
     private long total;
 
-    /** 列表数据 */
-    private List<?> rows;
+    @ApiModelProperty(value = "列表数据")
+    private T rows;
 
-    /** 消息状态码 */
+    @ApiModelProperty(value = "消息状态码", example = "200")
     private int code;
 
-    /** 消息内容 */
+    @ApiModelProperty(value = "消息内容", example = "成功")
     private String msg;
 
     /**
@@ -33,11 +34,11 @@ public class TableDataInfo implements Serializable
 
     /**
      * 分页
-     * 
+     *
      * @param list 列表数据
      * @param total 总记录数
      */
-    public TableDataInfo(List<?> list, int total)
+    public TableDataInfo(T list, int total)
     {
         this.rows = list;
         this.total = total;
@@ -53,12 +54,12 @@ public class TableDataInfo implements Serializable
         this.total = total;
     }
 
-    public List<?> getRows()
+    public T getRows()
     {
         return rows;
     }
 
-    public void setRows(List<?> rows)
+    public void setRows(T rows)
     {
         this.rows = rows;
     }

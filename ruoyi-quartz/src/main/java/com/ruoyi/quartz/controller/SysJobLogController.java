@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.Rest;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -19,7 +19,7 @@ import com.ruoyi.quartz.service.ISysJobLogService;
 
 /**
  * 调度日志操作处理
- * 
+ *
  * @author ruoyi
  */
 @RestController
@@ -47,21 +47,21 @@ public class SysJobLogController extends BaseController
     @PreAuthorize("@ss.hasPermi('monitor:job:export')")
     @Log(title = "任务调度日志", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public AjaxResult export(SysJobLog sysJobLog)
+    public Rest export(SysJobLog sysJobLog)
     {
         List<SysJobLog> list = jobLogService.selectJobLogList(sysJobLog);
         ExcelUtil<SysJobLog> util = new ExcelUtil<SysJobLog>(SysJobLog.class);
         return util.exportExcel(list, "调度日志");
     }
-    
+
     /**
      * 根据调度编号获取详细信息
      */
     @PreAuthorize("@ss.hasPermi('monitor:job:query')")
     @GetMapping(value = "/{configId}")
-    public AjaxResult getInfo(@PathVariable Long jobLogId)
+    public Rest getInfo(@PathVariable Long jobLogId)
     {
-        return AjaxResult.success(jobLogService.selectJobLogById(jobLogId));
+        return Rest.success(jobLogService.selectJobLogById(jobLogId));
     }
 
 
@@ -71,7 +71,7 @@ public class SysJobLogController extends BaseController
     @PreAuthorize("@ss.hasPermi('monitor:job:remove')")
     @Log(title = "定时任务调度日志", businessType = BusinessType.DELETE)
     @DeleteMapping("/{jobLogIds}")
-    public AjaxResult remove(@PathVariable Long[] jobLogIds)
+    public Rest remove(@PathVariable Long[] jobLogIds)
     {
         return toAjax(jobLogService.deleteJobLogByIds(jobLogIds));
     }
@@ -82,9 +82,9 @@ public class SysJobLogController extends BaseController
     @PreAuthorize("@ss.hasPermi('monitor:job:remove')")
     @Log(title = "调度日志", businessType = BusinessType.CLEAN)
     @DeleteMapping("/clean")
-    public AjaxResult clean()
+    public Rest clean()
     {
         jobLogService.cleanJobLog();
-        return AjaxResult.success();
+        return Rest.success();
     }
 }

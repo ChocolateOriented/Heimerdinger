@@ -1,8 +1,13 @@
 package com.ruoyi.framework.web.service;
 
+import com.ruoyi.system.service.ISysPostService;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,6 +35,9 @@ public class UserDetailsServiceImpl implements UserDetailsService
     @Autowired
     private SysPermissionService permissionService;
 
+    @Autowired
+    private ISysPostService sysPostService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
@@ -55,6 +63,10 @@ public class UserDetailsServiceImpl implements UserDetailsService
 
     public UserDetails createLoginUser(SysUser user)
     {
-        return new LoginUser(user.getUserId(), user.getDeptId(), user, permissionService.getMenuPermission(user));
+        Set<String> postCode = sysPostService.selectPostCodeByUserId(user.getUserId());
+        postCode = postCode.parallelStream().map( s ->  "GROUP_" + s).collect(Collectors.toSet());
+        postCode.add("ROLE_ACTIVITI_USER");
+        List<SimpleGrantedAuthority> collect = postCode.stream().map(s -> new SimpleGrantedAuthority(s)).collect(Collectors.toList());
+        return new LoginUser(user.getUserId(), user.getDeptId(), user, permissionService.getMenuPermission(user),collect);
     }
 }

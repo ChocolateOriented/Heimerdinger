@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import com.alibaba.fastjson.JSON;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.HttpStatus;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.Rest;
 import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
@@ -21,7 +21,7 @@ import com.ruoyi.framework.web.service.TokenService;
 
 /**
  * 自定义退出处理类 返回成功
- * 
+ *
  * @author ruoyi
  */
 @Configuration
@@ -32,7 +32,7 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler
 
     /**
      * 退出处理
-     * 
+     *
      * @return
      */
     @Override
@@ -48,6 +48,6 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler
             // 记录用户退出日志
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(userName, Constants.LOGOUT, "退出成功"));
         }
-        ServletUtils.renderString(response, JSON.toJSONString(AjaxResult.error(HttpStatus.SUCCESS, "退出成功")));
+        ServletUtils.renderString(response, JSON.toJSONString(Rest.error(HttpStatus.SUCCESS, "退出成功")));
     }
 }

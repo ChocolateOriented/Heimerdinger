@@ -3,6 +3,7 @@ package com.ruoyi.framework.web.service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,9 @@ public class TokenService
     // 令牌自定义标识
     @Value("${token.header}")
     private String header;
+    // 令牌自定义标识
+    @Value("${token.cookie}")
+    private String tokenCookieName;
 
     // 令牌秘钥
     @Value("${token.secret}")
@@ -211,11 +215,27 @@ public class TokenService
     private String getToken(HttpServletRequest request)
     {
         String token = request.getHeader(header);
+
         if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX))
         {
             token = token.replace(Constants.TOKEN_PREFIX, "");
+        }else {
+//            token = getTokenFromCookies(request.getCookies());
         }
         return token;
+    }
+
+    private String getTokenFromCookies(Cookie[] cookies) {
+        if(null == cookies){
+            return null;
+        }
+        for (int i = 0; i < cookies.length; i++) {
+            Cookie cookie = cookies[i];
+            if (tokenCookieName.equals(cookie.getName())){
+                return cookie.getValue();
+            }
+        }
+        return null;
     }
 
     private String getTokenKey(String uuid)

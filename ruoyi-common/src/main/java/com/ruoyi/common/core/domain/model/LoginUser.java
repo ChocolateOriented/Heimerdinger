@@ -1,15 +1,17 @@
 package com.ruoyi.common.core.domain.model;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ruoyi.common.core.domain.entity.SysUser;
 
 /**
  * 登录用户身份权限
- * 
+ *
  * @author ruoyi
  */
 public class LoginUser implements UserDetails
@@ -66,6 +68,8 @@ public class LoginUser implements UserDetails
      */
     private Set<String> permissions;
 
+    private List<SimpleGrantedAuthority> authorities;
+
     /**
      * 用户信息
      */
@@ -111,12 +115,13 @@ public class LoginUser implements UserDetails
         this.permissions = permissions;
     }
 
-    public LoginUser(Long userId, Long deptId, SysUser user, Set<String> permissions)
+    public LoginUser(Long userId, Long deptId, SysUser user, Set<String> permissions,List<SimpleGrantedAuthority> authorities)
     {
         this.userId = userId;
         this.deptId = deptId;
         this.user = user;
         this.permissions = permissions;
+        this.authorities = authorities;
     }
 
     @JsonIgnore
@@ -144,7 +149,7 @@ public class LoginUser implements UserDetails
 
     /**
      * 指定用户是否解锁,锁定的用户无法进行身份验证
-     * 
+     *
      * @return
      */
     @JsonIgnore
@@ -156,7 +161,7 @@ public class LoginUser implements UserDetails
 
     /**
      * 指示是否已过期的用户的凭据(密码),过期的凭据防止认证
-     * 
+     *
      * @return
      */
     @JsonIgnore
@@ -168,7 +173,7 @@ public class LoginUser implements UserDetails
 
     /**
      * 是否可用 ,禁用的用户不能身份验证
-     * 
+     *
      * @return
      */
     @JsonIgnore
@@ -258,9 +263,14 @@ public class LoginUser implements UserDetails
         this.user = user;
     }
 
+    public void setAuthorities(List<SimpleGrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities()
-    {
-        return null;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return authorities;
+
     }
 }

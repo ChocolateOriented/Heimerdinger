@@ -56,6 +56,14 @@ spring:
     restart:
       # 热部署开关
       enabled: true
+
+  activiti:
+    check-process-definitions: false
+    database-schema-update: true
+    history-level: full
+    db-history-used: true
+  main:
+    allow-bean-definition-overriding: true
   # redis 配置
   redis:
     # 地址
@@ -83,6 +91,7 @@ spring:
 token:
     # 令牌自定义标识
     header: Authorization
+    cookie: Admin-Token
     # 令牌密钥
     secret: abcdefghijklmnopqrstuvwxyz
     # 令牌有效期（默认30分钟）
@@ -106,9 +115,39 @@ pagehelper:
 # Swagger配置
 swagger:
   # 是否开启swagger
-  enabled: true
+  enabled: false
   # 请求前缀
   pathMapping: /dev-api
+
+knife4j:
+  enable: true
+  documents:
+    -
+      group: 1.2.x
+      name: 测试自定义标题分组
+      locations: classpath:md/*
+  setting:
+    enableSwaggerModels: true
+    enableDocumentManage: true
+    enableHost: true
+    enableHostText: http://localhost:8080
+    enableRequestCache: true
+    enableFilterMultipartApis: true
+    enableFilterMultipartApiMethodType: POST
+    language: zh-CN
+    enableAfterScript: true
+    enableHomeCustom: true
+    homeCustomLocation: classpath:test/home.md
+    enableSearch: true
+    enableDebug: true
+    enableOpenApi: true
+    enableGroup: true
+  cors: false
+  production: false
+  basic:
+    enable: false
+    username: test
+    password: 123
 
 # 防止XSS攻击
 xss:

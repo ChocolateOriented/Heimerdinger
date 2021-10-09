@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.system;
 
+import com.ruoyi.common.core.domain.Rest;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +17,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.Rest;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -25,7 +26,7 @@ import com.ruoyi.system.service.ISysConfigService;
 
 /**
  * 参数配置 信息操作处理
- * 
+ *
  * @author ruoyi
  */
 @RestController
@@ -50,7 +51,7 @@ public class SysConfigController extends BaseController
     @Log(title = "参数管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('system:config:export')")
     @GetMapping("/export")
-    public AjaxResult export(SysConfig config)
+    public Rest export(SysConfig config)
     {
         List<SysConfig> list = configService.selectConfigList(config);
         ExcelUtil<SysConfig> util = new ExcelUtil<SysConfig>(SysConfig.class);
@@ -62,18 +63,18 @@ public class SysConfigController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:config:query')")
     @GetMapping(value = "/{configId}")
-    public AjaxResult getInfo(@PathVariable Long configId)
+    public Rest getInfo(@PathVariable Long configId)
     {
-        return AjaxResult.success(configService.selectConfigById(configId));
+        return Rest.success(configService.selectConfigById(configId));
     }
 
     /**
      * 根据参数键名查询参数值
      */
     @GetMapping(value = "/configKey/{configKey}")
-    public AjaxResult getConfigKey(@PathVariable String configKey)
+    public Rest getConfigKey(@PathVariable String configKey)
     {
-        return AjaxResult.success(configService.selectConfigByKey(configKey));
+        return Rest.success(configService.selectConfigByKey(configKey));
     }
 
     /**
@@ -83,11 +84,11 @@ public class SysConfigController extends BaseController
     @Log(title = "参数管理", businessType = BusinessType.INSERT)
     @PostMapping
     @RepeatSubmit
-    public AjaxResult add(@Validated @RequestBody SysConfig config)
+    public Rest add(@Validated @RequestBody SysConfig config)
     {
         if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config)))
         {
-            return AjaxResult.error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
+            return Rest.error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
         config.setCreateBy(getUsername());
         return toAjax(configService.insertConfig(config));
@@ -99,11 +100,11 @@ public class SysConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:config:edit')")
     @Log(title = "参数管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@Validated @RequestBody SysConfig config)
+    public Rest edit(@Validated @RequestBody SysConfig config)
     {
         if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config)))
         {
-            return AjaxResult.error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
+            return Rest.error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
         config.setUpdateBy(getUsername());
         return toAjax(configService.updateConfig(config));
@@ -115,10 +116,10 @@ public class SysConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:config:remove')")
     @Log(title = "参数管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{configIds}")
-    public AjaxResult remove(@PathVariable Long[] configIds)
+    public Rest remove(@PathVariable Long[] configIds)
     {
         configService.deleteConfigByIds(configIds);
-        return success();
+        return Rest.success();
     }
 
     /**
@@ -127,9 +128,9 @@ public class SysConfigController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:config:remove')")
     @Log(title = "参数管理", businessType = BusinessType.CLEAN)
     @DeleteMapping("/refreshCache")
-    public AjaxResult refreshCache()
+    public Rest refreshCache()
     {
         configService.resetConfigCache();
-        return AjaxResult.success();
+        return Rest.success();
     }
 }
