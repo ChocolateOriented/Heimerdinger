@@ -67,6 +67,9 @@ create table sys_user (
 -- ----------------------------
 insert into sys_user values(1,  103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '管理员');
 insert into sys_user values(2,  105, 'ry',    '若依', '00', 'ry@qq.com',  '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '测试员');
+INSERT INTO `sys_user` VALUES (102, 105, 'ceshiyuan', '测试员', '00', '', '', '0', '', '$2a$10$3XHl2gHeP2ljHsc6VEGAE.el34bsMVFQ3T1GoTZMC8BfRaGIlbX0u', '0', '0', '127.0.0.1', '2021-10-08 16:44:01', 'admin', '2021-10-08 12:31:31', '', '2021-10-08 16:44:01', NULL);
+INSERT INTO `sys_user` VALUES (103, 105, 'ceshizuzhang', '测试组长', '00', '', '', '0', '', '$2a$10$llYpK5VSXo9ycD6z/pWdnud6q97zxoSwxY78OAPgTguxkZmDjlbRi', '0', '0', '127.0.0.1', '2021-10-08 15:28:45', 'admin', '2021-10-08 12:32:38', '', '2021-10-08 15:28:45', NULL);
+INSERT INTO `sys_user` VALUES (105, 105, 'renshi', 'renshi', '00', '', '', '0', '', '$2a$10$y7vbpWSEE18ocrnW6kxU5.ESPvqlOlhOJkT34CNIEgvRO9Z08jhza', '0', '0', '127.0.0.1', '2021-10-08 15:46:56', 'admin', '2021-10-08 15:45:24', 'ceshiyuan', '2021-10-08 16:50:35', NULL);
 
 
 -- ----------------------------
@@ -255,7 +258,21 @@ insert into sys_menu values('1057', '生成删除', '115', '3', '#', '', '', 1, 
 insert into sys_menu values('1058', '导入代码', '115', '2', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:import',            '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1059', '预览代码', '115', '4', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:preview',           '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1060', '生成代码', '115', '5', '#', '', '', 1, 0, 'F', '0', '0', 'tool:gen:code',              '#', 'admin', sysdate(), '', null, '');
+-- 工作流
+INSERT INTO `sys_menu` VALUES (1901, '流程定义', 5, 1, 'definition', 'activiti/definition/index', NULL, 1, 0, 'C', '0', '0', 'activiti:modeler', '#', 'admin', '2020-09-14 23:09:31', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2000, '请假', 2008, 1, 'leave', 'workflow/leave/index', NULL, 1, 0, 'C', '0', '0', 'workflow:leave:list', '#', 'admin', '2020-10-28 22:30:57', 'admin', '2020-11-10 22:15:13', '请假菜单');
+INSERT INTO `sys_menu` VALUES (2001, '请假查询', 2000, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'workflow:leave:query', '#', 'admin', '2020-10-28 22:30:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2002, '请假新增', 2000, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'workflow:leave:add', '#', 'admin', '2020-10-28 22:30:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2003, '请假修改', 2000, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'workflow:leave:edit', '#', 'admin', '2020-10-28 22:30:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2004, '请假删除', 2000, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'workflow:leave:remove', '#', 'admin', '2020-10-28 22:30:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2005, '请假导出', 2000, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'workflow:leave:export', '#', 'admin', '2020-10-28 22:30:57', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2006, '待办任务', 0, 6, 'task', NULL, NULL, 1, 0, 'M', '0', '0', '', 'excel', 'admin', '2020-11-04 10:53:24', 'admin', '2020-11-10 22:26:46', '');
+INSERT INTO `sys_menu` VALUES (2007, '代办任务', 2006, 1, 'task', 'activiti/task', NULL, 1, 0, 'C', '0', '0', '', '#', 'admin', '2020-11-04 10:54:28', 'admin', '2020-11-04 10:55:06', '');
+INSERT INTO `sys_menu` VALUES (2008, '我的OA', 0, 5, 'OA', NULL, NULL, 1, 0, 'M', '0', '0', '', 'guide', 'admin', '2020-11-10 22:13:34', 'admin', '2020-11-10 22:15:29', '');
+INSERT INTO `sys_menu` VALUES (2009, '历史流程', 0, 7, 'open', NULL, NULL, 1, 0, 'M', '0', '0', NULL, 'eye-open', 'admin', '2020-11-10 22:17:36', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2010, '请假历史', 2009, 1, 'leaveAll', 'workflow/leave/leaveAll', NULL, 1, 0, 'C', '0', '0', 'workflow:leave:list', '#', 'admin', '2020-10-28 22:30:57', 'admin', '2020-11-10 22:45:16', '请假菜单');
 
+--
 
 -- ----------------------------
 -- 6、用户和角色关联表  用户N-1角色
@@ -272,7 +289,9 @@ create table sys_user_role (
 -- ----------------------------
 insert into sys_user_role values ('1', '1');
 insert into sys_user_role values ('2', '2');
-
+INSERT INTO `sys_user_role` VALUES (102, 2);
+INSERT INTO `sys_user_role` VALUES (103, 2);
+INSERT INTO `sys_user_role` VALUES (105, 2);
 
 -- ----------------------------
 -- 7、角色和菜单关联表  角色1-N菜单
@@ -372,7 +391,7 @@ insert into sys_role_menu values ('2', '1058');
 insert into sys_role_menu values ('2', '1059');
 insert into sys_role_menu values ('2', '1060');
 
--- ----------------------------
+-- ----------------------------c
 -- 8、角色和部门关联表  角色1-N部门
 -- ----------------------------
 drop table if exists sys_role_dept;
@@ -462,6 +481,8 @@ insert into sys_dict_type values(7,  '通知类型', 'sys_notice_type',     '0',
 insert into sys_dict_type values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', sysdate(), '', null, '通知状态列表');
 insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
 insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
+INSERT INTO `sys_dict_type` VALUES (100, 'OA状态', 'activiti_flow_type', '0', 'admin', '2020-10-28 00:01:56', 'admin', '2020-10-28 00:02:43', 'OA流程状态');
+INSERT INTO `sys_dict_type` VALUES (101, '请假类型', 'activiti_leave_type', '0', 'admin', '2020-10-28 00:06:10', 'admin', '2020-10-28 00:06:34', NULL);
 
 
 -- ----------------------------
@@ -515,6 +536,12 @@ insert into sys_dict_data values(25, 8,  '生成代码', '8',       'sys_oper_ty
 insert into sys_dict_data values(26, 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '清空操作');
 insert into sys_dict_data values(27, 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'admin', sysdate(), '', null, '正常状态');
 insert into sys_dict_data values(28, 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'admin', sysdate(), '', null, '停用状态');
+INSERT INTO `sys_dict_data` VALUES (100, 1, '进行中', '0', 'activiti_flow_type', NULL, NULL, 'N', '0', 'admin', '2020-10-28 00:03:42', 'admin', '2020-10-28 22:40:58', NULL);
+INSERT INTO `sys_dict_data` VALUES (101, 2, '成功', '1', 'activiti_flow_type', NULL, NULL, 'N', '0', 'admin', '2020-10-28 00:03:50', 'admin', '2020-10-28 22:41:09', NULL);
+INSERT INTO `sys_dict_data` VALUES (102, 3, '失败', '2', 'activiti_flow_type', NULL, NULL, 'N', '0', 'admin', '2020-10-28 00:04:02', 'admin', '2020-10-28 22:41:17', NULL);
+INSERT INTO `sys_dict_data` VALUES (103, 1, '年假', '年假', 'activiti_leave_type', NULL, NULL, 'N', '0', 'admin', '2020-10-28 00:07:14', 'admin', '2020-11-04 17:41:02', NULL);
+INSERT INTO `sys_dict_data` VALUES (104, 2, '病假', '病假', 'activiti_leave_type', NULL, NULL, 'N', '0', 'admin', '2020-10-28 00:07:27', 'admin', '2020-11-04 17:41:07', NULL);
+INSERT INTO `sys_dict_data` VALUES (105, 3, '事假', '事假', 'activiti_leave_type', NULL, NULL, 'N', '0', 'admin', '2020-10-28 00:07:48', 'admin', '2020-11-04 17:41:12', NULL);
 
 
 -- ----------------------------
@@ -686,3 +713,42 @@ create table gen_table_column (
   update_time       datetime                                   comment '更新时间',
   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+-- ----------------------------
+-- 工作流通用表单数据
+-- ----------------------------
+DROP TABLE IF EXISTS `act_workflow_formdata`;
+CREATE TABLE `act_workflow_formdata`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
+  `business_key` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '事务key',
+  `form_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单Key',
+  `control_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单id',
+  `control_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单名',
+  `control_value` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单值',
+  `task_node_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务节点名称',
+  `create_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者姓名',
+  `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '动态表单' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- 请假申请
+-- ----------------------------
+DROP TABLE IF EXISTS `workflow_leave`;
+CREATE TABLE `workflow_leave`  (
+  `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键ID',
+  `type` char(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请假类型',
+  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `reason` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '原因',
+  `leave_start_time` date NULL DEFAULT NULL COMMENT '开始时间',
+  `leave_end_time` date NULL DEFAULT NULL COMMENT '结束时间',
+  `attachment_link` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '附件',
+  `instance_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '流程实例ID',
+  `state` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `create_name` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者名称',
+  `create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '请假' ROW_FORMAT = Dynamic;
