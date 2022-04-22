@@ -20,7 +20,7 @@ server:
   # 服务器的HTTP端口，默认为8080
   port: 8081
   servlet:
-    # 应用的访问路径
+    # 应用的访问路径测试
     context-path: /
   tomcat:
     # tomcat的URI编码
