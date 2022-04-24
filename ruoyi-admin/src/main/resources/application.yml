@@ -67,13 +67,13 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 192.168.1.252
+    host: ss.lijingxiang.top
     # 端口，默认为6379
     port: 6379
     # 数据库索引
     database: 0
     # 密码
-    password:
+    password: lijx456852
     # 连接超时时间
     timeout: 10s
     lettuce:
@@ -130,7 +130,7 @@ knife4j:
     enableSwaggerModels: true
     enableDocumentManage: true
     enableHost: true
-    enableHostText: http://localhost:8080
+    enableHostText: http://localhost:8081
     enableRequestCache: true
     enableFilterMultipartApis: true
     enableFilterMultipartApiMethodType: POST
