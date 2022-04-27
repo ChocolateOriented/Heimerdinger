@@ -150,6 +150,19 @@ export const constantRoutes = [
         meta: { title: '修改生成配置', activeMenu: '/tool/gen'}
       }
     ]
+  },
+  {
+    path: '/stockTrace/gridding',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'stock/:id(\\d+)',
+        component: (resolve) => require(['@/views/finance/stockTrace/gridding'], resolve),
+        name: 'stockGridding',
+        meta: { title: '网格交易', activeMenu: '/finance/stockTrace'}
+      }
+    ]
   }
 ]
 

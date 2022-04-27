@@ -53,16 +53,9 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
-        <!-- activiti模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-activiti</artifactId>
-        </dependency>
-
-        <!-- 工作流模块-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-workflow</artifactId>
+            <artifactId>weapon-finance</artifactId>
         </dependency>
 
         <dependency>

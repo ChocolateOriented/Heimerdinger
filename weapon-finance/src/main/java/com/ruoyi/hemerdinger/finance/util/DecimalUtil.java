@@ -1,4 +1,4 @@
-package com.hemerdinger.finance.util;
+package com.ruoyi.hemerdinger.finance.util;
 
 import java.math.BigDecimal;
 

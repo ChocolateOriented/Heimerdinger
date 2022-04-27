@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hemerdinger.finance.mapper.StockDataConfigMapper">
+
+    <resultMap type="com.ruoyi.hemerdinger.finance.domain.StockDataConfig" id="StockDataConfigResult">
+        <result property="id"    column="id"    />
+        <result property="index"    column="index"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectStockDataConfigVo">
+        select id, `index`, `name` from stock_data_config
+    </sql>
+
+    <select id="selectStockDataConfigList" parameterType="com.ruoyi.hemerdinger.finance.domain.StockDataConfig" resultMap="StockDataConfigResult">
+        <include refid="selectStockDataConfigVo"/>
+        <where>
+            <if test="index != null "> and index = #{index}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectStockDataConfigById" parameterType="Long" resultMap="StockDataConfigResult">
+        <include refid="selectStockDataConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertStockDataConfig" parameterType="com.ruoyi.hemerdinger.finance.domain.StockDataConfig">
+        insert into stock_data_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="index != null">index,</if>
+            <if test="name != null">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="index != null">#{index},</if>
+            <if test="name != null">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockDataConfig" parameterType="com.ruoyi.hemerdinger.finance.domain.StockDataConfig">
+        update stock_data_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="index != null">index = #{index},</if>
+            <if test="name != null">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStockDataConfigById" parameterType="Long">
+        delete from stock_data_config where id = #{id}
+    </delete>
+
+    <delete id="deleteStockDataConfigByIds" parameterType="String">
+        delete from stock_data_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
