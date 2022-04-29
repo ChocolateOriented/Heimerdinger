@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="索引" prop="index">
+      <el-form-item label="索引" prop="dataIndex">
         <el-input
-          v-model="queryParams.index"
+          v-model="queryParams.dataIndex"
           placeholder="请输入索引"
           clearable
           size="small"
@@ -75,7 +75,7 @@
     <el-table v-loading="loading" :data="stockDataConfigList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
-      <el-table-column label="索引" align="center" prop="index" />
+      <el-table-column label="索引" align="center" prop="dataIndex" />
       <el-table-column label="名称" align="center" prop="name" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -96,7 +96,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -105,11 +105,14 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改股票数据映射对话框 -->
+    <!-- 添加或修改股票数据映射配置对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="索引" prop="index">
-          <el-input v-model="form.index" placeholder="请输入索引" />
+        <el-form-item label="删除标志" prop="delFlag">
+          <el-input v-model="form.delFlag" placeholder="请输入删除标志" />
+        </el-form-item>
+        <el-form-item label="索引" prop="dataIndex">
+          <el-input v-model="form.dataIndex" placeholder="请输入索引" />
         </el-form-item>
         <el-form-item label="名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入名称" />
@@ -144,7 +147,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 股票数据映射表格数据
+      // 股票数据映射配置表格数据
       stockDataConfigList: [],
       // 弹出层标题
       title: "",
@@ -154,16 +157,13 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        index: null,
+        dataIndex: null,
         name: null
       },
       // 表单参数
       form: {},
       // 表单校验
       rules: {
-        index: [
-          { required: true, message: "索引不能为空", trigger: "blur" }
-        ],
       }
     };
   },
@@ -171,7 +171,7 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询股票数据映射列表 */
+    /** 查询股票数据映射配置列表 */
     getList() {
       this.loading = true;
       listStockDataConfig(this.queryParams).then(response => {
@@ -189,7 +189,12 @@ export default {
     reset() {
       this.form = {
         id: null,
-        index: null,
+        delFlag: null,
+        createBy: null,
+        createTime: null,
+        updateBy: null,
+        updateTime: null,
+        dataIndex: null,
         name: null
       };
       this.resetForm("form");
@@ -214,7 +219,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加股票数据映射";
+      this.title = "添加股票数据映射配置";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -223,7 +228,7 @@ export default {
       getStockDataConfig(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改股票数据映射";
+        this.title = "修改股票数据映射配置";
       });
     },
     /** 提交按钮 */
@@ -249,7 +254,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除股票数据映射编号为"' + ids + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除股票数据映射配置编号为"' + ids + '"的数据项？').then(function() {
         return delStockDataConfig(ids);
       }).then(() => {
         this.getList();
@@ -259,7 +264,7 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$modal.confirm('是否确认导出所有股票数据映射数据项？').then(() => {
+      this.$modal.confirm('是否确认导出所有股票数据映射配置数据项？').then(() => {
         this.exportLoading = true;
         return exportStockDataConfig(queryParams);
       }).then(response => {

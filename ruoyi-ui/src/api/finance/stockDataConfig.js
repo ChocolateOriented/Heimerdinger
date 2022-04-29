@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询股票数据映射列表
+// 查询股票数据映射配置列表
 export function listStockDataConfig(query) {
   return request({
     url: '/finance/stockDataConfig/list',
@@ -9,7 +9,7 @@ export function listStockDataConfig(query) {
   })
 }
 
-// 查询股票数据映射详细
+// 查询股票数据映射配置详细
 export function getStockDataConfig(id) {
   return request({
     url: '/finance/stockDataConfig/' + id,
@@ -17,7 +17,7 @@ export function getStockDataConfig(id) {
   })
 }
 
-// 新增股票数据映射
+// 新增股票数据映射配置
 export function addStockDataConfig(data) {
   return request({
     url: '/finance/stockDataConfig',
@@ -26,7 +26,7 @@ export function addStockDataConfig(data) {
   })
 }
 
-// 修改股票数据映射
+// 修改股票数据映射配置
 export function updateStockDataConfig(data) {
   return request({
     url: '/finance/stockDataConfig',
@@ -35,7 +35,7 @@ export function updateStockDataConfig(data) {
   })
 }
 
-// 删除股票数据映射
+// 删除股票数据映射配置
 export function delStockDataConfig(id) {
   return request({
     url: '/finance/stockDataConfig/' + id,
@@ -43,7 +43,7 @@ export function delStockDataConfig(id) {
   })
 }
 
-// 导出股票数据映射
+// 导出股票数据映射配置
 export function exportStockDataConfig(query) {
   return request({
     url: '/finance/stockDataConfig/export',

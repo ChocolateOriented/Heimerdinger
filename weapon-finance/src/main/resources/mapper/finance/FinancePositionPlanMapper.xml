@@ -2,46 +2,52 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.hemerdinger.finance.mapper.StockDataConfigMapper">
+<mapper namespace="com.ruoyi.hemerdinger.finance.mapper.FinancePositionPlanMapper">
     
-    <resultMap type="StockDataConfig" id="StockDataConfigResult">
+    <resultMap type="FinancePositionPlan" id="FinancePositionPlanResult">
         <result property="id"    column="id"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
-        <result property="dataIndex"    column="data_index"    />
+        <result property="traceId"    column="trace_id"    />
         <result property="name"    column="name"    />
+        <result property="realityAmount"    column="reality_amount"    />
+        <result property="targetAmount"    column="target_amount"    />
     </resultMap>
 
-    <sql id="selectStockDataConfigVo">
-        select id, del_flag, create_by, create_time, update_by, update_time, data_index, name from stock_data_config
+    <sql id="selectFinancePositionPlanVo">
+        select id, del_flag, create_by, create_time, update_by, update_time, trace_id, name, reality_amount, target_amount from finance_position_plan
     </sql>
 
-    <select id="selectStockDataConfigList" parameterType="StockDataConfig" resultMap="StockDataConfigResult">
-        <include refid="selectStockDataConfigVo"/>
+    <select id="selectFinancePositionPlanList" parameterType="FinancePositionPlan" resultMap="FinancePositionPlanResult">
+        <include refid="selectFinancePositionPlanVo"/>
         <where>  
-            <if test="dataIndex != null "> and data_index = #{dataIndex}</if>
+            <if test="traceId != null "> and trace_id = #{traceId}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="realityAmount != null "> and reality_amount = #{realityAmount}</if>
+            <if test="targetAmount != null "> and target_amount = #{targetAmount}</if>
         </where>
     </select>
     
-    <select id="selectStockDataConfigById" parameterType="Long" resultMap="StockDataConfigResult">
-        <include refid="selectStockDataConfigVo"/>
+    <select id="selectFinancePositionPlanById" parameterType="Long" resultMap="FinancePositionPlanResult">
+        <include refid="selectFinancePositionPlanVo"/>
         where id = #{id}
     </select>
         
-    <insert id="insertStockDataConfig" parameterType="StockDataConfig" useGeneratedKeys="true" keyProperty="id">
-        insert into stock_data_config
+    <insert id="insertFinancePositionPlan" parameterType="FinancePositionPlan" useGeneratedKeys="true" keyProperty="id">
+        insert into finance_position_plan
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="delFlag != null">del_flag,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
-            <if test="dataIndex != null">data_index,</if>
+            <if test="traceId != null">trace_id,</if>
             <if test="name != null">name,</if>
+            <if test="realityAmount != null">reality_amount,</if>
+            <if test="targetAmount != null">target_amount,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="delFlag != null">#{delFlag},</if>
@@ -49,31 +55,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="dataIndex != null">#{dataIndex},</if>
+            <if test="traceId != null">#{traceId},</if>
             <if test="name != null">#{name},</if>
+            <if test="realityAmount != null">#{realityAmount},</if>
+            <if test="targetAmount != null">#{targetAmount},</if>
          </trim>
     </insert>
 
-    <update id="updateStockDataConfig" parameterType="StockDataConfig">
-        update stock_data_config
+    <update id="updateFinancePositionPlan" parameterType="FinancePositionPlan">
+        update finance_position_plan
         <trim prefix="SET" suffixOverrides=",">
             <if test="delFlag != null">del_flag = #{delFlag},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="dataIndex != null">data_index = #{dataIndex},</if>
+            <if test="traceId != null">trace_id = #{traceId},</if>
             <if test="name != null">name = #{name},</if>
+            <if test="realityAmount != null">reality_amount = #{realityAmount},</if>
+            <if test="targetAmount != null">target_amount = #{targetAmount},</if>
         </trim>
         where id = #{id}
     </update>
 
-    <delete id="deleteStockDataConfigById" parameterType="Long">
-        delete from stock_data_config where id = #{id}
+    <delete id="deleteFinancePositionPlanById" parameterType="Long">
+        delete from finance_position_plan where id = #{id}
     </delete>
 
-    <delete id="deleteStockDataConfigByIds" parameterType="String">
-        delete from stock_data_config where id in 
+    <delete id="deleteFinancePositionPlanByIds" parameterType="String">
+        delete from finance_position_plan where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

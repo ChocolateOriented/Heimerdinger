@@ -1,28 +1,37 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="名称" prop="name">
+      <el-form-item label="追踪id" prop="traceId">
+        <el-input
+          v-model="queryParams.traceId"
+          placeholder="请输入追踪id"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="资产名称" prop="name">
         <el-input
           v-model="queryParams.name"
-          placeholder="请输入名称"
+          placeholder="请输入资产名称"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="代码" prop="code">
+      <el-form-item label="实际持仓" prop="realityAmount">
         <el-input
-          v-model="queryParams.code"
-          placeholder="请输入代码"
+          v-model="queryParams.realityAmount"
+          placeholder="请输入实际持仓"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="市净率" prop="pb">
+      <el-form-item label="计划持仓" prop="targetAmount">
         <el-input
-          v-model="queryParams.pb"
-          placeholder="请输入市净率"
+          v-model="queryParams.targetAmount"
+          placeholder="请输入计划持仓"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -42,7 +51,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['finance:stockTrace:add']"
+          v-hasPermi="['finance:financePositionPlan:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -53,7 +62,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['finance:stockTrace:edit']"
+          v-hasPermi="['finance:financePositionPlan:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -64,7 +73,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['finance:stockTrace:remove']"
+          v-hasPermi="['finance:financePositionPlan:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -75,45 +84,34 @@
           size="mini"
           :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['finance:stockTrace:export']"
+          v-hasPermi="['finance:financePositionPlan:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="stockTraceList" @selection-change="handleSelectionChange" @row-dblclick="gotoGridding">
-      <el-table-column type="selection" width="55" align="center" />
+    <el-table v-loading="loading" :data="financePositionPlanList" @selection-change="handleSelectionChange" show-summary>
+<!--      <el-table-column type="selection" width="55" align="center" />-->
       <el-table-column label="id" align="center" prop="id" />
-      <el-table-column label="名称" align="center" prop="name" />
-      <el-table-column label="代码" align="center" prop="code" />
-      <el-table-column label="价格" align="center" prop="price" />
-      <el-table-column label="市净率" align="center" prop="pb" />
-      <el-table-column label="预计最低市净率" align="center" prop="pbMin" />
-      <el-table-column label="预计最高市净率" align="center" prop="pbMax" />
-      <el-table-column label="预计合理市净率" align="center" prop="pbFit" />
-      <el-table-column label="持有时间" align="center" prop="keepData" width="180">
-        <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.keepData, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="持有金额" align="center" prop="amount" />
-      <el-table-column label="最小持有金额" align="center" prop="amountMin" />
-      <el-table-column label="最大持有金额" align="center" prop="amountMax" />
-      <el-table-column label="合理持有金额" align="center" prop="amountFit" />
+      <el-table-column label="追踪id" align="center" prop="traceId" />
+      <el-table-column label="资产名称" align="center" prop="name" />
+      <el-table-column label="实际持仓" align="center" prop="realityAmount" sortable />
+      <el-table-column label="计划持仓" align="center" prop="targetAmount" sortable />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
             icon="el-icon-edit"
-            @click="gotoGridding(scope.row)"
-          >网格</el-button>
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['finance:financePositionPlan:edit']"
+          >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['finance:stockTrace:remove']"
+            v-hasPermi="['finance:financePositionPlan:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -127,49 +125,20 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改股票追踪对话框 -->
+    <!-- 添加或修改持仓计划对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入名称" />
+        <el-form-item label="追踪id" prop="traceId">
+          <el-input v-model="form.traceId" placeholder="请输入追踪id" />
         </el-form-item>
-        <el-form-item label="代码" prop="code">
-          <el-input v-model="form.code" placeholder="请输入代码" />
+        <el-form-item label="资产名称" prop="name">
+          <el-input v-model="form.name" placeholder="请输入资产名称" />
         </el-form-item>
-        <el-form-item label="价格" prop="price">
-          <el-input v-model="form.price" placeholder="请输入价格" />
+        <el-form-item label="实际持仓" prop="realityAmount">
+          <el-input v-model="form.realityAmount" placeholder="请输入实际持仓" />
         </el-form-item>
-        <el-form-item label="市净率" prop="pb">
-          <el-input v-model="form.pb" placeholder="请输入市净率" />
-        </el-form-item>
-        <el-form-item label="预计最低市净率" prop="pbMin">
-          <el-input v-model="form.pbMin" placeholder="请输入预计最低市净率" />
-        </el-form-item>
-        <el-form-item label="预计最高市净率" prop="pbMax">
-          <el-input v-model="form.pbMax" placeholder="请输入预计最高市净率" />
-        </el-form-item>
-        <el-form-item label="预计合理市净率" prop="pbFit">
-          <el-input v-model="form.pbFit" placeholder="请输入预计合理市净率" />
-        </el-form-item>
-        <el-form-item label="持有时间" prop="keepData">
-          <el-date-picker clearable size="small"
-            v-model="form.keepData"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择持有时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="持有金额" prop="amount">
-          <el-input v-model="form.amount" placeholder="请输入持有金额" />
-        </el-form-item>
-        <el-form-item label="最小持有金额" prop="amountMin">
-          <el-input v-model="form.amountMin" placeholder="请输入最小持有金额" />
-        </el-form-item>
-        <el-form-item label="最大持有金额" prop="amountMax">
-          <el-input v-model="form.amountMax" placeholder="请输入最大持有金额" />
-        </el-form-item>
-        <el-form-item label="合理持有金额" prop="amountFit">
-          <el-input v-model="form.amountFit" placeholder="请输入合理持有金额" />
+        <el-form-item label="计划持仓" prop="targetAmount">
+          <el-input v-model="form.targetAmount" placeholder="请输入计划持仓" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -181,10 +150,10 @@
 </template>
 
 <script>
-import { listStockTrace, getStockTrace, delStockTrace, addStockTrace, updateStockTrace, exportStockTrace } from "@/api/finance/stockTrace";
+import { listFinancePositionPlan, getFinancePositionPlan, delFinancePositionPlan, addFinancePositionPlan, updateFinancePositionPlan, exportFinancePositionPlan } from "@/api/finance/financePositionPlan";
 
 export default {
-  name: "StockTrace",
+  name: "FinancePositionPlan",
   data() {
     return {
       // 遮罩层
@@ -201,8 +170,8 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 股票追踪表格数据
-      stockTraceList: [],
+      // 持仓计划表格数据
+      financePositionPlanList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -210,19 +179,11 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 50,
+        traceId: null,
         name: null,
-        code: null,
-        price: null,
-        pb: null,
-        pbMin: null,
-        pbMax: null,
-        pbFit: null,
-        keepData: null,
-        amount: null,
-        amountMin: null,
-        amountMax: null,
-        amountFit: null
+        realityAmount: null,
+        targetAmount: null
       },
       // 表单参数
       form: {},
@@ -235,16 +196,11 @@ export default {
     this.getList();
   },
   methods: {
-    /** 网格 */
-    gotoGridding(row) {
-      const id = row.id;
-      this.$router.push("/stockTrace/gridding/stock/" + id);
-    },
-    /** 查询股票追踪列表 */
+    /** 查询持仓计划列表 */
     getList() {
       this.loading = true;
-      listStockTrace(this.queryParams).then(response => {
-        this.stockTraceList = response.rows;
+      listFinancePositionPlan(this.queryParams).then(response => {
+        this.financePositionPlanList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -258,18 +214,15 @@ export default {
     reset() {
       this.form = {
         id: null,
+        delFlag: null,
+        createBy: null,
+        createTime: null,
+        updateBy: null,
+        updateTime: null,
+        traceId: null,
         name: null,
-        code: null,
-        price: null,
-        pb: null,
-        pbMin: null,
-        pbMax: null,
-        pbFit: null,
-        keepData: null,
-        amount: null,
-        amountMin: null,
-        amountMax: null,
-        amountFit: null
+        realityAmount: null,
+        targetAmount: null
       };
       this.resetForm("form");
     },
@@ -286,15 +239,6 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.id)
-      const id = row.id;
-      this.$router.push("/stockTrace/gridding/stock/" + id);
-
-      this.single = selection.length!==1
-      this.multiple = !selection.length
-    },
-    // 多选框选中数据
-    handlegotoGridding(selection) {
-      this.ids = selection.map(item => item.id)
       this.single = selection.length!==1
       this.multiple = !selection.length
     },
@@ -302,16 +246,16 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加股票追踪";
+      this.title = "添加持仓计划";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids
-      getStockTrace(id).then(response => {
+      getFinancePositionPlan(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改股票追踪";
+        this.title = "修改持仓计划";
       });
     },
     /** 提交按钮 */
@@ -319,13 +263,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.id != null) {
-            updateStockTrace(this.form).then(response => {
+            updateFinancePositionPlan(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addStockTrace(this.form).then(response => {
+            addFinancePositionPlan(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -337,8 +281,8 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除股票追踪编号为"' + ids + '"的数据项？').then(function() {
-        return delStockTrace(ids);
+      this.$modal.confirm('是否确认删除持仓计划编号为"' + ids + '"的数据项？').then(function() {
+        return delFinancePositionPlan(ids);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
@@ -347,9 +291,9 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$modal.confirm('是否确认导出所有股票追踪数据项？').then(() => {
+      this.$modal.confirm('是否确认导出所有持仓计划数据项？').then(() => {
         this.exportLoading = true;
-        return exportStockTrace(queryParams);
+        return exportFinancePositionPlan(queryParams);
       }).then(response => {
         this.$download.name(response.msg);
         this.exportLoading = false;

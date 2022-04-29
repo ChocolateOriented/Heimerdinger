@@ -1,5 +1,6 @@
 package com.ruoyi.hemerdinger.finance.domain;
 
+    import java.math.BigDecimal;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import io.swagger.annotations.ApiModel;
@@ -8,13 +9,13 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 股票数据映射配置对象 stock_data_config
+ * 持仓计划对象 finance_position_plan
  *
  * @author lijing xiang
  * @date 2022-04-27
  */
-@ApiModel(value = "ClassName", description = "股票数据映射配置对象")
-public class StockDataConfig extends BaseEntity
+@ApiModel(value = "ClassName", description = "持仓计划对象")
+public class FinancePositionPlan extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -24,15 +25,25 @@ public class StockDataConfig extends BaseEntity
     /** 删除标志（0代表存在 2代表删除） */
     private String delFlag;
 
-    /** 索引 */
-    @Excel(name = "索引")
-    @ApiModelProperty(value = "索引", example = "1")
-    private Long dataIndex;
+    /** 追踪id */
+    @Excel(name = "追踪id")
+    @ApiModelProperty(value = "追踪id", example = "1")
+    private Long traceId;
 
-    /** 名称 */
-    @Excel(name = "名称")
-    @ApiModelProperty(value = "名称", example = "1")
+    /** 资产名称 */
+    @Excel(name = "资产名称")
+    @ApiModelProperty(value = "资产名称", example = "1")
     private String name;
+
+    /** 实际持仓 */
+    @Excel(name = "实际持仓")
+    @ApiModelProperty(value = "实际持仓", example = "1")
+    private BigDecimal realityAmount;
+
+    /** 计划持仓 */
+    @Excel(name = "计划持仓")
+    @ApiModelProperty(value = "计划持仓", example = "1")
+    private BigDecimal targetAmount;
 
     public void setId(Long id)
     {
@@ -52,14 +63,14 @@ public class StockDataConfig extends BaseEntity
     {
         return delFlag;
     }
-    public void setDataIndex(Long dataIndex)
+    public void setTraceId(Long traceId)
     {
-        this.dataIndex = dataIndex;
+        this.traceId = traceId;
     }
 
-    public Long getDataIndex()
+    public Long getTraceId()
     {
-        return dataIndex;
+        return traceId;
     }
     public void setName(String name)
     {
@@ -69,6 +80,24 @@ public class StockDataConfig extends BaseEntity
     public String getName()
     {
         return name;
+    }
+    public void setRealityAmount(BigDecimal realityAmount)
+    {
+        this.realityAmount = realityAmount;
+    }
+
+    public BigDecimal getRealityAmount()
+    {
+        return realityAmount;
+    }
+    public void setTargetAmount(BigDecimal targetAmount)
+    {
+        this.targetAmount = targetAmount;
+    }
+
+    public BigDecimal getTargetAmount()
+    {
+        return targetAmount;
     }
 
     @Override
@@ -80,8 +109,10 @@ public class StockDataConfig extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
-            .append("dataIndex", getDataIndex())
+            .append("traceId", getTraceId())
             .append("name", getName())
+            .append("realityAmount", getRealityAmount())
+            .append("targetAmount", getTargetAmount())
             .toString();
     }
 }

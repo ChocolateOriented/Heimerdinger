@@ -8,6 +8,14 @@ export function listStockTrace(query) {
     params: query
   })
 }
+// 交易机会评分排名
+export function tradeGradeList(query) {
+  return request({
+    url: '/finance/stockTrace/tradeGradeList',
+    method: 'get',
+    params: query
+  })
+}
 
 // 查询股票追踪详细
 export function getStockTrace(id) {

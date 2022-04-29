@@ -61,15 +61,20 @@
           <el-descriptions
           class="margin-top"
           title="交易计划"
-          :column="6"
+          :column="5"
           border
           >
             <el-descriptions-item label="交易次数">{{ plan.time }}</el-descriptions-item>
             <el-descriptions-item label="交易金额">{{ plan.amount }}</el-descriptions-item>
             <el-descriptions-item label="下跌触发">{{ plan.unit }}</el-descriptions-item>
-            <el-descriptions-item label="合理价格">{{ plan.price }}</el-descriptions-item>
+            <el-descriptions-item label="合理价格">{{ plan.priceFit }}</el-descriptions-item>
             <el-descriptions-item label="定投日">周: <el-input v-model="plan.week" style="width: 4em" v-on:change="computeTable"/></el-descriptions-item>
-            <el-descriptions-item label="时间弹性"> <el-input v-model="plan.elasticity" style="width: 4em" v-on:change="computeTable"/></el-descriptions-item>
+            <el-descriptions-item label="时间弹性">
+              <el-input v-model="plan.elasticity" style="width: 4em" v-on:change="computeTable"/>
+            </el-descriptions-item>
+            <el-descriptions-item label="安全边际">
+              <el-input v-model="plan.safety" style="width: 4em" v-on:change="computeTable"/>%
+            </el-descriptions-item>
             <el-descriptions-item label="当前价格">{{ current.price }}</el-descriptions-item>
 <!--            <el-descriptions-item label="当前市净率">{{ current.pb }}</el-descriptions-item>-->
             <el-descriptions-item label="预计上涨">{{ plan.rise }}%</el-descriptions-item>
@@ -82,37 +87,97 @@
               :data="adviceTabel"
               style="width: 100%"
               max-height="650px"
-              :row-class-name="dealAdvice"
+              :cell-class-name="dealAdvice"
             >
-              <el-table-column prop="date" label="触发日期" :formatter="dateFormat" width="180" />
               <el-table-column prop="advicePrice" label="触发价格" width="180" />
-              <el-table-column prop="adviceAmount" label="持仓" />
-              <el-table-column prop="advicePercent" label="持仓百分比" />
+              <el-table-column prop="griddingAmount" label="网格持仓" />
+              <el-table-column prop="griddingPercent" label="网格持仓百分比">
+                <template slot-scope="scope">
+                  {{ scope.row.griddingPercent }}
+                  <el-tag v-if="scope.row.realGriddingAmount" style="margin-left: 3em">
+                    当前持仓
+                  </el-tag>
+                </template>
+              </el-table-column>
+
+              <el-table-column prop="adviceDate" label="触发日期" :formatter="dateFormat" width="180" />
+              <el-table-column prop="adviceAmount" label="定投持仓" />
+              <el-table-column prop="advicePercent" label="定投持仓百分比" >
+                <template slot-scope="scope">
+                  {{ scope.row.advicePercent }}
+                  <el-tag v-if="scope.row.realAmount" style="margin-left: 3em">
+                    当前持仓
+                  </el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作" class-name="small-padding fixed-width">
+                <template slot-scope="scope">
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handelPosition(scope.row)"
+                  >调仓</el-button>
+                </template>
+              </el-table-column>
             </el-table>
           </template>
         </el-main>
       </el-container>
     </el-container>
+
+    <!-- 调仓对话框 -->
+    <el-dialog title="调仓" :visible.sync="open" width="600px" append-to-body>
+      <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="来源" prop="name">
+          <el-select v-model="sourceFinancePositionPlanId" placeholder="请选择" v-on:change="positionChange">
+            <el-option
+              v-for="item in listFinancePositionPlan"
+              :label="item.name"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="仓位" prop="realityAmount">
+            <el-slider v-model="targetFinancePositionPlan.realityAmount"  style="width: 400px" :max="maxAmount" show-input></el-slider>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="updatePosition">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
   import { listStockTrace, getStockTrace, delStockTrace, addStockTrace, updateStockTrace, exportStockTrace, findCurrentInfo } from "@/api/finance/stockTrace";
+  import { saveStockPositionPlanList } from "@/api/finance/stockPositionPlan";
+  import { listFinancePositionPlan, getFinancePositionPlan, delFinancePositionPlan, addFinancePositionPlan, updateFinancePositionPlan, exportFinancePositionPlan } from "@/api/finance/financePositionPlan";
   import moment from "moment"
 
 export default {
   name: "StockTraceGridding",
   data() {
     return {
+      // 是否显示弹出层
+      open: false,
        // 遮罩层
       form:{},
       plan:{
         week:4,
         elasticity:2,
+        safety:50
       },
       loading: true,
       adviceTabel:[],
       current:{},
+      financePositionPlan:null,
+      sourceFinancePositionPlanId:5,
+      sourceFinancePositionPlan:{},
+      targetFinancePositionPlan:{},
+      listFinancePositionPlan:[],
+      maxAmount:0
     };
   },
   created() {
@@ -125,18 +190,38 @@ export default {
         that.plan.tradeDate = that.getDate(that.form.startTime,that.form.keepData, that.plan.week);
         that.plan.time = that.plan.tradeDate.length;
         that.plan.amount = that.floatFormat((that.form.amountFit - that.form.amount)/that.plan.time) ;
-        that.plan.unit = ((that.form.pb - that.form.pbMin)/that.form.pb)* that.form.price / that.plan.time ;
-        that.plan.price = that.floatFormat(that.form.price * that.form.pbFit / that.form.pb) ;
+        that.plan.priceFit = that.floatFormat(that.form.price * that.form.pbFit / that.form.pb) ;
+        that.plan.priceMin = that.floatFormat(that.form.price * that.form.pbMin / that.form.pb) ;
+        that.plan.priceSafe = (that.plan.priceFit + that.plan.priceMin)*that.plan.safety/100
+        that.plan.unit = (that.plan.priceSafe - that.plan.priceMin) / that.plan.time ;
+
         that.computeTable();
+
+        findCurrentInfo({"code":that.form.code}).then((response) => {
+          that.current = response.data;
+          that.plan.rise = that.floatFormat((that.plan.priceFit - that.current.price)*100/that.current.price);
+          that.plan.fall = that.floatFormat((that.current.price - that.plan.floorPrice )*100/that.current.price);
+
+          listFinancePositionPlan({"traceId":id}).then((response) => {
+            if (response.rows.length > 0){
+              that.financePositionPlan = response.rows[0];
+            }
+            that.computeTable();
+          });
+        })
       });
-
-
+      this.findListFinancePositionPlan();
     }
   },
   methods: {
     /** 单击选中行数据 */
     clickRow(row) {
       this.$refs.table.toggleRowSelection(row);
+    },
+    findListFinancePositionPlan(){
+      listFinancePositionPlan().then((response) => {
+        this.listFinancePositionPlan = response.rows;
+      });
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
@@ -150,11 +235,13 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.computeTable();
           if (this.form.id != null) {
             updateStockTrace(this.form).then(response => {
-              this.$modal.msgSuccess("修改成功");
-              this.open = false;
-              this.getList();
+              saveStockPositionPlanList(this.adviceTabel).then(response => {
+                this.$modal.msgSuccess("修改成功");
+                this.open = false;
+              });
             });
           } else {
             addStockTrace(this.form).then(response => {
@@ -167,7 +254,6 @@ export default {
       });
     },
     getDate(startDate, endDate, weak){
-      weak = weak - 1;
       let dates = [];
       let dateTime = new Date(startDate);
       let endDateTime = new Date(endDate);
@@ -194,51 +280,137 @@ export default {
       let that = this;
       this.loading = false;
       //获取当前股票信息
-      findCurrentInfo({"code":that.form.code}).then((response) => {
-        that.current = response.data;
+      //定投计划
+      let floorPrice = 0;
+      that.adviceTabel = [];
+      for (let i = 0; i < that.plan.tradeDate.length; i++) {
+        let advicePrice = that.floatFormat(Number(that.plan.priceSafe )- i*that.plan.unit);
+        let adviceAmount = that.floatFormat(Number(that.form.amount) + i* that.plan.amount);
+        let advicePercent = that.floatFormat(adviceAmount*100/Number(that.form.amountFit));
+        let griddingPercent = that.floatFormat((i+1)*100/that.plan.tradeDate.length)
+        let griddingAmount = (griddingPercent * that.form.amountFit)/100;
+        floorPrice = advicePrice;
+        that.adviceTabel.push({
+          "traceId": that.form.id,
+          "adviceDate": that.plan.tradeDate[i],
+          "advicePrice": advicePrice,
+          "adviceAmount":adviceAmount,
+          "advicePercent":advicePercent,
+          "griddingAmount":griddingAmount,
+          "griddingPercent":griddingPercent,
+        });
+      }
+      that.plan.floorPrice = floorPrice;
 
-        //定投计划
-        let floorPrice = 0;
-        for (let i = 0; i < that.plan.tradeDate.length; i++) {
-          let advicePrice = that.floatFormat(that.form.price- i*that.plan.unit);
-          let adviceAmount = that.floatFormat(that.form.amount + i* that.plan.amount);
-          let advicePercent = that.floatFormat(adviceAmount*100/that.form.amountFit);
-          floorPrice = advicePrice;
-          that.adviceTabel.push({
-            "date": that.plan.tradeDate[i],
-            "advicePrice": advicePrice,
-            "adviceAmount":adviceAmount,
-            "advicePercent":advicePercent,
+      //定投计划风险分级
+      let buyNum = 0;
+      let realityAmount = 0;
+      let realityAmountIndex = null;
+      let realityGriddingAmountIndex = null;
+      if(that.financePositionPlan != null){
+        realityAmount = that.financePositionPlan.realityAmount;
+      }
+      for (let i = 0; i <  that.adviceTabel.length; i++) {
+        const advice = that.adviceTabel[i];
+        advice.hadBuy = "";
+        if (realityAmount >= advice.adviceAmount) {
+          realityAmountIndex = i;
+          advice.hadBuy = "hadBuy";
+        }
+        if (realityAmount >= advice.griddingAmount) {
+          realityGriddingAmountIndex = i;
+          advice.griddingHadBuy = "hadBuy";
+        }
+        if ( new Date() > advice.adviceDate){
+          advice.dateCss = "buy-row";
+          buyNum ++;
+          continue;
+        }
+        if ( advice.advicePrice >= this.current.price){
+          if ( i >= buyNum *that.plan.elasticity ){
+            advice.priceCss = 'buy-danger-row';
+            continue;
+          }
+          advice.priceCss = 'buy-cautious-row';
+          continue;
+        }
+        advice.buyCss = '';
+      }
+      if (realityAmountIndex != null){
+        that.adviceTabel[realityAmountIndex].realAmount = true;
+      }
+      if (realityGriddingAmountIndex != null){
+        that.adviceTabel[realityGriddingAmountIndex].realGriddingAmount = true;
+      }
+
+    },
+    dealAdvice({row, column, rowIndex, columnIndex}) {
+      if (column.property ==  "advicePrice" || column.property == "griddingAmount" || column.property == "griddingPercent") {
+        if (row.priceCss!=null) {
+          return row.priceCss;
+        }
+        return row.griddingHadBuy;
+      }
+      if ( column.property == "adviceDate" || column.property == "adviceAmount" || column.property == "advicePercent" ) {
+        if (row.dateCss!=null) {
+          return row.dateCss;
+        }
+        return row.hadBuy;
+      }
+      return "";
+    },
+    handelPosition(row){
+      this.targetFinancePositionPlan.realityAmount = row.adviceAmount;
+      this.positionChange(this.sourceFinancePositionPlanId);
+      this.open = true;
+    },
+    // 取消按钮
+    cancel() {
+      this.open = false;
+    },
+    updatePosition() {
+      let financePositionPlan = this.financePositionPlan;
+      if (financePositionPlan!= null) {
+          financePositionPlan.realityAmount = this.targetFinancePositionPlan.realityAmount;
+          financePositionPlan.targetAmount = this.form.amountFit;
+          updateFinancePositionPlan(financePositionPlan).then(response => {
+            this.$modal.msgSuccess("调仓成功");
+            this.computeTable();
+            this.open = false;
+          });
+        } else {
+          financePositionPlan = {
+            "realityAmount": row.adviceAmount,
+            "traceId": this.form.id,
+            "name": this.form.name,
+            "targetAmount": this.form.amountFit,
+          };
+          addFinancePositionPlan(financePositionPlan).then(response => {
+            this.$modal.msgSuccess("调仓成功");
+            listFinancePositionPlan({"traceId":this.form.id}).then((response) => {
+              if (response.rows.length > 0){
+                this.financePositionPlan = response.rows[0];
+              }
+              this.computeTable();
+              this.open = false;
+            });
           });
         }
-
-        that.plan.rise = that.floatFormat((that.plan.price - that.current.price)*100/that.current.price);
-        that.plan.fall = that.floatFormat((that.current.price - floorPrice)*100/that.current.price);
-
-        //定投计划风险分级
-        let buyNum = 0;
-        for (let i = 0; i <  that.adviceTabel.length; i++) {
-          const advice = that.adviceTabel[i];
-          if ( new Date() > advice.date){
-            advice.buyCss = "buy-row";
-            buyNum ++;
-            continue;
-          }
-          if ( advice.advicePrice > this.current.price){
-            if ( i >= buyNum *that.plan.elasticity ){
-              advice.buyCss = 'buy-danger-row';
-              continue;
-            }
-            advice.buyCss = 'buy-cautious-row';
-            continue;
-          }
-          advice.buyCss = '';
-        }
-
-      })
+        this.sourceFinancePositionPlan.realityAmount = this.maxAmount - financePositionPlan.realityAmount;
+        updateFinancePositionPlan(this.sourceFinancePositionPlan).then(r=>{
+          this.findListFinancePositionPlan();
+        });
     },
-    dealAdvice({row, rowIndex}) {
-      return row.buyCss;
+    positionChange(id){
+      let listFinancePositionPlan = this.listFinancePositionPlan;
+      for (let i = 0; i < listFinancePositionPlan.length; i++) {
+        let financePositionPlan = listFinancePositionPlan[i];
+        if (id == financePositionPlan.id){
+          this.sourceFinancePositionPlan = financePositionPlan;
+          break;
+        }
+      }
+      this.maxAmount = this.sourceFinancePositionPlan.realityAmount + this.financePositionPlan.realityAmount;
     }
   },
 };
@@ -253,5 +425,8 @@ export default {
   }
   .el-table .buy-danger-row {
     background: #ff9680;
+  }
+  .el-table .hadBuy {
+    background: #e8f4ff;
   }
 </style>

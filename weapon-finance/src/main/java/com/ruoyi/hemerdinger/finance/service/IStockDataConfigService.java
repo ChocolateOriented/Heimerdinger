@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface IStockDataConfigService
 {
+    public static final String NAME_PRICE = "price";
     /**
      * 查询股票数据映射
      *

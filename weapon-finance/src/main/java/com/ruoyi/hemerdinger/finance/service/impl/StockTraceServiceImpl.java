@@ -1,11 +1,14 @@
 package com.ruoyi.hemerdinger.finance.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ruoyi.framework.web.service.UserDetailsServiceImpl;
 import com.ruoyi.hemerdinger.finance.domain.StockDataConfig;
 import com.ruoyi.hemerdinger.finance.manager.StockManager;
 import com.ruoyi.hemerdinger.finance.mapper.StockDataConfigMapper;
 import com.ruoyi.hemerdinger.finance.mapper.StockTraceMapper;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.hemerdinger.finance.domain.StockTrace;
@@ -20,6 +23,8 @@ import com.ruoyi.hemerdinger.finance.service.IStockTraceService;
 @Service
 public class StockTraceServiceImpl implements IStockTraceService
 {
+    private static final Logger log = LoggerFactory.getLogger(StockTraceServiceImpl.class);
+
     @Autowired
     private StockTraceMapper stockTraceMapper;
     @Autowired
@@ -104,15 +109,19 @@ public class StockTraceServiceImpl implements IStockTraceService
         String stockString = stockManager.findStock(code);
         String[] split = stockString.split("\\~");
         for (int i = 0; i < split.length; i++) {
-            System.out.println(i+":"+split[i]);
+            log.info(i+":"+split[i]);
         }
         JSONObject stockInfo = new JSONObject();
-        List<StockDataConfig> stockDataConfigs = dataConfigMapper.selectStockDataConfigList(new StockDataConfig());
-        for (int i = 0; i < stockDataConfigs.size(); i++) {
-            StockDataConfig stockDataConfig = stockDataConfigs.get(i);
-            Long index = stockDataConfig.getIndex();
-            String name = stockDataConfig.getName();
-            stockInfo.put(name, split[index.intValue()]);
+        try {
+            List<StockDataConfig> stockDataConfigs = dataConfigMapper.selectStockDataConfigList(new StockDataConfig());
+            for (int i = 0; i < stockDataConfigs.size(); i++) {
+                StockDataConfig stockDataConfig = stockDataConfigs.get(i);
+                Long index = stockDataConfig.getDataIndex();
+                String name = stockDataConfig.getName();
+                stockInfo.put(name, split[index.intValue()]);
+            }
+        }catch (Exception e){
+            log.error("获取股票信息失败:"+code,e);
         }
         return stockInfo;
     }

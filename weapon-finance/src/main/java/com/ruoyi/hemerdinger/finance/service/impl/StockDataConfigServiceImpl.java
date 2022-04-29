@@ -16,6 +16,8 @@ import com.ruoyi.hemerdinger.finance.service.IStockDataConfigService;
 @Service
 public class StockDataConfigServiceImpl implements IStockDataConfigService
 {
+
+
     @Autowired
     private StockDataConfigMapper stockDataConfigMapper;
 

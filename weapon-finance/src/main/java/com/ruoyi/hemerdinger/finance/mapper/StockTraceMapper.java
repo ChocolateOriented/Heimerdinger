@@ -5,15 +5,15 @@ import com.ruoyi.hemerdinger.finance.domain.StockTrace;
 
 /**
  * 股票追踪Mapper接口
- *
- * @author lijingxiang
- * @date 2022-04-24
+ * 
+ * @author lijing xiang
+ * @date 2022-04-27
  */
-public interface StockTraceMapper
+public interface StockTraceMapper 
 {
     /**
      * 查询股票追踪
-     *
+     * 
      * @param id 股票追踪主键
      * @return 股票追踪
      */
@@ -21,7 +21,7 @@ public interface StockTraceMapper
 
     /**
      * 查询股票追踪列表
-     *
+     * 
      * @param stockTrace 股票追踪
      * @return 股票追踪集合
      */
@@ -29,7 +29,7 @@ public interface StockTraceMapper
 
     /**
      * 新增股票追踪
-     *
+     * 
      * @param stockTrace 股票追踪
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface StockTraceMapper
 
     /**
      * 修改股票追踪
-     *
+     * 
      * @param stockTrace 股票追踪
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface StockTraceMapper
 
     /**
      * 删除股票追踪
-     *
+     * 
      * @param id 股票追踪主键
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface StockTraceMapper
 
     /**
      * 批量删除股票追踪
-     *
+     * 
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
