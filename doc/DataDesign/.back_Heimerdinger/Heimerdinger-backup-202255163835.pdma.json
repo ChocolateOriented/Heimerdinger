@@ -2,9 +2,9 @@
   "name": "Heimerdinger",
   "describe": "自用工具",
   "avatar": "",
-  "version": "4.0.0",
+  "version": "3.5.7",
   "createdTime": "2021-10-15 11:41:11",
-  "updatedTime": "2022-5-5 17:12:05",
+  "updatedTime": "2022-4-27 17:35:54",
   "profile": {
     "default": {
       "db": "E410B2A3-3E59-49D9-8A06-FFF4888D40CC",
@@ -787,7 +787,24 @@
           "id": "235259F5-9FF8-47F4-82A1-1F78E1D11831"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "66DCBC8C-0347-43E7-BC82-3AB073786CCE",
+          "refEntity": "483C278E-C4D9-4678-8A92-395FDE0E2C87",
+          "refField": "93619A28-52B7-4BDB-A057-0CC6B39073DB",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        },
+        {
+          "myField": "66DCBC8C-0347-43E7-BC82-3AB073786CCE",
+          "refEntity": "342B8DE6-F39D-49BC-AF3C-70827DA39675",
+          "refField": "5BCC362F-86BD-4DD7-91FB-EF57801D7560",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -1213,54 +1230,6 @@
           "id": "93619A28-52B7-4BDB-A057-0CC6B39073DB"
         },
         {
-          "defKey": "advice_price",
-          "defName": "触发价格",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "F8BB7158-4C67-4988-ABA0-F6CD8C2580C6"
-        },
-        {
-          "defKey": "gridding_amount",
-          "defName": "网格持仓",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "77868456-5E31-4160-A642-796716111FC8"
-        },
-        {
-          "defKey": "gridding_percent",
-          "defName": "网格持仓百分比",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "9B75203C-91F7-468E-BF75-F1238472B7FD"
-        },
-        {
           "defKey": "advice_date",
           "defName": "触发日期",
           "comment": "",
@@ -1277,8 +1246,24 @@
           "id": "B4384B74-69DC-41F6-B1D9-6AD6EF2D0C75"
         },
         {
+          "defKey": "advice_price",
+          "defName": "触发价格",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "F8BB7158-4C67-4988-ABA0-F6CD8C2580C6"
+        },
+        {
           "defKey": "advice_amount",
-          "defName": "定投持仓金额",
+          "defName": "持仓金额",
           "comment": "",
           "type": "",
           "len": "",
@@ -1294,7 +1279,7 @@
         },
         {
           "defKey": "advice_percent",
-          "defName": "定投持仓百分比",
+          "defName": "持仓百分比",
           "comment": "",
           "type": "",
           "len": "",

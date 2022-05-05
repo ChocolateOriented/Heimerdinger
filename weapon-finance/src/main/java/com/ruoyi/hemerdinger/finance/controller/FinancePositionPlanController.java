@@ -95,20 +95,24 @@ public class FinancePositionPlanController extends BaseController
             for (int j = 0; j < stockPositionPlans.size(); j++) {
                 StockPositionPlan stockPositionPlan =  stockPositionPlans.get(j);
                 Date adviceDate = stockPositionPlan.getAdviceDate();
-                BigDecimal adviceAmount = stockPositionPlan.getAdviceAmount();
-                BigDecimal advicePrice = stockPositionPlan.getAdvicePrice();
-                boolean amountShort = realityAmount.compareTo(adviceAmount) < 0;
+                BigDecimal timeAdviceAmount = stockPositionPlan.getAdviceAmount();
+                boolean timeAmountShort = realityAmount.compareTo(timeAdviceAmount) < 0;
                 //时间触发
-                if (adviceDate.compareTo(now) <= 0 && amountShort ){
+                if (adviceDate.compareTo(now) <= 0 && timeAmountShort ){
                     tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_DATE,
-                        adviceAmount,realityAmount);
+                            timeAdviceAmount,realityAmount);
                     continue;
                 }
+
                 //价格触发
-                if (advicePrice.compareTo(currentPrice) >= 0 && amountShort){
+                BigDecimal griddingAdvicePrice = stockPositionPlan.getAdvicePrice();
+                BigDecimal griddingAdviceAmount =stockPositionPlan.getGriddingAmount();
+                boolean griddingAmountShort = realityAmount.compareTo(griddingAdviceAmount) < 0;
+
+                if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort){
                     tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
-                        adviceAmount,realityAmount);
-                    break;
+                            griddingAdviceAmount,realityAmount);
+                    continue;
                 }
             }
             if (null != tradeAdvice){

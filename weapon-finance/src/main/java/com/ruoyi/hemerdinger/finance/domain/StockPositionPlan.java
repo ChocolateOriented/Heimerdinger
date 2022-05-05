@@ -1,8 +1,8 @@
 package com.ruoyi.hemerdinger.finance.domain;
 
-    import java.math.BigDecimal;
-    import java.util.Date;
-    import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import io.swagger.annotations.ApiModel;
@@ -14,7 +14,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 股票持仓计划对象 stock_position_plan
  *
  * @author lijing xiang
- * @date 2022-04-27
+ * @date 2022-05-05
  */
 @ApiModel(value = "ClassName", description = "股票持仓计划对象")
 public class StockPositionPlan extends BaseEntity
@@ -43,10 +43,20 @@ public class StockPositionPlan extends BaseEntity
     @ApiModelProperty(value = "触发价格", example = "1")
     private BigDecimal advicePrice;
 
+    /** 网格持仓 */
+    @Excel(name = "网格持仓")
+    @ApiModelProperty(value = "网格持仓", example = "1")
+    private BigDecimal griddingAmount;
+
     /** 持仓金额 */
     @Excel(name = "持仓金额")
     @ApiModelProperty(value = "持仓金额", example = "1")
     private BigDecimal adviceAmount;
+
+    /** 网格持仓百分比 */
+    @Excel(name = "网格持仓百分比")
+    @ApiModelProperty(value = "网格持仓百分比", example = "1")
+    private BigDecimal griddingPercent;
 
     /** 持仓百分比 */
     @Excel(name = "持仓百分比")
@@ -103,6 +113,23 @@ public class StockPositionPlan extends BaseEntity
     {
         return advicePrice;
     }
+
+    public BigDecimal getGriddingAmount() {
+        return griddingAmount;
+    }
+
+    public void setGriddingAmount(BigDecimal griddingAmount) {
+        this.griddingAmount = griddingAmount;
+    }
+
+    public BigDecimal getGriddingPercent() {
+        return griddingPercent;
+    }
+
+    public void setGriddingPercent(BigDecimal griddingPercent) {
+        this.griddingPercent = griddingPercent;
+    }
+
     public void setAdviceAmount(BigDecimal adviceAmount)
     {
         this.adviceAmount = adviceAmount;
@@ -112,6 +139,7 @@ public class StockPositionPlan extends BaseEntity
     {
         return adviceAmount;
     }
+
     public void setAdvicePercent(BigDecimal advicePercent)
     {
         this.advicePercent = advicePercent;
@@ -134,18 +162,20 @@ public class StockPositionPlan extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("delFlag", getDelFlag())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("traceId", getTraceId())
-            .append("adviceDate", getAdviceDate())
-            .append("advicePrice", getAdvicePrice())
-            .append("adviceAmount", getAdviceAmount())
-            .append("advicePercent", getAdvicePercent())
-            .append("tradeType", getTradeType())
-            .toString();
+                .append("id", getId())
+                .append("delFlag", getDelFlag())
+                .append("createBy", getCreateBy())
+                .append("createTime", getCreateTime())
+                .append("updateBy", getUpdateBy())
+                .append("updateTime", getUpdateTime())
+                .append("traceId", getTraceId())
+                .append("adviceDate", getAdviceDate())
+                .append("advicePrice", getAdvicePrice())
+                .append("griddingAmount", getGriddingAmount())
+                .append("adviceAmount", getAdviceAmount())
+                .append("griddingPercent", getGriddingPercent())
+                .append("advicePercent", getAdvicePercent())
+                .append("tradeType", getTradeType())
+                .toString();
     }
 }
