@@ -94,6 +94,18 @@ public class FinancePositionPlanController extends BaseController
             TradeAdviceListVo tradeAdvice = null;
             for (int j = 0; j < stockPositionPlans.size(); j++) {
                 StockPositionPlan stockPositionPlan =  stockPositionPlans.get(j);
+
+                //价格触发
+                BigDecimal griddingAdvicePrice = stockPositionPlan.getAdvicePrice();
+                BigDecimal griddingAdviceAmount =stockPositionPlan.getGriddingAmount();
+                boolean griddingAmountShort = realityAmount.compareTo(griddingAdviceAmount) < 0;
+
+                if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort){
+                    tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
+                        griddingAdviceAmount,realityAmount);
+                    continue;
+                }
+
                 Date adviceDate = stockPositionPlan.getAdviceDate();
                 BigDecimal timeAdviceAmount = stockPositionPlan.getAdviceAmount();
                 boolean timeAmountShort = realityAmount.compareTo(timeAdviceAmount) < 0;
@@ -104,16 +116,6 @@ public class FinancePositionPlanController extends BaseController
                     continue;
                 }
 
-                //价格触发
-                BigDecimal griddingAdvicePrice = stockPositionPlan.getAdvicePrice();
-                BigDecimal griddingAdviceAmount =stockPositionPlan.getGriddingAmount();
-                boolean griddingAmountShort = realityAmount.compareTo(griddingAdviceAmount) < 0;
-
-                if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort){
-                    tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
-                            griddingAdviceAmount,realityAmount);
-                    continue;
-                }
             }
             if (null != tradeAdvice){
                 adviceListVos.add(tradeAdvice);

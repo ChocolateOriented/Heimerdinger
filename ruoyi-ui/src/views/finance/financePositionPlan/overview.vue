@@ -228,8 +228,10 @@ export default {
           text: '持仓比例',
           left: 'left'
         },
+        //提示框组件,鼠标移动上去显示的提示内容
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
+          formatter: "{a} <br/>{b}: {c} ({d}%)"//模板变量有 {a}、{b}、{c}、{d}，分别表示系列名，数据名，数据值，百分比。
         },
         series: [
           {
