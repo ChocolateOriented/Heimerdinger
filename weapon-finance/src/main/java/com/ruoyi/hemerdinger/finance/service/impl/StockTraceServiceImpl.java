@@ -10,6 +10,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.ruoyi.hemerdinger.finance.domain.StockTrace;
 import com.ruoyi.hemerdinger.finance.service.IStockTraceService;
@@ -105,6 +106,7 @@ public class StockTraceServiceImpl implements IStockTraceService
     }
 
     @Override
+    @Cacheable(value = "stockCurrentInfo",key = "#code")
     public JSONObject findCurrentInfo(String code) {
         String stockString = stockManager.findStock(code);
         String[] split = stockString.split("\\~");
