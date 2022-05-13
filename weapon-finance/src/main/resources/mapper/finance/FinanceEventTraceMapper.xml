@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hemerdinger.finance.mapper.FinanceEventTraceMapper">
+
+    <resultMap type="FinanceEventTrace" id="FinanceEventTraceResult">
+        <result property="id"    column="id"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="occurredTime"    column="occurred_time"    />
+        <result property="ammount"    column="ammount"    />
+        <result property="changeRate"    column="change_rate"    />
+        <result property="eventType"    column="event_type"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectFinanceEventTraceVo">
+        select id, del_flag, create_by, create_time, update_by, update_time, occurred_time, ammount, change_rate, event_type, name from finance_event_trace
+    </sql>
+
+    <select id="selectFinanceEventTraceList" parameterType="FinanceEventTrace" resultMap="FinanceEventTraceResult">
+        <include refid="selectFinanceEventTraceVo"/>
+        <where>
+            <if test="occurredTime != null "> and occurred_time = #{occurredTime}</if>
+            <if test="ammount != null "> and ammount = #{ammount}</if>
+            <if test="changeRate != null "> and change_rate = #{changeRate}</if>
+            <if test="eventType != null  and eventType != ''"> and event_type = #{eventType}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                and date_format(occurred_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                and date_format(occurred_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+        </where>
+        <if test=" params != null  and params.order != null"> order by #{params.order}</if>
+    </select>
+
+    <select id="selectFinanceEventTraceById" parameterType="Long" resultMap="FinanceEventTraceResult">
+        <include refid="selectFinanceEventTraceVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertFinanceEventTrace" parameterType="FinanceEventTrace" useGeneratedKeys="true" keyProperty="id">
+        insert into finance_event_trace
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="occurredTime != null">occurred_time,</if>
+            <if test="ammount != null">ammount,</if>
+            <if test="changeRate != null">change_rate,</if>
+            <if test="eventType != null">event_type,</if>
+            <if test="name != null">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="occurredTime != null">#{occurredTime},</if>
+            <if test="ammount != null">#{ammount},</if>
+            <if test="changeRate != null">#{changeRate},</if>
+            <if test="eventType != null">#{eventType},</if>
+            <if test="name != null">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFinanceEventTrace" parameterType="FinanceEventTrace">
+        update finance_event_trace
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="occurredTime != null">occurred_time = #{occurredTime},</if>
+            <if test="ammount != null">ammount = #{ammount},</if>
+            <if test="changeRate != null">change_rate = #{changeRate},</if>
+            <if test="eventType != null">event_type = #{eventType},</if>
+            <if test="name != null">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteFinanceEventTraceById" parameterType="Long">
+        delete from finance_event_trace where id = #{id}
+    </delete>
+
+    <delete id="deleteFinanceEventTraceByIds" parameterType="String">
+        delete from finance_event_trace where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -2,9 +2,9 @@
   "name": "Heimerdinger",
   "describe": "自用工具",
   "avatar": "",
-  "version": "3.5.7",
+  "version": "4.0.0",
   "createdTime": "2021-10-15 11:41:11",
-  "updatedTime": "2022-4-27 17:35:54",
+  "updatedTime": "2022-5-10 13:26:50",
   "profile": {
     "default": {
       "db": "E410B2A3-3E59-49D9-8A06-FFF4888D40CC",
@@ -787,24 +787,7 @@
           "id": "235259F5-9FF8-47F4-82A1-1F78E1D11831"
         }
       ],
-      "correlations": [
-        {
-          "myField": "66DCBC8C-0347-43E7-BC82-3AB073786CCE",
-          "refEntity": "483C278E-C4D9-4678-8A92-395FDE0E2C87",
-          "refField": "93619A28-52B7-4BDB-A057-0CC6B39073DB",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        },
-        {
-          "myField": "66DCBC8C-0347-43E7-BC82-3AB073786CCE",
-          "refEntity": "342B8DE6-F39D-49BC-AF3C-70827DA39675",
-          "refField": "5BCC362F-86BD-4DD7-91FB-EF57801D7560",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     },
     {
@@ -1230,22 +1213,6 @@
           "id": "93619A28-52B7-4BDB-A057-0CC6B39073DB"
         },
         {
-          "defKey": "advice_date",
-          "defName": "触发日期",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
-          "id": "B4384B74-69DC-41F6-B1D9-6AD6EF2D0C75"
-        },
-        {
           "defKey": "advice_price",
           "defName": "触发价格",
           "comment": "",
@@ -1262,8 +1229,56 @@
           "id": "F8BB7158-4C67-4988-ABA0-F6CD8C2580C6"
         },
         {
+          "defKey": "gridding_amount",
+          "defName": "网格持仓",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "77868456-5E31-4160-A642-796716111FC8"
+        },
+        {
+          "defKey": "gridding_percent",
+          "defName": "网格持仓百分比",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "9B75203C-91F7-468E-BF75-F1238472B7FD"
+        },
+        {
+          "defKey": "advice_date",
+          "defName": "触发日期",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "id": "B4384B74-69DC-41F6-B1D9-6AD6EF2D0C75"
+        },
+        {
           "defKey": "advice_amount",
-          "defName": "持仓金额",
+          "defName": "定投持仓金额",
           "comment": "",
           "type": "",
           "len": "",
@@ -1279,7 +1294,7 @@
         },
         {
           "defKey": "advice_percent",
-          "defName": "持仓百分比",
+          "defName": "定投持仓百分比",
           "comment": "",
           "type": "",
           "len": "",
@@ -1565,6 +1580,281 @@
       ],
       "correlations": [],
       "indexes": []
+    },
+    {
+      "id": "A2D08C76-A71E-43C8-A533-E332ABC0D1EA",
+      "env": {
+        "base": {
+          "nameSpace": "",
+          "codeRoot": ""
+        }
+      },
+      "defKey": "finance_event_trace",
+      "defName": "经济事件追踪",
+      "comment": "",
+      "properties": {},
+      "nameTemplate": "{defKey}[{defName}]",
+      "headers": [
+        {
+          "freeze": false,
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "freeze": true,
+          "refKey": "defKey",
+          "hideInGraph": false
+        },
+        {
+          "freeze": true,
+          "refKey": "defName",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "primaryKey",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "notNull",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "autoIncrement",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "domain",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "scale",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "refDict",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "defaultValue",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "isStandard",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "uiHint",
+          "hideInGraph": true
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "id",
+          "defName": "id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
+          "id": "907FEBBF-C2C4-475E-AE14-D296DAE42047"
+        },
+        {
+          "defKey": "del_flag",
+          "defName": "删除标志（0代表存在 2代表删除）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "'0'",
+          "hideInGraph": true,
+          "refDict": "",
+          "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
+          "id": "FF4EEA64-ED90-4ED9-9B0A-54FB649C77F9"
+        },
+        {
+          "defKey": "create_by",
+          "defName": "创建人",
+          "comment": "",
+          "domain": "A28F4A8C-A80E-4708-A0D3-C1868B98720E",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "9CE19DA9-743E-4B6F-B404-3D11763E9C97"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "创建时间",
+          "comment": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "855192A9-56DB-4F07-8C71-27417A7C26D7"
+        },
+        {
+          "defKey": "update_by",
+          "defName": "更新人",
+          "comment": "",
+          "domain": "A28F4A8C-A80E-4708-A0D3-C1868B98720E",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "DD35E63F-ACE4-4708-A12A-E707288502EC"
+        },
+        {
+          "defKey": "update_time",
+          "defName": "更新时间",
+          "comment": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "12EA67A3-ABEC-45E6-B3FB-5538FB3A44BE"
+        },
+        {
+          "defKey": "occurred_time",
+          "defName": "发生时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "id": "5A0FF5C9-8D16-408B-88E0-A856672AA191"
+        },
+        {
+          "defKey": "ammount",
+          "defName": "数值",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "11F19C09-39E2-404A-A320-5D806CA0BD83"
+        },
+        {
+          "defKey": "change_rate",
+          "defName": "较上期变化率",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "0",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "AD23F179-B2EB-4A09-B9A1-D3877574B689"
+        },
+        {
+          "defKey": "event_type",
+          "defName": "事件类型",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "E84A95ED-5D81-4687-B1B4-6DD2A173BEDD",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
+          "id": "600C6E2B-8BDA-4E68-9C6B-2901CF6A919A"
+        },
+        {
+          "defKey": "name",
+          "defName": "事件名称",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
+          "id": "9D9AE63B-5B2A-4E89-9642-749D1980D2CC"
+        }
+      ],
+      "correlations": [],
+      "indexes": []
     }
   ],
   "views": [],
@@ -1599,6 +1889,87 @@
           "attr2": "",
           "attr3": "",
           "id": "C39F91E9-93B4-473E-941A-57934233D4C3"
+        }
+      ]
+    },
+    {
+      "defKey": "finance_event_type",
+      "defName": "经济事件类型",
+      "sort": "",
+      "intro": "",
+      "id": "E84A95ED-5D81-4687-B1B4-6DD2A173BEDD",
+      "items": [
+        {
+          "defKey": "GOLD",
+          "defName": "黄金",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "D9ADF09D-E687-4F02-A3CB-139C21F956BB"
+        },
+        {
+          "defKey": "COMMODITY",
+          "defName": "大宗商品",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "47A6F141-F588-4DCA-92BB-AAF079F2434B"
+        },
+        {
+          "defKey": "STOCK",
+          "defName": "股票",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "D22DF191-8E12-4BA4-91D3-B32C7BE2F50F"
+        },
+        {
+          "defKey": "BOND",
+          "defName": "债券",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "F0821375-F592-47B1-BE19-0BE20E3BA3DC"
+        },
+        {
+          "defKey": "CURRENCY",
+          "defName": "货币政策",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "3ECE7EC8-CA12-4D56-8A33-CCA7C652F684"
+        },
+        {
+          "defKey": "CREDIT",
+          "defName": "信用政策",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "EDA67498-3B7B-4BBB-9360-98119A2C126A"
         }
       ]
     }
@@ -1855,23 +2226,6 @@
       "canvasData": {
         "cells": [
           {
-            "id": "7ed4f092-07b6-4cd1-be4f-cbf420bcc0e8",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
-              "port": "93619A28-52B7-4BDB-A057-0CC6B39073DB%out"
-            },
-            "target": {
-              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
-            },
-            "relation": "1:n",
-            "fillColor": "#ACDAFC",
-            "router": {
-              "name": "manhattan"
-            }
-          },
-          {
             "id": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
             "shape": "table",
             "position": {
@@ -1880,33 +2234,6 @@
             },
             "count": 0,
             "originKey": "483C278E-C4D9-4678-8A92-395FDE0E2C87"
-          },
-          {
-            "id": "dc0456dd-8bed-4e08-b857-a7c712e29b8f",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "10145707-51e1-4b2a-afb4-a55fa40930a8",
-              "port": "5BCC362F-86BD-4DD7-91FB-EF57801D7560%out"
-            },
-            "target": {
-              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
-            },
-            "relation": "1:n",
-            "fillColor": "#ACDAFC",
-            "router": {
-              "name": "manhattan"
-            }
-          },
-          {
-            "id": "10145707-51e1-4b2a-afb4-a55fa40930a8",
-            "shape": "table",
-            "position": {
-              "x": -722.5,
-              "y": -657
-            },
-            "count": 0,
-            "originKey": "342B8DE6-F39D-49BC-AF3C-70827DA39675"
           },
           {
             "id": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
@@ -1927,6 +2254,54 @@
             },
             "count": 0,
             "originKey": "8257CA8A-984C-41E9-A9A6-0FB23BBE60F7"
+          },
+          {
+            "id": "7ed4f092-07b6-4cd1-be4f-cbf420bcc0e8",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
+              "port": "93619A28-52B7-4BDB-A057-0CC6B39073DB%out"
+            },
+            "target": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC"
+          },
+          {
+            "id": "dc0456dd-8bed-4e08-b857-a7c712e29b8f",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "10145707-51e1-4b2a-afb4-a55fa40930a8",
+              "port": "5BCC362F-86BD-4DD7-91FB-EF57801D7560%out"
+            },
+            "target": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC"
+          },
+          {
+            "id": "10145707-51e1-4b2a-afb4-a55fa40930a8",
+            "shape": "table",
+            "position": {
+              "x": -722.5,
+              "y": -657
+            },
+            "count": 0,
+            "originKey": "342B8DE6-F39D-49BC-AF3C-70827DA39675"
+          },
+          {
+            "id": "e80aa71b-f9ea-4009-8a54-4ba4a06060a6",
+            "shape": "table",
+            "position": {
+              "x": -722,
+              "y": -430
+            },
+            "count": 0,
+            "originKey": "A2D08C76-A71E-43C8-A533-E332ABC0D1EA"
           }
         ]
       },
