@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class StockManager {
 //	http://qt.gtimg.cn/q=sh600519
 	public String findStock(String code){
-		return HttpUtils.sendGet("http://qt.gtimg.cn/q=" +code,null);
+		return HttpUtils.sendGet("http://qt.gtimg.cn/q=" +code);
 	}
 }
 

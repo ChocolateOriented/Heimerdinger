@@ -1,0 +1,17 @@
+GET http://127.0.0.1:88/api/public/stock_zh_a_hist?symbol=600000
+Accept: application/json
+
+###
+POST https://open.lixinger.com/api/macro/gdp
+Content-Type: application/json
+
+{
+  "token":"b2d82ce2-70f2-49c9-a6c2-a3c22fedabd8",
+  "startDate":"2022-11-01",
+  "endDate": "2014-11-01",
+  "areaCode": "cn",
+  "metricsList": [
+    "y.gdp.t"
+  ]
+}
+

@@ -13,7 +13,7 @@ export function parseTime(time, pattern) {
 	if (typeof time === 'object') {
 		date = time
 	} else {
-		if ((typeof time === 'string') && (/^[0-9]+$/.test(time))) {
+		if ((typeof time === 'string') && (/^\d{10,13}$/.test(time))) {
 			time = parseInt(time)
 		} else if (typeof time === 'string') {
 			time = time.replace(new RegExp(/-/gm), '/').replace('T', ' ').replace(new RegExp(/\.[\d]{3}/gm),'');

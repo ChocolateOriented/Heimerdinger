@@ -1,11 +1,15 @@
 package com.ruoyi.hemerdinger.finance.util;
 
 import com.alibaba.fastjson.JSON;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.sun.xml.internal.fastinfoset.Encoder;
 import org.apache.http.Consts;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -13,6 +17,7 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -24,16 +29,13 @@ public class HttpUtil {
     private HttpUtil() {
     }
 
+
     public static CloseableHttpResponse sendGetResponse(CloseableHttpClient httpClient, String url) throws IOException {
         return httpClient.execute(new HttpGet(url));
     }
 
     public static String sendGet(CloseableHttpClient httpClient, String url) {
         return HttpUtil.sendGet(httpClient, url, null, null);
-    }
-
-    public static String sendGet(CloseableHttpClient httpClient, String url, Map<String, String> header) {
-        return HttpUtil.sendGet(httpClient, url, header, null);
     }
 
     public static String sendGet(CloseableHttpClient httpClient, String url, String charset) {
@@ -82,7 +84,7 @@ public class HttpUtil {
     private static String sendEntityRequest(CloseableHttpClient httpClient, HttpEntityEnclosingRequestBase request, Map<String, Object> params) {
         if (params != null) {
             List<BasicNameValuePair> parameters = params.entrySet().stream().map(entry ->
-                new BasicNameValuePair(entry.getKey(), String.valueOf(entry.getValue()))
+                    new BasicNameValuePair(entry.getKey(), String.valueOf(entry.getValue()))
             ).collect(Collectors.toList());
 
             UrlEncodedFormEntity entity = new UrlEncodedFormEntity(parameters, Consts.UTF_8);

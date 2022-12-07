@@ -10,12 +10,21 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.cert.X509Certificate;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import com.sun.xml.internal.fastinfoset.Encoder;
+import io.jsonwebtoken.lang.Collections;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.Constants;
@@ -40,6 +49,19 @@ public class HttpUtils
     public static String sendGet(String url, String param)
     {
         return sendGet(url, param, Constants.UTF8);
+    }
+
+    public static String sendGet(String url)
+    {
+        return sendGet(url, null, Constants.UTF8);
+    }
+    public static String sendGet(String url, Map<String, String> params) {
+        if (Collections.isEmpty(params)){
+            return sendGet(url);
+        }
+        String param = URLEncodedUtils.format(HttpUtils.convertMap2NameValuePairs(params), Encoder.UTF_8);
+        return sendGet(url, param);
+
     }
 
     /**
@@ -260,4 +282,10 @@ public class HttpUtils
             return true;
         }
     }
+
+
+    public static List<NameValuePair> convertMap2NameValuePairs(Map<String, String> data) {
+        return data.entrySet().stream().map(entry -> new BasicNameValuePair(entry.getKey(), entry.getValue())).collect(Collectors.toList());
+    }
+
 }
