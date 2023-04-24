@@ -37,6 +37,7 @@
             <if test="advicePercent != null "> and advice_percent = #{advicePercent}</if>
             <if test="tradeType != null  and tradeType != ''"> and trade_type = #{tradeType}</if>
         </where>
+        order by advice_date
     </select>
 
     <select id="selectStockPositionPlanById" parameterType="Long" resultMap="StockPositionPlanResult">

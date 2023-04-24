@@ -1,43 +1,39 @@
 package com.ruoyi.hemerdinger.finance.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.hemerdinger.finance.domain.StockPositionPlan;
-import com.ruoyi.hemerdinger.finance.domain.vo.TradeAdviceListVo;
-import com.ruoyi.hemerdinger.finance.domain.vo.TradeAdviceType;
-import com.ruoyi.hemerdinger.finance.manager.StockManager;
-import com.ruoyi.hemerdinger.finance.service.IStockDataConfigService;
-import com.ruoyi.hemerdinger.finance.service.IStockPositionPlanService;
-import com.ruoyi.hemerdinger.finance.service.IStockTraceService;
-import com.ruoyi.hemerdinger.finance.service.impl.StockDataConfigServiceImpl;
-import com.ruoyi.hemerdinger.finance.service.impl.StockTraceServiceImpl;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiOperation;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.Rest;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.hemerdinger.finance.domain.FinancePositionPlan;
-import com.ruoyi.hemerdinger.finance.service.IFinancePositionPlanService;
-import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.hemerdinger.finance.domain.FinancePositionPlan;
+import com.ruoyi.hemerdinger.finance.domain.StockPositionPlan;
+import com.ruoyi.hemerdinger.finance.domain.vo.TradeAdviceListVo;
+import com.ruoyi.hemerdinger.finance.domain.vo.TradeAdviceType;
+import com.ruoyi.hemerdinger.finance.service.IFinancePositionPlanService;
+import com.ruoyi.hemerdinger.finance.service.IStockDataConfigService;
+import com.ruoyi.hemerdinger.finance.service.IStockPositionPlanService;
+import com.ruoyi.hemerdinger.finance.service.IStockTraceService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 持仓计划Controller
@@ -94,6 +90,18 @@ public class FinancePositionPlanController extends BaseController
             TradeAdviceListVo tradeAdvice = null;
             for (int j = 0; j < stockPositionPlans.size(); j++) {
                 StockPositionPlan stockPositionPlan =  stockPositionPlans.get(j);
+
+                //价格触发
+                BigDecimal griddingAdvicePrice = stockPositionPlan.getAdvicePrice();
+                BigDecimal griddingAdviceAmount =stockPositionPlan.getGriddingAmount();
+                boolean griddingAmountShort = realityAmount.compareTo(griddingAdviceAmount) < 0;
+
+                if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort){
+                    tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
+                        griddingAdviceAmount,realityAmount);
+                    continue;
+                }
+
                 Date adviceDate = stockPositionPlan.getAdviceDate();
                 BigDecimal timeAdviceAmount = stockPositionPlan.getAdviceAmount();
                 boolean timeAmountShort = realityAmount.compareTo(timeAdviceAmount) < 0;
@@ -104,16 +112,6 @@ public class FinancePositionPlanController extends BaseController
                     continue;
                 }
 
-                //价格触发
-                BigDecimal griddingAdvicePrice = stockPositionPlan.getAdvicePrice();
-                BigDecimal griddingAdviceAmount =stockPositionPlan.getGriddingAmount();
-                boolean griddingAmountShort = realityAmount.compareTo(griddingAdviceAmount) < 0;
-
-                if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort){
-                    tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
-                            griddingAdviceAmount,realityAmount);
-                    continue;
-                }
             }
             if (null != tradeAdvice){
                 adviceListVos.add(tradeAdvice);
