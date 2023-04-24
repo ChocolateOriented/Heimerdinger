@@ -3,6 +3,7 @@
 import * as echarts from "echarts";
 import {find} from "@/api/finance/akShare";
 import {asc, merge, valueList} from "@/utils/chart/DataUtils";
+import da from "element-ui/src/locale/lang/da";
 
 /**
  * 渲染图表
@@ -42,7 +43,8 @@ export function renderChartList(chartList) {
       let dataHandleList = chartDef.dataHandleList;
       if (dataHandleList){
         for (let i = 0; i < dataHandleList.length; i++) {
-          dataHandleList[i](chartDef, mergeData);
+          let handleDef = dataHandleList[i];
+          doHandel(handleDef, chartDef, mergeData);
         }
       }
       //渲染图表
@@ -54,28 +56,57 @@ export function renderChartList(chartList) {
 async function getData(chartDef) {
 
   let dataDefineList = chartDef.dataDefineList;
-  let mergeDataMap = getDateMap();
+  let mergeDataMap = {}
   let mergeData = {};
 
   let mergeKey = chartDef.mergeKey;
 
   for (let i = 0; i < dataDefineList.length; i++) {
     let chartDataDefine = dataDefineList[i];
+    let targetData = null;
+    if (chartDataDefine.path){
+      await find(chartDataDefine).then(response => {
+        if (response.code == 200 && response.data) {
+          targetData = response.data;
+          if (chartDataDefine.valueHandel) {
+            targetData = chartDataDefine.valueHandel(response.data);
+          }
 
-    await find(chartDataDefine).then(response => {
-      if (response.code == 200 && response.data) {
-        if (chartDataDefine.valueHandel) {
-          response.data = chartDataDefine.valueHandel(response.data);
+        } else {
+          console.error(response);
         }
-        mergeDataMap = merge(mergeDataMap, response.data, chartDataDefine.xField, chartDataDefine.xFormat, chartDataDefine.yField, mergeKey);
-        mergeData = valueList(mergeDataMap, asc(mergeKey));
-      } else {
-        console.error(response);
-      }
-    });
+      });
+    }
+    if (chartDataDefine.data){
+      targetData = chartDataDefine.data;
+    }
+    mergeDataMap = merge(mergeDataMap, targetData, chartDataDefine, mergeKey);
+    mergeData = valueList(mergeDataMap, asc(mergeKey))
   }
   return mergeData;
 }
+
+//数据处理
+function doHandel(handelDef, chartDef, mergeData){
+  let resultField = handelDef.resultField;
+  let handel = handelDef.handel;
+  let dataDef = handelDef.dataDef;
+
+  for (let i = 0; i < mergeData.length; i++) {
+    let tar = mergeData[i];
+    tar[resultField] = handel(tar, i, mergeData)
+  }
+
+  if (! dataDef){
+    dataDef = {
+      yName: resultField,
+      commonSeries: lineDateSeries,
+      yAxis: {name: resultField, type: 'value',max: 'dataMax', min: 'dataMin',},
+    }
+  }
+
+  chartDef.dataDefineList.push(dataDef);
+};
 
 function renderChart(chartKey, chartDef, mergeData) {
   console.info(mergeData);
@@ -88,18 +119,20 @@ function renderChart(chartKey, chartDef, mergeData) {
     let chartDataDefine = dataDefineList[i];
 
     if (chartDataDefine.commonSeries){
-      chartDataDefine.series = chartDataDefine.commonSeries(mergeKey,chartDataDefine.yField);
+      chartDataDefine.series = chartDataDefine.commonSeries(mergeKey,chartDataDefine.yName);
     }
     //增加图形
     if (chartDataDefine.series) {
       //增加维度
-      option.dataset.dimensions.push(chartDataDefine.yField);
-      option.legend.data.push(chartDataDefine.yField);
-      chartDataDefine.series.name = chartDataDefine.yField;
+      option.dataset.dimensions.push(chartDataDefine.yName);
+      chartDataDefine.series.name = chartDataDefine.yName;
       //增加Y轴
       if (chartDataDefine.yAxis) {
         option.yAxis.push(chartDataDefine.yAxis);
         chartDataDefine.series.yAxisIndex = option.yAxis.length - 1;
+      }
+      if (mergeData.length > 3000){
+        chartDataDefine.series.symbol = "none";
       }
       option.series.push(chartDataDefine.series);
     }
@@ -115,24 +148,11 @@ function renderChart(chartKey, chartDef, mergeData) {
   option && myChart.setOption(option);
 }
 
-//获取日期Map
-function getDateMap(){
-  let start = new Date("1990-01-01");
-  let end = new Date();
-  let mergeDataMap = {};
-  while (start.getTime() < end){
-    mergeDataMap[start]={};
-    start = new Date( start.setDate(start.getDate() + 1));
-  }
-  return mergeDataMap;
-}
-
 export function lineDateSeries (x, y) {
   return {
     type: 'line',
     smooth: true,
     connectNulls: true,
-    symbol: 'none',
     encode: {
       x: x,
       y: y
@@ -140,13 +160,21 @@ export function lineDateSeries (x, y) {
   };
 }
 
+
+export function lineStackDateSeries (x, y) {
+  let series = lineDateSeries(x,y)
+  series.stack = "Total";
+  series.emphasis= {
+    focus: 'series'
+  };
+  series.stackStrategy= 'all';
+  series.areaStyle={};
+  return series;
+}
+
 function defaultOption() {
   return {
     legend: {
-      // orient: 'vertical',
-      // right: 10,
-      // top: 'center',
-      data:[],
     },
     tooltip: {
       trigger: 'axis',
@@ -158,7 +186,7 @@ function defaultOption() {
       {
         type: 'inside',
         end: 100,
-        startValue: "2005-01-01",
+        startValue: "2002-12-01",
       },
       {
         show: true,
@@ -166,7 +194,7 @@ function defaultOption() {
         top: '90%',
         // start: 50,
         end: 100,
-        startValue: "2005-01-01",
+        startValue: "2002-12-01",
       }
     ],
     dataset: {
@@ -188,3 +216,5 @@ function defaultOption() {
     ],
   }
 };
+
+

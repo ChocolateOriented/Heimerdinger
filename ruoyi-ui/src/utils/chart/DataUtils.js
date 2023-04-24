@@ -39,7 +39,14 @@ export function asc(p){
 }
 
 //合并数据
-export function merge(mergeDataMap, dataList, keyField, keyFormat, valueField, mergeKey){
+export function merge(mergeDataMap, dataList, chartDataDefine, mergeKey){
+  let keyField = chartDataDefine.xField;
+  let keyFormat = chartDataDefine.xFormat;
+  let valueField = chartDataDefine.yField;
+  if (!chartDataDefine.yName){
+    chartDataDefine.yName = chartDataDefine.yField;
+  }
+  let valueName = chartDataDefine.yName;
 
   //将Key格式化
   dataList = changeDate(dataList, keyField, keyFormat);
@@ -52,7 +59,7 @@ export function merge(mergeDataMap, dataList, keyField, keyFormat, valueField, m
     }
 
     let mergeTarget = mergeDataMap[keyValue];
-    mergeTarget[valueField] = data[valueField];
+    mergeTarget[valueName] = data[valueField];
     mergeTarget[mergeKey] = keyValue;
   }
   return mergeDataMap;
@@ -91,4 +98,29 @@ export function parseDate(str, fmt)
   var date = new Date(obj.y, obj.M, obj.d, obj.H, obj.m, obj.s);
   if(obj.S !== 0) date.setMilliseconds(obj.S); // 如果设置了毫秒
   return date;
+}
+
+//获取上一个有字段的对象
+export function getLastEL(index, mergeData, field){
+  let beginIndex = index;
+  while (beginIndex > 0 ){
+    beginIndex --;
+    if (mergeData[beginIndex][field]){
+      return mergeData[beginIndex];
+    }
+  };
+  return null;
+}
+
+
+//获取上一个有字段的对象
+export function getNextEL(index, mergeData, field){
+  let beginIndex = index;
+  while (beginIndex < mergeData.length ){
+    beginIndex ++;
+    if (mergeData[beginIndex][field]){
+      return mergeData[beginIndex];
+    }
+  };
+  return null;
 }

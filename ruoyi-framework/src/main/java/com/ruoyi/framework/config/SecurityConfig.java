@@ -105,7 +105,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",
-                        "/profile/**"
+                        "/profile/**",
+                        "/ak_share/**"
                 ).permitAll()
                 .antMatchers("/processDefinition/**").permitAll()
                 .antMatchers("/activitiHistory/**").permitAll()

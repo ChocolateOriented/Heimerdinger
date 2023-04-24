@@ -116,7 +116,8 @@ public class Knife4jConfig {
 				.groupName("接口示例")
 				.select()
 				//这里指定Controller扫描包路径
-				.apis(RequestHandlerSelectors.basePackage("com.ruoyi.web.controller.tool"))
+//				.apis(RequestHandlerSelectors.basePackage("com.ruoyi.web.controller.tool"))
+				.apis(RequestHandlerSelectors.basePackage("com.ruoyi.hemerdinger.finance"))
 				.paths(PathSelectors.any())
 				.build();
 		return docket;
