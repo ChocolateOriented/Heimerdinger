@@ -13,8 +13,8 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 股票追踪对象 stock_trace
  *
- * @author lijing xiang
- * @date 2022-04-27
+ * @author lijingxiang
+ * @date 2023-11-26
  */
 @ApiModel(value = "ClassName", description = "股票追踪对象")
 public class StockTrace extends BaseEntity
@@ -37,62 +37,82 @@ public class StockTrace extends BaseEntity
     @ApiModelProperty(value = "代码", example = "1")
     private String code;
 
-    /** 追踪价格 */
-    @Excel(name = "追踪价格")
-    @ApiModelProperty(value = "追踪价格", example = "1")
-    private BigDecimal price;
+    /** 成本价格 */
+    @Excel(name = "成本价格")
+    @ApiModelProperty(value = "成本价格", example = "1")
+    private BigDecimal costPrice;
 
-    /** 追踪pb */
-    @Excel(name = "追踪pb")
-    @ApiModelProperty(value = "追踪pb", example = "1")
-    private BigDecimal pb;
+    /** 持有份额 */
+    @Excel(name = "持有份额")
+    @ApiModelProperty(value = "持有份额", example = "1")
+    private BigDecimal quotient;
 
-    /** 预计最低市净率 */
-    @Excel(name = "预计最低市净率")
-    @ApiModelProperty(value = "预计最低市净率", example = "1")
-    private BigDecimal pbMin;
+    /** 最小持有份额 */
+    @Excel(name = "最小持有份额")
+    @ApiModelProperty(value = "最小持有份额", example = "1")
+    private BigDecimal quotientMin;
 
-    /** 预计最高市净率 */
-    @Excel(name = "预计最高市净率")
-    @ApiModelProperty(value = "预计最高市净率", example = "1")
-    private BigDecimal pbMax;
+    /** 最大持有份额 */
+    @Excel(name = "最大持有份额")
+    @ApiModelProperty(value = "最大持有份额", example = "1")
+    private BigDecimal quotientMax;
 
-    /** 预计合理市净率 */
-    @Excel(name = "预计合理市净率")
-    @ApiModelProperty(value = "预计合理市净率", example = "1")
-    private BigDecimal pbFit;
+    /** 合理持有份额 */
+    @Excel(name = "合理持有份额")
+    @ApiModelProperty(value = "合理持有份额", example = "1")
+    private BigDecimal quotientFit;
 
-    /** 开始追踪时间 */
+    /** 估值方式 */
+    @Excel(name = "估值方式")
+    @ApiModelProperty(value = "估值方式", example = "1")
+    private String assessmentType;
+
+    /** 成本估值指标 */
+    @Excel(name = "成本估值指标")
+    @ApiModelProperty(value = "成本估值指标", example = "1")
+    private BigDecimal assessmen;
+
+    /** 预计最低估值指标 */
+    @Excel(name = "预计最低估值指标")
+    @ApiModelProperty(value = "预计最低估值指标", example = "1")
+    private BigDecimal assessmenMin;
+
+    /** 预计最高估值指标 */
+    @Excel(name = "预计最高估值指标")
+    @ApiModelProperty(value = "预计最高估值指标", example = "1")
+    private BigDecimal assessmenMax;
+
+    /** 预计合理估值指标 */
+    @Excel(name = "预计合理估值指标")
+    @ApiModelProperty(value = "预计合理估值指标", example = "1")
+    private BigDecimal assessmenFit;
+
+    /** 安全边际, 合理指标与最低指标之间百分比计算买入点 */
+    @Excel(name = "安全边际, 合理指标与最低指标之间百分比计算买入点")
+    @ApiModelProperty(value = "安全边际, 合理指标与最低指标之间百分比计算买入点", example = "1")
+    private String safeSpan;
+
+    /** 开始持有时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "开始追踪时间", width = 30, dateFormat = "yyyy-MM-dd")
-    @ApiModelProperty(value = "开始追踪时间", example = "2020-10-10")
+    @Excel(name = "开始持有时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @ApiModelProperty(value = "开始持有时间", example = "2020-10-10")
     private Date startTime;
 
-    /** 持有时间 */
+    /** 目标持有时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "持有时间", width = 30, dateFormat = "yyyy-MM-dd")
-    @ApiModelProperty(value = "持有时间", example = "2020-10-10")
+    @Excel(name = "目标持有时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @ApiModelProperty(value = "目标持有时间", example = "2020-10-10")
     private Date keepData;
 
-    /** 开始持有金额 */
-    @Excel(name = "开始持有金额")
-    @ApiModelProperty(value = "开始持有金额", example = "1")
-    private BigDecimal amount;
+    /** 时间弹性,超过定投目标范围 */
+    @Excel(name = "时间弹性,超过定投目标范围")
+    @ApiModelProperty(value = "时间弹性,超过定投目标范围", example = "1")
+    private BigDecimal timeSpan;
 
-    /** 最小持有金额 */
-    @Excel(name = "最小持有金额")
-    @ApiModelProperty(value = "最小持有金额", example = "1")
-    private BigDecimal amountMin;
-
-    /** 最大持有金额 */
-    @Excel(name = "最大持有金额")
-    @ApiModelProperty(value = "最大持有金额", example = "1")
-    private BigDecimal amountMax;
-
-    /** 合理持有金额 */
-    @Excel(name = "合理持有金额")
-    @ApiModelProperty(value = "合理持有金额", example = "1")
-    private BigDecimal amountFit;
+    /** 计划id */
+    @Excel(name = "计划id")
+    @ApiModelProperty(value = "计划id", example = "1")
+    private Long planId;
 
     public void setId(Long id)
     {
@@ -130,50 +150,104 @@ public class StockTrace extends BaseEntity
     {
         return code;
     }
-    public void setPrice(BigDecimal price)
+    public void setCostPrice(BigDecimal costPrice)
     {
-        this.price = price;
+        this.costPrice = costPrice;
     }
 
-    public BigDecimal getPrice()
+    public BigDecimal getCostPrice()
     {
-        return price;
+        return costPrice;
     }
-    public void setPb(BigDecimal pb)
+    public void setQuotient(BigDecimal quotient)
     {
-        this.pb = pb;
-    }
-
-    public BigDecimal getPb()
-    {
-        return pb;
-    }
-    public void setPbMin(BigDecimal pbMin)
-    {
-        this.pbMin = pbMin;
+        this.quotient = quotient;
     }
 
-    public BigDecimal getPbMin()
+    public BigDecimal getQuotient()
     {
-        return pbMin;
+        return quotient;
     }
-    public void setPbMax(BigDecimal pbMax)
+    public void setQuotientMin(BigDecimal quotientMin)
     {
-        this.pbMax = pbMax;
-    }
-
-    public BigDecimal getPbMax()
-    {
-        return pbMax;
-    }
-    public void setPbFit(BigDecimal pbFit)
-    {
-        this.pbFit = pbFit;
+        this.quotientMin = quotientMin;
     }
 
-    public BigDecimal getPbFit()
+    public BigDecimal getQuotientMin()
     {
-        return pbFit;
+        return quotientMin;
+    }
+    public void setQuotientMax(BigDecimal quotientMax)
+    {
+        this.quotientMax = quotientMax;
+    }
+
+    public BigDecimal getQuotientMax()
+    {
+        return quotientMax;
+    }
+    public void setQuotientFit(BigDecimal quotientFit)
+    {
+        this.quotientFit = quotientFit;
+    }
+
+    public BigDecimal getQuotientFit()
+    {
+        return quotientFit;
+    }
+    public void setAssessmentType(String assessmentType)
+    {
+        this.assessmentType = assessmentType;
+    }
+
+    public String getAssessmentType()
+    {
+        return assessmentType;
+    }
+    public void setAssessmen(BigDecimal assessmen)
+    {
+        this.assessmen = assessmen;
+    }
+
+    public BigDecimal getAssessmen()
+    {
+        return assessmen;
+    }
+    public void setAssessmenMin(BigDecimal assessmenMin)
+    {
+        this.assessmenMin = assessmenMin;
+    }
+
+    public BigDecimal getAssessmenMin()
+    {
+        return assessmenMin;
+    }
+    public void setAssessmenMax(BigDecimal assessmenMax)
+    {
+        this.assessmenMax = assessmenMax;
+    }
+
+    public BigDecimal getAssessmenMax()
+    {
+        return assessmenMax;
+    }
+    public void setAssessmenFit(BigDecimal assessmenFit)
+    {
+        this.assessmenFit = assessmenFit;
+    }
+
+    public BigDecimal getAssessmenFit()
+    {
+        return assessmenFit;
+    }
+    public void setSafeSpan(String safeSpan)
+    {
+        this.safeSpan = safeSpan;
+    }
+
+    public String getSafeSpan()
+    {
+        return safeSpan;
     }
     public void setStartTime(Date startTime)
     {
@@ -193,41 +267,23 @@ public class StockTrace extends BaseEntity
     {
         return keepData;
     }
-    public void setAmount(BigDecimal amount)
+    public void setTimeSpan(BigDecimal timeSpan)
     {
-        this.amount = amount;
+        this.timeSpan = timeSpan;
     }
 
-    public BigDecimal getAmount()
+    public BigDecimal getTimeSpan()
     {
-        return amount;
+        return timeSpan;
     }
-    public void setAmountMin(BigDecimal amountMin)
+    public void setPlanId(Long planId)
     {
-        this.amountMin = amountMin;
-    }
-
-    public BigDecimal getAmountMin()
-    {
-        return amountMin;
-    }
-    public void setAmountMax(BigDecimal amountMax)
-    {
-        this.amountMax = amountMax;
+        this.planId = planId;
     }
 
-    public BigDecimal getAmountMax()
+    public Long getPlanId()
     {
-        return amountMax;
-    }
-    public void setAmountFit(BigDecimal amountFit)
-    {
-        this.amountFit = amountFit;
-    }
-
-    public BigDecimal getAmountFit()
-    {
-        return amountFit;
+        return planId;
     }
 
     @Override
@@ -241,17 +297,21 @@ public class StockTrace extends BaseEntity
             .append("updateTime", getUpdateTime())
             .append("name", getName())
             .append("code", getCode())
-            .append("price", getPrice())
-            .append("pb", getPb())
-            .append("pbMin", getPbMin())
-            .append("pbMax", getPbMax())
-            .append("pbFit", getPbFit())
+            .append("costPrice", getCostPrice())
+            .append("quotient", getQuotient())
+            .append("quotientMin", getQuotientMin())
+            .append("quotientMax", getQuotientMax())
+            .append("quotientFit", getQuotientFit())
+            .append("assessmentType", getAssessmentType())
+            .append("assessmen", getAssessmen())
+            .append("assessmenMin", getAssessmenMin())
+            .append("assessmenMax", getAssessmenMax())
+            .append("assessmenFit", getAssessmenFit())
+            .append("safeSpan", getSafeSpan())
             .append("startTime", getStartTime())
             .append("keepData", getKeepData())
-            .append("amount", getAmount())
-            .append("amountMin", getAmountMin())
-            .append("amountMax", getAmountMax())
-            .append("amountFit", getAmountFit())
+            .append("timeSpan", getTimeSpan())
+            .append("planId", getPlanId())
             .toString();
     }
 }

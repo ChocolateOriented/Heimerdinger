@@ -5,15 +5,15 @@ import com.ruoyi.hemerdinger.finance.domain.StockPositionPlan;
 
 /**
  * 股票持仓计划Mapper接口
- *
- * @author lijing xiang
- * @date 2022-04-27
+ * 
+ * @author lijingxiang
+ * @date 2023-11-26
  */
-public interface StockPositionPlanMapper
+public interface StockPositionPlanMapper 
 {
     /**
      * 查询股票持仓计划
-     *
+     * 
      * @param id 股票持仓计划主键
      * @return 股票持仓计划
      */
@@ -21,7 +21,7 @@ public interface StockPositionPlanMapper
 
     /**
      * 查询股票持仓计划列表
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 股票持仓计划集合
      */
@@ -29,7 +29,7 @@ public interface StockPositionPlanMapper
 
     /**
      * 新增股票持仓计划
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface StockPositionPlanMapper
 
     /**
      * 修改股票持仓计划
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface StockPositionPlanMapper
 
     /**
      * 删除股票持仓计划
-     *
+     * 
      * @param id 股票持仓计划主键
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface StockPositionPlanMapper
 
     /**
      * 批量删除股票持仓计划
-     *
+     * 
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */

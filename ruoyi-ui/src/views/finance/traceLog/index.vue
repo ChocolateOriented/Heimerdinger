@@ -1,37 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="追踪id" prop="traceId">
+      <el-form-item label="股票追踪id" prop="traceId">
         <el-input
           v-model="queryParams.traceId"
-          placeholder="请输入追踪id"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="资产名称" prop="name">
-        <el-input
-          v-model="queryParams.name"
-          placeholder="请输入资产名称"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="实际持仓份额" prop="realityAmount">
-        <el-input
-          v-model="queryParams.realityAmount"
-          placeholder="请输入实际持仓份额"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="计划持仓金额" prop="targetAmount">
-        <el-input
-          v-model="queryParams.targetAmount"
-          placeholder="请输入计划持仓金额"
+          placeholder="请输入股票追踪id"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -51,7 +24,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['finance:financePositionPlan:add']"
+          v-hasPermi="['finance:traceLog:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -62,7 +35,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['finance:financePositionPlan:edit']"
+          v-hasPermi="['finance:traceLog:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -73,7 +46,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['finance:financePositionPlan:remove']"
+          v-hasPermi="['finance:traceLog:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -84,19 +57,17 @@
           size="mini"
           :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['finance:financePositionPlan:export']"
+          v-hasPermi="['finance:traceLog:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="financePositionPlanList" @selection-change="handleSelectionChange" show-summary>
-<!--      <el-table-column type="selection" width="55" align="center" />-->
+    <el-table v-loading="loading" :data="traceLogList" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
-      <el-table-column label="追踪id" align="center" prop="traceId" />
-      <el-table-column label="资产名称" align="center" prop="name" />
-      <el-table-column label="实际持仓份额" align="center" prop="realityAmount" sortable />
-      <el-table-column label="计划持仓金额" align="center" prop="targetAmount" sortable />
+      <el-table-column label="内容" align="center" prop="content" />
+      <el-table-column label="股票追踪id" align="center" prop="traceId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -104,19 +75,19 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['finance:financePositionPlan:edit']"
+            v-hasPermi="['finance:traceLog:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['finance:financePositionPlan:remove']"
+            v-hasPermi="['finance:traceLog:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-
+    
     <pagination
       v-show="total>0"
       :total="total"
@@ -125,20 +96,17 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改持仓计划对话框 -->
+    <!-- 添加或修改追踪日志对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="追踪id" prop="traceId">
-          <el-input v-model="form.traceId" placeholder="请输入追踪id" />
+        <el-form-item label="删除标志" prop="delFlag">
+          <el-input v-model="form.delFlag" placeholder="请输入删除标志" />
         </el-form-item>
-        <el-form-item label="资产名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入资产名称" />
+        <el-form-item label="内容">
+          <editor v-model="form.content" :min-height="192"/>
         </el-form-item>
-        <el-form-item label="实际持仓" prop="realityAmount">
-          <el-input v-model="form.realityAmount" placeholder="请输入实际持仓" />
-        </el-form-item>
-        <el-form-item label="计划持仓" prop="targetAmount">
-          <el-input v-model="form.targetAmount" placeholder="请输入计划持仓" />
+        <el-form-item label="股票追踪id" prop="traceId">
+          <el-input v-model="form.traceId" placeholder="请输入股票追踪id" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -150,10 +118,10 @@
 </template>
 
 <script>
-import { listFinancePositionPlan, getFinancePositionPlan, delFinancePositionPlan, addFinancePositionPlan, updateFinancePositionPlan, exportFinancePositionPlan } from "@/api/finance/financePositionPlan";
+import { listTraceLog, getTraceLog, delTraceLog, addTraceLog, updateTraceLog, exportTraceLog } from "@/api/finance/traceLog";
 
 export default {
-  name: "FinancePositionPlan",
+  name: "TraceLog",
   data() {
     return {
       // 遮罩层
@@ -170,8 +138,8 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 持仓计划表格数据
-      financePositionPlanList: [],
+      // 追踪日志表格数据
+      traceLogList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -179,11 +147,9 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 50,
-        traceId: null,
-        name: null,
-        realityAmount: null,
-        targetAmount: null
+        pageSize: 10,
+        content: null,
+        traceId: null
       },
       // 表单参数
       form: {},
@@ -196,11 +162,11 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询持仓计划列表 */
+    /** 查询追踪日志列表 */
     getList() {
       this.loading = true;
-      listFinancePositionPlan(this.queryParams).then(response => {
-        this.financePositionPlanList = response.rows;
+      listTraceLog(this.queryParams).then(response => {
+        this.traceLogList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -219,10 +185,8 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null,
-        traceId: null,
-        name: null,
-        realityAmount: null,
-        targetAmount: null
+        content: null,
+        traceId: null
       };
       this.resetForm("form");
     },
@@ -246,16 +210,16 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加持仓计划";
+      this.title = "添加追踪日志";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids
-      getFinancePositionPlan(id).then(response => {
+      getTraceLog(id).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改持仓计划";
+        this.title = "修改追踪日志";
       });
     },
     /** 提交按钮 */
@@ -263,13 +227,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.id != null) {
-            updateFinancePositionPlan(this.form).then(response => {
+            updateTraceLog(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addFinancePositionPlan(this.form).then(response => {
+            addTraceLog(this.form).then(response => {
               this.$modal.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -281,8 +245,8 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除持仓计划编号为"' + ids + '"的数据项？').then(function() {
-        return delFinancePositionPlan(ids);
+      this.$modal.confirm('是否确认删除追踪日志编号为"' + ids + '"的数据项？').then(function() {
+        return delTraceLog(ids);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
@@ -291,9 +255,9 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$modal.confirm('是否确认导出所有持仓计划数据项？').then(() => {
+      this.$modal.confirm('是否确认导出所有追踪日志数据项？').then(() => {
         this.exportLoading = true;
-        return exportFinancePositionPlan(queryParams);
+        return exportTraceLog(queryParams);
       }).then(response => {
         this.$download.name(response.msg);
         this.exportLoading = false;

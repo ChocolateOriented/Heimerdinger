@@ -17,12 +17,12 @@ import com.ruoyi.hemerdinger.finance.service.IStockTraceService;
 
 /**
  * 股票追踪Service业务层处理
- *
+ * 
  * @author lijingxiang
- * @date 2022-04-24
+ * @date 2023-11-26
  */
 @Service
-public class StockTraceServiceImpl implements IStockTraceService
+public class StockTraceServiceImpl implements IStockTraceService 
 {
     private static final Logger log = LoggerFactory.getLogger(StockTraceServiceImpl.class);
 
@@ -35,7 +35,7 @@ public class StockTraceServiceImpl implements IStockTraceService
 
     /**
      * 查询股票追踪
-     *
+     * 
      * @param id 股票追踪主键
      * @return 股票追踪
      */
@@ -47,7 +47,7 @@ public class StockTraceServiceImpl implements IStockTraceService
 
     /**
      * 查询股票追踪列表
-     *
+     * 
      * @param stockTrace 股票追踪
      * @return 股票追踪
      */
@@ -59,7 +59,7 @@ public class StockTraceServiceImpl implements IStockTraceService
 
     /**
      * 新增股票追踪
-     *
+     * 
      * @param stockTrace 股票追踪
      * @return 结果
      */
@@ -71,7 +71,7 @@ public class StockTraceServiceImpl implements IStockTraceService
 
     /**
      * 修改股票追踪
-     *
+     * 
      * @param stockTrace 股票追踪
      * @return 结果
      */
@@ -83,7 +83,7 @@ public class StockTraceServiceImpl implements IStockTraceService
 
     /**
      * 批量删除股票追踪
-     *
+     * 
      * @param ids 需要删除的股票追踪主键
      * @return 结果
      */
@@ -95,7 +95,7 @@ public class StockTraceServiceImpl implements IStockTraceService
 
     /**
      * 删除股票追踪信息
-     *
+     * 
      * @param id 股票追踪主键
      * @return 结果
      */
@@ -127,6 +127,4 @@ public class StockTraceServiceImpl implements IStockTraceService
         }
         return stockInfo;
     }
-
-
 }

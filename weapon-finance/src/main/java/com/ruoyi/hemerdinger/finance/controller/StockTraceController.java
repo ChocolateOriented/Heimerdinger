@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 股票追踪Controller
  *
  * @author lijingxiang
- * @date 2022-04-24
+ * @date 2023-11-26
  */
 @Api("股票追踪管理")
 @RestController
@@ -65,14 +65,15 @@ public class StockTraceController extends BaseController
             StockTrace trace =  list.get(i);
             String code = trace.getCode();
             BigDecimal currentPrice = stockTraceService.findCurrentInfo(code).getBigDecimal(IStockDataConfigService.NAME_PRICE);
-            BigDecimal tracePrice = trace.getPrice();
-            BigDecimal tracePb = trace.getPb();
-            BigDecimal pbFit = trace.getPbFit();
-            BigDecimal pbMin = trace.getPbMin();
+            BigDecimal costPrice = trace.getCostPrice();
+            BigDecimal assessmen = trace.getAssessmen();
+            BigDecimal assessmenFit = trace.getAssessmenFit();
+            BigDecimal assessmenMin = trace.getAssessmenMin();
 
-            BigDecimal currentPb = DecimalUtil.div(currentPrice,(DecimalUtil.div(tracePrice,tracePb)));
-            BigDecimal planRise = DecimalUtil.div(pbFit.subtract(currentPb), currentPb).multiply(new BigDecimal(100));
-            BigDecimal planFall = DecimalUtil.div(currentPb.subtract(pbMin), currentPb).multiply(new BigDecimal(100));
+            //TODO 重写机会排名
+            BigDecimal currentPb = DecimalUtil.div(currentPrice,(DecimalUtil.div(costPrice,assessmen)));
+            BigDecimal planRise = DecimalUtil.div(assessmenFit.subtract(currentPb), currentPb).multiply(new BigDecimal(100));
+            BigDecimal planFall = DecimalUtil.div(currentPb.subtract(assessmenMin), currentPb).multiply(new BigDecimal(100));
             BigDecimal grade = DecimalUtil.div(planRise,planFall.multiply(new BigDecimal(2)));
 
             TradeGradeVo tradeGradeVo = new TradeGradeVo(trace.getId(),trace.getName(),currentPrice,planRise,planFall,grade);
@@ -133,7 +134,7 @@ public class StockTraceController extends BaseController
     @ApiOperationSupport(author = "lijingxiang")
     @ApiImplicitParam(name = "id", value = "${pkColumn.columnComment}", required = true)
     @Log(title = "股票追踪", businessType = BusinessType.DELETE)
-	  @DeleteMapping("/{ids}")
+	@DeleteMapping("/{ids}")
     public Rest remove(@PathVariable Long[] ids)
     {
         return toAjax(stockTraceService.deleteStockTraceByIds(ids));

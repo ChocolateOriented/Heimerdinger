@@ -72,13 +72,13 @@
             <el-descriptions-item label="时间弹性">
               <el-input v-model="plan.elasticity" style="width: 4em" v-on:change="computeTable"/>
             </el-descriptions-item>
-            <el-descriptions-item label="安全边际">
+            <el-descriptions-item label="价格安全边际">
               <el-input v-model="plan.safety" style="width: 4em" v-on:change="computeTable"/>%
             </el-descriptions-item>
             <el-descriptions-item label="当前价格">{{ current.price }}</el-descriptions-item>
 <!--            <el-descriptions-item label="当前市净率">{{ current.pb }}</el-descriptions-item>-->
-            <el-descriptions-item label="预计上涨">{{ plan.rise }}%</el-descriptions-item>
-            <el-descriptions-item label="预计下跌">{{ plan.fall }}%</el-descriptions-item>
+            <el-descriptions-item label="上涨空间">{{ plan.rise }}%</el-descriptions-item>
+            <el-descriptions-item label="下跌空间">{{ plan.fall }}%</el-descriptions-item>
           </el-descriptions>
         </el-header>
         <el-main>
@@ -192,6 +192,8 @@ export default {
         that.plan.amount = that.floatFormat((that.form.amountFit - that.form.amount)/that.plan.time) ;
         that.plan.priceFit = that.floatFormat(that.form.price * that.form.pbFit / that.form.pb) ;
         that.plan.priceMin = that.floatFormat(that.form.price * that.form.pbMin / that.form.pb) ;
+        //TODO safety 安全边际逻辑修改
+        //安全价格
         that.plan.priceSafe = (that.plan.priceFit + that.plan.priceMin)*that.plan.safety/100
         that.plan.unit = (that.plan.priceSafe - that.plan.priceMin) / that.plan.time ;
 
@@ -293,7 +295,7 @@ export default {
         that.adviceTabel.push({
           "traceId": that.form.id,
           "adviceDate": that.plan.tradeDate[i],
-          "advicePrice": advicePrice,
+          "advicePriadvicePriceadvicePricece": advicePrice,
           "adviceAmount":adviceAmount,
           "advicePercent":advicePercent,
           "griddingAmount":griddingAmount,
@@ -308,7 +310,7 @@ export default {
       let realityAmountIndex = null;
       let realityGriddingAmountIndex = null;
       if(that.financePositionPlan != null){
-        realityAmount = that.financePositionPlan.realityAmount;
+        realityAmount = that.financePositionPlan.realityAmount * this.current.price  ;
       }
       for (let i = 0; i <  that.adviceTabel.length; i++) {
         const advice = that.adviceTabel[i];
@@ -322,15 +324,20 @@ export default {
           advice.griddingHadBuy = "hadBuy";
         }
         if ( new Date() > advice.adviceDate){
+          //建议买入
           advice.dateCss = "buy-row";
           buyNum ++;
           continue;
         }
+        //TODO 这是干嘛的??
         if ( advice.advicePrice >= this.current.price){
-          if ( i >= buyNum *that.plan.elasticity ){
+          //超过定投目标时间弹性倍数后建议卖出
+          if ( i >= buyNum * that.plan.elasticity ){
+            //建议卖出
             advice.priceCss = 'buy-danger-row';
             continue;
           }
+          //建议持有
           advice.priceCss = 'buy-cautious-row';
           continue;
         }

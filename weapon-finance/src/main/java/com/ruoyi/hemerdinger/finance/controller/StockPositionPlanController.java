@@ -29,8 +29,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 股票持仓计划Controller
  *
- * @author lijing xiang
- * @date 2022-04-27
+ * @author lijingxiang
+ * @date 2023-11-26
  */
 @Api("股票持仓计划管理")
 @RestController
@@ -41,7 +41,7 @@ public class StockPositionPlanController extends BaseController
     private IStockPositionPlanService stockPositionPlanService;
 
     @ApiOperation("查询股票持仓计划列表")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:stockPositionPlan:list')")
     @GetMapping("/list")
     public TableDataInfo<List<StockPositionPlan>> list(StockPositionPlan stockPositionPlan)
@@ -52,7 +52,7 @@ public class StockPositionPlanController extends BaseController
     }
 
     @ApiOperation("导出股票持仓计划列表")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:stockPositionPlan:export')")
     @Log(title = "股票持仓计划", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
@@ -64,7 +64,7 @@ public class StockPositionPlanController extends BaseController
     }
 
     @ApiOperation("获取股票持仓计划详细信息")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @PreAuthorize("@ss.hasPermi('finance:stockPositionPlan:query')")
     @GetMapping(value = "/{id}")
@@ -75,7 +75,7 @@ public class StockPositionPlanController extends BaseController
 
 
     @ApiOperation("新增股票持仓计划")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:stockPositionPlan:add')")
     @Log(title = "股票持仓计划", businessType = BusinessType.INSERT)
     @PostMapping
@@ -103,7 +103,7 @@ public class StockPositionPlanController extends BaseController
     }
 
     @ApiOperation("修改股票持仓计划")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:stockPositionPlan:edit')")
     @Log(title = "股票持仓计划", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -113,11 +113,11 @@ public class StockPositionPlanController extends BaseController
     }
 
     @ApiOperation("删除股票持仓计划")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @PreAuthorize("@ss.hasPermi('finance:stockPositionPlan:remove')")
     @Log(title = "股票持仓计划", businessType = BusinessType.DELETE)
-	  @DeleteMapping("/{ids}")
+	@DeleteMapping("/{ids}")
     public Rest remove(@PathVariable Long[] ids)
     {
         return toAjax(stockPositionPlanService.deleteStockPositionPlanByIds(ids));

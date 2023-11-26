@@ -15,3 +15,12 @@ Content-Type: application/json
   ]
 }
 
+###
+POST https://www.xjafpx.com:8443/security-training/app/course/record/progress
+Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMjY3MyIsImlhdCI6MTY4Mzc3NjU3OSwiZXhwIjoxNjg2MzY4NTc5fQ.23V5WIYhgl9fl50b77cxm2uhtjHR9bm62Cf2xPi_snGHEY3DTRehxNOuyDRYViZV3XrKRlFdCmXzn5hsKKwk0w
+Content-Type: application/json
+
+{
+   "currentTime": 1946,
+   "contentId": 63
+}

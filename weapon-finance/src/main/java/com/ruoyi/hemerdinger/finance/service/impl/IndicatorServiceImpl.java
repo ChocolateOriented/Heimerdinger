@@ -51,9 +51,9 @@ public class IndicatorServiceImpl implements IIndicatorService {
     @PostConstruct
     private void init() {
         akShareUpdataIndicators = new ArrayList<>();
-//        pmi ppi 接口数据有问题
-//        akShareUpdataIndicators.add(new akShareUpdataIndicator("macro_china_pmi_yearly", MacroChinaPmiYearly.class, macroChinaPmiYearlyRepository));
-//        akShareUpdataIndicators.add(new akShareUpdataIndicator("macro_china_ppi_yearly", MacroChinaPpiYearly.class, macroChinaPpiYearlyRepository));
+
+        akShareUpdataIndicators.add(new akShareUpdataIndicator("macro_china_pmi_yearly", MacroChinaPmiYearly.class, macroChinaPmiYearlyRepository));
+        akShareUpdataIndicators.add(new akShareUpdataIndicator("macro_china_ppi_yearly", MacroChinaPpiYearly.class, macroChinaPpiYearlyRepository));
         akShareUpdataIndicators.add(new akShareUpdataIndicator("stock_a_ttm_lyr", StockATtmLyr.class, stockATtmLyrRepository));
         akShareUpdataIndicators.add(new akShareUpdataIndicator("macro_china_cpi_yearly", MacroChinaCpiYearly.class, macroChinaCpiYearlyRepository));
         akShareUpdataIndicators.add(new akShareUpdataIndicator("macro_china_supply_of_money", MacroChinaSupplyOfMoney.class, macroChinaSupplyOfMoneyRepository));
@@ -71,6 +71,10 @@ public class IndicatorServiceImpl implements IIndicatorService {
             String path = updataIndicator.getPath();
             Class clazz = updataIndicator.getClazz();
             CrudRepository repository = updataIndicator.getRepository();
+            //TODO      pmi ppi 接口数据有问题, 货币供应记录的不是公布时间
+            if (path.equals("macro_china_pmi_yearly") || path.equals("macro_china_ppi_yearly")|| path.equals("macro_china_supply_of_money")){
+                continue;
+            }
 
             try {
                 updateIndicator(path, clazz, repository);

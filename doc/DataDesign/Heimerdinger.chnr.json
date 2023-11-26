@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.0.0",
   "createdTime": "2021-10-15 11:41:11",
-  "updatedTime": "2022-11-17 15:57:03",
+  "updatedTime": "2023-11-25 16:49:20",
   "profile": {
     "default": {
       "db": "E410B2A3-3E59-49D9-8A06-FFF4888D40CC",
@@ -611,8 +611,8 @@
           "id": "66475C15-44EB-4F72-9DBA-13E1B3009053"
         },
         {
-          "defKey": "price",
-          "defName": "追踪价格",
+          "defKey": "cost_price",
+          "defName": "成本价格",
           "comment": "",
           "type": "",
           "len": "",
@@ -627,104 +627,8 @@
           "id": "8CD5E9D4-3962-4E39-B4FA-C726520D8E16"
         },
         {
-          "defKey": "pb",
-          "defName": "追踪pb",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "5255C77F-C50C-4260-A6D5-6A3E390B73E6"
-        },
-        {
-          "defKey": "pb_min",
-          "defName": "预计最低市净率",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "DF0334CE-F949-47C8-9BE3-1CC00CF74EF7"
-        },
-        {
-          "defKey": "pb_max",
-          "defName": "预计最高市净率",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "B200ADF4-36AB-4EE4-A2EC-9721041C6D0F"
-        },
-        {
-          "defKey": "pb_fit",
-          "defName": "预计合理市净率",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "E23BC88B-BC16-4C03-9A9F-0F14B0AD39AC"
-        },
-        {
-          "defKey": "start_time",
-          "defName": "开始追踪时间",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
-          "id": "8E77A705-AD5D-44FF-A8EE-DF84014D9D98"
-        },
-        {
-          "defKey": "keep_data",
-          "defName": "持有时间",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
-          "id": "C518DD8E-9E16-47CA-B803-7773A09AC654"
-        },
-        {
-          "defKey": "amount",
-          "defName": "开始持有金额",
+          "defKey": "quotient",
+          "defName": "持有份额",
           "comment": "",
           "type": "",
           "len": "",
@@ -739,8 +643,8 @@
           "id": "6C02BE15-951B-4556-9C66-CE43FD91837D"
         },
         {
-          "defKey": "amount_min",
-          "defName": "最小持有金额",
+          "defKey": "quotient_min",
+          "defName": "最小持有份额",
           "comment": "",
           "type": "",
           "len": "",
@@ -755,8 +659,8 @@
           "id": "C3AEAAF7-6E76-4CD2-A18E-BCDD041A5A68"
         },
         {
-          "defKey": "amount_max",
-          "defName": "最大持有金额",
+          "defKey": "quotient_max",
+          "defName": "最大持有份额",
           "comment": "",
           "type": "",
           "len": "",
@@ -771,8 +675,8 @@
           "id": "44A63071-F637-4B39-8EBF-DD465CC8CD3C"
         },
         {
-          "defKey": "amount_fit",
-          "defName": "合理持有金额",
+          "defKey": "quotient_fit",
+          "defName": "合理持有份额",
           "comment": "",
           "type": "",
           "len": "",
@@ -785,6 +689,166 @@
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
           "id": "235259F5-9FF8-47F4-82A1-1F78E1D11831"
+        },
+        {
+          "defKey": "assessment_type",
+          "defName": "估值方式",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "A6F4DC54-14C7-4602-A86A-0C4095A55265",
+          "domain": "A7A03A09-2927-42F3-B119-8AC254942BE8",
+          "id": "1C5CD2B2-4977-4470-9955-F6F135A2844C"
+        },
+        {
+          "defKey": "assessmen",
+          "defName": "成本估值指标",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "5255C77F-C50C-4260-A6D5-6A3E390B73E6"
+        },
+        {
+          "defKey": "assessmen_min",
+          "defName": "预计最低估值指标",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "DF0334CE-F949-47C8-9BE3-1CC00CF74EF7"
+        },
+        {
+          "defKey": "assessmen_max",
+          "defName": "预计最高估值指标",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "B200ADF4-36AB-4EE4-A2EC-9721041C6D0F"
+        },
+        {
+          "defKey": "assessmen_fit",
+          "defName": "预计合理估值指标",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "E23BC88B-BC16-4C03-9A9F-0F14B0AD39AC"
+        },
+        {
+          "defKey": "safe_span",
+          "defName": "安全边际, 合理指标与最低指标之间百分比计算买入点",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
+          "id": "A08BEDFD-CC06-4316-B060-3B91D1B96A92"
+        },
+        {
+          "defKey": "start_time",
+          "defName": "开始持有时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "id": "FAF02D97-0660-4728-94C0-95E3452C287F"
+        },
+        {
+          "defKey": "keep_data",
+          "defName": "目标持有时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "id": "C518DD8E-9E16-47CA-B803-7773A09AC654"
+        },
+        {
+          "defKey": "time_span",
+          "defName": "时间弹性,超过定投目标范围",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
+          "id": "2832FED6-F607-4D05-8EFB-B4AB904442DA"
+        },
+        {
+          "defKey": "plan_id",
+          "defName": "计划id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
+          "id": "D9C386C1-1F83-4684-BA9F-067A3958D84A"
         }
       ],
       "correlations": [],
@@ -1514,22 +1578,6 @@
           "id": "48A699EB-78FE-41C3-BAC2-5A1BF6354EBC"
         },
         {
-          "defKey": "trace_id",
-          "defName": "追踪id",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "5BCC362F-86BD-4DD7-91FB-EF57801D7560"
-        },
-        {
           "defKey": "name",
           "defName": "资产名称",
           "comment": "",
@@ -1544,22 +1592,6 @@
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
           "id": "A5F57E6F-5192-49F3-85F6-1CD80C1C7A67"
-        },
-        {
-          "defKey": "reality_amount",
-          "defName": "实际持仓",
-          "comment": "",
-          "type": "",
-          "len": "",
-          "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
-          "defaultValue": "",
-          "hideInGraph": false,
-          "refDict": "",
-          "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "B4042D86-AC67-46DA-AFCA-9A3327AF9D11"
         },
         {
           "defKey": "target_amount",
@@ -2018,6 +2050,233 @@
       ],
       "correlations": [],
       "indexes": []
+    },
+    {
+      "id": "4026C67A-61E2-42F5-AB52-91FD339DA25F",
+      "env": {
+        "base": {
+          "nameSpace": "",
+          "codeRoot": ""
+        }
+      },
+      "defKey": "trace_log",
+      "defName": "追踪日志",
+      "comment": "",
+      "properties": {},
+      "nameTemplate": "{defKey}[{defName}]",
+      "headers": [
+        {
+          "freeze": false,
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "freeze": true,
+          "refKey": "defKey",
+          "hideInGraph": false
+        },
+        {
+          "freeze": true,
+          "refKey": "defName",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "primaryKey",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "notNull",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "autoIncrement",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "domain",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "scale",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "refDict",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "defaultValue",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "isStandard",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "uiHint",
+          "hideInGraph": true
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "id",
+          "defName": "id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
+          "id": "7C84E6B8-AEC3-4909-A2BF-5A7B9B56F603"
+        },
+        {
+          "defKey": "del_flag",
+          "defName": "删除标志（0代表存在 2代表删除）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "'0'",
+          "hideInGraph": true,
+          "refDict": "",
+          "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
+          "id": "B0189B58-0ED2-4EDD-8E7F-C795004CAC5F"
+        },
+        {
+          "defKey": "create_by",
+          "defName": "创建人",
+          "comment": "",
+          "domain": "A28F4A8C-A80E-4708-A0D3-C1868B98720E",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "4D923180-04F6-425E-8525-FFEBA0EBB3DF"
+        },
+        {
+          "defKey": "create_time",
+          "defName": "创建时间",
+          "comment": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "0E67F91E-935F-40AC-89B2-2D01BB594EFE"
+        },
+        {
+          "defKey": "update_by",
+          "defName": "更新人",
+          "comment": "",
+          "domain": "A28F4A8C-A80E-4708-A0D3-C1868B98720E",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "C1E64E4D-F2BC-4774-90AE-7173E500E7CC"
+        },
+        {
+          "defKey": "update_time",
+          "defName": "更新时间",
+          "comment": "",
+          "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": true,
+          "refDict": "",
+          "uiHint": "",
+          "id": "A6526487-1A76-4A09-BE5F-213DE41BAB56"
+        },
+        {
+          "defKey": "content",
+          "defName": "内容",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "7A1CDD76-6DF2-4845-A71C-1C066C0F9FC6",
+          "id": "06A6BF87-4BAB-46DD-8D47-D8D47B30DF5F"
+        },
+        {
+          "defKey": "trace_id",
+          "defName": "股票追踪id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
+          "id": "387925D6-15C8-4805-8EE0-CDA86AC82432"
+        }
+      ],
+      "correlations": [],
+      "indexes": []
     }
   ],
   "views": [],
@@ -2052,6 +2311,96 @@
           "attr2": "",
           "attr3": "",
           "id": "C39F91E9-93B4-473E-941A-57934233D4C3"
+        }
+      ]
+    },
+    {
+      "defKey": "assessment_type",
+      "defName": "估值方式",
+      "sort": "",
+      "intro": "",
+      "id": "A6F4DC54-14C7-4602-A86A-0C4095A55265",
+      "items": [
+        {
+          "defKey": "PB",
+          "defName": "市净率",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "B2488DFA-FE51-4C2C-BE5C-69724620FABA"
+        },
+        {
+          "defKey": "PE",
+          "defName": "市盈率",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "7BB5B7EE-6104-4A43-A456-DD91AE67A2C3"
+        },
+        {
+          "defKey": "PEG",
+          "defName": "市盈增长率",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "6E161063-1897-44FE-8B9E-82AF2CC7CD60"
+        }
+      ]
+    },
+    {
+      "defKey": "trace_logical_type",
+      "defName": "持有逻辑类型",
+      "sort": "",
+      "intro": "",
+      "id": "005A6051-8477-4F99-A1EE-EA6593471A87",
+      "items": [
+        {
+          "defKey": "LONG",
+          "defName": "长期-产业发展-企业利润兑现,破5周线跑",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "5FE158CD-6C5A-465A-8FEA-538C4C9F3C4E"
+        },
+        {
+          "defKey": "MIDDLE",
+          "defName": "中期-资金政策-破5日线跑",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "71649EE6-FA4A-46FC-89FE-AB026CC54A85"
+        },
+        {
+          "defKey": "SHORT",
+          "defName": "短期-热点炒作-放量跑",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "0CA987A8-A25F-4557-BE54-8841EA2DFCD2"
         }
       ]
     }
@@ -2308,10 +2657,61 @@
       "canvasData": {
         "cells": [
           {
+            "id": "ea28855f-6f06-4422-b51d-738ff404dad3",
+            "shape": "table",
+            "position": {
+              "x": -1290,
+              "y": -1280
+            },
+            "count": 0,
+            "originKey": "212991A6-A062-4A5F-852B-C3215E617BE0"
+          },
+          {
+            "id": "4de8a9c7-ce85-4c62-b738-9f0cd0980d6f",
+            "shape": "table",
+            "position": {
+              "x": -1290,
+              "y": -1010
+            },
+            "count": 0,
+            "originKey": "2C1D9F6A-E92D-4879-A57E-F372306D943C"
+          },
+          {
+            "id": "7ed4f092-07b6-4cd1-be4f-cbf420bcc0e8",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
+              "port": "93619A28-52B7-4BDB-A057-0CC6B39073DB%out"
+            },
+            "target": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC"
+          },
+          {
+            "id": "25446c4f-cb3a-444a-bfaa-1fdedd18a67f",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
+              "port": "387925D6-15C8-4805-8EE0-CDA86AC82432%in"
+            },
+            "target": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
             "id": "2665ec74-b71f-423e-88f3-6ba0dacd4278",
             "shape": "table",
             "position": {
-              "x": -144.5,
+              "x": -180,
               "y": -1010
             },
             "count": 0,
@@ -2326,6 +2726,33 @@
             },
             "count": 0,
             "originKey": "483C278E-C4D9-4678-8A92-395FDE0E2C87"
+          },
+          {
+            "id": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
+            "shape": "table",
+            "position": {
+              "x": -170.5,
+              "y": -456
+            },
+            "count": 0,
+            "originKey": "4026C67A-61E2-42F5-AB52-91FD339DA25F"
+          },
+          {
+            "id": "65040162-5984-4da1-b625-720655ddbe55",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "D9C386C1-1F83-4684-BA9F-067A3958D84A%in"
+            },
+            "target": {
+              "cell": "10145707-51e1-4b2a-afb4-a55fa40930a8",
+              "port": "01541F34-B26D-42B7-B9B0-3301A11478CF%out"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
           },
           {
             "id": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
@@ -2346,54 +2773,6 @@
             },
             "count": 0,
             "originKey": "342B8DE6-F39D-49BC-AF3C-70827DA39675"
-          },
-          {
-            "id": "7ed4f092-07b6-4cd1-be4f-cbf420bcc0e8",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
-              "port": "93619A28-52B7-4BDB-A057-0CC6B39073DB%out"
-            },
-            "target": {
-              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
-            },
-            "relation": "1:n",
-            "fillColor": "#ACDAFC"
-          },
-          {
-            "id": "dc0456dd-8bed-4e08-b857-a7c712e29b8f",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "10145707-51e1-4b2a-afb4-a55fa40930a8",
-              "port": "5BCC362F-86BD-4DD7-91FB-EF57801D7560%out"
-            },
-            "target": {
-              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
-            },
-            "relation": "1:n",
-            "fillColor": "#ACDAFC"
-          },
-          {
-            "id": "ea28855f-6f06-4422-b51d-738ff404dad3",
-            "shape": "table",
-            "position": {
-              "x": -1290,
-              "y": -1280
-            },
-            "count": 0,
-            "originKey": "212991A6-A062-4A5F-852B-C3215E617BE0"
-          },
-          {
-            "id": "4de8a9c7-ce85-4c62-b738-9f0cd0980d6f",
-            "shape": "table",
-            "position": {
-              "x": -1290,
-              "y": -1010
-            },
-            "count": 0,
-            "originKey": "2C1D9F6A-E92D-4879-A57E-F372306D943C"
           }
         ]
       },

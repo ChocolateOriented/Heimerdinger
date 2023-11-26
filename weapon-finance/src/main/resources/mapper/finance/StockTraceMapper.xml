@@ -13,21 +13,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="name"    column="name"    />
         <result property="code"    column="code"    />
-        <result property="price"    column="price"    />
-        <result property="pb"    column="pb"    />
-        <result property="pbMin"    column="pb_min"    />
-        <result property="pbMax"    column="pb_max"    />
-        <result property="pbFit"    column="pb_fit"    />
+        <result property="costPrice"    column="cost_price"    />
+        <result property="quotient"    column="quotient"    />
+        <result property="quotientMin"    column="quotient_min"    />
+        <result property="quotientMax"    column="quotient_max"    />
+        <result property="quotientFit"    column="quotient_fit"    />
+        <result property="assessmentType"    column="assessment_type"    />
+        <result property="assessmen"    column="assessmen"    />
+        <result property="assessmenMin"    column="assessmen_min"    />
+        <result property="assessmenMax"    column="assessmen_max"    />
+        <result property="assessmenFit"    column="assessmen_fit"    />
+        <result property="safeSpan"    column="safe_span"    />
         <result property="startTime"    column="start_time"    />
         <result property="keepData"    column="keep_data"    />
-        <result property="amount"    column="amount"    />
-        <result property="amountMin"    column="amount_min"    />
-        <result property="amountMax"    column="amount_max"    />
-        <result property="amountFit"    column="amount_fit"    />
+        <result property="timeSpan"    column="time_span"    />
+        <result property="planId"    column="plan_id"    />
     </resultMap>
 
     <sql id="selectStockTraceVo">
-        select id, del_flag, create_by, create_time, update_by, update_time, name, code, price, pb, pb_min, pb_max, pb_fit, start_time, keep_data, amount, amount_min, amount_max, amount_fit from stock_trace
+        select id, del_flag, create_by, create_time, update_by, update_time, name, code, cost_price, quotient, quotient_min, quotient_max, quotient_fit, assessment_type, assessmen, assessmen_min, assessmen_max, assessmen_fit, safe_span, start_time, keep_data, time_span, plan_id from stock_trace
     </sql>
 
     <select id="selectStockTraceList" parameterType="StockTrace" resultMap="StockTraceResult">
@@ -35,17 +39,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
-            <if test="price != null "> and price = #{price}</if>
-            <if test="pb != null "> and pb = #{pb}</if>
-            <if test="pbMin != null "> and pb_min = #{pbMin}</if>
-            <if test="pbMax != null "> and pb_max = #{pbMax}</if>
-            <if test="pbFit != null "> and pb_fit = #{pbFit}</if>
+            <if test="costPrice != null "> and cost_price = #{costPrice}</if>
+            <if test="quotient != null "> and quotient = #{quotient}</if>
+            <if test="quotientMin != null "> and quotient_min = #{quotientMin}</if>
+            <if test="quotientMax != null "> and quotient_max = #{quotientMax}</if>
+            <if test="quotientFit != null "> and quotient_fit = #{quotientFit}</if>
+            <if test="assessmentType != null  and assessmentType != ''"> and assessment_type = #{assessmentType}</if>
+            <if test="assessmen != null "> and assessmen = #{assessmen}</if>
+            <if test="assessmenMin != null "> and assessmen_min = #{assessmenMin}</if>
+            <if test="assessmenMax != null "> and assessmen_max = #{assessmenMax}</if>
+            <if test="assessmenFit != null "> and assessmen_fit = #{assessmenFit}</if>
+            <if test="safeSpan != null  and safeSpan != ''"> and safe_span = #{safeSpan}</if>
             <if test="startTime != null "> and start_time = #{startTime}</if>
             <if test="keepData != null "> and keep_data = #{keepData}</if>
-            <if test="amount != null "> and amount = #{amount}</if>
-            <if test="amountMin != null "> and amount_min = #{amountMin}</if>
-            <if test="amountMax != null "> and amount_max = #{amountMax}</if>
-            <if test="amountFit != null "> and amount_fit = #{amountFit}</if>
+            <if test="timeSpan != null "> and time_span = #{timeSpan}</if>
+            <if test="planId != null "> and plan_id = #{planId}</if>
         </where>
     </select>
     
@@ -64,17 +72,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time,</if>
             <if test="name != null">name,</if>
             <if test="code != null">code,</if>
-            <if test="price != null">price,</if>
-            <if test="pb != null">pb,</if>
-            <if test="pbMin != null">pb_min,</if>
-            <if test="pbMax != null">pb_max,</if>
-            <if test="pbFit != null">pb_fit,</if>
+            <if test="costPrice != null">cost_price,</if>
+            <if test="quotient != null">quotient,</if>
+            <if test="quotientMin != null">quotient_min,</if>
+            <if test="quotientMax != null">quotient_max,</if>
+            <if test="quotientFit != null">quotient_fit,</if>
+            <if test="assessmentType != null">assessment_type,</if>
+            <if test="assessmen != null">assessmen,</if>
+            <if test="assessmenMin != null">assessmen_min,</if>
+            <if test="assessmenMax != null">assessmen_max,</if>
+            <if test="assessmenFit != null">assessmen_fit,</if>
+            <if test="safeSpan != null">safe_span,</if>
             <if test="startTime != null">start_time,</if>
             <if test="keepData != null">keep_data,</if>
-            <if test="amount != null">amount,</if>
-            <if test="amountMin != null">amount_min,</if>
-            <if test="amountMax != null">amount_max,</if>
-            <if test="amountFit != null">amount_fit,</if>
+            <if test="timeSpan != null">time_span,</if>
+            <if test="planId != null">plan_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="delFlag != null">#{delFlag},</if>
@@ -84,17 +96,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">#{updateTime},</if>
             <if test="name != null">#{name},</if>
             <if test="code != null">#{code},</if>
-            <if test="price != null">#{price},</if>
-            <if test="pb != null">#{pb},</if>
-            <if test="pbMin != null">#{pbMin},</if>
-            <if test="pbMax != null">#{pbMax},</if>
-            <if test="pbFit != null">#{pbFit},</if>
+            <if test="costPrice != null">#{costPrice},</if>
+            <if test="quotient != null">#{quotient},</if>
+            <if test="quotientMin != null">#{quotientMin},</if>
+            <if test="quotientMax != null">#{quotientMax},</if>
+            <if test="quotientFit != null">#{quotientFit},</if>
+            <if test="assessmentType != null">#{assessmentType},</if>
+            <if test="assessmen != null">#{assessmen},</if>
+            <if test="assessmenMin != null">#{assessmenMin},</if>
+            <if test="assessmenMax != null">#{assessmenMax},</if>
+            <if test="assessmenFit != null">#{assessmenFit},</if>
+            <if test="safeSpan != null">#{safeSpan},</if>
             <if test="startTime != null">#{startTime},</if>
             <if test="keepData != null">#{keepData},</if>
-            <if test="amount != null">#{amount},</if>
-            <if test="amountMin != null">#{amountMin},</if>
-            <if test="amountMax != null">#{amountMax},</if>
-            <if test="amountFit != null">#{amountFit},</if>
+            <if test="timeSpan != null">#{timeSpan},</if>
+            <if test="planId != null">#{planId},</if>
          </trim>
     </insert>
 
@@ -108,17 +124,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="name != null">name = #{name},</if>
             <if test="code != null">code = #{code},</if>
-            <if test="price != null">price = #{price},</if>
-            <if test="pb != null">pb = #{pb},</if>
-            <if test="pbMin != null">pb_min = #{pbMin},</if>
-            <if test="pbMax != null">pb_max = #{pbMax},</if>
-            <if test="pbFit != null">pb_fit = #{pbFit},</if>
+            <if test="costPrice != null">cost_price = #{costPrice},</if>
+            <if test="quotient != null">quotient = #{quotient},</if>
+            <if test="quotientMin != null">quotient_min = #{quotientMin},</if>
+            <if test="quotientMax != null">quotient_max = #{quotientMax},</if>
+            <if test="quotientFit != null">quotient_fit = #{quotientFit},</if>
+            <if test="assessmentType != null">assessment_type = #{assessmentType},</if>
+            <if test="assessmen != null">assessmen = #{assessmen},</if>
+            <if test="assessmenMin != null">assessmen_min = #{assessmenMin},</if>
+            <if test="assessmenMax != null">assessmen_max = #{assessmenMax},</if>
+            <if test="assessmenFit != null">assessmen_fit = #{assessmenFit},</if>
+            <if test="safeSpan != null">safe_span = #{safeSpan},</if>
             <if test="startTime != null">start_time = #{startTime},</if>
             <if test="keepData != null">keep_data = #{keepData},</if>
-            <if test="amount != null">amount = #{amount},</if>
-            <if test="amountMin != null">amount_min = #{amountMin},</if>
-            <if test="amountMax != null">amount_max = #{amountMax},</if>
-            <if test="amountFit != null">amount_fit = #{amountFit},</if>
+            <if test="timeSpan != null">time_span = #{timeSpan},</if>
+            <if test="planId != null">plan_id = #{planId},</if>
         </trim>
         where id = #{id}
     </update>

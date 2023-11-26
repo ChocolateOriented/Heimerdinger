@@ -10,14 +10,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="触发日期" prop="adviceDate">
-        <el-date-picker clearable size="small"
-          v-model="queryParams.adviceDate"
-          type="date"
-          value-format="yyyy-MM-dd"
-          placeholder="选择触发日期">
-        </el-date-picker>
-      </el-form-item>
       <el-form-item label="触发价格" prop="advicePrice">
         <el-input
           v-model="queryParams.advicePrice"
@@ -27,19 +19,45 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="持仓金额" prop="adviceAmount">
+      <el-form-item label="网格持仓" prop="griddingAmount">
         <el-input
-          v-model="queryParams.adviceAmount"
-          placeholder="请输入持仓金额"
+          v-model="queryParams.griddingAmount"
+          placeholder="请输入网格持仓"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="持仓百分比" prop="advicePercent">
+      <el-form-item label="网格持仓百分比" prop="griddingPercent">
+        <el-input
+          v-model="queryParams.griddingPercent"
+          placeholder="请输入网格持仓百分比"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="触发日期" prop="adviceDate">
+        <el-date-picker clearable size="small"
+          v-model="queryParams.adviceDate"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择触发日期">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="定投持仓金额" prop="adviceAmount">
+        <el-input
+          v-model="queryParams.adviceAmount"
+          placeholder="请输入定投持仓金额"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="定投持仓百分比" prop="advicePercent">
         <el-input
           v-model="queryParams.advicePercent"
-          placeholder="请输入持仓百分比"
+          placeholder="请输入定投持仓百分比"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -107,14 +125,16 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="追踪id" align="center" prop="traceId" />
+      <el-table-column label="触发价格" align="center" prop="advicePrice" />
+      <el-table-column label="网格持仓" align="center" prop="griddingAmount" />
+      <el-table-column label="网格持仓百分比" align="center" prop="griddingPercent" />
       <el-table-column label="触发日期" align="center" prop="adviceDate" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.adviceDate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="触发价格" align="center" prop="advicePrice" />
-      <el-table-column label="持仓金额" align="center" prop="adviceAmount" />
-      <el-table-column label="持仓百分比" align="center" prop="advicePercent" />
+      <el-table-column label="定投持仓金额" align="center" prop="adviceAmount" />
+      <el-table-column label="定投持仓百分比" align="center" prop="advicePercent" />
       <el-table-column label="交易类型" align="center" prop="tradeType" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -153,6 +173,15 @@
         <el-form-item label="追踪id" prop="traceId">
           <el-input v-model="form.traceId" placeholder="请输入追踪id" />
         </el-form-item>
+        <el-form-item label="触发价格" prop="advicePrice">
+          <el-input v-model="form.advicePrice" placeholder="请输入触发价格" />
+        </el-form-item>
+        <el-form-item label="网格持仓" prop="griddingAmount">
+          <el-input v-model="form.griddingAmount" placeholder="请输入网格持仓" />
+        </el-form-item>
+        <el-form-item label="网格持仓百分比" prop="griddingPercent">
+          <el-input v-model="form.griddingPercent" placeholder="请输入网格持仓百分比" />
+        </el-form-item>
         <el-form-item label="触发日期" prop="adviceDate">
           <el-date-picker clearable size="small"
             v-model="form.adviceDate"
@@ -161,14 +190,11 @@
             placeholder="选择触发日期">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="触发价格" prop="advicePrice">
-          <el-input v-model="form.advicePrice" placeholder="请输入触发价格" />
+        <el-form-item label="定投持仓金额" prop="adviceAmount">
+          <el-input v-model="form.adviceAmount" placeholder="请输入定投持仓金额" />
         </el-form-item>
-        <el-form-item label="持仓金额" prop="adviceAmount">
-          <el-input v-model="form.adviceAmount" placeholder="请输入持仓金额" />
-        </el-form-item>
-        <el-form-item label="持仓百分比" prop="advicePercent">
-          <el-input v-model="form.advicePercent" placeholder="请输入持仓百分比" />
+        <el-form-item label="定投持仓百分比" prop="advicePercent">
+          <el-input v-model="form.advicePercent" placeholder="请输入定投持仓百分比" />
         </el-form-item>
         <el-form-item label="交易类型" prop="tradeType">
           <el-select v-model="form.tradeType" placeholder="请选择交易类型">
@@ -216,8 +242,10 @@ export default {
         pageNum: 1,
         pageSize: 10,
         traceId: null,
-        adviceDate: null,
         advicePrice: null,
+        griddingAmount: null,
+        griddingPercent: null,
+        adviceDate: null,
         adviceAmount: null,
         advicePercent: null,
         tradeType: null
@@ -257,8 +285,10 @@ export default {
         updateBy: null,
         updateTime: null,
         traceId: null,
-        adviceDate: null,
         advicePrice: null,
+        griddingAmount: null,
+        griddingPercent: null,
+        adviceDate: null,
         adviceAmount: null,
         advicePercent: null,
         tradeType: null

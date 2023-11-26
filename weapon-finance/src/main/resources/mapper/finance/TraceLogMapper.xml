@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hemerdinger.finance.mapper.TraceLogMapper">
+    
+    <resultMap type="TraceLog" id="TraceLogResult">
+        <result property="id"    column="id"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="content"    column="content"    />
+        <result property="traceId"    column="trace_id"    />
+    </resultMap>
+
+    <sql id="selectTraceLogVo">
+        select id, del_flag, create_by, create_time, update_by, update_time, content, trace_id from trace_log
+    </sql>
+
+    <select id="selectTraceLogList" parameterType="TraceLog" resultMap="TraceLogResult">
+        <include refid="selectTraceLogVo"/>
+        <where>  
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="traceId != null "> and trace_id = #{traceId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTraceLogById" parameterType="Long" resultMap="TraceLogResult">
+        <include refid="selectTraceLogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertTraceLog" parameterType="TraceLog" useGeneratedKeys="true" keyProperty="id">
+        insert into trace_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="content != null">content,</if>
+            <if test="traceId != null">trace_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="content != null">#{content},</if>
+            <if test="traceId != null">#{traceId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTraceLog" parameterType="TraceLog">
+        update trace_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="traceId != null">trace_id = #{traceId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTraceLogById" parameterType="Long">
+        delete from trace_log where id = #{id}
+    </delete>
+
+    <delete id="deleteTraceLogByIds" parameterType="String">
+        delete from trace_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

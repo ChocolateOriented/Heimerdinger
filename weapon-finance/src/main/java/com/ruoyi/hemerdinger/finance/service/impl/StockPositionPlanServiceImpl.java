@@ -10,19 +10,19 @@ import com.ruoyi.hemerdinger.finance.service.IStockPositionPlanService;
 
 /**
  * 股票持仓计划Service业务层处理
- *
- * @author lijing xiang
- * @date 2022-04-27
+ * 
+ * @author lijingxiang
+ * @date 2023-11-26
  */
 @Service
-public class StockPositionPlanServiceImpl implements IStockPositionPlanService
+public class StockPositionPlanServiceImpl implements IStockPositionPlanService 
 {
     @Autowired
     private StockPositionPlanMapper stockPositionPlanMapper;
 
     /**
      * 查询股票持仓计划
-     *
+     * 
      * @param id 股票持仓计划主键
      * @return 股票持仓计划
      */
@@ -34,7 +34,7 @@ public class StockPositionPlanServiceImpl implements IStockPositionPlanService
 
     /**
      * 查询股票持仓计划列表
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 股票持仓计划
      */
@@ -46,7 +46,7 @@ public class StockPositionPlanServiceImpl implements IStockPositionPlanService
 
     /**
      * 新增股票持仓计划
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 结果
      */
@@ -59,7 +59,7 @@ public class StockPositionPlanServiceImpl implements IStockPositionPlanService
 
     /**
      * 修改股票持仓计划
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 结果
      */
@@ -72,7 +72,7 @@ public class StockPositionPlanServiceImpl implements IStockPositionPlanService
 
     /**
      * 批量删除股票持仓计划
-     *
+     * 
      * @param ids 需要删除的股票持仓计划主键
      * @return 结果
      */
@@ -84,7 +84,7 @@ public class StockPositionPlanServiceImpl implements IStockPositionPlanService
 
     /**
      * 删除股票持仓计划信息
-     *
+     * 
      * @param id 股票持仓计划主键
      * @return 结果
      */

@@ -5,15 +5,15 @@ import com.ruoyi.hemerdinger.finance.domain.StockPositionPlan;
 
 /**
  * 股票持仓计划Service接口
- *
- * @author lijing xiang
- * @date 2022-04-27
+ * 
+ * @author lijingxiang
+ * @date 2023-11-26
  */
-public interface IStockPositionPlanService
+public interface IStockPositionPlanService 
 {
     /**
      * 查询股票持仓计划
-     *
+     * 
      * @param id 股票持仓计划主键
      * @return 股票持仓计划
      */
@@ -21,7 +21,7 @@ public interface IStockPositionPlanService
 
     /**
      * 查询股票持仓计划列表
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 股票持仓计划集合
      */
@@ -29,7 +29,7 @@ public interface IStockPositionPlanService
 
     /**
      * 新增股票持仓计划
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface IStockPositionPlanService
 
     /**
      * 修改股票持仓计划
-     *
+     * 
      * @param stockPositionPlan 股票持仓计划
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface IStockPositionPlanService
 
     /**
      * 批量删除股票持仓计划
-     *
+     * 
      * @param ids 需要删除的股票持仓计划主键集合
      * @return 结果
      */
@@ -53,7 +53,7 @@ public interface IStockPositionPlanService
 
     /**
      * 删除股票持仓计划信息
-     *
+     * 
      * @param id 股票持仓计划主键
      * @return 结果
      */

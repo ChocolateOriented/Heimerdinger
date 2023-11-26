@@ -19,10 +19,130 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="市净率" prop="pb">
+      <el-form-item label="成本价格" prop="costPrice">
         <el-input
-          v-model="queryParams.pb"
-          placeholder="请输入市净率"
+          v-model="queryParams.costPrice"
+          placeholder="请输入成本价格"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="持有份额" prop="quotient">
+        <el-input
+          v-model="queryParams.quotient"
+          placeholder="请输入持有份额"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="最小持有份额" prop="quotientMin">
+        <el-input
+          v-model="queryParams.quotientMin"
+          placeholder="请输入最小持有份额"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="最大持有份额" prop="quotientMax">
+        <el-input
+          v-model="queryParams.quotientMax"
+          placeholder="请输入最大持有份额"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="合理持有份额" prop="quotientFit">
+        <el-input
+          v-model="queryParams.quotientFit"
+          placeholder="请输入合理持有份额"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="估值方式" prop="assessmentType">
+        <el-select v-model="queryParams.assessmentType" placeholder="请选择估值方式" clearable size="small">
+          <el-option label="请选择字典生成" value="" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="成本估值指标" prop="assessmen">
+        <el-input
+          v-model="queryParams.assessmen"
+          placeholder="请输入成本估值指标"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="预计最低估值指标" prop="assessmenMin">
+        <el-input
+          v-model="queryParams.assessmenMin"
+          placeholder="请输入预计最低估值指标"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="预计最高估值指标" prop="assessmenMax">
+        <el-input
+          v-model="queryParams.assessmenMax"
+          placeholder="请输入预计最高估值指标"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="预计合理估值指标" prop="assessmenFit">
+        <el-input
+          v-model="queryParams.assessmenFit"
+          placeholder="请输入预计合理估值指标"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="安全边际, 合理指标与最低指标之间百分比计算买入点" prop="safeSpan">
+        <el-input
+          v-model="queryParams.safeSpan"
+          placeholder="请输入安全边际, 合理指标与最低指标之间百分比计算买入点"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="开始持有时间" prop="startTime">
+        <el-date-picker clearable size="small"
+          v-model="queryParams.startTime"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择开始持有时间">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="目标持有时间" prop="keepData">
+        <el-date-picker clearable size="small"
+          v-model="queryParams.keepData"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="选择目标持有时间">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="时间弹性,超过定投目标范围" prop="timeSpan">
+        <el-input
+          v-model="queryParams.timeSpan"
+          placeholder="请输入时间弹性,超过定投目标范围"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="计划id" prop="planId">
+        <el-input
+          v-model="queryParams.planId"
+          placeholder="请输入计划id"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -81,25 +201,34 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="stockTraceList" @selection-change="handleSelectionChange" @row-dblclick="gotoGridding">
+    <el-table v-loading="loading" :data="stockTraceList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="名称" align="center" prop="name" />
       <el-table-column label="代码" align="center" prop="code" />
-      <el-table-column label="价格" align="center" prop="price" />
-      <el-table-column label="市净率" align="center" prop="pb" />
-      <el-table-column label="预计最低市净率" align="center" prop="pbMin" />
-      <el-table-column label="预计最高市净率" align="center" prop="pbMax" />
-      <el-table-column label="预计合理市净率" align="center" prop="pbFit" />
-      <el-table-column label="持有时间" align="center" prop="keepData" width="180">
+      <el-table-column label="成本价格" align="center" prop="costPrice" />
+      <el-table-column label="持有份额" align="center" prop="quotient" />
+      <el-table-column label="最小持有份额" align="center" prop="quotientMin" />
+      <el-table-column label="最大持有份额" align="center" prop="quotientMax" />
+      <el-table-column label="合理持有份额" align="center" prop="quotientFit" />
+      <el-table-column label="估值方式" align="center" prop="assessmentType" />
+      <el-table-column label="成本估值指标" align="center" prop="assessmen" />
+      <el-table-column label="预计最低估值指标" align="center" prop="assessmenMin" />
+      <el-table-column label="预计最高估值指标" align="center" prop="assessmenMax" />
+      <el-table-column label="预计合理估值指标" align="center" prop="assessmenFit" />
+      <el-table-column label="安全边际, 合理指标与最低指标之间百分比计算买入点" align="center" prop="safeSpan" />
+      <el-table-column label="开始持有时间" align="center" prop="startTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d}') }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="目标持有时间" align="center" prop="keepData" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.keepData, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="持有金额" align="center" prop="amount" />
-      <el-table-column label="最小持有金额" align="center" prop="amountMin" />
-      <el-table-column label="最大持有金额" align="center" prop="amountMax" />
-      <el-table-column label="合理持有金额" align="center" prop="amountFit" />
+      <el-table-column label="时间弹性,超过定投目标范围" align="center" prop="timeSpan" />
+      <el-table-column label="计划id" align="center" prop="planId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -136,40 +265,62 @@
         <el-form-item label="代码" prop="code">
           <el-input v-model="form.code" placeholder="请输入代码" />
         </el-form-item>
-        <el-form-item label="价格" prop="price">
-          <el-input v-model="form.price" placeholder="请输入价格" />
+        <el-form-item label="成本价格" prop="costPrice">
+          <el-input v-model="form.costPrice" placeholder="请输入成本价格" />
         </el-form-item>
-        <el-form-item label="市净率" prop="pb">
-          <el-input v-model="form.pb" placeholder="请输入市净率" />
+        <el-form-item label="持有份额" prop="quotient">
+          <el-input v-model="form.quotient" placeholder="请输入持有份额" />
         </el-form-item>
-        <el-form-item label="预计最低市净率" prop="pbMin">
-          <el-input v-model="form.pbMin" placeholder="请输入预计最低市净率" />
+        <el-form-item label="最小持有份额" prop="quotientMin">
+          <el-input v-model="form.quotientMin" placeholder="请输入最小持有份额" />
         </el-form-item>
-        <el-form-item label="预计最高市净率" prop="pbMax">
-          <el-input v-model="form.pbMax" placeholder="请输入预计最高市净率" />
+        <el-form-item label="最大持有份额" prop="quotientMax">
+          <el-input v-model="form.quotientMax" placeholder="请输入最大持有份额" />
         </el-form-item>
-        <el-form-item label="预计合理市净率" prop="pbFit">
-          <el-input v-model="form.pbFit" placeholder="请输入预计合理市净率" />
+        <el-form-item label="合理持有份额" prop="quotientFit">
+          <el-input v-model="form.quotientFit" placeholder="请输入合理持有份额" />
         </el-form-item>
-        <el-form-item label="持有时间" prop="keepData">
+        <el-form-item label="估值方式" prop="assessmentType">
+          <el-select v-model="form.assessmentType" placeholder="请选择估值方式">
+            <el-option label="请选择字典生成" value="" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="成本估值指标" prop="assessmen">
+          <el-input v-model="form.assessmen" placeholder="请输入成本估值指标" />
+        </el-form-item>
+        <el-form-item label="预计最低估值指标" prop="assessmenMin">
+          <el-input v-model="form.assessmenMin" placeholder="请输入预计最低估值指标" />
+        </el-form-item>
+        <el-form-item label="预计最高估值指标" prop="assessmenMax">
+          <el-input v-model="form.assessmenMax" placeholder="请输入预计最高估值指标" />
+        </el-form-item>
+        <el-form-item label="预计合理估值指标" prop="assessmenFit">
+          <el-input v-model="form.assessmenFit" placeholder="请输入预计合理估值指标" />
+        </el-form-item>
+        <el-form-item label="安全边际, 合理指标与最低指标之间百分比计算买入点" prop="safeSpan">
+          <el-input v-model="form.safeSpan" placeholder="请输入安全边际, 合理指标与最低指标之间百分比计算买入点" />
+        </el-form-item>
+        <el-form-item label="开始持有时间" prop="startTime">
+          <el-date-picker clearable size="small"
+            v-model="form.startTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择开始持有时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="目标持有时间" prop="keepData">
           <el-date-picker clearable size="small"
             v-model="form.keepData"
             type="date"
             value-format="yyyy-MM-dd"
-            placeholder="选择持有时间">
+            placeholder="选择目标持有时间">
           </el-date-picker>
         </el-form-item>
-        <el-form-item label="持有金额" prop="amount">
-          <el-input v-model="form.amount" placeholder="请输入持有金额" />
+        <el-form-item label="时间弹性,超过定投目标范围" prop="timeSpan">
+          <el-input v-model="form.timeSpan" placeholder="请输入时间弹性,超过定投目标范围" />
         </el-form-item>
-        <el-form-item label="最小持有金额" prop="amountMin">
-          <el-input v-model="form.amountMin" placeholder="请输入最小持有金额" />
-        </el-form-item>
-        <el-form-item label="最大持有金额" prop="amountMax">
-          <el-input v-model="form.amountMax" placeholder="请输入最大持有金额" />
-        </el-form-item>
-        <el-form-item label="合理持有金额" prop="amountFit">
-          <el-input v-model="form.amountFit" placeholder="请输入合理持有金额" />
+        <el-form-item label="计划id" prop="planId">
+          <el-input v-model="form.planId" placeholder="请输入计划id" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -213,16 +364,21 @@ export default {
         pageSize: 10,
         name: null,
         code: null,
-        price: null,
-        pb: null,
-        pbMin: null,
-        pbMax: null,
-        pbFit: null,
+        costPrice: null,
+        quotient: null,
+        quotientMin: null,
+        quotientMax: null,
+        quotientFit: null,
+        assessmentType: null,
+        assessmen: null,
+        assessmenMin: null,
+        assessmenMax: null,
+        assessmenFit: null,
+        safeSpan: null,
+        startTime: null,
         keepData: null,
-        amount: null,
-        amountMin: null,
-        amountMax: null,
-        amountFit: null
+        timeSpan: null,
+        planId: null
       },
       // 表单参数
       form: {},
@@ -258,18 +414,28 @@ export default {
     reset() {
       this.form = {
         id: null,
+        delFlag: null,
+        createBy: null,
+        createTime: null,
+        updateBy: null,
+        updateTime: null,
         name: null,
         code: null,
-        price: null,
-        pb: null,
-        pbMin: null,
-        pbMax: null,
-        pbFit: null,
+        costPrice: null,
+        quotient: null,
+        quotientMin: null,
+        quotientMax: null,
+        quotientFit: null,
+        assessmentType: null,
+        assessmen: null,
+        assessmenMin: null,
+        assessmenMax: null,
+        assessmenFit: null,
+        safeSpan: null,
+        startTime: null,
         keepData: null,
-        amount: null,
-        amountMin: null,
-        amountMax: null,
-        amountFit: null
+        timeSpan: null,
+        planId: null
       };
       this.resetForm("form");
     },

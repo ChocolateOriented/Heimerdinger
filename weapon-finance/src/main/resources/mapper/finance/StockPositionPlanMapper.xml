@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.hemerdinger.finance.mapper.StockPositionPlanMapper">
-
+    
     <resultMap type="StockPositionPlan" id="StockPositionPlanResult">
         <result property="id"    column="id"    />
         <result property="delFlag"    column="del_flag"    />
@@ -12,39 +12,38 @@
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="traceId"    column="trace_id"    />
-        <result property="adviceDate"    column="advice_date"    />
         <result property="advicePrice"    column="advice_price"    />
         <result property="griddingAmount"    column="gridding_amount"    />
-        <result property="adviceAmount"    column="advice_amount"    />
         <result property="griddingPercent"    column="gridding_percent"    />
+        <result property="adviceDate"    column="advice_date"    />
+        <result property="adviceAmount"    column="advice_amount"    />
         <result property="advicePercent"    column="advice_percent"    />
         <result property="tradeType"    column="trade_type"    />
     </resultMap>
 
     <sql id="selectStockPositionPlanVo">
-        select id, del_flag, create_by, create_time, update_by, update_time, trace_id, advice_date, advice_price, gridding_amount, advice_amount, gridding_percent, advice_percent, trade_type from stock_position_plan
+        select id, del_flag, create_by, create_time, update_by, update_time, trace_id, advice_price, gridding_amount, gridding_percent, advice_date, advice_amount, advice_percent, trade_type from stock_position_plan
     </sql>
 
     <select id="selectStockPositionPlanList" parameterType="StockPositionPlan" resultMap="StockPositionPlanResult">
         <include refid="selectStockPositionPlanVo"/>
-        <where>
+        <where>  
             <if test="traceId != null "> and trace_id = #{traceId}</if>
-            <if test="adviceDate != null "> and advice_date = #{adviceDate}</if>
             <if test="advicePrice != null "> and advice_price = #{advicePrice}</if>
-            <if test="griddingAmount != null  and griddingAmount != ''"> and gridding_amount = #{griddingAmount}</if>
+            <if test="griddingAmount != null "> and gridding_amount = #{griddingAmount}</if>
+            <if test="griddingPercent != null "> and gridding_percent = #{griddingPercent}</if>
+            <if test="adviceDate != null "> and advice_date = #{adviceDate}</if>
             <if test="adviceAmount != null "> and advice_amount = #{adviceAmount}</if>
-            <if test="griddingPercent != null  and griddingPercent != ''"> and gridding_percent = #{griddingPercent}</if>
             <if test="advicePercent != null "> and advice_percent = #{advicePercent}</if>
             <if test="tradeType != null  and tradeType != ''"> and trade_type = #{tradeType}</if>
         </where>
-        order by advice_date
     </select>
-
+    
     <select id="selectStockPositionPlanById" parameterType="Long" resultMap="StockPositionPlanResult">
         <include refid="selectStockPositionPlanVo"/>
         where id = #{id}
     </select>
-
+        
     <insert id="insertStockPositionPlan" parameterType="StockPositionPlan" useGeneratedKeys="true" keyProperty="id">
         insert into stock_position_plan
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -54,14 +53,14 @@
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="traceId != null">trace_id,</if>
-            <if test="adviceDate != null">advice_date,</if>
             <if test="advicePrice != null">advice_price,</if>
             <if test="griddingAmount != null">gridding_amount,</if>
-            <if test="adviceAmount != null">advice_amount,</if>
             <if test="griddingPercent != null">gridding_percent,</if>
+            <if test="adviceDate != null">advice_date,</if>
+            <if test="adviceAmount != null">advice_amount,</if>
             <if test="advicePercent != null">advice_percent,</if>
             <if test="tradeType != null">trade_type,</if>
-        </trim>
+         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="delFlag != null">#{delFlag},</if>
             <if test="createBy != null">#{createBy},</if>
@@ -69,14 +68,14 @@
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="traceId != null">#{traceId},</if>
-            <if test="adviceDate != null">#{adviceDate},</if>
             <if test="advicePrice != null">#{advicePrice},</if>
             <if test="griddingAmount != null">#{griddingAmount},</if>
-            <if test="adviceAmount != null">#{adviceAmount},</if>
             <if test="griddingPercent != null">#{griddingPercent},</if>
+            <if test="adviceDate != null">#{adviceDate},</if>
+            <if test="adviceAmount != null">#{adviceAmount},</if>
             <if test="advicePercent != null">#{advicePercent},</if>
             <if test="tradeType != null">#{tradeType},</if>
-        </trim>
+         </trim>
     </insert>
 
     <update id="updateStockPositionPlan" parameterType="StockPositionPlan">
@@ -88,11 +87,11 @@
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="traceId != null">trace_id = #{traceId},</if>
-            <if test="adviceDate != null">advice_date = #{adviceDate},</if>
             <if test="advicePrice != null">advice_price = #{advicePrice},</if>
             <if test="griddingAmount != null">gridding_amount = #{griddingAmount},</if>
-            <if test="adviceAmount != null">advice_amount = #{adviceAmount},</if>
             <if test="griddingPercent != null">gridding_percent = #{griddingPercent},</if>
+            <if test="adviceDate != null">advice_date = #{adviceDate},</if>
+            <if test="adviceAmount != null">advice_amount = #{adviceAmount},</if>
             <if test="advicePercent != null">advice_percent = #{advicePercent},</if>
             <if test="tradeType != null">trade_type = #{tradeType},</if>
         </trim>
@@ -104,12 +103,9 @@
     </delete>
 
     <delete id="deleteStockPositionPlanByIds" parameterType="String">
-        delete from stock_position_plan where id in
+        delete from stock_position_plan where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
-  <delete id="deleteStockPositionPlanByTraceId" parameterType="Long">
-      delete from stock_position_plan where trace_id = #{traceId}
-  </delete>
 </mapper>
