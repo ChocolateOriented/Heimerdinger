@@ -1,15 +1,6 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="追踪id" prop="traceId">
-        <el-input
-          v-model="queryParams.traceId"
-          placeholder="请输入追踪id"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="资产名称" prop="name">
         <el-input
           v-model="queryParams.name"
@@ -19,19 +10,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="实际持仓份额" prop="realityAmount">
-        <el-input
-          v-model="queryParams.realityAmount"
-          placeholder="请输入实际持仓份额"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="计划持仓金额" prop="targetAmount">
+      <el-form-item label="计划持仓" prop="targetAmount">
         <el-input
           v-model="queryParams.targetAmount"
-          placeholder="请输入计划持仓金额"
+          placeholder="请输入计划持仓"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -90,13 +72,11 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="financePositionPlanList" @selection-change="handleSelectionChange" show-summary>
-<!--      <el-table-column type="selection" width="55" align="center" />-->
+    <el-table v-loading="loading" :data="financePositionPlanList" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
-      <el-table-column label="追踪id" align="center" prop="traceId" />
       <el-table-column label="资产名称" align="center" prop="name" />
-      <el-table-column label="实际持仓份额" align="center" prop="realityAmount" sortable />
-      <el-table-column label="计划持仓金额" align="center" prop="targetAmount" sortable />
+      <el-table-column label="计划持仓" align="center" prop="targetAmount" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -128,14 +108,8 @@
     <!-- 添加或修改持仓计划对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="追踪id" prop="traceId">
-          <el-input v-model="form.traceId" placeholder="请输入追踪id" />
-        </el-form-item>
         <el-form-item label="资产名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入资产名称" />
-        </el-form-item>
-        <el-form-item label="实际持仓" prop="realityAmount">
-          <el-input v-model="form.realityAmount" placeholder="请输入实际持仓" />
         </el-form-item>
         <el-form-item label="计划持仓" prop="targetAmount">
           <el-input v-model="form.targetAmount" placeholder="请输入计划持仓" />
@@ -179,10 +153,8 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 50,
-        traceId: null,
+        pageSize: 10,
         name: null,
-        realityAmount: null,
         targetAmount: null
       },
       // 表单参数
@@ -219,9 +191,7 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null,
-        traceId: null,
         name: null,
-        realityAmount: null,
         targetAmount: null
       };
       this.resetForm("form");

@@ -6,8 +6,8 @@ import com.ruoyi.hemerdinger.finance.domain.FinancePositionPlan;
 /**
  * 持仓计划Mapper接口
  * 
- * @author lijing xiang
- * @date 2022-04-27
+ * @author lijingxiang
+ * @date 2023-11-26
  */
 public interface FinancePositionPlanMapper 
 {

@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.0.0",
   "createdTime": "2021-10-15 11:41:11",
-  "updatedTime": "2023-11-25 16:49:20",
+  "updatedTime": "2023-11-27 00:15:57",
   "profile": {
     "default": {
       "db": "E410B2A3-3E59-49D9-8A06-FFF4888D40CC",
@@ -625,6 +625,22 @@
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
           "id": "8CD5E9D4-3962-4E39-B4FA-C726520D8E16"
+        },
+        {
+          "defKey": "trace_logical_type",
+          "defName": "持有逻辑",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "005A6051-8477-4F99-A1EE-EA6593471A87",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
+          "id": "A7FA1772-7993-41C1-807B-4D5F962EFDA9"
         },
         {
           "defKey": "quotient",

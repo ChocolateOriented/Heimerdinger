@@ -11,22 +11,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
-        <result property="traceId"    column="trace_id"    />
         <result property="name"    column="name"    />
-        <result property="realityAmount"    column="reality_amount"    />
         <result property="targetAmount"    column="target_amount"    />
     </resultMap>
 
     <sql id="selectFinancePositionPlanVo">
-        select id, del_flag, create_by, create_time, update_by, update_time, trace_id, name, reality_amount, target_amount from finance_position_plan
+        select id, del_flag, create_by, create_time, update_by, update_time, name, target_amount from finance_position_plan
     </sql>
 
     <select id="selectFinancePositionPlanList" parameterType="FinancePositionPlan" resultMap="FinancePositionPlanResult">
         <include refid="selectFinancePositionPlanVo"/>
         <where>  
-            <if test="traceId != null "> and trace_id = #{traceId}</if>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="realityAmount != null "> and reality_amount = #{realityAmount}</if>
             <if test="targetAmount != null "> and target_amount = #{targetAmount}</if>
         </where>
     </select>
@@ -44,9 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
-            <if test="traceId != null">trace_id,</if>
             <if test="name != null">name,</if>
-            <if test="realityAmount != null">reality_amount,</if>
             <if test="targetAmount != null">target_amount,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -55,9 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
-            <if test="traceId != null">#{traceId},</if>
             <if test="name != null">#{name},</if>
-            <if test="realityAmount != null">#{realityAmount},</if>
             <if test="targetAmount != null">#{targetAmount},</if>
          </trim>
     </insert>
@@ -70,9 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="traceId != null">trace_id = #{traceId},</if>
             <if test="name != null">name = #{name},</if>
-            <if test="realityAmount != null">reality_amount = #{realityAmount},</if>
             <if test="targetAmount != null">target_amount = #{targetAmount},</if>
         </trim>
         where id = #{id}

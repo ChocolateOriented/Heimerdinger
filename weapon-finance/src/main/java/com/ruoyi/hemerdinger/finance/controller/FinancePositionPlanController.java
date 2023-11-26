@@ -11,6 +11,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.hemerdinger.finance.domain.FinancePositionPlan;
 import com.ruoyi.hemerdinger.finance.domain.StockPositionPlan;
+import com.ruoyi.hemerdinger.finance.domain.StockTrace;
 import com.ruoyi.hemerdinger.finance.domain.vo.TradeAdviceListVo;
 import com.ruoyi.hemerdinger.finance.domain.vo.TradeAdviceType;
 import com.ruoyi.hemerdinger.finance.service.IFinancePositionPlanService;
@@ -38,8 +39,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 持仓计划Controller
  *
- * @author lijing xiang
- * @date 2022-04-27
+ * @author lijingxiang
+ * @date 2023-11-26
  */
 @Api("持仓计划管理")
 @RestController
@@ -54,7 +55,7 @@ public class FinancePositionPlanController extends BaseController
     private IStockTraceService stockTraceService;
 
     @ApiOperation("查询持仓计划列表")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:list')")
     @GetMapping("/list")
     public TableDataInfo<List<FinancePositionPlan>> list(FinancePositionPlan financePositionPlan)
@@ -68,14 +69,14 @@ public class FinancePositionPlanController extends BaseController
     @ApiOperationSupport(author = "lijing xiang")
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:list')")
     @GetMapping("/tradeAdviceList")
-    public Rest<List<TradeAdviceListVo>> tradeAdviceList(FinancePositionPlan financePositionPlan)
+    public Rest<List<TradeAdviceListVo>> tradeAdviceList()
     {
-        List<FinancePositionPlan> list = financePositionPlanService.selectFinancePositionPlanList(financePositionPlan);
         List<TradeAdviceListVo> adviceListVos = new ArrayList<>();
+        List<StockTrace> list = stockTraceService.selectStockTraceList(new StockTrace());
         Date now = DateUtils.dateTime(DateUtils.YYYY_MM_DD, DateUtils.getDate());
         for (int i = 0; i < list.size(); i++) {
-            FinancePositionPlan positionPlan = list.get(i);
-            Long traceId = positionPlan.getTraceId();
+            StockTrace stockTrace = list.get(i);
+            Long traceId = stockTrace.getId();
             StockPositionPlan query = new StockPositionPlan();
             query.setTraceId(traceId);
             List<StockPositionPlan> stockPositionPlans = stockPositionPlanService.selectStockPositionPlanList(query);
@@ -85,7 +86,8 @@ public class FinancePositionPlanController extends BaseController
             String code = stockTraceService.selectStockTraceById(traceId).getCode();
             JSONObject currentInfo = stockTraceService.findCurrentInfo(code);
             BigDecimal currentPrice = currentInfo.getBigDecimal(IStockDataConfigService.NAME_PRICE);
-            BigDecimal realityAmount = positionPlan.getRealityAmount();
+            //TODO 检验逻辑
+            BigDecimal realityAmount = stockTrace.getAssessmen();
 
             TradeAdviceListVo tradeAdvice = null;
             for (int j = 0; j < stockPositionPlans.size(); j++) {
@@ -97,7 +99,7 @@ public class FinancePositionPlanController extends BaseController
                 boolean griddingAmountShort = realityAmount.compareTo(griddingAdviceAmount) < 0;
 
                 if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort){
-                    tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
+                    tradeAdvice = new TradeAdviceListVo(traceId,stockTrace.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
                         griddingAdviceAmount,realityAmount);
                     continue;
                 }
@@ -107,7 +109,7 @@ public class FinancePositionPlanController extends BaseController
                 boolean timeAmountShort = realityAmount.compareTo(timeAdviceAmount) < 0;
                 //时间触发
                 if (adviceDate.compareTo(now) <= 0 && timeAmountShort ){
-                    tradeAdvice = new TradeAdviceListVo(traceId,positionPlan.getName(),currentPrice, TradeAdviceType.BUY_DATE,
+                    tradeAdvice = new TradeAdviceListVo(traceId,stockTrace.getName(),currentPrice, TradeAdviceType.BUY_DATE,
                             timeAdviceAmount,realityAmount);
                     continue;
                 }
@@ -121,7 +123,7 @@ public class FinancePositionPlanController extends BaseController
     }
 
     @ApiOperation("导出持仓计划列表")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:export')")
     @Log(title = "持仓计划", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
@@ -133,7 +135,7 @@ public class FinancePositionPlanController extends BaseController
     }
 
     @ApiOperation("获取持仓计划详细信息")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:query')")
     @GetMapping(value = "/{id}")
@@ -144,7 +146,7 @@ public class FinancePositionPlanController extends BaseController
 
 
     @ApiOperation("新增持仓计划")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:add')")
     @Log(title = "持仓计划", businessType = BusinessType.INSERT)
     @PostMapping
@@ -154,7 +156,7 @@ public class FinancePositionPlanController extends BaseController
     }
 
     @ApiOperation("修改持仓计划")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:edit')")
     @Log(title = "持仓计划", businessType = BusinessType.UPDATE)
     @PutMapping
@@ -164,15 +166,13 @@ public class FinancePositionPlanController extends BaseController
     }
 
     @ApiOperation("删除持仓计划")
-    @ApiOperationSupport(author = "lijing xiang")
+    @ApiOperationSupport(author = "lijingxiang")
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:remove')")
     @Log(title = "持仓计划", businessType = BusinessType.DELETE)
-	  @DeleteMapping("/{ids}")
+	@DeleteMapping("/{ids}")
     public Rest remove(@PathVariable Long[] ids)
     {
         return toAjax(financePositionPlanService.deleteFinancePositionPlanByIds(ids));
     }
-
-
 }
