@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="advicePercent != null "> and advice_percent = #{advicePercent}</if>
             <if test="tradeType != null  and tradeType != ''"> and trade_type = #{tradeType}</if>
         </where>
+        order by advice_price desc
     </select>
     
     <select id="selectStockPositionPlanById" parameterType="Long" resultMap="StockPositionPlanResult">
@@ -107,5 +108,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
+    </delete>
+
+    <delete id="deleteStockPositionPlanByTraceId" parameterType="Long">
+        delete from stock_position_plan where trace_id = #{traceId}
     </delete>
 </mapper>

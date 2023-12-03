@@ -9,6 +9,15 @@ export function listFinancePositionPlan(query) {
   })
 }
 
+// 查询交易建议列表
+export function tradeAdviceList(query) {
+  return request({
+    url: '/finance/financePositionPlan/tradeAdviceList',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询持仓计划详细
 export function getFinancePositionPlan(id) {
   return request({

@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"    column="name"    />
         <result property="code"    column="code"    />
         <result property="costPrice"    column="cost_price"    />
+        <result property="traceLogicalType"    column="trace_logical_type"    />
         <result property="quotient"    column="quotient"    />
         <result property="quotientMin"    column="quotient_min"    />
         <result property="quotientMax"    column="quotient_max"    />
@@ -31,7 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectStockTraceVo">
-        select id, del_flag, create_by, create_time, update_by, update_time, name, code, cost_price, quotient, quotient_min, quotient_max, quotient_fit, assessment_type, assessmen, assessmen_min, assessmen_max, assessmen_fit, safe_span, start_time, keep_data, time_span, plan_id from stock_trace
+        select id, del_flag, create_by, create_time, update_by, update_time, name, code, cost_price, trace_logical_type, quotient, quotient_min, quotient_max, quotient_fit, assessment_type, assessmen, assessmen_min, assessmen_max, assessmen_fit, safe_span, start_time, keep_data, time_span, plan_id from stock_trace
     </sql>
 
     <select id="selectStockTraceList" parameterType="StockTrace" resultMap="StockTraceResult">
@@ -40,6 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="costPrice != null "> and cost_price = #{costPrice}</if>
+            <if test="traceLogicalType != null  and traceLogicalType != ''"> and trace_logical_type = #{traceLogicalType}</if>
             <if test="quotient != null "> and quotient = #{quotient}</if>
             <if test="quotientMin != null "> and quotient_min = #{quotientMin}</if>
             <if test="quotientMax != null "> and quotient_max = #{quotientMax}</if>
@@ -73,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null">name,</if>
             <if test="code != null">code,</if>
             <if test="costPrice != null">cost_price,</if>
+            <if test="traceLogicalType != null">trace_logical_type,</if>
             <if test="quotient != null">quotient,</if>
             <if test="quotientMin != null">quotient_min,</if>
             <if test="quotientMax != null">quotient_max,</if>
@@ -97,6 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null">#{name},</if>
             <if test="code != null">#{code},</if>
             <if test="costPrice != null">#{costPrice},</if>
+            <if test="traceLogicalType != null">#{traceLogicalType},</if>
             <if test="quotient != null">#{quotient},</if>
             <if test="quotientMin != null">#{quotientMin},</if>
             <if test="quotientMax != null">#{quotientMax},</if>
@@ -125,6 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null">name = #{name},</if>
             <if test="code != null">code = #{code},</if>
             <if test="costPrice != null">cost_price = #{costPrice},</if>
+            <if test="traceLogicalType != null">trace_logical_type = #{traceLogicalType},</if>
             <if test="quotient != null">quotient = #{quotient},</if>
             <if test="quotientMin != null">quotient_min = #{quotientMin},</if>
             <if test="quotientMax != null">quotient_max = #{quotientMax},</if>

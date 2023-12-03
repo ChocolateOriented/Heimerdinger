@@ -7,6 +7,7 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.Rest;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.hemerdinger.finance.domain.StockTrace;
 import com.ruoyi.hemerdinger.finance.domain.vo.TradeGradeVo;
@@ -64,16 +65,18 @@ public class StockTraceController extends BaseController
         for (int i = 0; i < list.size(); i++) {
             StockTrace trace =  list.get(i);
             String code = trace.getCode();
+            if(StringUtils.isBlank(code)){
+                continue;
+            }
             BigDecimal currentPrice = stockTraceService.findCurrentInfo(code).getBigDecimal(IStockDataConfigService.NAME_PRICE);
             BigDecimal costPrice = trace.getCostPrice();
             BigDecimal assessmen = trace.getAssessmen();
             BigDecimal assessmenFit = trace.getAssessmenFit();
             BigDecimal assessmenMin = trace.getAssessmenMin();
 
-            //TODO 重写机会排名
-            BigDecimal currentPb = DecimalUtil.div(currentPrice,(DecimalUtil.div(costPrice,assessmen)));
-            BigDecimal planRise = DecimalUtil.div(assessmenFit.subtract(currentPb), currentPb).multiply(new BigDecimal(100));
-            BigDecimal planFall = DecimalUtil.div(currentPb.subtract(assessmenMin), currentPb).multiply(new BigDecimal(100));
+            BigDecimal currentAssessmen = DecimalUtil.div(currentPrice,(DecimalUtil.div(costPrice,assessmen)));
+            BigDecimal planRise = DecimalUtil.div(assessmenFit.subtract(currentAssessmen), currentAssessmen).multiply(new BigDecimal(100));
+            BigDecimal planFall = DecimalUtil.div(currentAssessmen.subtract(assessmenMin), currentAssessmen).multiply(new BigDecimal(100));
             BigDecimal grade = DecimalUtil.div(planRise,planFall.multiply(new BigDecimal(2)));
 
             TradeGradeVo tradeGradeVo = new TradeGradeVo(trace.getId(),trace.getName(),currentPrice,planRise,planFall,grade);

@@ -29,7 +29,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * 追踪日志Controller
  *
  * @author lijingxiang
- * @date 2023-11-26
+ * @date 2023-11-30
  */
 @Api("追踪日志管理")
 @RestController

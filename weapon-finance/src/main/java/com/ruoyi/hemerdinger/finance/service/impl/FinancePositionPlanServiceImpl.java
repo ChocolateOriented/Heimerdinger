@@ -1,12 +1,19 @@
 package com.ruoyi.hemerdinger.finance.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.hemerdinger.finance.domain.StockTrace;
+import com.ruoyi.hemerdinger.finance.service.IStockTraceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.hemerdinger.finance.mapper.FinancePositionPlanMapper;
 import com.ruoyi.hemerdinger.finance.domain.FinancePositionPlan;
 import com.ruoyi.hemerdinger.finance.service.IFinancePositionPlanService;
+import org.springframework.util.CollectionUtils;
 
 /**
  * 持仓计划Service业务层处理
@@ -19,7 +26,8 @@ public class FinancePositionPlanServiceImpl implements IFinancePositionPlanServi
 {
     @Autowired
     private FinancePositionPlanMapper financePositionPlanMapper;
-
+    @Autowired
+    private IStockTraceService stockTraceService;
     /**
      * 查询持仓计划
      * 
@@ -41,7 +49,34 @@ public class FinancePositionPlanServiceImpl implements IFinancePositionPlanServi
     @Override
     public List<FinancePositionPlan> selectFinancePositionPlanList(FinancePositionPlan financePositionPlan)
     {
-        return financePositionPlanMapper.selectFinancePositionPlanList(financePositionPlan);
+        List<FinancePositionPlan> list = financePositionPlanMapper.selectFinancePositionPlanList(financePositionPlan);
+        //计算个板块实际持仓
+        for (int i = 0; i < list.size(); i++) {
+            FinancePositionPlan positionPlan = list.get(i);
+            List<StockTrace> stockTraceList = positionPlan.getStockTraceList();
+            BigDecimal realityAmount = positionPlan.getRealityAmount();
+            if (null == realityAmount){
+                realityAmount = new BigDecimal(0);
+            }
+            if (CollectionUtils.isEmpty(stockTraceList)){
+                continue;
+            }
+            for (int j = 0; j < stockTraceList.size(); j++) {
+                StockTrace stockTrace = stockTraceList.get(j);
+                String code = stockTrace.getCode();
+                //兼容现金
+                if(StringUtils.isBlank(code)){
+                    realityAmount = realityAmount.add(stockTrace.getQuotient());
+                    continue;
+                }
+                JSONObject currentInfo = stockTraceService.findCurrentInfo(stockTrace.getCode());
+                BigDecimal price = new BigDecimal(currentInfo.getDouble("price")) ;
+                BigDecimal amount = price.multiply(stockTrace.getQuotient());
+                realityAmount = realityAmount.add(amount);
+            }
+            positionPlan.setRealityAmount(realityAmount);
+        }
+        return list;
     }
 
     /**

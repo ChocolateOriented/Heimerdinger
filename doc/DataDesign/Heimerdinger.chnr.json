@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.0.0",
   "createdTime": "2021-10-15 11:41:11",
-  "updatedTime": "2023-11-27 00:15:57",
+  "updatedTime": "2023-11-30 13:41:11",
   "profile": {
     "default": {
       "db": "E410B2A3-3E59-49D9-8A06-FFF4888D40CC",
@@ -2262,8 +2262,8 @@
           "defKey": "content",
           "defName": "内容",
           "comment": "",
-          "type": "",
-          "len": "",
+          "type": "VARCHAR",
+          "len": 5000,
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -2271,12 +2271,12 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "7A1CDD76-6DF2-4845-A71C-1C066C0F9FC6",
+          "domain": "",
           "id": "06A6BF87-4BAB-46DD-8D47-D8D47B30DF5F"
         },
         {
-          "defKey": "trace_id",
-          "defName": "股票追踪id",
+          "defKey": "code",
+          "defName": "股票编码",
           "comment": "",
           "type": "",
           "len": "",
@@ -2287,8 +2287,24 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
           "id": "387925D6-15C8-4805-8EE0-CDA86AC82432"
+        },
+        {
+          "defKey": "log_type",
+          "defName": "日志类型",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "E132CA2D-2224-4757-91FC-F89296AB58B1",
+          "domain": "A7A03A09-2927-42F3-B119-8AC254942BE8",
+          "id": "E75B1C72-1E5D-409F-AF34-C9EB0EA4F984"
         }
       ],
       "correlations": [],
@@ -2417,6 +2433,39 @@
           "attr2": "",
           "attr3": "",
           "id": "0CA987A8-A25F-4557-BE54-8841EA2DFCD2"
+        }
+      ]
+    },
+    {
+      "defKey": "trace_log_type",
+      "defName": "追踪日志类型",
+      "sort": "",
+      "intro": "",
+      "id": "E132CA2D-2224-4757-91FC-F89296AB58B1",
+      "items": [
+        {
+          "defKey": "BASE",
+          "defName": "基本面分析",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "E3B28904-13E2-436F-B41A-1F3FDC41E23F"
+        },
+        {
+          "defKey": "TREND",
+          "defName": "走势分析",
+          "sort": "",
+          "parentKey": "",
+          "intro": "",
+          "enabled": true,
+          "attr1": "",
+          "attr2": "",
+          "attr3": "",
+          "id": "6B0C439F-EC5C-4BBB-BD3A-351B93638C18"
         }
       ]
     }
@@ -2693,37 +2742,6 @@
             "originKey": "2C1D9F6A-E92D-4879-A57E-F372306D943C"
           },
           {
-            "id": "7ed4f092-07b6-4cd1-be4f-cbf420bcc0e8",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
-              "port": "93619A28-52B7-4BDB-A057-0CC6B39073DB%out"
-            },
-            "target": {
-              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
-            },
-            "relation": "1:n",
-            "fillColor": "#ACDAFC"
-          },
-          {
-            "id": "25446c4f-cb3a-444a-bfaa-1fdedd18a67f",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
-              "port": "387925D6-15C8-4805-8EE0-CDA86AC82432%in"
-            },
-            "target": {
-              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
-            },
-            "relation": "1:n",
-            "fillColor": "#ACDAFC",
-            "router": {
-              "name": "manhattan"
-            }
-          },
-          {
             "id": "2665ec74-b71f-423e-88f3-6ba0dacd4278",
             "shape": "table",
             "position": {
@@ -2744,14 +2762,28 @@
             "originKey": "483C278E-C4D9-4678-8A92-395FDE0E2C87"
           },
           {
-            "id": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
+            "id": "10145707-51e1-4b2a-afb4-a55fa40930a8",
             "shape": "table",
             "position": {
-              "x": -170.5,
-              "y": -456
+              "x": -722.5,
+              "y": -657
             },
             "count": 0,
-            "originKey": "4026C67A-61E2-42F5-AB52-91FD339DA25F"
+            "originKey": "342B8DE6-F39D-49BC-AF3C-70827DA39675"
+          },
+          {
+            "id": "7ed4f092-07b6-4cd1-be4f-cbf420bcc0e8",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
+              "port": "93619A28-52B7-4BDB-A057-0CC6B39073DB%out"
+            },
+            "target": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "66DCBC8C-0347-43E7-BC82-3AB073786CCE%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC"
           },
           {
             "id": "65040162-5984-4da1-b625-720655ddbe55",
@@ -2765,10 +2797,31 @@
               "port": "01541F34-B26D-42B7-B9B0-3301A11478CF%out"
             },
             "relation": "1:n",
-            "fillColor": "#ACDAFC",
-            "router": {
-              "name": "manhattan"
-            }
+            "fillColor": "#ACDAFC"
+          },
+          {
+            "id": "25446c4f-cb3a-444a-bfaa-1fdedd18a67f",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
+              "port": "387925D6-15C8-4805-8EE0-CDA86AC82432%in"
+            },
+            "target": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "66475C15-44EB-4F72-9DBA-13E1B3009053%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC"
+          },
+          {
+            "id": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
+            "shape": "table",
+            "position": {
+              "x": -180,
+              "y": -446
+            },
+            "count": 0,
+            "originKey": "4026C67A-61E2-42F5-AB52-91FD339DA25F"
           },
           {
             "id": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
@@ -2779,16 +2832,6 @@
             },
             "count": 0,
             "originKey": "03334F24-4E8C-4DB0-9559-0829BCA37524"
-          },
-          {
-            "id": "10145707-51e1-4b2a-afb4-a55fa40930a8",
-            "shape": "table",
-            "position": {
-              "x": -722.5,
-              "y": -657
-            },
-            "count": 0,
-            "originKey": "342B8DE6-F39D-49BC-AF3C-70827DA39675"
           }
         ]
       },

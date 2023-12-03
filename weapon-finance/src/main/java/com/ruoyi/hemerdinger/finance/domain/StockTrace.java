@@ -14,7 +14,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 股票追踪对象 stock_trace
  *
  * @author lijingxiang
- * @date 2023-11-26
+ * @date 2023-11-27
  */
 @ApiModel(value = "ClassName", description = "股票追踪对象")
 public class StockTrace extends BaseEntity
@@ -41,6 +41,11 @@ public class StockTrace extends BaseEntity
     @Excel(name = "成本价格")
     @ApiModelProperty(value = "成本价格", example = "1")
     private BigDecimal costPrice;
+
+    /** 持有逻辑 */
+    @Excel(name = "持有逻辑")
+    @ApiModelProperty(value = "持有逻辑", example = "1")
+    private String traceLogicalType;
 
     /** 持有份额 */
     @Excel(name = "持有份额")
@@ -158,6 +163,15 @@ public class StockTrace extends BaseEntity
     public BigDecimal getCostPrice()
     {
         return costPrice;
+    }
+    public void setTraceLogicalType(String traceLogicalType)
+    {
+        this.traceLogicalType = traceLogicalType;
+    }
+
+    public String getTraceLogicalType()
+    {
+        return traceLogicalType;
     }
     public void setQuotient(BigDecimal quotient)
     {
@@ -298,6 +312,7 @@ public class StockTrace extends BaseEntity
             .append("name", getName())
             .append("code", getCode())
             .append("costPrice", getCostPrice())
+            .append("traceLogicalType", getTraceLogicalType())
             .append("quotient", getQuotient())
             .append("quotientMin", getQuotientMin())
             .append("quotientMax", getQuotientMax())

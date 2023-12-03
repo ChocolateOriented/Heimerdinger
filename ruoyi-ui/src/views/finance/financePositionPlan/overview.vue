@@ -77,8 +77,6 @@ export default {
       open: false,
       // 查询参数
       queryParams: {
-        pageNum: 1,
-        pageSize: 50,
         traceId: null,
         name: null,
         realityAmount: null,
@@ -109,8 +107,8 @@ export default {
       listFinancePositionPlan(this.queryParams).then(response => {
         this.listFinancePositionPlan = response.rows;
         this.loading = false;
-        this.renderPositionPie();
         this.renderPositionBar();
+        this.renderPositionPie();
       });
     },
     // 取消按钮
@@ -209,6 +207,12 @@ export default {
       if ('BUY_PRICE' === row.tradeAdviceType){
         return "buy-cautious-row";
       }
+      if ('SELL_DATE' === row.tradeAdviceType){
+        return "buy-danger-row";
+      }
+      if ('SELL_PRICE' === row.tradeAdviceType){
+        return "buy-danger-row";
+      }
       return "";
     },
     /** 饼图表渲染 **/
@@ -260,12 +264,15 @@ export default {
       var option;
       let listPositionPlan = this.listFinancePositionPlan;
       let barData = [['product', '实际持仓', '计划持仓']];
+
+      let totle = 0;
       for (let i = 0; i < listPositionPlan.length; i++) {
         const positionPlan = listPositionPlan[i];
-        if (positionPlan.traceId == null){
-          continue;
-        }
-        barData.push([positionPlan.name, positionPlan.realityAmount, positionPlan.targetAmount]);
+        totle = positionPlan.realityAmount + totle;
+      }
+      for (let i = 0; i < listPositionPlan.length; i++) {
+        const positionPlan = listPositionPlan[i];
+        barData.push([positionPlan.name, positionPlan.realityAmount*100/totle, positionPlan.targetAmount]);
       }
       option = {
         legend: {},
@@ -292,5 +299,8 @@ export default {
   }
   .el-table .buy-cautious-row {
     background: #e9d076;
+  }
+  .el-table .buy-danger-row {
+    background: #ff9680;
   }
 </style>

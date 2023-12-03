@@ -1,14 +1,24 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="股票追踪id" prop="traceId">
+      <el-form-item label="股票编码" prop="code">
         <el-input
-          v-model="queryParams.traceId"
-          placeholder="请输入股票追踪id"
+          v-model="queryParams.code"
+          placeholder="请输入股票编码"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
+      </el-form-item>
+      <el-form-item label="日志类型" prop="logType">
+        <el-select v-model="queryParams.logType" placeholder="请选择日志类型" clearable size="small">
+          <el-option
+            v-for="dict in dict.type.trace_log_type"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -67,7 +77,12 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="id" align="center" prop="id" />
       <el-table-column label="内容" align="center" prop="content" />
-      <el-table-column label="股票追踪id" align="center" prop="traceId" />
+      <el-table-column label="股票编码" align="center" prop="code" />
+      <el-table-column label="日志类型" align="center" prop="logType">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.trace_log_type" :value="scope.row.logType"/>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -87,7 +102,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -97,16 +112,23 @@
     />
 
     <!-- 添加或修改追踪日志对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="删除标志" prop="delFlag">
-          <el-input v-model="form.delFlag" placeholder="请输入删除标志" />
-        </el-form-item>
         <el-form-item label="内容">
           <editor v-model="form.content" :min-height="192"/>
         </el-form-item>
-        <el-form-item label="股票追踪id" prop="traceId">
-          <el-input v-model="form.traceId" placeholder="请输入股票追踪id" />
+        <el-form-item label="股票编码" prop="code">
+          <el-input v-model="form.code" placeholder="请输入股票编码" />
+        </el-form-item>
+        <el-form-item label="日志类型" prop="logType">
+          <el-select v-model="form.logType" placeholder="请选择日志类型">
+            <el-option
+              v-for="dict in dict.type.trace_log_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            ></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -122,6 +144,7 @@ import { listTraceLog, getTraceLog, delTraceLog, addTraceLog, updateTraceLog, ex
 
 export default {
   name: "TraceLog",
+  dicts: ['trace_log_type'],
   data() {
     return {
       // 遮罩层
@@ -149,7 +172,8 @@ export default {
         pageNum: 1,
         pageSize: 10,
         content: null,
-        traceId: null
+        code: null,
+        logType: null
       },
       // 表单参数
       form: {},
@@ -186,7 +210,8 @@ export default {
         updateBy: null,
         updateTime: null,
         content: null,
-        traceId: null
+        code: null,
+        logType: null
       };
       this.resetForm("form");
     },

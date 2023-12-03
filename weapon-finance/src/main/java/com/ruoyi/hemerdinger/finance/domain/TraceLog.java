@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 追踪日志对象 trace_log
  *
  * @author lijingxiang
- * @date 2023-11-26
+ * @date 2023-11-30
  */
 @ApiModel(value = "ClassName", description = "追踪日志对象")
 public class TraceLog extends BaseEntity
@@ -29,10 +29,15 @@ public class TraceLog extends BaseEntity
     @ApiModelProperty(value = "内容", example = "1")
     private String content;
 
-    /** 股票追踪id */
-    @Excel(name = "股票追踪id")
-    @ApiModelProperty(value = "股票追踪id", example = "1")
-    private Long traceId;
+    /** 股票编码 */
+    @Excel(name = "股票编码")
+    @ApiModelProperty(value = "股票编码", example = "1")
+    private String code;
+
+    /** 日志类型 */
+    @Excel(name = "日志类型")
+    @ApiModelProperty(value = "日志类型", example = "1")
+    private String logType;
 
     public void setId(Long id)
     {
@@ -61,14 +66,23 @@ public class TraceLog extends BaseEntity
     {
         return content;
     }
-    public void setTraceId(Long traceId)
+    public void setCode(String code)
     {
-        this.traceId = traceId;
+        this.code = code;
     }
 
-    public Long getTraceId()
+    public String getCode()
     {
-        return traceId;
+        return code;
+    }
+    public void setLogType(String logType)
+    {
+        this.logType = logType;
+    }
+
+    public String getLogType()
+    {
+        return logType;
     }
 
     @Override
@@ -81,7 +95,8 @@ public class TraceLog extends BaseEntity
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("content", getContent())
-            .append("traceId", getTraceId())
+            .append("code", getCode())
+            .append("logType", getLogType())
             .toString();
     }
 }

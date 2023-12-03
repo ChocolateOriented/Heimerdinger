@@ -12,19 +12,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="content"    column="content"    />
-        <result property="traceId"    column="trace_id"    />
+        <result property="code"    column="code"    />
+        <result property="logType"    column="log_type"    />
     </resultMap>
 
     <sql id="selectTraceLogVo">
-        select id, del_flag, create_by, create_time, update_by, update_time, content, trace_id from trace_log
+        select id, del_flag, create_by, create_time, update_by, update_time, content, code, log_type from trace_log
     </sql>
 
     <select id="selectTraceLogList" parameterType="TraceLog" resultMap="TraceLogResult">
         <include refid="selectTraceLogVo"/>
         <where>  
             <if test="content != null  and content != ''"> and content = #{content}</if>
-            <if test="traceId != null "> and trace_id = #{traceId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="logType != null  and logType != ''"> and log_type = #{logType}</if>
         </where>
+
+        order by create_time desc
     </select>
     
     <select id="selectTraceLogById" parameterType="Long" resultMap="TraceLogResult">
@@ -41,7 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="content != null">content,</if>
-            <if test="traceId != null">trace_id,</if>
+            <if test="code != null">code,</if>
+            <if test="logType != null">log_type,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="delFlag != null">#{delFlag},</if>
@@ -50,7 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="content != null">#{content},</if>
-            <if test="traceId != null">#{traceId},</if>
+            <if test="code != null">#{code},</if>
+            <if test="logType != null">#{logType},</if>
          </trim>
     </insert>
 
@@ -63,7 +69,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="content != null">content = #{content},</if>
-            <if test="traceId != null">trace_id = #{traceId},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="logType != null">log_type = #{logType},</if>
         </trim>
         where id = #{id}
     </update>

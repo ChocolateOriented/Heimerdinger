@@ -1,7 +1,9 @@
 package com.ruoyi.hemerdinger.finance.domain;
 
     import java.math.BigDecimal;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+    import java.util.List;
+
+    import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -34,6 +36,30 @@ public class FinancePositionPlan extends BaseEntity
     @Excel(name = "计划持仓")
     @ApiModelProperty(value = "计划持仓", example = "1")
     private BigDecimal targetAmount;
+
+    /** 实际持仓 */
+    @Excel(name = "实际持仓")
+    @ApiModelProperty(value = "实际持仓", example = "1")
+    private BigDecimal realityAmount;
+
+    @ApiModelProperty(value = "相关对象")
+    private List<StockTrace> stockTraceList;
+
+    public BigDecimal getRealityAmount() {
+        return realityAmount;
+    }
+
+    public void setRealityAmount(BigDecimal realityAmount) {
+        this.realityAmount = realityAmount;
+    }
+
+    public List<StockTrace> getStockTraceList() {
+        return stockTraceList;
+    }
+
+    public void setStockTraceList(List<StockTrace> stockTraceList) {
+        this.stockTraceList = stockTraceList;
+    }
 
     public void setId(Long id)
     {

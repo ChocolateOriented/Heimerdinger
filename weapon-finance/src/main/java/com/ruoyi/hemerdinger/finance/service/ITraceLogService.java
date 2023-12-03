@@ -7,7 +7,7 @@ import com.ruoyi.hemerdinger.finance.domain.TraceLog;
  * 追踪日志Service接口
  * 
  * @author lijingxiang
- * @date 2023-11-26
+ * @date 2023-11-30
  */
 public interface ITraceLogService 
 {

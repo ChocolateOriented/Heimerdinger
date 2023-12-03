@@ -21,12 +21,15 @@ import com.ruoyi.hemerdinger.finance.service.IStockTraceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,8 +48,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api("持仓计划管理")
 @RestController
 @RequestMapping("/finance/financePositionPlan")
-public class FinancePositionPlanController extends BaseController
-{
+public class FinancePositionPlanController extends BaseController {
     @Autowired
     private IFinancePositionPlanService financePositionPlanService;
     @Autowired
@@ -58,10 +60,10 @@ public class FinancePositionPlanController extends BaseController
     @ApiOperationSupport(author = "lijingxiang")
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:list')")
     @GetMapping("/list")
-    public TableDataInfo<List<FinancePositionPlan>> list(FinancePositionPlan financePositionPlan)
-    {
+    public TableDataInfo<List<FinancePositionPlan>> list(FinancePositionPlan financePositionPlan) {
         startPage();
         List<FinancePositionPlan> list = financePositionPlanService.selectFinancePositionPlanList(financePositionPlan);
+
         return getDataTable(list);
     }
 
@@ -69,8 +71,7 @@ public class FinancePositionPlanController extends BaseController
     @ApiOperationSupport(author = "lijing xiang")
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:list')")
     @GetMapping("/tradeAdviceList")
-    public Rest<List<TradeAdviceListVo>> tradeAdviceList()
-    {
+    public Rest<List<TradeAdviceListVo>> tradeAdviceList() {
         List<TradeAdviceListVo> adviceListVos = new ArrayList<>();
         List<StockTrace> list = stockTraceService.selectStockTraceList(new StockTrace());
         Date now = DateUtils.dateTime(DateUtils.YYYY_MM_DD, DateUtils.getDate());
@@ -80,42 +81,51 @@ public class FinancePositionPlanController extends BaseController
             StockPositionPlan query = new StockPositionPlan();
             query.setTraceId(traceId);
             List<StockPositionPlan> stockPositionPlans = stockPositionPlanService.selectStockPositionPlanList(query);
-            if (null == traceId){
+            String code = stockTraceService.selectStockTraceById(traceId).getCode();
+            if (null == traceId || null == code ) {
                 continue;
             }
-            String code = stockTraceService.selectStockTraceById(traceId).getCode();
             JSONObject currentInfo = stockTraceService.findCurrentInfo(code);
             BigDecimal currentPrice = currentInfo.getBigDecimal(IStockDataConfigService.NAME_PRICE);
-            //TODO 检验逻辑
-            BigDecimal realityAmount = stockTrace.getAssessmen();
+
+            BigDecimal realityAmount = stockTrace.getQuotient();
 
             TradeAdviceListVo tradeAdvice = null;
             for (int j = 0; j < stockPositionPlans.size(); j++) {
-                StockPositionPlan stockPositionPlan =  stockPositionPlans.get(j);
+                StockPositionPlan stockPositionPlan = stockPositionPlans.get(j);
 
                 //价格触发
                 BigDecimal griddingAdvicePrice = stockPositionPlan.getAdvicePrice();
-                BigDecimal griddingAdviceAmount =stockPositionPlan.getGriddingAmount();
-                boolean griddingAmountShort = realityAmount.compareTo(griddingAdviceAmount) < 0;
-
-                if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort){
-                    tradeAdvice = new TradeAdviceListVo(traceId,stockTrace.getName(),currentPrice, TradeAdviceType.BUY_PRICE,
-                        griddingAdviceAmount,realityAmount);
+                BigDecimal griddingAdviceAmount = stockPositionPlan.getGriddingAmount();
+                BigDecimal shortAmount = griddingAdviceAmount.subtract(realityAmount);
+                boolean griddingAmountShort = shortAmount.compareTo(new BigDecimal(100)) >= 0;
+                boolean griddingAmountRich =  shortAmount.negate().compareTo(new BigDecimal(100)) >= 0;
+                //买
+                if (griddingAdvicePrice.compareTo(currentPrice) >= 0 && griddingAmountShort) {
+                    tradeAdvice = new TradeAdviceListVo(traceId, stockTrace.getName(), currentPrice, TradeAdviceType.BUY_PRICE,
+                            griddingAdviceAmount, realityAmount);
                     continue;
                 }
+                //卖
+                if (griddingAdvicePrice.compareTo(currentPrice) < 0 && griddingAmountRich) {
+                    tradeAdvice = new TradeAdviceListVo(traceId, stockTrace.getName(), currentPrice, TradeAdviceType.SELL_PRICE,
+                            griddingAdviceAmount, realityAmount);
+                    break;
+                }
 
+                //时间触发
                 Date adviceDate = stockPositionPlan.getAdviceDate();
                 BigDecimal timeAdviceAmount = stockPositionPlan.getAdviceAmount();
                 boolean timeAmountShort = realityAmount.compareTo(timeAdviceAmount) < 0;
-                //时间触发
-                if (adviceDate.compareTo(now) <= 0 && timeAmountShort ){
-                    tradeAdvice = new TradeAdviceListVo(traceId,stockTrace.getName(),currentPrice, TradeAdviceType.BUY_DATE,
-                            timeAdviceAmount,realityAmount);
+                boolean timeAmountRich = realityAmount.compareTo(timeAdviceAmount) > 0;
+                //买
+                if (adviceDate.compareTo(now) <= 0 && timeAmountShort) {
+                    tradeAdvice = new TradeAdviceListVo(traceId, stockTrace.getName(), currentPrice, TradeAdviceType.BUY_DATE,
+                            timeAdviceAmount, realityAmount);
                     continue;
                 }
-
             }
-            if (null != tradeAdvice){
+            if (null != tradeAdvice) {
                 adviceListVos.add(tradeAdvice);
             }
         }
@@ -127,8 +137,7 @@ public class FinancePositionPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:export')")
     @Log(title = "持仓计划", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
-    public Rest export(FinancePositionPlan financePositionPlan)
-    {
+    public Rest export(FinancePositionPlan financePositionPlan) {
         List<FinancePositionPlan> list = financePositionPlanService.selectFinancePositionPlanList(financePositionPlan);
         ExcelUtil<FinancePositionPlan> util = new ExcelUtil<FinancePositionPlan>(FinancePositionPlan.class);
         return util.exportExcel(list, "持仓计划数据");
@@ -139,8 +148,7 @@ public class FinancePositionPlanController extends BaseController
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:query')")
     @GetMapping(value = "/{id}")
-    public Rest<FinancePositionPlan> getInfo(@PathVariable("id") Long id)
-    {
+    public Rest<FinancePositionPlan> getInfo(@PathVariable("id") Long id) {
         return Rest.success(financePositionPlanService.selectFinancePositionPlanById(id));
     }
 
@@ -150,8 +158,7 @@ public class FinancePositionPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:add')")
     @Log(title = "持仓计划", businessType = BusinessType.INSERT)
     @PostMapping
-    public Rest<FinancePositionPlan> add(@RequestBody FinancePositionPlan financePositionPlan)
-    {
+    public Rest<FinancePositionPlan> add(@RequestBody FinancePositionPlan financePositionPlan) {
         return toAjax(financePositionPlanService.insertFinancePositionPlan(financePositionPlan));
     }
 
@@ -160,8 +167,7 @@ public class FinancePositionPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:edit')")
     @Log(title = "持仓计划", businessType = BusinessType.UPDATE)
     @PutMapping
-    public Rest<FinancePositionPlan> edit(@RequestBody FinancePositionPlan financePositionPlan)
-    {
+    public Rest<FinancePositionPlan> edit(@RequestBody FinancePositionPlan financePositionPlan) {
         return toAjax(financePositionPlanService.updateFinancePositionPlan(financePositionPlan));
     }
 
@@ -170,9 +176,8 @@ public class FinancePositionPlanController extends BaseController
     @ApiImplicitParam(name = "id", value = "id", required = true)
     @PreAuthorize("@ss.hasPermi('finance:financePositionPlan:remove')")
     @Log(title = "持仓计划", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public Rest remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public Rest remove(@PathVariable Long[] ids) {
         return toAjax(financePositionPlanService.deleteFinancePositionPlanByIds(ids));
     }
 }

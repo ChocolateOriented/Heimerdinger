@@ -12,7 +12,7 @@ import com.ruoyi.hemerdinger.finance.service.ITraceLogService;
  * 追踪日志Service业务层处理
  * 
  * @author lijingxiang
- * @date 2023-11-26
+ * @date 2023-11-30
  */
 @Service
 public class TraceLogServiceImpl implements ITraceLogService 

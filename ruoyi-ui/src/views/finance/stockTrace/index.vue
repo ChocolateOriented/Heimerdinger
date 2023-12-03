@@ -43,8 +43,7 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['finance:stockTrace:add']"
-        >新增
-        </el-button>
+        >新增</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -55,8 +54,7 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['finance:stockTrace:edit']"
-        >修改
-        </el-button>
+        >修改</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -67,8 +65,7 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['finance:stockTrace:remove']"
-        >删除
-        </el-button>
+        >删除</el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -79,28 +76,36 @@
           :loading="exportLoading"
           @click="handleExport"
           v-hasPermi="['finance:stockTrace:export']"
-        >导出
-        </el-button>
+        >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="stockTraceList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column label="id" align="center" prop="id"/>
-      <el-table-column label="名称" align="center" prop="name"/>
-      <el-table-column label="代码" align="center" prop="code"/>
-      <el-table-column label="成本价格" align="center" prop="costPrice"/>
-      <el-table-column label="持有份额" align="center" prop="quotient"/>
-      <el-table-column label="最小持有份额" align="center" prop="quotientMin"/>
-      <el-table-column label="最大持有份额" align="center" prop="quotientMax"/>
-      <el-table-column label="合理持有份额" align="center" prop="quotientFit"/>
-      <el-table-column label="估值方式" align="center" prop="assessmentType"/>
-      <el-table-column label="成本估值指标" align="center" prop="assessmen"/>
-      <el-table-column label="预计最低估值指标" align="center" prop="assessmenMin"/>
-      <el-table-column label="预计最高估值指标" align="center" prop="assessmenMax"/>
-      <el-table-column label="预计合理估值指标" align="center" prop="assessmenFit"/>
-      <el-table-column label="安全边际, 合理指标与最低指标之间百分比计算买入点" align="center" prop="safeSpan"/>
+    <el-table v-loading="loading" :data="stockTraceList" @selection-change="handleSelectionChange" @row-dblclick="gotoGridding">
+      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column label="id" align="center" prop="id" />
+      <el-table-column label="名称" align="center" prop="name" />
+      <el-table-column label="代码" align="center" prop="code" />
+      <el-table-column label="成本价格" align="center" prop="costPrice" />
+      <el-table-column label="持有逻辑" align="center" prop="traceLogicalType">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.trace_logical_type" :value="scope.row.traceLogicalType"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="持有份额" align="center" prop="quotient" />
+      <el-table-column label="最小持有份额" align="center" prop="quotientMin" />
+      <el-table-column label="最大持有份额" align="center" prop="quotientMax" />
+      <el-table-column label="合理持有份额" align="center" prop="quotientFit" />
+      <el-table-column label="估值方式" align="center" prop="assessmentType">
+        <template slot-scope="scope">
+          <dict-tag :options="dict.type.assessment_type" :value="scope.row.assessmentType"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="成本估值指标" align="center" prop="assessmen" />
+      <el-table-column label="预计最低估值指标" align="center" prop="assessmenMin" />
+      <el-table-column label="预计最高估值指标" align="center" prop="assessmenMax" />
+      <el-table-column label="预计合理估值指标" align="center" prop="assessmenFit" />
+      <el-table-column label="安全边际, 合理指标与最低指标之间百分比计算买入点" align="center" prop="safeSpan" />
       <el-table-column label="开始持有时间" align="center" prop="startTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.startTime, '{y}-{m}-{d}') }}</span>
@@ -111,8 +116,8 @@
           <span>{{ parseTime(scope.row.keepData, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="时间弹性,超过定投目标范围" align="center" prop="timeSpan"/>
-      <el-table-column label="计划id" align="center" prop="planId"/>
+      <el-table-column label="时间弹性,超过定投目标范围" align="center" prop="timeSpan" />
+      <el-table-column label="计划id" align="center" prop="planId" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -128,8 +133,7 @@
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['finance:stockTrace:remove']"
-          >删除
-          </el-button>
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -143,67 +147,82 @@
     />
 
     <!-- 添加或修改股票追踪对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+    <el-dialog :title="title" :visible.sync="open" width="800px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="200px">
         <el-form-item label="名称" prop="name">
-          <el-input v-model="form.name" placeholder="请输入名称"/>
+          <el-input v-model="form.name" placeholder="请输入名称" />
         </el-form-item>
         <el-form-item label="代码" prop="code">
-          <el-input v-model="form.code" placeholder="请输入代码"/>
+          <el-input v-model="form.code" placeholder="请输入代码" />
         </el-form-item>
         <el-form-item label="成本价格" prop="costPrice">
-          <el-input v-model="form.costPrice" placeholder="请输入成本价格"/>
+          <el-input v-model="form.costPrice" placeholder="请输入成本价格" />
+        </el-form-item>
+        <el-form-item label="持有逻辑" prop="traceLogicalType">
+          <el-select v-model="form.traceLogicalType" placeholder="请选择持有逻辑">
+            <el-option
+              v-for="dict in dict.type.trace_logical_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            ></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="持有份额" prop="quotient">
-          <el-input v-model="form.quotient" placeholder="请输入持有份额"/>
+          <el-input v-model="form.quotient" placeholder="请输入持有份额" />
         </el-form-item>
         <el-form-item label="最小持有份额" prop="quotientMin">
-          <el-input v-model="form.quotientMin" placeholder="请输入最小持有份额"/>
+          <el-input v-model="form.quotientMin" placeholder="请输入最小持有份额" />
         </el-form-item>
         <el-form-item label="最大持有份额" prop="quotientMax">
-          <el-input v-model="form.quotientMax" placeholder="请输入最大持有份额"/>
+          <el-input v-model="form.quotientMax" placeholder="请输入最大持有份额" />
         </el-form-item>
         <el-form-item label="合理持有份额" prop="quotientFit">
-          <el-input v-model="form.quotientFit" placeholder="请输入合理持有份额"/>
+          <el-input v-model="form.quotientFit" placeholder="请输入合理持有份额" />
         </el-form-item>
         <el-form-item label="估值方式" prop="assessmentType">
           <el-select v-model="form.assessmentType" placeholder="请选择估值方式">
-            <el-option label="请选择字典生成" value=""/>
+            <el-option
+              v-for="dict in dict.type.assessment_type"
+              :key="dict.value"
+              :label="dict.label"
+              :value="dict.value"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="成本估值指标" prop="assessmen">
-          <el-input v-model="form.assessmen" placeholder="请输入成本估值指标"/>
+          <el-input v-model="form.assessmen" placeholder="请输入成本估值指标" />
         </el-form-item>
         <el-form-item label="预计最低估值指标" prop="assessmenMin">
-          <el-input v-model="form.assessmenMin" placeholder="请输入预计最低估值指标"/>
+          <el-input v-model="form.assessmenMin" placeholder="请输入预计最低估值指标" />
         </el-form-item>
         <el-form-item label="预计最高估值指标" prop="assessmenMax">
-          <el-input v-model="form.assessmenMax" placeholder="请输入预计最高估值指标"/>
+          <el-input v-model="form.assessmenMax" placeholder="请输入预计最高估值指标" />
         </el-form-item>
         <el-form-item label="预计合理估值指标" prop="assessmenFit">
-          <el-input v-model="form.assessmenFit" placeholder="请输入预计合理估值指标"/>
+          <el-input v-model="form.assessmenFit" placeholder="请输入预计合理估值指标" />
         </el-form-item>
         <el-form-item label="安全边际, 合理指标与最低指标之间百分比计算买入点" prop="safeSpan">
-          <el-input v-model="form.safeSpan" placeholder="请输入安全边际, 合理指标与最低指标之间百分比计算买入点"/>
+          <el-input v-model="form.safeSpan" placeholder="请输入安全边际, 合理指标与最低指标之间百分比计算买入点" value="50"/>
         </el-form-item>
         <el-form-item label="开始持有时间" prop="startTime">
           <el-date-picker clearable size="small"
-                          v-model="form.startTime"
-                          type="date"
-                          value-format="yyyy-MM-dd"
-                          placeholder="选择开始持有时间">
+            v-model="form.startTime"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择开始持有时间">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="目标持有时间" prop="keepData">
           <el-date-picker clearable size="small"
-                          v-model="form.keepData"
-                          type="date"
-                          value-format="yyyy-MM-dd"
-                          placeholder="选择目标持有时间">
+            v-model="form.keepData"
+            type="date"
+            value-format="yyyy-MM-dd"
+            placeholder="选择目标持有时间">
           </el-date-picker>
         </el-form-item>
         <el-form-item label="时间弹性,超过定投目标范围" prop="timeSpan">
-          <el-input v-model="form.timeSpan" placeholder="请输入时间弹性,超过定投目标范围"/>
+          <el-input v-model="form.timeSpan" placeholder="请输入时间弹性,超过定投目标范围" value="2"/>
         </el-form-item>
         <el-form-item label="计划id" prop="planId">
           <el-select v-model="form.planId" placeholder="请选择">
@@ -238,6 +257,7 @@ import {listFinancePositionPlan} from "@/api/finance/financePositionPlan";
 
 export default {
   name: "StockTrace",
+  dicts: ['trace_logical_type', 'assessment_type'],
   data() {
     return {
       // 遮罩层
@@ -265,7 +285,7 @@ export default {
       // 查询参数
       queryParams: {
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 50,
         name: null,
         code: null,
         costPrice: null,
@@ -287,7 +307,8 @@ export default {
       // 表单参数
       form: {},
       // 表单校验
-      rules: {}
+      rules: {
+      }
     };
   },
   created() {
@@ -329,6 +350,7 @@ export default {
         name: null,
         code: null,
         costPrice: null,
+        traceLogicalType: null,
         quotient: null,
         quotientMin: null,
         quotientMax: null,
@@ -410,13 +432,12 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const ids = row.id || this.ids;
-      this.$modal.confirm('是否确认删除股票追踪编号为"' + ids + '"的数据项？').then(function () {
+      this.$modal.confirm('是否确认删除股票追踪编号为"' + ids + '"的数据项？').then(function() {
         return delStockTrace(ids);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {
-      });
+      }).catch(() => {});
     },
     /** 导出按钮操作 */
     handleExport() {
@@ -427,8 +448,7 @@ export default {
       }).then(response => {
         this.$download.name(response.msg);
         this.exportLoading = false;
-      }).catch(() => {
-      });
+      }).catch(() => {});
     }
   }
 };

@@ -13,6 +13,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="name"    column="name"    />
         <result property="targetAmount"    column="target_amount"    />
+        <collection property="stockTraceList" javaType="ArrayList"  resultMap="StockTraceResult" />
+    </resultMap>
+
+    <resultMap type="StockTrace" id="StockTraceResult">
+        <result property="id"    column="stock_trace_id"    />
+        <result property="name"    column="stock_trace_name"    />
+        <result property="code"    column="code"    />
+        <result property="costPrice"    column="cost_price"    />
+        <result property="traceLogicalType"    column="trace_logical_type"    />
+        <result property="quotient"    column="quotient"    />
+        <result property="quotientMin"    column="quotient_min"    />
+        <result property="quotientMax"    column="quotient_max"    />
+        <result property="quotientFit"    column="quotient_fit"    />
+        <result property="assessmentType"    column="assessment_type"    />
+        <result property="assessmen"    column="assessmen"    />
+        <result property="assessmenMin"    column="assessmen_min"    />
+        <result property="assessmenMax"    column="assessmen_max"    />
+        <result property="assessmenFit"    column="assessmen_fit"    />
+        <result property="safeSpan"    column="safe_span"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="keepData"    column="keep_data"    />
+        <result property="timeSpan"    column="time_span"    />
+        <result property="planId"    column="plan_id"    />
     </resultMap>
 
     <sql id="selectFinancePositionPlanVo">
@@ -20,9 +43,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectFinancePositionPlanList" parameterType="FinancePositionPlan" resultMap="FinancePositionPlanResult">
-        <include refid="selectFinancePositionPlanVo"/>
+        select p.id, p.del_flag, p.create_by, p.create_time, p.update_by, p.update_time, p.name, p.target_amount,
+            t.id as stock_trace_id, t.name as stock_trace_name, t.code, t.cost_price, t.trace_logical_type, t.quotient, t.quotient_min,
+            t.quotient_max, t.quotient_fit, t.assessment_type, t.assessmen, t.assessmen_min, t.assessmen_max, t.assessmen_fit, t.safe_span,
+            t.start_time, t.keep_data, t.time_span, t.plan_id
+        from finance_position_plan p left join stock_trace t on p.id = t.plan_id
+
         <where>  
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="name != null  and name != ''"> and p.name like concat('%', #{name}, '%')</if>
             <if test="targetAmount != null "> and target_amount = #{targetAmount}</if>
         </where>
     </select>
