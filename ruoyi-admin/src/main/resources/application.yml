@@ -159,3 +159,8 @@ xss:
 
 akShare:
   api: http://127.0.0.1:88
+
+gpt:
+  tongyi:
+    api: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+    key: Bearer sk-67484a8092e446e78d3a56b32cbf99db

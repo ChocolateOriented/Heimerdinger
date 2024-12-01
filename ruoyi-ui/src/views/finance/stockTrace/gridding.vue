@@ -123,7 +123,7 @@
         </el-header>
         <el-main>
           <el-collapse v-model="activeNames">
-            <el-collapse-item title="网格" name="1">
+            <el-collapse-item title="买入网格" name="1">
               <template>
                 <el-table
                   :data="adviceTabel"
@@ -176,11 +176,10 @@
                   <div style="line-height: 60px">
                     基本面分析
                     <el-button @click="traceLogHandleAdd('BASE')">添加</el-button>
-                    <a target="_blank" :href="indexHref" style="margin: 0px 10px;">财务指标</a>
-                    <a target="_blank" :href="modeHref" >杜邦分析</a>
-                    <a target="_blank" :href="dongfangModeHref" style="margin: 0px 10px;">东方杜邦分析</a>
-                    <a target="_blank" :href="reportHref" >财务报告</a>
-                    <a target="_blank" :href="shareholderHref"  style="margin: 0px 10px;">股东结构</a>
+                    <a target="_blank" :href="dongfangModeHref" style="margin: 0px 10px;" >杜邦分析</a>
+                    <a target="_blank" :href="indexHref">财务指标</a>
+                    <a target="_blank" :href="reportHref"  style="margin: 0px 10px;" >财务报告</a>
+                    <a target="_blank" :href="shareholderHref">股东结构</a>
                   </div>
                   <div style="max-height: 600px; overflow-y:scroll;">
                     <el-card class="box-card" v-for="base in baseLogList" :key="base.id">
@@ -199,7 +198,7 @@
     </el-container>
 
     <!-- 添加或修改追踪日志对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="12 00px" append-to-body>
       <el-form ref="traceLogForm" :model="traceLogForm" label-width="80px">
         <el-form-item label="内容">
           <editor v-model="traceLogForm.content" :min-height="192"/>
@@ -286,7 +285,6 @@ export default {
       maxAmount: 0,
       thinCode: "",
       indexHref: "",
-      modeHref: "",
       reportHref: "",
       dongfangModeHref: "",
       priceHref: "",
@@ -311,12 +309,12 @@ export default {
         if (that.form.code == null) {
           return;
         }
-        that.thinCode = that.form.code.replace("sh", "").replace("sz", "");
-        that.indexHref = "https://vip.stock.finance.sina.com.cn/corp/go.php/vFD_FinanceSummary/stockid/" + that.thinCode + "/displaytype/4.phtml?source=gjzb";
-        that.modeHref = "https://money.finance.sina.com.cn/corp/go.php/vFD_DupontAnalysis/stockid/" + that.thinCode + "/displaytype/10.phtml";
+        that.thinCode = that.form.code.toLowerCase().replace("sh", "").replace("sz", "");
+        that.indexHref = "https://vip.stock.finance.sina.com.cn/corp/go.php/vFD_FinanceSummary/stockid/" + that.form.code + "/displaytype/4.phtml?source=gjzb";
         that.dongfangModeHref = "https://emweb.securities.eastmoney.com/pc_hsf10/pages/index.html?type=web&code="+ that.form.code +"&color=b#/cwfx/dbfx";
         that.priceHref = "https://finance.sina.com.cn/realstock/company/" + that.form.code + "/nc.shtml";
-        that.reportHref = "https://money.finance.sina.com.cn/corp/view/vCB_Bulletin.php?stockid=" + that.thinCode + "&type=list&page_type=ndbg";
+        // that.reportHref = "https://vip.stock.finance.sina.com.cn/corp/go.php/vCB_Bulletin/stockid/"+ that.form.code +"/page_type/ndbg.phtml";
+        that.reportHref = "https://vip.stock.finance.sina.com.cn/corp/go.php/vCB_Bulletin/stockid/"+ that.thinCode +"/page_type/ndbg.phtml";
         that.shareholderHref = "https://emweb.securities.eastmoney.com/pc_hsf10/pages/index.html?type=web&code=" + that.form.code + "&color=b#/gdyj";
         findCurrentInfo({"code": that.form.code}).then((response) => {
           that.current = response.data;
@@ -383,7 +381,7 @@ export default {
       return moment(date).format("YYYY-MM-DD")
     },
     floatFormat(number) {
-      return Math.round(number * 1000) / 1000;
+      return Math.floor(number * 1000) / 1000;
     },
     computePlan() {
       let that = this;
@@ -443,10 +441,6 @@ export default {
         const advice = that.adviceTabel[j];
         advice.hadBuy = "";
 
-        if (realityAmount < advice.adviceAmount && advice.advicePrice < this.current.price) {
-          continue;
-        }
-
         if (realityAmount >= advice.adviceAmount) {
           realityAmountIndex = j;
           advice.hadBuy = "hadBuy";
@@ -469,10 +463,12 @@ export default {
             advice.priceCss = 'buy-row';
             continue;
           }
-          //建议持有
-          advice.priceCss = 'buy-cautious-row';
-          continue;
-        } else {
+          if (advice.advicePrice >= this.current.price){
+            //建议持有
+            advice.priceCss = 'buy-cautious-row';
+            continue;
+          }
+        } else if(realityAmount >= advice.adviceAmount){
           //建议卖出
           advice.priceCss = 'buy-danger-row';
           continue;
@@ -512,14 +508,18 @@ export default {
     },
     /** 新增按钮操作 */
     traceLogHandleAdd(logType) {
-      this.traceLogFormReset();
+      let defultContent = "";
+      if(logType == "BASE"){
+        defultContent = baseDefault();
+      }
+      this.traceLogFormReset(defultContent);
       this.traceLogForm.code = this.form.code;
       this.traceLogForm.logType = logType;
       this.open = true;
       this.title = "添加追踪日志";
     },
     // 表单重置
-    traceLogFormReset() {
+    traceLogFormReset(defultContent) {
       this.traceLogForm = {
         id: null,
         delFlag: null,
@@ -527,7 +527,7 @@ export default {
         createTime: null,
         updateBy: null,
         updateTime: null,
-        content: baseDefault(),
+        content: defultContent,
         code: null,
         logType: null
       };

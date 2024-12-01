@@ -12,6 +12,7 @@ import java.net.URLConnection;
 import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -48,20 +49,20 @@ public class HttpUtils
      */
     public static String sendGet(String url, String param)
     {
-        return sendGet(url, param, Constants.UTF8);
+        return sendGet(url, param, Constants.UTF8, null);
     }
 
     public static String sendGet(String url)
     {
-        return sendGet(url, null, Constants.UTF8);
+        return sendGet(url, null, Constants.UTF8, null);
     }
-    public static String sendGet(String url, Map<String, String> params) {
-        if (Collections.isEmpty(params)){
-            return sendGet(url);
-        }
-        String param = URLEncodedUtils.format(HttpUtils.convertMap2NameValuePairs(params), Encoder.UTF_8);
-        return sendGet(url, param);
 
+    public static String sendGet(String url, Map<String, String> params, Map<String, String> header) {
+        String paramStr = null;
+        if (!Collections.isEmpty(params)){
+            paramStr =  URLEncodedUtils.format(HttpUtils.convertMap2NameValuePairs(params), Encoder.UTF_8);
+        }
+        return sendGet(url, paramStr, Encoder.UTF_8, header);
     }
 
     /**
@@ -72,7 +73,7 @@ public class HttpUtils
      * @param contentType 编码类型
      * @return 所代表远程资源的响应结果
      */
-    public static String sendGet(String url, String param, String contentType)
+    public static String sendGet(String url, String param, String contentType, Map<String, String> header)
     {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
@@ -82,9 +83,19 @@ public class HttpUtils
             log.info("sendGet - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
             URLConnection connection = realUrl.openConnection();
+
             connection.setRequestProperty("accept", "*/*");
             connection.setRequestProperty("connection", "Keep-Alive");
             connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+
+            //添加请求头
+            if (header != null){
+                Set<Map.Entry<String, String>> entries = header.entrySet();
+                for (Map.Entry<String, String> entry : entries) {
+                    connection.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
+
             connection.connect();
             in = new BufferedReader(new InputStreamReader(connection.getInputStream(), contentType));
             String line;
@@ -134,7 +145,7 @@ public class HttpUtils
      * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
      * @return 所代表远程资源的响应结果
      */
-    public static String sendPost(String url, String param)
+    public static String sendPost(String url, String param, Map<String, String> header)
     {
         PrintWriter out = null;
         BufferedReader in = null;
@@ -150,6 +161,15 @@ public class HttpUtils
             conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
+
+            //添加请求头
+            if (header != null){
+                Set<Map.Entry<String, String>> entries = header.entrySet();
+                for (Map.Entry<String, String> entry : entries) {
+                    conn.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
+
             conn.setDoOutput(true);
             conn.setDoInput(true);
             out = new PrintWriter(conn.getOutputStream());

@@ -109,7 +109,7 @@ public class StockTraceServiceImpl implements IStockTraceService
 //    @Cacheable(value = "stockCurrentInfo",key = "#code")
     public JSONObject findCurrentInfo(String code) {
         String stockString = stockManager.findStock(code);
-        String[] split = stockString.split("\\~");
+        String[] split = stockString.split("\\,");
         for (int i = 0; i < split.length; i++) {
             log.info(i+":"+split[i]);
         }

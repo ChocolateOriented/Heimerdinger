@@ -22,6 +22,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
+import java.lang.ref.SoftReference;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +64,6 @@ public class FinancePositionPlanController extends BaseController {
     public TableDataInfo<List<FinancePositionPlan>> list(FinancePositionPlan financePositionPlan) {
         startPage();
         List<FinancePositionPlan> list = financePositionPlanService.selectFinancePositionPlanList(financePositionPlan);
-
         return getDataTable(list);
     }
 

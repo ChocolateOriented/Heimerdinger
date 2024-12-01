@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hemerdinger.gpt.mapper.GptFictionDataMapper">
+    
+    <resultMap type="GptFictionData" id="GptFictionDataResult">
+        <result property="id"    column="id"    />
+        <result property="content"    column="content"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="fileId"    column="file_id"    />
+        <result property="fictionId"    column="fiction_id"    />
+    </resultMap>
+
+    <sql id="selectGptFictionDataVo">
+        select id, content, del_flag, create_by, create_time, update_by, update_time, file_id, fiction_id from gpt_fiction_data
+    </sql>
+
+    <select id="selectGptFictionDataList" parameterType="GptFictionData" resultMap="GptFictionDataResult">
+        <include refid="selectGptFictionDataVo"/>
+        <where>  
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="fileId != null  and fileId != ''"> and file_id = #{fileId}</if>
+            <if test="fictionId != null  and fictionId != ''"> and fiction_id = #{fictionId}</if>
+        </where>
+    </select>
+    
+    <select id="selectGptFictionDataById" parameterType="Long" resultMap="GptFictionDataResult">
+        <include refid="selectGptFictionDataVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertGptFictionData" parameterType="GptFictionData" useGeneratedKeys="true" keyProperty="id">
+        insert into gpt_fiction_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null">content,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="fileId != null">file_id,</if>
+            <if test="fictionId != null">fiction_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null">#{content},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="fileId != null">#{fileId},</if>
+            <if test="fictionId != null">#{fictionId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGptFictionData" parameterType="GptFictionData">
+        update gpt_fiction_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="content != null">content = #{content},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="fileId != null">file_id = #{fileId},</if>
+            <if test="fictionId != null">fiction_id = #{fictionId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGptFictionDataById" parameterType="Long">
+        delete from gpt_fiction_data where id = #{id}
+    </delete>
+
+    <delete id="deleteGptFictionDataByIds" parameterType="String">
+        delete from gpt_fiction_data where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

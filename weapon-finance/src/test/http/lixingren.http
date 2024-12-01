@@ -24,3 +24,47 @@ Content-Type: application/json
    "currentTime": 1946,
    "contentId": 63
 }
+
+
+### gtp
+
+# curl --location 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions'
+#--header 'Authorization: Bearer $DASHSCOPE_API_KEY'
+#--header 'Content-Type: application/json'
+#--data '{
+#    "model": "qwen-long",
+#    "messages": [
+#        {
+#            "role": "system",
+#            "content": "You are a helpful assistant."
+#        },
+#        {
+#            "role": "system",
+#            "content": "fileid://file-fe-xxx"
+#        },
+#        {
+#            "role": "user",
+#            "content": "文章讲了什么？"
+#        }
+#    ]
+#}'
+POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+Authorization: Bearer sk-67484a8092e446e78d3a56b32cbf99db
+Content-Type: application/json
+
+{
+  "model": "qwen-long",
+  "messages": [
+    {
+      "role": "system",
+      "content": "你现在是一名很火的网络小说作家，擅长各种爽文题材，你擅长创作新奇且吸引人的故事设定；精于编织情节，使故事层次丰富、悬念迭起"
+    },
+    {
+      "role": "user",
+      "content": "设计一部修仙小说的故事背景。要求主角刚登场就处于一个的困境之中。故事的结局是开放的。"
+    }
+  ]
+}
+
+###
+

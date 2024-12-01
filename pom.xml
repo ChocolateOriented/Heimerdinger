@@ -234,6 +234,11 @@
                 <artifactId>weapon-finance</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>gpt-apply</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
@@ -254,6 +259,7 @@
         <module>ruoyi-activiti</module>
         <module>ruoyi-workflow</module>
         <module>weapon-finance</module>
+        <module>gpt-apply</module>
     </modules>
     <packaging>pom</packaging>
 

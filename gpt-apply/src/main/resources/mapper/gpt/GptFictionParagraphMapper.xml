@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hemerdinger.gpt.mapper.GptFictionParagraphMapper">
+    
+    <resultMap type="GptFictionParagraph" id="GptFictionParagraphResult">
+        <result property="id"    column="id"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="content"    column="content"    />
+        <result property="optionsJson"    column="options_json"    />
+        <result property="fictionFrameId"    column="fiction_frame_id"    />
+        <result property="FrameId"    column="_frame_id"    />
+        <result property="fictionId"    column="fiction_id"    />
+        <result property="serial"    column="serial"    />
+    </resultMap>
+
+    <sql id="selectGptFictionParagraphVo">
+        select id, del_flag, create_by, create_time, update_by, update_time, content, options_json, fiction_frame_id, _frame_id, fiction_id, serial from gpt_fiction_paragraph
+    </sql>
+
+    <select id="selectGptFictionParagraphList" parameterType="GptFictionParagraph" resultMap="GptFictionParagraphResult">
+        <include refid="selectGptFictionParagraphVo"/>
+        <where>  
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="optionsJson != null  and optionsJson != ''"> and options_json = #{optionsJson}</if>
+            <if test="fictionFrameId != null "> and fiction_frame_id = #{fictionFrameId}</if>
+            <if test="FrameId != null "> and _frame_id = #{FrameId}</if>
+            <if test="fictionId != null "> and fiction_id = #{fictionId}</if>
+            <if test="serial != null "> and serial = #{serial}</if>
+        </where>
+    </select>
+    
+    <select id="selectGptFictionParagraphById" parameterType="Long" resultMap="GptFictionParagraphResult">
+        <include refid="selectGptFictionParagraphVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertGptFictionParagraph" parameterType="GptFictionParagraph" useGeneratedKeys="true" keyProperty="id">
+        insert into gpt_fiction_paragraph
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="content != null">content,</if>
+            <if test="optionsJson != null">options_json,</if>
+            <if test="fictionFrameId != null">fiction_frame_id,</if>
+            <if test="FrameId != null">_frame_id,</if>
+            <if test="fictionId != null">fiction_id,</if>
+            <if test="serial != null">serial,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="content != null">#{content},</if>
+            <if test="optionsJson != null">#{optionsJson},</if>
+            <if test="fictionFrameId != null">#{fictionFrameId},</if>
+            <if test="FrameId != null">#{FrameId},</if>
+            <if test="fictionId != null">#{fictionId},</if>
+            <if test="serial != null">#{serial},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGptFictionParagraph" parameterType="GptFictionParagraph">
+        update gpt_fiction_paragraph
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="optionsJson != null">options_json = #{optionsJson},</if>
+            <if test="fictionFrameId != null">fiction_frame_id = #{fictionFrameId},</if>
+            <if test="FrameId != null">_frame_id = #{FrameId},</if>
+            <if test="fictionId != null">fiction_id = #{fictionId},</if>
+            <if test="serial != null">serial = #{serial},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGptFictionParagraphById" parameterType="Long">
+        delete from gpt_fiction_paragraph where id = #{id}
+    </delete>
+
+    <delete id="deleteGptFictionParagraphByIds" parameterType="String">
+        delete from gpt_fiction_paragraph where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
