@@ -2,9 +2,9 @@
   "name": "Heimerdinger",
   "describe": "自用工具",
   "avatar": "",
-  "version": "4.0.0",
+  "version": "4.9.4",
   "createdTime": "2021-10-15 11:41:11",
-  "updatedTime": "2024-5-27 22:34:07",
+  "updatedTime": "2024-12-1 23:03:38",
   "profile": {
     "default": {
       "db": "E410B2A3-3E59-49D9-8A06-FFF4888D40CC",
@@ -24,7 +24,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "4B744620-5DE1-4964-8517-6E855571A882"
+          "id": "4B744620-5DE1-4964-8517-6E855571A882",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -40,7 +41,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "B04B5CD9-13F9-45F8-B420-447E083A577D"
+          "id": "B04B5CD9-13F9-45F8-B420-447E083A577D",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -57,7 +59,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "6DB87704-7527-4E88-8308-58C171810659"
+          "id": "6DB87704-7527-4E88-8308-58C171810659",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -74,7 +77,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "C3A840EA-E9E2-41CB-8ACF-92045DF0F85C"
+          "id": "C3A840EA-E9E2-41CB-8ACF-92045DF0F85C",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -91,7 +95,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "B35B3312-E97A-43C2-804F-1437873C1E9E"
+          "id": "B35B3312-E97A-43C2-804F-1437873C1E9E",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -108,7 +113,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "61857570-B40B-484B-B50E-63CE22A1B138"
+          "id": "61857570-B40B-484B-B50E-63CE22A1B138",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         }
       ],
       "entityInitProperties": {}
@@ -390,7 +396,132 @@
         "id": "F6CE3D41-FE35-45C7-951C-6B48537E565C"
       }
     ],
-    "menuWidth": "353px"
+    "menuWidth": "353px",
+    "headers": [
+      {
+        "refKey": "defKey",
+        "hideInGraph": false,
+        "freeze": false
+      },
+      {
+        "refKey": "defName",
+        "hideInGraph": false,
+        "freeze": false
+      },
+      {
+        "refKey": "primaryKey",
+        "hideInGraph": false,
+        "freeze": false
+      },
+      {
+        "refKey": "notNull",
+        "hideInGraph": true,
+        "freeze": false
+      },
+      {
+        "refKey": "autoIncrement",
+        "hideInGraph": true,
+        "freeze": false
+      },
+      {
+        "refKey": "domain",
+        "hideInGraph": true,
+        "freeze": false
+      },
+      {
+        "refKey": "type",
+        "hideInGraph": false,
+        "freeze": false
+      },
+      {
+        "refKey": "len",
+        "hideInGraph": false,
+        "freeze": false
+      },
+      {
+        "refKey": "scale",
+        "hideInGraph": false,
+        "freeze": false
+      },
+      {
+        "refKey": "comment",
+        "hideInGraph": true,
+        "freeze": false
+      },
+      {
+        "refKey": "refDict",
+        "hideInGraph": true,
+        "freeze": false
+      },
+      {
+        "refKey": "defaultValue",
+        "hideInGraph": true,
+        "freeze": false
+      },
+      {
+        "refKey": "isStandard",
+        "hideInGraph": false,
+        "freeze": false
+      },
+      {
+        "refKey": "uiHint",
+        "hideInGraph": true,
+        "freeze": false
+      },
+      {
+        "refKey": "extProps",
+        "hideInGraph": true,
+        "freeze": false,
+        "enable": false
+      }
+    ],
+    "extAttrProps": {
+      "attr1": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr2": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr3": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr4": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr5": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr6": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr7": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr8": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      },
+      "attr9": {
+        "editType": "",
+        "optionsData": "",
+        "optionsFetcher": ""
+      }
+    }
   },
   "entities": [
     {
@@ -399,20 +530,19 @@
       "defName": "股票追踪",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -475,6 +605,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -492,7 +627,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "66DCBC8C-0347-43E7-BC82-3AB073786CCE"
+          "id": "66DCBC8C-0347-43E7-BC82-3AB073786CCE",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -508,7 +644,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "09D35774-3270-4FBA-818A-5A47CC1701F5"
+          "id": "09D35774-3270-4FBA-818A-5A47CC1701F5",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -525,7 +662,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "710CF992-5D90-45B1-B596-531FA89B6BD1"
+          "id": "710CF992-5D90-45B1-B596-531FA89B6BD1",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -542,7 +680,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "FFD91356-831A-4513-B533-A7D41BE15EC6"
+          "id": "FFD91356-831A-4513-B533-A7D41BE15EC6",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -559,7 +698,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "D051E5BD-C04A-4A16-B252-04D6ADD11C51"
+          "id": "D051E5BD-C04A-4A16-B252-04D6ADD11C51",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -576,7 +716,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "A236B0FD-D712-4B21-ADD8-FDA6948870A1"
+          "id": "A236B0FD-D712-4B21-ADD8-FDA6948870A1",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "name",
@@ -592,7 +733,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "2565FB1F-7A87-41E8-8560-E2E44B65CE3D"
+          "id": "2565FB1F-7A87-41E8-8560-E2E44B65CE3D",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "code",
@@ -608,7 +750,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "66475C15-44EB-4F72-9DBA-13E1B3009053"
+          "id": "66475C15-44EB-4F72-9DBA-13E1B3009053",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "cost_price",
@@ -624,7 +767,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "8CD5E9D4-3962-4E39-B4FA-C726520D8E16"
+          "id": "8CD5E9D4-3962-4E39-B4FA-C726520D8E16",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "trace_logical_type",
@@ -640,7 +784,8 @@
           "hideInGraph": false,
           "refDict": "005A6051-8477-4F99-A1EE-EA6593471A87",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "A7FA1772-7993-41C1-807B-4D5F962EFDA9"
+          "id": "A7FA1772-7993-41C1-807B-4D5F962EFDA9",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "quotient",
@@ -656,7 +801,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "6C02BE15-951B-4556-9C66-CE43FD91837D"
+          "id": "6C02BE15-951B-4556-9C66-CE43FD91837D",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "quotient_min",
@@ -672,7 +818,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "C3AEAAF7-6E76-4CD2-A18E-BCDD041A5A68"
+          "id": "C3AEAAF7-6E76-4CD2-A18E-BCDD041A5A68",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "quotient_max",
@@ -688,7 +835,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "44A63071-F637-4B39-8EBF-DD465CC8CD3C"
+          "id": "44A63071-F637-4B39-8EBF-DD465CC8CD3C",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "quotient_fit",
@@ -704,7 +852,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "235259F5-9FF8-47F4-82A1-1F78E1D11831"
+          "id": "235259F5-9FF8-47F4-82A1-1F78E1D11831",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "assessment_type",
@@ -720,7 +869,8 @@
           "hideInGraph": false,
           "refDict": "A6F4DC54-14C7-4602-A86A-0C4095A55265",
           "domain": "A7A03A09-2927-42F3-B119-8AC254942BE8",
-          "id": "1C5CD2B2-4977-4470-9955-F6F135A2844C"
+          "id": "1C5CD2B2-4977-4470-9955-F6F135A2844C",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "assessmen",
@@ -736,7 +886,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "5255C77F-C50C-4260-A6D5-6A3E390B73E6"
+          "id": "5255C77F-C50C-4260-A6D5-6A3E390B73E6",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "assessmen_min",
@@ -752,7 +903,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "DF0334CE-F949-47C8-9BE3-1CC00CF74EF7"
+          "id": "DF0334CE-F949-47C8-9BE3-1CC00CF74EF7",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "assessmen_max",
@@ -768,7 +920,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "B200ADF4-36AB-4EE4-A2EC-9721041C6D0F"
+          "id": "B200ADF4-36AB-4EE4-A2EC-9721041C6D0F",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "assessmen_fit",
@@ -784,7 +937,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "E23BC88B-BC16-4C03-9A9F-0F14B0AD39AC"
+          "id": "E23BC88B-BC16-4C03-9A9F-0F14B0AD39AC",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "safe_span",
@@ -800,7 +954,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "A08BEDFD-CC06-4316-B060-3B91D1B96A92"
+          "id": "A08BEDFD-CC06-4316-B060-3B91D1B96A92",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "start_time",
@@ -816,7 +971,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
-          "id": "FAF02D97-0660-4728-94C0-95E3452C287F"
+          "id": "FAF02D97-0660-4728-94C0-95E3452C287F",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "keep_data",
@@ -832,7 +988,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
-          "id": "C518DD8E-9E16-47CA-B803-7773A09AC654"
+          "id": "C518DD8E-9E16-47CA-B803-7773A09AC654",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "time_span",
@@ -848,7 +1005,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "2832FED6-F607-4D05-8EFB-B4AB904442DA"
+          "id": "2832FED6-F607-4D05-8EFB-B4AB904442DA",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "plan_id",
@@ -864,11 +1022,16 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "D9C386C1-1F83-4684-BA9F-067A3958D84A"
+          "id": "D9C386C1-1F83-4684-BA9F-067A3958D84A",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "8257CA8A-984C-41E9-A9A6-0FB23BBE60F7",
@@ -876,20 +1039,19 @@
       "defName": "股票数据映射配置",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -952,6 +1114,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -969,7 +1136,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "949EC5A5-3BE0-47A9-B9D2-FDC34D56574A"
+          "id": "949EC5A5-3BE0-47A9-B9D2-FDC34D56574A",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -985,7 +1153,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "85ED4882-7B40-4B7C-A45D-1BADE7C73FBA"
+          "id": "85ED4882-7B40-4B7C-A45D-1BADE7C73FBA",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -1002,7 +1171,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "6BC87B79-1372-4745-8AA1-D2B46F029DAB"
+          "id": "6BC87B79-1372-4745-8AA1-D2B46F029DAB",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -1019,7 +1189,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "54E2FAC8-40CC-4366-A921-ADABF9BF49E1"
+          "id": "54E2FAC8-40CC-4366-A921-ADABF9BF49E1",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -1036,7 +1207,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "99FE7703-AFDD-4089-BB9F-FFD359B4335D"
+          "id": "99FE7703-AFDD-4089-BB9F-FFD359B4335D",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -1053,7 +1225,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "B5BB38FD-96F2-4F95-9FA3-FF23C085C681"
+          "id": "B5BB38FD-96F2-4F95-9FA3-FF23C085C681",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "data_index",
@@ -1069,7 +1242,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "4B3D3BC1-9958-4738-B78D-96047D720AE0",
-          "id": "98251DF5-CFF2-4E7A-B73C-1AFD02920FAF"
+          "id": "98251DF5-CFF2-4E7A-B73C-1AFD02920FAF",
+          "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         },
         {
           "defKey": "name",
@@ -1085,11 +1259,16 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "CAD10A9D-B64C-4528-A746-F4464824473C"
+          "id": "CAD10A9D-B64C-4528-A746-F4464824473C",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "483C278E-C4D9-4678-8A92-395FDE0E2C87",
@@ -1097,20 +1276,19 @@
       "defName": "股票持仓计划",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -1173,6 +1351,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -1190,7 +1373,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "C6CDC30C-5CEA-47AC-B318-868EE6E85684"
+          "id": "C6CDC30C-5CEA-47AC-B318-868EE6E85684",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -1206,7 +1390,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "E9143737-070A-4DCE-A8FA-F37CD05A3FBF"
+          "id": "E9143737-070A-4DCE-A8FA-F37CD05A3FBF",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -1223,7 +1408,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "857489F2-AD62-42F6-8D9E-317C9EBFE075"
+          "id": "857489F2-AD62-42F6-8D9E-317C9EBFE075",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -1240,7 +1426,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "D41C6BB1-61DC-4BCB-B225-5E5178BACF6B"
+          "id": "D41C6BB1-61DC-4BCB-B225-5E5178BACF6B",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -1257,7 +1444,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "ED8E569E-C5FF-4EFE-B96C-DD95849929B5"
+          "id": "ED8E569E-C5FF-4EFE-B96C-DD95849929B5",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -1274,7 +1462,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "9B542E34-EE42-45B8-8E5C-CC78B9B33088"
+          "id": "9B542E34-EE42-45B8-8E5C-CC78B9B33088",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "trace_id",
@@ -1290,7 +1479,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "93619A28-52B7-4BDB-A057-0CC6B39073DB"
+          "id": "93619A28-52B7-4BDB-A057-0CC6B39073DB",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "advice_price",
@@ -1306,7 +1496,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "F8BB7158-4C67-4988-ABA0-F6CD8C2580C6"
+          "id": "F8BB7158-4C67-4988-ABA0-F6CD8C2580C6",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "gridding_amount",
@@ -1322,7 +1513,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "77868456-5E31-4160-A642-796716111FC8"
+          "id": "77868456-5E31-4160-A642-796716111FC8",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "gridding_percent",
@@ -1338,7 +1530,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "9B75203C-91F7-468E-BF75-F1238472B7FD"
+          "id": "9B75203C-91F7-468E-BF75-F1238472B7FD",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "advice_date",
@@ -1354,7 +1547,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "ED0C9B62-EF0D-484B-84CF-EF9C6C6B353C",
-          "id": "B4384B74-69DC-41F6-B1D9-6AD6EF2D0C75"
+          "id": "B4384B74-69DC-41F6-B1D9-6AD6EF2D0C75",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "advice_amount",
@@ -1370,7 +1564,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "76A8FEEF-B0E3-423A-82A1-83C8DE9F9B2B"
+          "id": "76A8FEEF-B0E3-423A-82A1-83C8DE9F9B2B",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "advice_percent",
@@ -1386,7 +1581,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "B321E1CE-A788-4678-8586-A7266E6F000B"
+          "id": "B321E1CE-A788-4678-8586-A7266E6F000B",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         },
         {
           "defKey": "trade_type",
@@ -1402,11 +1598,16 @@
           "hideInGraph": false,
           "refDict": "9249FB96-0110-4441-BE5F-0448343BC28A",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "2D9B474B-8DFB-40A6-BEAA-39CA3102E13E"
+          "id": "2D9B474B-8DFB-40A6-BEAA-39CA3102E13E",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "342B8DE6-F39D-49BC-AF3C-70827DA39675",
@@ -1414,20 +1615,19 @@
       "defName": "持仓计划",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -1490,6 +1690,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -1507,7 +1712,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "01541F34-B26D-42B7-B9B0-3301A11478CF"
+          "id": "01541F34-B26D-42B7-B9B0-3301A11478CF",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -1523,7 +1729,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "2202AD98-27D4-44C6-9A01-CBE9DC7B9C57"
+          "id": "2202AD98-27D4-44C6-9A01-CBE9DC7B9C57",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -1540,7 +1747,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "8A0A1596-0D63-42D5-9E2C-28EC8DEBD736"
+          "id": "8A0A1596-0D63-42D5-9E2C-28EC8DEBD736",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -1557,7 +1765,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "C52D167F-3F8B-4DE5-B125-01E1D8A98EB4"
+          "id": "C52D167F-3F8B-4DE5-B125-01E1D8A98EB4",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -1574,7 +1783,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "0F1DA97F-D1EA-46EF-91BC-BA2EAD7A07A6"
+          "id": "0F1DA97F-D1EA-46EF-91BC-BA2EAD7A07A6",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -1591,7 +1801,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "48A699EB-78FE-41C3-BAC2-5A1BF6354EBC"
+          "id": "48A699EB-78FE-41C3-BAC2-5A1BF6354EBC",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "name",
@@ -1607,7 +1818,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "A5F57E6F-5192-49F3-85F6-1CD80C1C7A67"
+          "id": "A5F57E6F-5192-49F3-85F6-1CD80C1C7A67",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "target_amount",
@@ -1623,11 +1835,16 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A189ADB1-F393-4164-BDA4-68F92977C0E7",
-          "id": "3CDC96E6-00D4-4729-A60C-D252A0B5E5C1"
+          "id": "3CDC96E6-00D4-4729-A60C-D252A0B5E5C1",
+          "baseType": "8C365A08-155E-4339-890D-7DE19833A242"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "212991A6-A062-4A5F-852B-C3215E617BE0",
@@ -1641,20 +1858,19 @@
       "defName": "经济周期",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -1717,6 +1933,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -1734,7 +1955,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "D8E08B61-A43A-472A-A09B-05CCF1207C1E"
+          "id": "D8E08B61-A43A-472A-A09B-05CCF1207C1E",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -1750,7 +1972,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "6DE08E8D-0E36-4A68-926A-F25B41524023"
+          "id": "6DE08E8D-0E36-4A68-926A-F25B41524023",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -1767,7 +1990,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "2D29EBA4-DD4B-4665-ABAA-F6A9C88246E0"
+          "id": "2D29EBA4-DD4B-4665-ABAA-F6A9C88246E0",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -1784,7 +2008,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "60BFFED6-101F-42BB-9EB2-61C2B18ABE4F"
+          "id": "60BFFED6-101F-42BB-9EB2-61C2B18ABE4F",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -1801,7 +2026,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "476C2F35-5E61-4E4D-AD9B-66EDF9692700"
+          "id": "476C2F35-5E61-4E4D-AD9B-66EDF9692700",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -1818,11 +2044,16 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "10EA7D0B-74A2-42A8-89E3-4AEEDB92402D"
+          "id": "10EA7D0B-74A2-42A8-89E3-4AEEDB92402D",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "2C1D9F6A-E92D-4879-A57E-F372306D943C",
@@ -1836,20 +2067,19 @@
       "defName": "经济指标",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -1912,6 +2142,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -1929,7 +2164,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "CD8A3382-36AA-455B-8126-47CB6B763412"
+          "id": "CD8A3382-36AA-455B-8126-47CB6B763412",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -1945,7 +2181,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "F1EABDE3-6B0B-45E8-8582-8C940C6E5D50"
+          "id": "F1EABDE3-6B0B-45E8-8582-8C940C6E5D50",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -1962,7 +2199,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "AA23D0F0-3BEC-4441-9917-3507A191F139"
+          "id": "AA23D0F0-3BEC-4441-9917-3507A191F139",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -1979,7 +2217,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "95076494-1FA0-4B99-BE12-F5822C184BB7"
+          "id": "95076494-1FA0-4B99-BE12-F5822C184BB7",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -1996,7 +2235,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "872A6B7D-D4D8-4473-ACFC-55634647D57C"
+          "id": "872A6B7D-D4D8-4473-ACFC-55634647D57C",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -2013,7 +2253,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "638D3727-AD19-4D54-9D90-85FB404DABE8"
+          "id": "638D3727-AD19-4D54-9D90-85FB404DABE8",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "name",
@@ -2029,7 +2270,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "A2AA350F-0BFF-46C6-9CEC-E056F6618E22"
+          "id": "A2AA350F-0BFF-46C6-9CEC-E056F6618E22",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "code",
@@ -2045,7 +2287,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "FBB5497C-78AF-459F-8355-FE8CBD4C3617"
+          "id": "FBB5497C-78AF-459F-8355-FE8CBD4C3617",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "value",
@@ -2061,11 +2304,16 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "FA1A0E36-3489-432E-9531-371802F85751"
+          "id": "FA1A0E36-3489-432E-9531-371802F85751",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "4026C67A-61E2-42F5-AB52-91FD339DA25F",
@@ -2079,20 +2327,19 @@
       "defName": "追踪日志",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -2155,6 +2402,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -2172,7 +2424,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "7C84E6B8-AEC3-4909-A2BF-5A7B9B56F603"
+          "id": "7C84E6B8-AEC3-4909-A2BF-5A7B9B56F603",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -2188,7 +2441,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "B0189B58-0ED2-4EDD-8E7F-C795004CAC5F"
+          "id": "B0189B58-0ED2-4EDD-8E7F-C795004CAC5F",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -2205,7 +2459,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "4D923180-04F6-425E-8525-FFEBA0EBB3DF"
+          "id": "4D923180-04F6-425E-8525-FFEBA0EBB3DF",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -2222,7 +2477,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "0E67F91E-935F-40AC-89B2-2D01BB594EFE"
+          "id": "0E67F91E-935F-40AC-89B2-2D01BB594EFE",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -2239,7 +2495,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "C1E64E4D-F2BC-4774-90AE-7173E500E7CC"
+          "id": "C1E64E4D-F2BC-4774-90AE-7173E500E7CC",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -2256,7 +2513,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "A6526487-1A76-4A09-BE5F-213DE41BAB56"
+          "id": "A6526487-1A76-4A09-BE5F-213DE41BAB56",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "content",
@@ -2272,7 +2530,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "",
-          "id": "06A6BF87-4BAB-46DD-8D47-D8D47B30DF5F"
+          "id": "06A6BF87-4BAB-46DD-8D47-D8D47B30DF5F",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "code",
@@ -2288,7 +2547,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "387925D6-15C8-4805-8EE0-CDA86AC82432"
+          "id": "387925D6-15C8-4805-8EE0-CDA86AC82432",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "log_type",
@@ -2304,11 +2564,16 @@
           "hideInGraph": false,
           "refDict": "E132CA2D-2224-4757-91FC-F89296AB58B1",
           "domain": "A7A03A09-2927-42F3-B119-8AC254942BE8",
-          "id": "E75B1C72-1E5D-409F-AF34-C9EB0EA4F984"
+          "id": "E75B1C72-1E5D-409F-AF34-C9EB0EA4F984",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "54594C69-597D-4840-A131-BD37052E13B3",
@@ -2322,20 +2587,19 @@
       "defName": "小说",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -2398,6 +2662,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -2415,7 +2684,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "C8079D22-2458-46B5-9909-DE5452652D88"
+          "id": "C8079D22-2458-46B5-9909-DE5452652D88",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "name",
@@ -2431,7 +2701,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "4264A245-318E-4207-AA75-94F3792D37C8"
+          "id": "4264A245-318E-4207-AA75-94F3792D37C8",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "summary",
@@ -2447,7 +2718,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "C132F442-490C-45BA-9CC6-85E5D94E2A54"
+          "id": "C132F442-490C-45BA-9CC6-85E5D94E2A54",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "img",
@@ -2463,7 +2735,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "C86C93F3-4D76-4B0C-90EA-AD60ADF8C582"
+          "id": "C86C93F3-4D76-4B0C-90EA-AD60ADF8C582",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "del_flag",
@@ -2479,7 +2752,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "3F3E778C-6CB9-4233-9C90-74B0EDD30DC9"
+          "id": "3F3E778C-6CB9-4233-9C90-74B0EDD30DC9",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -2496,7 +2770,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "F06C1A6D-9D44-4E79-B4B1-02C581F6DECE"
+          "id": "F06C1A6D-9D44-4E79-B4B1-02C581F6DECE",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -2513,7 +2788,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "AB102D6B-24A3-4CE2-AE11-8C2F674A8C0F"
+          "id": "AB102D6B-24A3-4CE2-AE11-8C2F674A8C0F",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -2530,7 +2806,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "06B69D72-4603-4771-9757-EB581B03525B"
+          "id": "06B69D72-4603-4771-9757-EB581B03525B",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -2547,11 +2824,16 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "2FE8AC8F-223D-4C84-BC61-7CA05448E3A6"
+          "id": "2FE8AC8F-223D-4C84-BC61-7CA05448E3A6",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "gpt_fiction_1",
@@ -2565,15 +2847,19 @@
       "defName": "数据表",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": true,
+          "refKey": "hideInGraph",
+          "hideInGraph": true,
+          "freeze": true
+        },
+        {
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -2581,6 +2867,21 @@
           "freeze": false,
           "refKey": "primaryKey",
           "hideInGraph": false
+        },
+        {
+          "refKey": "notNull",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "autoIncrement",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "domain",
+          "hideInGraph": true,
+          "freeze": false
         },
         {
           "freeze": false,
@@ -2598,9 +2899,34 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "refDict",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "defaultValue",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
           "freeze": false,
           "refKey": "isStandard",
           "hideInGraph": false
+        },
+        {
+          "refKey": "uiHint",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -2619,7 +2945,8 @@
           "refDict": "",
           "domain": "主键标识",
           "id": "C8079D22-2458-46B5-9909-DE5452652D88",
-          "dbType": "BIGINT"
+          "dbType": "BIGINT",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "name",
@@ -2636,7 +2963,8 @@
           "refDict": "",
           "domain": "默认字串",
           "id": "4264A245-318E-4207-AA75-94F3792D37C8",
-          "dbType": "VARCHAR"
+          "dbType": "VARCHAR",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "summary",
@@ -2653,7 +2981,8 @@
           "refDict": "",
           "domain": "默认字串",
           "id": "C132F442-490C-45BA-9CC6-85E5D94E2A54",
-          "dbType": "VARCHAR"
+          "dbType": "VARCHAR",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "img",
@@ -2670,11 +2999,16 @@
           "refDict": "",
           "domain": "默认字串",
           "id": "C86C93F3-4D76-4B0C-90EA-AD60ADF8C582",
-          "dbType": "VARCHAR"
+          "dbType": "VARCHAR",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "gpt_fiction_2",
@@ -2688,15 +3022,19 @@
       "defName": "数据表",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": true,
+          "refKey": "hideInGraph",
+          "hideInGraph": true,
+          "freeze": true
+        },
+        {
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -2704,6 +3042,21 @@
           "freeze": false,
           "refKey": "primaryKey",
           "hideInGraph": false
+        },
+        {
+          "refKey": "notNull",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "autoIncrement",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "domain",
+          "hideInGraph": true,
+          "freeze": false
         },
         {
           "freeze": false,
@@ -2721,9 +3074,34 @@
           "hideInGraph": false
         },
         {
+          "refKey": "comment",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "refDict",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "defaultValue",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
           "freeze": false,
           "refKey": "isStandard",
           "hideInGraph": false
+        },
+        {
+          "refKey": "uiHint",
+          "hideInGraph": true,
+          "freeze": false
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -2742,7 +3120,8 @@
           "refDict": "",
           "domain": "主键标识",
           "id": "C8079D22-2458-46B5-9909-DE5452652D88",
-          "dbType": "BIGINT"
+          "dbType": "BIGINT",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "name",
@@ -2759,7 +3138,8 @@
           "refDict": "",
           "domain": "默认字串",
           "id": "4264A245-318E-4207-AA75-94F3792D37C8",
-          "dbType": "VARCHAR"
+          "dbType": "VARCHAR",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "summary",
@@ -2776,7 +3156,8 @@
           "refDict": "",
           "domain": "默认字串",
           "id": "C132F442-490C-45BA-9CC6-85E5D94E2A54",
-          "dbType": "VARCHAR"
+          "dbType": "VARCHAR",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "img",
@@ -2793,11 +3174,16 @@
           "refDict": "",
           "domain": "默认字串",
           "id": "C86C93F3-4D76-4B0C-90EA-AD60ADF8C582",
-          "dbType": "VARCHAR"
+          "dbType": "VARCHAR",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "807A2696-AB85-4AB8-A928-8C81BBAD57D9",
@@ -2811,20 +3197,19 @@
       "defName": "框架",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -2887,6 +3272,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -2904,7 +3294,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "99346902-3D3C-4642-AF49-F7069172AC13"
+          "id": "99346902-3D3C-4642-AF49-F7069172AC13",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "content",
@@ -2920,7 +3311,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "F3197EB1-98B3-4A94-BA58-E4AED837C96E"
+          "id": "F3197EB1-98B3-4A94-BA58-E4AED837C96E",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "del_flag",
@@ -2936,7 +3328,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "41239538-56C9-4D69-8133-9EF6EAAC6F08"
+          "id": "41239538-56C9-4D69-8133-9EF6EAAC6F08",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -2953,7 +3346,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "11BFD140-1F8D-480F-B259-D5BC84C9E6A3"
+          "id": "11BFD140-1F8D-480F-B259-D5BC84C9E6A3",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -2970,7 +3364,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "A8465AA2-B3FE-4095-8A0F-61522AF11532"
+          "id": "A8465AA2-B3FE-4095-8A0F-61522AF11532",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -2987,7 +3382,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "91791A0E-6003-46BD-BF93-38C64EC39273"
+          "id": "91791A0E-6003-46BD-BF93-38C64EC39273",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -3004,7 +3400,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "12BC5F44-B124-4A01-87C1-31919172C933"
+          "id": "12BC5F44-B124-4A01-87C1-31919172C933",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "file_id",
@@ -3020,7 +3417,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
-          "id": "EB749F16-272F-4616-A93B-E90140C47681"
+          "id": "EB749F16-272F-4616-A93B-E90140C47681",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "fiction_id",
@@ -3036,11 +3434,16 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "4B3D3BC1-9958-4738-B78D-96047D720AE0",
-          "id": "D8112AE2-7E32-4103-A593-32B57372D683"
+          "id": "D8112AE2-7E32-4103-A593-32B57372D683",
+          "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     },
     {
       "id": "D66EDD39-2D40-4EDB-AF8B-6A6B5C451EB1",
@@ -3054,20 +3457,19 @@
       "defName": "段落",
       "comment": "",
       "properties": {},
-      "nameTemplate": "{defKey}[{defName}]",
       "headers": [
         {
-          "freeze": false,
+          "freeze": true,
           "refKey": "hideInGraph",
           "hideInGraph": true
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defKey",
           "hideInGraph": false
         },
         {
-          "freeze": true,
+          "freeze": false,
           "refKey": "defName",
           "hideInGraph": false
         },
@@ -3130,6 +3532,11 @@
           "freeze": false,
           "refKey": "uiHint",
           "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
         }
       ],
       "fields": [
@@ -3147,7 +3554,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
-          "id": "D469BAB3-D7A8-4BBD-954B-C5FCD50EDE5F"
+          "id": "D469BAB3-D7A8-4BBD-954B-C5FCD50EDE5F",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         },
         {
           "defKey": "del_flag",
@@ -3163,7 +3571,8 @@
           "hideInGraph": true,
           "refDict": "",
           "domain": "E2CBFD80-1645-4B0C-876D-274651B108F5",
-          "id": "973DBB50-2C43-4B83-B6FA-0FE3A4F6F907"
+          "id": "973DBB50-2C43-4B83-B6FA-0FE3A4F6F907",
+          "baseType": "A08C8394-66A6-4EEB-B46C-C910DD0C28A0"
         },
         {
           "defKey": "create_by",
@@ -3180,7 +3589,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "1BF34D6E-99A9-457D-968B-7A24A7A41DD2"
+          "id": "1BF34D6E-99A9-457D-968B-7A24A7A41DD2",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "create_time",
@@ -3197,7 +3607,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "BA7D0747-A2B8-4217-9B99-CF02CA30BEE6"
+          "id": "BA7D0747-A2B8-4217-9B99-CF02CA30BEE6",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "update_by",
@@ -3214,7 +3625,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "12B1E0EF-9904-4BCF-B290-C16D252213A2"
+          "id": "12B1E0EF-9904-4BCF-B290-C16D252213A2",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "update_time",
@@ -3231,7 +3643,8 @@
           "hideInGraph": true,
           "refDict": "",
           "uiHint": "",
-          "id": "FF82122C-366A-4A18-A76F-1B9C9819AA1D"
+          "id": "FF82122C-366A-4A18-A76F-1B9C9819AA1D",
+          "baseType": "A5F56026-4AC5-4D0E-8C16-509B60C5BE21"
         },
         {
           "defKey": "content",
@@ -3247,7 +3660,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "7A1CDD76-6DF2-4845-A71C-1C066C0F9FC6",
-          "id": "81299DE5-CCC6-431C-8560-12495317529C"
+          "id": "81299DE5-CCC6-431C-8560-12495317529C",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "options_json",
@@ -3263,7 +3677,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "7A1CDD76-6DF2-4845-A71C-1C066C0F9FC6",
-          "id": "F580BCAF-7236-4352-994E-5870792AE01D"
+          "id": "F580BCAF-7236-4352-994E-5870792AE01D",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
         },
         {
           "defKey": "fiction_frame_id",
@@ -3279,7 +3694,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "4B3D3BC1-9958-4738-B78D-96047D720AE0",
-          "id": "3951857D-D57D-4E95-B24A-7DCED4154A4D"
+          "id": "3951857D-D57D-4E95-B24A-7DCED4154A4D",
+          "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         },
         {
           "defKey": "volume_frame_id",
@@ -3295,7 +3711,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "4B3D3BC1-9958-4738-B78D-96047D720AE0",
-          "id": "C3C81461-A984-43A6-B62B-A9D0C6D6C722"
+          "id": "C3C81461-A984-43A6-B62B-A9D0C6D6C722",
+          "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         },
         {
           "defKey": "fiction_id",
@@ -3311,7 +3728,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "4B3D3BC1-9958-4738-B78D-96047D720AE0",
-          "id": "F74A9893-44DF-4943-A145-96A1D334251A"
+          "id": "F74A9893-44DF-4943-A145-96A1D334251A",
+          "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         },
         {
           "defKey": "serial",
@@ -3327,7 +3745,8 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "4B3D3BC1-9958-4738-B78D-96047D720AE0",
-          "id": "DBBFD63E-5763-43A2-ADC0-C1966143BA07"
+          "id": "DBBFD63E-5763-43A2-ADC0-C1966143BA07",
+          "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         },
         {
           "defKey": "role_status_id",
@@ -3343,11 +3762,16 @@
           "hideInGraph": false,
           "refDict": "",
           "domain": "4B3D3BC1-9958-4738-B78D-96047D720AE0",
-          "id": "3694344E-91C8-48F0-B1C4-3B090121DE80"
+          "id": "3694344E-91C8-48F0-B1C4-3B090121DE80",
+          "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         }
       ],
       "correlations": [],
-      "indexes": []
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      }
     }
   ],
   "views": [],
@@ -3976,5 +4400,267 @@
       "id": "17DF545A-113E-4D80-8115-1042C2B96EFA"
     }
   ],
-  "standardFields": []
+  "standardFields": [],
+  "namingRules": [
+    {
+      "id": "63F1DC0E-6A76-4B75-B3DA-4B00657B4E1B",
+      "defName": "属性代码不能超过32",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "L",
+      "applyFieldType": "field",
+      "programCode": "return (data.field.defName||\"\").length <= 32",
+      "enable": true
+    },
+    {
+      "id": "668CBEE6-E0B7-4ACE-B72E-63942963B191",
+      "defName": "长度不能超过32位",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "return (data.entity.defName||\"\").length <= 32",
+      "enable": true
+    },
+    {
+      "id": "11BD987F-82E7-418E-A752-FDD84F1582A2",
+      "defName": "长度不能超过32位",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "return (data.field.defName||\"\").length <= 32",
+      "enable": true
+    },
+    {
+      "id": "29D0A8D9-ABE2-451F-8A39-52FAB02E62B9",
+      "defName": "索引名-长度不超过32个字符",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "index",
+      "programCode": "return (data.index.defName||\"\").length <= 32",
+      "enable": true
+    },
+    {
+      "id": "B425A96F-6A31-4DBD-8743-A00DE28FB50F",
+      "defName": "不能使用保留字",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "index",
+      "programCode": "let sysWords = \"action,add,aggregate,all,alter,after,and,as,asc,avg,avg_row_length,auto_increment,between,bigint,bit,binary,blob,bool,both,by,cascade,case,char,character,change,check,checksum,column,columns,comment,constraint,create,cross,current_date,current_time,current_timestamp,data,database,databases,date,datetime,day,day_hour,day_minute,day_second,dayofmonth,dayofweek,dayofyear,dec,decimal,default,delayed,delay_key_write,delete,desc,describe,distinct,distinctrow,double,drop,end,else,escape,escaped,enclosed,enum,explain,exists,fields,file,first,float,float4,float8,flush,foreign,from,for,full,function,global,grant,grants,group,having,heap,high_priority,hour,hour_minute,hour_second,hosts,identified,ignore,in,index,infile,inner,insert,insert_id,int,integer,interval,int1,int2,int3,int4,int8,into,if,is,isam,join,key,keys,kill,last_insert_id,leading,left,length,like,lines,limit,load,local,lock,logs,long,longblob,longtext,low_priority,max,max_rows,match,mediumblob,mediumtext,mediumint,middleint,min_rows,minute,minute_second,modify,month,monthname,myisam,natural,numeric,no,not,null,on,optimize,option,optionally,or,order,outer,outfile,pack_keys,partial,password,precision,primary,procedure,process,processlist,privileges,read,real,references,reload,regexp,rename,replace,restrict,returns,revoke,rlike,row,rows,second,select,set,show,shutdown,smallint,soname,sql_big_tables,sql_big_selects,sql_low_priority_updates,sql_log_off,sql_log_update,sql_select_limit,sql_small_result,sql_big_result,sql_warnings,straight_join,starting,status,string,table,tables,temporary,terminated,text,then,time,timestamp,tinyblob,tinytext,tinyint,trailing,to,type,use,using,unique,unlock,unsigned,update,usage,values,varchar,variables,varying,varbinary,with,write,when,where,year,year_month,zerofill\".split(\",\");\nreturn sysWords.indexOf(data.index.defKey.toLowerCase())<0;",
+      "enable": true
+    },
+    {
+      "id": "EF9E44D0-691A-4352-A079-CFF300107531",
+      "defName": "索引名-全小写",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "index",
+      "programCode": "return !/[A-Z]+/.test(data.index.defKey);",
+      "enable": true
+    },
+    {
+      "id": "972EB2FB-4428-429D-8B0A-F082A8C7A94D",
+      "defName": "名称不能为空",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "L",
+      "applyFieldType": "entity",
+      "programCode": "return data.logicEntity.defName",
+      "enable": true
+    },
+    {
+      "id": "EEAEB9C5-BB6C-4E92-949B-D27928690D85",
+      "defName": "名称长度不超过32",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "L",
+      "applyFieldType": "entity",
+      "programCode": "return (data.logicEntity.defName||\"\").length <=32",
+      "enable": true
+    },
+    {
+      "id": "24E3F7E5-730D-4378-B72D-195D6B940352",
+      "defName": "不能使用保留字",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "let sysWords = \"action,add,aggregate,all,alter,after,and,as,asc,avg,avg_row_length,auto_increment,between,bigint,bit,binary,blob,bool,both,by,cascade,case,char,character,change,check,checksum,column,columns,comment,constraint,create,cross,current_date,current_time,current_timestamp,data,database,databases,date,datetime,day,day_hour,day_minute,day_second,dayofmonth,dayofweek,dayofyear,dec,decimal,default,delayed,delay_key_write,delete,desc,describe,distinct,distinctrow,double,drop,end,else,escape,escaped,enclosed,enum,explain,exists,fields,file,first,float,float4,float8,flush,foreign,from,for,full,function,global,grant,grants,group,having,heap,high_priority,hour,hour_minute,hour_second,hosts,identified,ignore,in,index,infile,inner,insert,insert_id,int,integer,interval,int1,int2,int3,int4,int8,into,if,is,isam,join,key,keys,kill,last_insert_id,leading,left,length,like,lines,limit,load,local,lock,logs,long,longblob,longtext,low_priority,max,max_rows,match,mediumblob,mediumtext,mediumint,middleint,min_rows,minute,minute_second,modify,month,monthname,myisam,natural,numeric,no,not,null,on,optimize,option,optionally,or,order,outer,outfile,pack_keys,partial,password,precision,primary,procedure,process,processlist,privileges,read,real,references,reload,regexp,rename,replace,restrict,returns,revoke,rlike,row,rows,second,select,set,show,shutdown,smallint,soname,sql_big_tables,sql_big_selects,sql_low_priority_updates,sql_log_off,sql_log_update,sql_select_limit,sql_small_result,sql_big_result,sql_warnings,straight_join,starting,status,string,table,tables,temporary,terminated,text,then,time,timestamp,tinyblob,tinytext,tinyint,trailing,to,type,use,using,unique,unlock,unsigned,update,usage,values,varchar,variables,varying,varbinary,with,write,when,where,year,year_month,zerofill\".split(\",\");\nreturn sysWords.indexOf(data.entity.defKey.toLowerCase())<0;",
+      "enable": true
+    },
+    {
+      "id": "039BF435-DC77-4DA4-81C7-7F8076BF22BB",
+      "defName": "表名-全小写",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "return !/[A-Z]+/.test(data.entity.defKey);",
+      "enable": true
+    },
+    {
+      "id": "CBEB0E30-19C6-427D-A8BF-61FF10E27A0B",
+      "defName": "表名-不允许空格",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "return !/\\s+/.test(data.entity.defKey);",
+      "enable": true
+    },
+    {
+      "id": "1168C7C2-8E8E-4FB7-B639-B3DE839C395A",
+      "defName": "表名-英文及下划线",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "return /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(data.entity.defKey);",
+      "enable": true
+    },
+    {
+      "id": "D373637C-D3A6-4621-B656-6841A5444A76",
+      "defName": "表必须有comment注释",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "return (data.entity.defName||\"\").length > 0 || (data.entity.comment||\"\").length > 0",
+      "enable": true
+    },
+    {
+      "id": "2BAB122B-8811-40BB-89F3-CDC24B5862D3",
+      "defName": "主键命名为 id，类型为 int 或 bigint，且为自增",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "let fields = data.entity.fields;\nfor(let i=0;i<fields.length;i++){\n    let field = fields[i];\n    if(field.primaryKey){\n        return field.autoIncrement && (field.dbType.toUpperCase()==\"INT\"||field.dbType==\"BIGINT\");\n    }\n}\nreturn false;",
+      "enable": true
+    },
+    {
+      "id": "0B2F0BD2-3B84-4AB1-BA29-9DE9620AF608",
+      "defName": "必须有数据的创建时间以及创建人字段",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "entity",
+      "programCode": "let count = 0;\nlet fields = data.entity.fields;\nfor(let i=0;i<fields.length;i++){\n    let field = fields[i];\n    if(\"created_time,updated_time\".indexOf(field.defKey.toLowerCase())>=0){\n        count ++;\n    }\n}\nreturn count==2;",
+      "enable": true
+    },
+    {
+      "id": "BEC54F19-52D5-4882-BCE1-4439785F8001",
+      "defName": "不能使用保留字",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "let sysWords = \"action,add,aggregate,all,alter,after,and,as,asc,avg,avg_row_length,auto_increment,between,bigint,bit,binary,blob,bool,both,by,cascade,case,char,character,change,check,checksum,column,columns,comment,constraint,create,cross,current_date,current_time,current_timestamp,data,database,databases,date,datetime,day,day_hour,day_minute,day_second,dayofmonth,dayofweek,dayofyear,dec,decimal,default,delayed,delay_key_write,delete,desc,describe,distinct,distinctrow,double,drop,end,else,escape,escaped,enclosed,enum,explain,exists,fields,file,first,float,float4,float8,flush,foreign,from,for,full,function,global,grant,grants,group,having,heap,high_priority,hour,hour_minute,hour_second,hosts,identified,ignore,in,index,infile,inner,insert,insert_id,int,integer,interval,int1,int2,int3,int4,int8,into,if,is,isam,join,key,keys,kill,last_insert_id,leading,left,length,like,lines,limit,load,local,lock,logs,long,longblob,longtext,low_priority,max,max_rows,match,mediumblob,mediumtext,mediumint,middleint,min_rows,minute,minute_second,modify,month,monthname,myisam,natural,numeric,no,not,null,on,optimize,option,optionally,or,order,outer,outfile,pack_keys,partial,password,precision,primary,procedure,process,processlist,privileges,read,real,references,reload,regexp,rename,replace,restrict,returns,revoke,rlike,row,rows,second,select,set,show,shutdown,smallint,soname,sql_big_tables,sql_big_selects,sql_low_priority_updates,sql_log_off,sql_log_update,sql_select_limit,sql_small_result,sql_big_result,sql_warnings,straight_join,starting,status,string,table,tables,temporary,terminated,text,then,time,timestamp,tinyblob,tinytext,tinyint,trailing,to,type,use,using,unique,unlock,unsigned,update,usage,values,varchar,variables,varying,varbinary,with,write,when,where,year,year_month,zerofill\".split(\",\");\nreturn sysWords.indexOf(data.field.defKey.toLowerCase())<0;",
+      "enable": true
+    },
+    {
+      "id": "082E186D-7B02-4F1C-9ECE-378AB98C4845",
+      "defName": "字段-全小写",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "return !/[A-Z]+/.test(data.field.defKey);",
+      "enable": true
+    },
+    {
+      "id": "F3CE5C67-23B6-4E7B-BA91-D5F0BCBC9E6A",
+      "defName": "字段-不允许空格",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "return !/\\s+/.test(data.field.defKey);",
+      "enable": true
+    },
+    {
+      "id": "21AFEAC8-96D7-467F-8320-A33887FC0C5D",
+      "defName": "字段-英文及下划线",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "return /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(data.field.defKey);",
+      "enable": true
+    },
+    {
+      "id": "2BBDE47B-6926-4E1A-AE57-D4F6E5399EE6",
+      "defName": "字段-必需有comment注释",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "return (data.field.defName||\"\").length > 0 || (data.field.comment||\"\").length > 0",
+      "enable": true
+    },
+    {
+      "id": "5E181E43-0D72-498F-8178-4C1CDBC89A16",
+      "defName": "字段-不能与表名相同",
+      "intro": "",
+      "controlIntensity": "F",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "return data.field.defKey != data.entity.defKey;",
+      "enable": true
+    },
+    {
+      "id": "DE8F8598-5D53-4727-A837-7816C2AF99D9",
+      "defName": "外键-字段必须具有表名及其主键",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "let relas = data.entity.correlations;\nfor(let i=0;i<relas.length;i++){\n    let rela = relas[i];\n    if(data.field.defKey==rela.myField&&rela.myRows==\"n\"){\n        if(rela.myField==(rela.refEntity+\"_\"+rela.refField)){\n            return true;\n        }else{\n            return false;\n        }\n    }\n}\nreturn true;",
+      "enable": true
+    },
+    {
+      "id": "D330BCC3-DBAB-4677-8C5A-A301003A5878",
+      "defName": "时间字段类型尽量选取 timestamp",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "if(data.field.defName.lastIndexOf(\"日期\")>=0 || data.field.defName.lastIndexOf(\"时间\")>=0 ){\n    if(data.field.dbType.toLowerCase().indexOf(\"date\")>=0){\n        return true;\n    }else{\n        return false;\n    }\n};\nreturn true;",
+      "enable": true
+    },
+    {
+      "id": "2E7FDA44-989A-4C5B-A0C5-12B1E40E57B1",
+      "defName": "索引名-英文及下划线",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "index",
+      "programCode": "return /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(data.index.defKey);",
+      "enable": true
+    },
+    {
+      "id": "023450B3-AAE2-4DC1-AE63-2196DD82823D",
+      "defName": "索引名-主键的名称以pk_开头，唯一键以uk_开头，普通索引以 ix_开头",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "index",
+      "programCode": "if(data.index.unique){\n    return data.index.defKey.indexOf(\"uk_\")==0;\n}else{\n    return data.index.defKey.indexOf(\"ix_\")==0;\n}",
+      "enable": true
+    },
+    {
+      "id": "1C563E17-262B-4EB6-87F0-203CAC667CF0",
+      "defName": "不允许存在blob、text等大字段",
+      "intro": "",
+      "controlIntensity": "S",
+      "applyObjectType": "P",
+      "applyFieldType": "field",
+      "programCode": "if(\"blob,text\".indexOf(data.field.dbType.toLowerCase())>=0){\n    return false;\n}\nreturn true;",
+      "enable": true
+    }
+  ]
 }
