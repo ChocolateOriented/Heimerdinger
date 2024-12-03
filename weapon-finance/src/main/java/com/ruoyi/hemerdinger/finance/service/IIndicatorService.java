@@ -22,4 +22,10 @@ public interface IIndicatorService
     public void updateIndicators();
 
     Iterable findAKShare(String path, Map<String, String> param);
+
+    /**
+     * 保存或更新指标
+     * @param dataList
+     */
+    void saveOrUpdateIndicator(List<JSONObject> dataList);
 }

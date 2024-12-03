@@ -1,7 +1,9 @@
 package com.ruoyi.hemerdinger.finance.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mongodb.client.result.UpdateResult;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.hemerdinger.finance.domain.indicator.*;
 import com.ruoyi.hemerdinger.finance.manager.AkShareManager;
@@ -11,13 +13,19 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 股票追踪Service业务层处理
@@ -45,10 +53,12 @@ public class IndicatorServiceImpl implements IIndicatorService {
     private MacroChinaSupplyOfMoneyRepository macroChinaSupplyOfMoneyRepository;
     @Autowired
     private AkShareManager akShareManager;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     private List<akShareUpdataIndicator> akShareUpdataIndicators;
 
-    @PostConstruct
+//    @PostConstruct
     private void init() {
         akShareUpdataIndicators = new ArrayList<>();
 
@@ -59,6 +69,42 @@ public class IndicatorServiceImpl implements IIndicatorService {
         akShareUpdataIndicators.add(new akShareUpdataIndicator("macro_china_supply_of_money", MacroChinaSupplyOfMoney.class, macroChinaSupplyOfMoneyRepository));
         akShareUpdataIndicators.add(new akShareUpdataIndicator("stock_a_all_pb", StockAAllPb.class, stockAAllPbRepository));
         akShareUpdataIndicators.add(new akShareUpdataIndicator("bond_zh_us_rate", BondZhUsRate.class, bondZhUsRateRepository));
+    }
+
+    /**
+     * 保存或更新指标
+     * @param dataList
+     */
+    @Override
+    public void saveOrUpdateIndicator(List<JSONObject> dataList) {
+        if (CollectionUtils.isEmpty(dataList)){
+            return;
+        }
+        for (int i = 0; i < dataList.size(); i++) {
+            JSONObject jsonObject = dataList.get(i);
+            String date = jsonObject.getString("date");
+            Query query= new Query(Criteria.where("date").is(date));
+            JSONObject one = mongoTemplate.findOne(query, JSONObject.class,"indicator");
+            //已存在进行更新
+            if (one != null){
+                Set<String> keys = jsonObject.keySet();
+                Update update = new Update();
+                for (String key : keys) {
+                    if ("date" == key){
+                        continue;
+                    }
+                    update.set(key, jsonObject.get(key));
+                }
+                //更新查询满足条件的文档数据（第一条）
+                UpdateResult result =mongoTemplate.updateFirst(query,update, JSONObject.class,"indicator");
+                if(result!=null){
+                    log.info("更新条数：{}", result.getMatchedCount());
+                }
+            } else{
+                //插入数据
+                mongoTemplate.insert(jsonObject, "indicator");
+            }
+        }
     }
 
     /**
