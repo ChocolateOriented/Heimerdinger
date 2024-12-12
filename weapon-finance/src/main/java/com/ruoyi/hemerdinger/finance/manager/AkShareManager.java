@@ -15,7 +15,7 @@ public class AkShareManager {
     private String akShareApi;
 
 
-    @Cacheable(value = "akShare", key = "#path+':'+#param", unless = "#result==null")
+//    @Cacheable(value = "akShare", key = "#path+':'+#param", unless = "#result==null")
     public String find(String path, Map<String,String> param) {
         return HttpUtils.sendGet(akShareApi+"/api/public/"+path , param, null);
     }

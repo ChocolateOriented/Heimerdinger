@@ -8,3 +8,13 @@ export function find(query) {
     params: query
   })
 }
+
+  export function findLineFromMongo(data) {
+    return request({
+      url: '/ak_share/findLineFromMongo',
+      method: 'post',
+      data: data
+    })
+  }
+
+

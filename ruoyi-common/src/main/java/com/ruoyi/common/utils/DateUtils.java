@@ -20,6 +20,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
     public static String YYYY_MM_DD = "yyyy-MM-dd";
 
     public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+    public static String YYYYMMDD = "yyyyMMdd";
 
     public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
     

@@ -13,6 +13,7 @@ import {parseTime} from "@/utils/ruoyi";
 import {formatDate, getLastEL} from "@/utils/chart/DataUtils";
 import {renderChartList, lineDateSeries, lineStackDateSeries} from "@/utils/chart/AKShareChartUtils";
 import indicators from '@/utils/chart/data/indicators.json'
+import {findLineFromMongo} from "@/api/finance/akShare";
 
 export default {
   name: "macro_watch",
@@ -51,69 +52,40 @@ export default {
       form: {},
       // 表单校验
       rules: {},
+      lineReq: {
+        startTime:'2011-01-20',
+        endTime:'',
+        columns:[
+          '货币(狭义货币M1)同比增长',
+          '货币和准货币（广义货币M2）同比增长',
+          // '融资余额',
+          'GDP',
+          'CPI',
+        ]
+      },
       chartList: {
         money_watch: {
           dataDefineList: [
             {
-              path: "macro_china_supply_of_money",
-              xField: "统计时间",
-              yField: "货币(狭义货币M1)同比增长",
-              xFormat: formatDate(),
+              yName: "货币(狭义货币M1)同比增长",
               commonSeries: lineDateSeries,
-              // commonSeries: lineStackDateSeries,
               yAxis: {name: '百分比', type: 'value'}
             },
             {
-              path: "macro_china_supply_of_money",
-              xField: "统计时间",
-              yField: "货币和准货币（广义货币M2）同比增长",
-              xFormat: formatDate(),
+              yName: "货币和准货币（广义货币M2）同比增长",
               commonSeries: lineDateSeries,
-              // commonSeries: lineStackDateSeries,
-              // yAxis: {name: '百分比', type: 'value'}
             },
-
-            {
-              path: "macro_china_gdp_yearly",
-              xField: "date",
-              yField: "value",
-              yName: "GDP",
-              xFormat: formatDate('{y}-{m}-01'),
-              // commonSeries: lineDateSeries,
-            },
-            {
-              path: "macro_china_cpi_yearly",
-              xField: "date",
-              yField: "value",
-              yName: "CPI",
-              xFormat: formatDate('{y}-{m}-01'),
-              // commonSeries: lineDateSeries,
-            },
-
-            {
-              path: "stock_margin_sse",
-              param:{start_date:"2010401",end_date:parseTime(new Date(),'{y}{m}{d}')},
-              xField: "信用交易日期",
-              yField: "融资余额",
-              xFormat: formatDate('{y}-{m}-{d}','yyyyMMdd'),
-              // commonSeries: lineDateSeries,
-              // yAxis: {name: '融资余额', type: 'value',},
-            },
+            // {
+            //   yField: "GDP",
+            //   commonSeries: lineDateSeries,
+            // },
+            // {
+            //   yField: "CPI",
+            //   commonSeries: lineDateSeries,
+            // }
           ],
-          mergeKey: "日期",
+          mergeKey: "date",
           dataHandleList:[
-            { resultField:"gdpAVG", handel:this.averageGDP,
-              dataDef:{
-                yName: "gdpAVG",
-                // commonSeries: lineStackDateSeries,
-              }
-            },
-            { resultField:"货币超发", handel:this.superCurrency,
-              dataDef:{
-                yName: "货币超发",
-                // commonSeries: lineStackDateSeries,
-              }
-            },
             { resultField:"货币M2流出M1", handel:function(tar){
                 if(tar["货币和准货币（广义货币M2）同比增长"] && tar["货币(狭义货币M1)同比增长"]){
                   return tar["货币和准货币（广义货币M2）同比增长"] -  tar["货币(狭义货币M1)同比增长"] ;
@@ -127,14 +99,13 @@ export default {
               }
             },
           ],
-
         },
         rate_watch:{
           dataDefineList: [
             {
               path: "bond_zh_us_rate",
               xField: "日期",
-              yField: "中国国债收益率10年",
+              yName: "中国国债收益率10年",
               xFormat: formatDate(),
               commonSeries: lineDateSeries,
               yAxis: {name: '收益率', type: 'value',max: 'dataMax', min: 'dataMin',},
@@ -142,10 +113,9 @@ export default {
             {
               path: "bond_zh_us_rate",
               xField: "日期",
-              yField: "美国国债收益率10年",
+              yName: "美国国债收益率10年",
               xFormat: formatDate(),
               commonSeries: lineDateSeries,
-              // yAxis: {name: '收益率', type: 'value',max: 'dataMax', min: 'dataMin',},
             },
             // {
             //   path: "currency_boc_safe",
@@ -335,6 +305,7 @@ export default {
           mergeKey: "日期",
         }
       },
+      mergeData:[]
     };
   },
   created() {
@@ -342,7 +313,10 @@ export default {
   },
   mounted() {
     //渲染图表
-    renderChartList(this.chartList);
+    findLineFromMongo(this.lineReq).then(response => {
+      this.mergeData = response.data;
+      renderChartList(this.chartList, this.mergeData);
+    })
   },
   methods: {
     getData() {
@@ -406,9 +380,9 @@ export default {
       return null;
     },
     // 获取平均GDP
-    averageGDP(tar, index, mergeData){
+    averageGDP(tar, index, mergeData, gdp = "GDP") {
 
-      if (!tar["GDP"]){
+      if (!tar[gdp]){
         return tar["gdpAVG"];
       }
       let GDP = tar["GDP"];

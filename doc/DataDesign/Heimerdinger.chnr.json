@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "4.9.4",
   "createdTime": "2021-10-15 11:41:11",
-  "updatedTime": "2024-12-1 23:03:38",
+  "updatedTime": "2024-12-10 16:22:14",
   "profile": {
     "default": {
       "db": "E410B2A3-3E59-49D9-8A06-FFF4888D40CC",
@@ -1026,7 +1026,16 @@
           "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "D9C386C1-1F83-4684-BA9F-067A3958D84A",
+          "refEntity": "342B8DE6-F39D-49BC-AF3C-70827DA39675",
+          "refField": "01541F34-B26D-42B7-B9B0-3301A11478CF",
+          "myRows": "1",
+          "refRows": "n",
+          "innerType": ""
+        }
+      ],
       "indexes": [],
       "type": "P",
       "sysProps": {
@@ -1602,7 +1611,16 @@
           "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "93619A28-52B7-4BDB-A057-0CC6B39073DB",
+          "refEntity": "03334F24-4E8C-4DB0-9559-0829BCA37524",
+          "refField": "66DCBC8C-0347-43E7-BC82-3AB073786CCE",
+          "myRows": "1",
+          "refRows": "n",
+          "innerType": ""
+        }
+      ],
       "indexes": [],
       "type": "P",
       "sysProps": {
@@ -2568,7 +2586,16 @@
           "baseType": "648FD869-4477-4822-8435-538692390CA3"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "06A6BF87-4BAB-46DD-8D47-D8D47B30DF5F",
+          "refEntity": "03334F24-4E8C-4DB0-9559-0829BCA37524",
+          "refField": "66475C15-44EB-4F72-9DBA-13E1B3009053",
+          "myRows": "1",
+          "refRows": "n",
+          "innerType": ""
+        }
+      ],
       "indexes": [],
       "type": "P",
       "sysProps": {
@@ -3766,12 +3793,203 @@
           "baseType": "47DC1731-336C-42CA-8CB3-760D4A4805F8"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "3951857D-D57D-4E95-B24A-7DCED4154A4D",
+          "refEntity": "807A2696-AB85-4AB8-A928-8C81BBAD57D9",
+          "refField": "99346902-3D3C-4642-AF49-F7069172AC13",
+          "myRows": "1",
+          "refRows": "n",
+          "innerType": ""
+        },
+        {
+          "myField": "C3C81461-A984-43A6-B62B-A9D0C6D6C722",
+          "refEntity": "807A2696-AB85-4AB8-A928-8C81BBAD57D9",
+          "refField": "99346902-3D3C-4642-AF49-F7069172AC13",
+          "myRows": "1",
+          "refRows": "n",
+          "innerType": ""
+        },
+        {
+          "myField": "3694344E-91C8-48F0-B1C4-3B090121DE80",
+          "refEntity": "807A2696-AB85-4AB8-A928-8C81BBAD57D9",
+          "refField": "99346902-3D3C-4642-AF49-F7069172AC13",
+          "myRows": "1",
+          "refRows": "n",
+          "innerType": ""
+        }
+      ],
       "indexes": [],
       "type": "P",
       "sysProps": {
         "nameTemplate": "{defKey}[{defName}]"
       }
+    },
+    {
+      "id": "7693ECC0-B322-469E-85B0-FDF9AEBA2F9E",
+      "defKey": "stock_dict",
+      "defName": "股票字典",
+      "comment": "",
+      "properties": {},
+      "headers": [
+        {
+          "freeze": true,
+          "refKey": "hideInGraph",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "defKey",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "defName",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "primaryKey",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "notNull",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "autoIncrement",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "domain",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "type",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "len",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "scale",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "comment",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "refDict",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "defaultValue",
+          "hideInGraph": true
+        },
+        {
+          "freeze": false,
+          "refKey": "isStandard",
+          "hideInGraph": false
+        },
+        {
+          "freeze": false,
+          "refKey": "uiHint",
+          "hideInGraph": true
+        },
+        {
+          "refKey": "extProps",
+          "hideInGraph": true,
+          "freeze": false
+        }
+      ],
+      "fields": [
+        {
+          "defKey": "id",
+          "defName": "id",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "A3300FEB-F2CA-4ADD-A77C-3ED7A9D61745",
+          "id": "66DCBC8C-0347-43E7-BC82-3AB073786CCE",
+          "baseType": "F93EEBF1-C4BB-431E-8D2D-D30212D9B2A9"
+        },
+        {
+          "defKey": "name",
+          "defName": "名称",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
+          "id": "2565FB1F-7A87-41E8-8560-E2E44B65CE3D",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
+        },
+        {
+          "defKey": "code",
+          "defName": "代码",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
+          "id": "66475C15-44EB-4F72-9DBA-13E1B3009053",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
+        },
+        {
+          "defKey": "bourse",
+          "defName": "交易所",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "005A6051-8477-4F99-A1EE-EA6593471A87",
+          "domain": "0E5D19FD-3933-4159-A0D2-9F74C741CA02",
+          "id": "A7FA1772-7993-41C1-807B-4D5F962EFDA9",
+          "baseType": "648FD869-4477-4822-8435-538692390CA3"
+        }
+      ],
+      "correlations": [],
+      "indexes": [],
+      "type": "P",
+      "sysProps": {
+        "nameTemplate": "{defKey}[{defName}]"
+      },
+      "notes": {}
     }
   ],
   "views": [],
@@ -4213,37 +4431,11 @@
               "y": -1280
             },
             "count": 0,
-            "originKey": "212991A6-A062-4A5F-852B-C3215E617BE0"
-          },
-          {
-            "id": "2665ec74-b71f-423e-88f3-6ba0dacd4278",
-            "shape": "table",
-            "position": {
-              "x": -180,
-              "y": -1010
-            },
-            "count": 0,
-            "originKey": "8257CA8A-984C-41E9-A9A6-0FB23BBE60F7"
-          },
-          {
-            "id": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
-            "shape": "table",
-            "position": {
-              "x": -730,
-              "y": -950
-            },
-            "count": 0,
-            "originKey": "483C278E-C4D9-4678-8A92-395FDE0E2C87"
-          },
-          {
-            "id": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-            "shape": "table",
-            "position": {
-              "x": -180,
-              "y": -840
-            },
-            "count": 0,
-            "originKey": "03334F24-4E8C-4DB0-9559-0829BCA37524"
+            "originKey": "212991A6-A062-4A5F-852B-C3215E617BE0",
+            "size": {
+              "width": 227,
+              "height": 54
+            }
           },
           {
             "id": "4de8a9c7-ce85-4c62-b738-9f0cd0980d6f",
@@ -4253,27 +4445,11 @@
               "y": -1010
             },
             "count": 0,
-            "originKey": "2C1D9F6A-E92D-4879-A57E-F372306D943C"
-          },
-          {
-            "id": "10145707-51e1-4b2a-afb4-a55fa40930a8",
-            "shape": "table",
-            "position": {
-              "x": -722.5,
-              "y": -657
-            },
-            "count": 0,
-            "originKey": "342B8DE6-F39D-49BC-AF3C-70827DA39675"
-          },
-          {
-            "id": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
-            "shape": "table",
-            "position": {
-              "x": -180,
-              "y": -446
-            },
-            "count": 0,
-            "originKey": "4026C67A-61E2-42F5-AB52-91FD339DA25F"
+            "originKey": "2C1D9F6A-E92D-4879-A57E-F372306D943C",
+            "size": {
+              "width": 310,
+              "height": 123
+            }
           },
           {
             "id": "c77db462-30a3-4419-aa43-737cf752ad42",
@@ -4284,7 +4460,11 @@
             },
             "count": 0,
             "originKey": "54594C69-597D-4840-A131-BD37052E13B3",
-            "parent": "5b54451c-1861-4c08-8422-ad1cc1bfb61d"
+            "parent": "5b54451c-1861-4c08-8422-ad1cc1bfb61d",
+            "size": {
+              "width": 311,
+              "height": 123
+            }
           },
           {
             "id": "7ed4f092-07b6-4cd1-be4f-cbf420bcc0e8",
@@ -4310,20 +4490,6 @@
             "target": {
               "cell": "10145707-51e1-4b2a-afb4-a55fa40930a8",
               "port": "01541F34-B26D-42B7-B9B0-3301A11478CF%out"
-            },
-            "relation": "1:n",
-            "fillColor": "#ACDAFC"
-          },
-          {
-            "id": "25446c4f-cb3a-444a-bfaa-1fdedd18a67f",
-            "shape": "erdRelation",
-            "source": {
-              "cell": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
-              "port": "387925D6-15C8-4805-8EE0-CDA86AC82432%in"
-            },
-            "target": {
-              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
-              "port": "66475C15-44EB-4F72-9DBA-13E1B3009053%in"
             },
             "relation": "1:n",
             "fillColor": "#ACDAFC"
@@ -4374,15 +4540,18 @@
             "parent": "5b54451c-1861-4c08-8422-ad1cc1bfb61d"
           },
           {
-            "id": "804ad117-4f80-42e6-96a7-03290130939a",
-            "shape": "table",
-            "position": {
-              "x": -1020,
-              "y": -370.0000000000013
+            "id": "25446c4f-cb3a-444a-bfaa-1fdedd18a67f",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
+              "port": "06A6BF87-4BAB-46DD-8D47-D8D47B30DF5F%out"
             },
-            "count": 0,
-            "originKey": "807A2696-AB85-4AB8-A928-8C81BBAD57D9",
-            "parent": "5b54451c-1861-4c08-8422-ad1cc1bfb61d"
+            "target": {
+              "cell": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+              "port": "66475C15-44EB-4F72-9DBA-13E1B3009053%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC"
           },
           {
             "id": "47bd788d-3a56-4c55-bf44-341d1dfd0e82",
@@ -4393,11 +4562,115 @@
             },
             "count": 0,
             "originKey": "D66EDD39-2D40-4EDB-AF8B-6A6B5C451EB1",
-            "parent": "5b54451c-1861-4c08-8422-ad1cc1bfb61d"
+            "parent": "5b54451c-1861-4c08-8422-ad1cc1bfb61d",
+            "size": {
+              "width": 696,
+              "height": 215
+            }
+          },
+          {
+            "id": "804ad117-4f80-42e6-96a7-03290130939a",
+            "shape": "table",
+            "position": {
+              "x": -1020,
+              "y": -370.0000000000013
+            },
+            "count": 0,
+            "originKey": "807A2696-AB85-4AB8-A928-8C81BBAD57D9",
+            "parent": "5b54451c-1861-4c08-8422-ad1cc1bfb61d",
+            "size": {
+              "width": 348,
+              "height": 123
+            }
+          },
+          {
+            "id": "44bf2d90-b8f1-48a8-8ce1-e640e8d74b70",
+            "shape": "table",
+            "position": {
+              "x": -730,
+              "y": -1020
+            },
+            "count": 0,
+            "originKey": "483C278E-C4D9-4678-8A92-395FDE0E2C87",
+            "size": {
+              "width": 428,
+              "height": 238
+            }
+          },
+          {
+            "id": "7443f718-e354-486d-86d0-8afdf8e8f9bf",
+            "shape": "table",
+            "position": {
+              "x": -642,
+              "y": -730
+            },
+            "count": 0,
+            "originKey": "4026C67A-61E2-42F5-AB52-91FD339DA25F",
+            "size": {
+              "width": 340,
+              "height": 123
+            }
+          },
+          {
+            "id": "2665ec74-b71f-423e-88f3-6ba0dacd4278",
+            "shape": "table",
+            "position": {
+              "x": -180,
+              "y": -1010
+            },
+            "count": 0,
+            "originKey": "8257CA8A-984C-41E9-A9A6-0FB23BBE60F7",
+            "size": {
+              "width": 363,
+              "height": 100
+            }
+          },
+          {
+            "id": "ac1a23e4-8dc4-42cf-b075-e80459143dce",
+            "shape": "table",
+            "position": {
+              "x": -200,
+              "y": -887
+            },
+            "count": 0,
+            "originKey": "03334F24-4E8C-4DB0-9559-0829BCA37524",
+            "size": {
+              "width": 445,
+              "height": 376
+            }
+          },
+          {
+            "id": "10145707-51e1-4b2a-afb4-a55fa40930a8",
+            "shape": "table",
+            "position": {
+              "x": -675,
+              "y": -556
+            },
+            "count": 0,
+            "originKey": "342B8DE6-F39D-49BC-AF3C-70827DA39675",
+            "size": {
+              "width": 373,
+              "height": 100
+            }
+          },
+          {
+            "id": "c55988e2-647a-4e9b-a92b-96307d801c91",
+            "shape": "table",
+            "position": {
+              "x": 350,
+              "y": -910.0000000000001
+            },
+            "count": 0,
+            "originKey": "7693ECC0-B322-469E-85B0-FDF9AEBA2F9E",
+            "size": {
+              "width": 440,
+              "height": 150
+            }
           }
         ]
       },
-      "id": "17DF545A-113E-4D80-8115-1042C2B96EFA"
+      "id": "17DF545A-113E-4D80-8115-1042C2B96EFA",
+      "comment": ""
     }
   ],
   "standardFields": [],
@@ -4662,5 +4935,6 @@
       "programCode": "if(\"blob,text\".indexOf(data.field.dbType.toLowerCase())>=0){\n    return false;\n}\nreturn true;",
       "enable": true
     }
-  ]
+  ],
+  "logicEntities": []
 }

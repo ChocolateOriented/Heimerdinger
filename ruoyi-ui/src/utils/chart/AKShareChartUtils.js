@@ -1,7 +1,7 @@
 // 获取数据
 
 import * as echarts from "echarts";
-import {find} from "@/api/finance/akShare";
+import {find, findLineFromMongo} from "@/api/finance/akShare";
 import {asc, merge, valueList} from "@/utils/chart/DataUtils";
 import da from "element-ui/src/locale/lang/da";
 
@@ -31,25 +31,21 @@ import da from "element-ui/src/locale/lang/da";
  *         },
 *         },
  */
-export function renderChartList(chartList) {
+export function renderChartList(chartList, mergeData) {
 
   for (const chartKey in chartList) {
     let chartDef = chartList[chartKey];
     chartDef.option = defaultOption();
-    //获取数据
-    getData(chartDef).then(function (mergeData) {
-
-      //处理数据
-      let dataHandleList = chartDef.dataHandleList;
-      if (dataHandleList){
-        for (let i = 0; i < dataHandleList.length; i++) {
-          let handleDef = dataHandleList[i];
-          doHandel(handleDef, chartDef, mergeData);
-        }
+    //处理数据
+    let dataHandleList = chartDef.dataHandleList;
+    if (dataHandleList){
+      for (let i = 0; i < dataHandleList.length; i++) {
+        let handleDef = dataHandleList[i];
+        doHandel(handleDef, chartDef, mergeData);
       }
-      //渲染图表
-      renderChart(chartKey, chartDef, mergeData);
-    });
+    }
+    //渲染图表
+    renderChart(chartKey, chartDef, mergeData);
   }
 }
 
@@ -108,6 +104,12 @@ function doHandel(handelDef, chartDef, mergeData){
   chartDef.dataDefineList.push(dataDef);
 };
 
+/**
+ * 渲染图表
+ * @param chartKey
+ * @param chartDef
+ * @param mergeData
+ */
 function renderChart(chartKey, chartDef, mergeData) {
   console.info(mergeData);
   let dataDefineList = chartDef.dataDefineList;
@@ -117,13 +119,12 @@ function renderChart(chartKey, chartDef, mergeData) {
 
   for (let i = 0; i < dataDefineList.length; i++) {
     let chartDataDefine = dataDefineList[i];
-
+    //增加维度
     if (chartDataDefine.commonSeries){
       chartDataDefine.series = chartDataDefine.commonSeries(mergeKey,chartDataDefine.yName);
     }
     //增加图形
     if (chartDataDefine.series) {
-      //增加维度
       option.dataset.dimensions.push(chartDataDefine.yName);
       chartDataDefine.series.name = chartDataDefine.yName;
       //增加Y轴
@@ -207,7 +208,7 @@ function defaultOption() {
     },
     xAxis: {
       type: 'time',
-      name: "日期",
+      name: "date",
       axisLine: {onZero: false},
       splitLine: {show: false},
     },

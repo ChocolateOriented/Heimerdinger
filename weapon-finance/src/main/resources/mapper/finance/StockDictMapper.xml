@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.hemerdinger.finance.mapper.StockDictMapper">
+    
+    <resultMap type="StockDict" id="StockDictResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="code"    />
+        <result property="bourse"    column="bourse"    />
+    </resultMap>
+
+    <sql id="selectStockDictVo">
+        select id, name, code, bourse from stock_dict
+    </sql>
+
+    <select id="selectStockDictList" parameterType="StockDict" resultMap="StockDictResult">
+        <include refid="selectStockDictVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="bourse != null  and bourse != ''"> and bourse = #{bourse}</if>
+        </where>
+    </select>
+    
+    <select id="selectStockDictById" parameterType="Long" resultMap="StockDictResult">
+        <include refid="selectStockDictVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertStockDict" parameterType="StockDict" useGeneratedKeys="true" keyProperty="id">
+        insert into stock_dict
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
+            <if test="bourse != null">bourse,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="bourse != null">#{bourse},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStockDict" parameterType="StockDict">
+        update stock_dict
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="bourse != null">bourse = #{bourse},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStockDictById" parameterType="Long">
+        delete from stock_dict where id = #{id}
+    </delete>
+
+    <delete id="deleteStockDictByIds" parameterType="String">
+        delete from stock_dict where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
