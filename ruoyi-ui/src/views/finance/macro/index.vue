@@ -104,7 +104,6 @@ export default {
           dataDefineList: [
             {
               path: "bond_zh_us_rate",
-              xField: "日期",
               yName: "中国国债收益率10年",
               xFormat: formatDate(),
               commonSeries: lineDateSeries,

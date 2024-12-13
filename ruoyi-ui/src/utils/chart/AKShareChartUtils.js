@@ -119,12 +119,13 @@ function renderChart(chartKey, chartDef, mergeData) {
 
   for (let i = 0; i < dataDefineList.length; i++) {
     let chartDataDefine = dataDefineList[i];
-    //增加维度
+    // 获取折线定义
     if (chartDataDefine.commonSeries){
       chartDataDefine.series = chartDataDefine.commonSeries(mergeKey,chartDataDefine.yName);
     }
     //增加图形
     if (chartDataDefine.series) {
+      //增加维度
       option.dataset.dimensions.push(chartDataDefine.yName);
       chartDataDefine.series.name = chartDataDefine.yName;
       //增加Y轴
