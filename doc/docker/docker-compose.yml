@@ -1,0 +1,98 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:5 # 选择mongodb版本
+    restart: always  # 自启动
+    ports:
+      - 27017:27017 # 映射宿主机端口
+    volumes:
+      - /home/ljx/mongodb/data/db:/data/db    # 挂载数据文件，根据实际路径修改 ：前的路径
+      - /home/ljx/mongodb/data/log:/var/log/mongodb  # 挂载日志文件，根据实际路径修改 ：前的路径
+      - /home/ljx/mongodb/data/config:/etc/mongo  # 挂载配置文件，根据实际路径修改 ：前的路径
+    network_mode: "host"
+  elasticsearch:
+    container_name: es
+    image: elasticsearch:7.12.0
+    restart: always
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1024m"
+      - "TZ=Asia/Shanghai"
+      - "discovery.type=single-node"
+      - "ELASTIC_PASSWORD=123456"
+      - "xpack.security.http.ssl.enabled=false"
+      - "xpack.security.enabled=false"
+      - "network.host=0.0.0.0"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - /home/ljx/es/data:/usr/share/elasticsearch/data
+      - /home/ljx/es/plugins:/usr/share/elasticsearch/plugins
+    network_mode: "host"
+  mysql:
+    image: mysql:8.0.18
+    container_name: mysql8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    command:
+      --default-authentication-plugin=mysql_native_password
+      --lower_case_table_names=1
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /home/ljx/mysql/data:/var/lib/mysql
+      - /home/ljx/mysql/conf:/etc/mysql/conf.d
+      - /home/ljx/mysql/logs:/var/log/mysql
+      - /home/ljx/mysql/mysql-files:/var/lib/mysql-files
+    network_mode: "host"
+  redis: #redis服务/其他服务（web服务/nginx服务等）
+    image: redis:7                            #redis镜像，如果镜像容器没有会去自动拉取
+    container_name: redis                     #设置容器名称
+    restart: always
+    volumes:
+      - /home/ljx/redis/data:/data
+      - /home/ljx/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - /home/ljx/redis/logs:/logs
+    #配置文件启动
+    command: redis-server /usr/local/etc/redis/redis.conf          #数据文件挂载
+    ports:
+      - "6379:6379"
+    network_mode: "host"
+  akshare:
+    build:
+      context: .
+      dockerfile: akshare-dockerfile
+    container_name: aktools
+    restart: always
+    volumes:
+      - /home/ljx/aktools:/home
+    command: python -m aktools --host 0.0.0.0 --port 8888
+    ports:
+      - "8888:8888"
+    network_mode: "host"
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx-dockerfile
+    container_name: nginx
+    restart: always
+    volumes:
+      - /home/ljx/ruoyi-ui:/home/ljx/ruoyi-ui
+    ports:
+      - "80:80"
+    network_mode: "host"
+  heimerdinger-service:
+    build:
+      context: .
+      dockerfile: heimeridinger-service-dockerfile
+    container_name: heimerdinger-service
+    restart: always
+    volumes:
+      - /home/ljx/ruoyi:/home/ljx/ruoyi
+    ports:
+      - "8080:8080"
+    network_mode: "host"

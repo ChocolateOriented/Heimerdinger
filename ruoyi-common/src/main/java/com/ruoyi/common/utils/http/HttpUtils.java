@@ -1,10 +1,16 @@
 package com.ruoyi.common.utils.http;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.utils.StringUtils;
+import io.jsonwebtoken.lang.Collections;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.net.ssl.*;
+import java.io.*;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
@@ -14,22 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import com.sun.xml.internal.fastinfoset.Encoder;
-import io.jsonwebtoken.lang.Collections;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.ruoyi.common.constant.Constants;
-import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 通用http发送方法
@@ -60,9 +50,9 @@ public class HttpUtils
     public static String sendGet(String url, Map<String, String> params, Map<String, String> header) {
         String paramStr = null;
         if (!Collections.isEmpty(params)){
-            paramStr =  URLEncodedUtils.format(HttpUtils.convertMap2NameValuePairs(params), Encoder.UTF_8);
+            paramStr =  URLEncodedUtils.format(HttpUtils.convertMap2NameValuePairs(params), "UTF-8");
         }
-        return sendGet(url, paramStr, Encoder.UTF_8, header);
+        return sendGet(url, paramStr, "UTF-8", header);
     }
 
     /**

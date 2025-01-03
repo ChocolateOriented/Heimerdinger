@@ -58,6 +58,13 @@ export default {
         columns:[
           '货币(狭义货币M1)同比增长',
           '货币和准货币（广义货币M2）同比增长',
+          "中国国债收益率10年",
+          "美国国债收益率10年",
+          "中国官方制造业PMI",
+          "中国PPI",
+          "上证指数",
+          "沪深300",
+          "创业板",
           // '融资余额',
           'GDP',
           'CPI',
@@ -75,14 +82,8 @@ export default {
               yName: "货币和准货币（广义货币M2）同比增长",
               commonSeries: lineDateSeries,
             },
-            // {
-            //   yField: "GDP",
-            //   commonSeries: lineDateSeries,
-            // },
-            // {
-            //   yField: "CPI",
-            //   commonSeries: lineDateSeries,
-            // }
+            // { yField: "GDP", commonSeries: lineDateSeries },
+            // { yField: "CPI", commonSeries: lineDateSeries }
           ],
           mergeKey: "date",
           dataHandleList:[
@@ -103,38 +104,17 @@ export default {
         rate_watch:{
           dataDefineList: [
             {
-              path: "bond_zh_us_rate",
               yName: "中国国债收益率10年",
-              xFormat: formatDate(),
               commonSeries: lineDateSeries,
               yAxis: {name: '收益率', type: 'value',max: 'dataMax', min: 'dataMin',},
             },
             {
-              path: "bond_zh_us_rate",
-              xField: "日期",
               yName: "美国国债收益率10年",
               xFormat: formatDate(),
               commonSeries: lineDateSeries,
-            },
-            // {
-            //   path: "currency_boc_safe",
-            //   xField: "日期",
-            //   yField: "美元",
-            //   xFormat: formatDate(),
-            //   commonSeries: lineDateSeries,
-            //   yAxis: {name: '汇率', type: 'value',offset: 200,max: 'dataMax', min: 'dataMin',},
-            // },
-            // {
-            //   path: "index_value_hist_funddb",
-            //   param:{symbol:"万得全A", indicator:"市盈率"},
-            //   xField: "日期",
-            //   yField: "市盈率",
-            //   xFormat: formatDate(),
-            //   commonSeries: lineDateSeries,
-            //   // yAxis: {name: '市盈率', type: 'value',max: 'dataMax', min: 'dataMin',},
-            // },
+            }
           ],
-          mergeKey: "日期",
+          mergeKey: "date",
           dataHandleList:[
             { resultField:"国债收益率资金流入导向", handel:function(tar){
                 if(tar["中国国债收益率10年"] && tar["美国国债收益率10年"]){
@@ -179,54 +159,27 @@ export default {
         cycle_watch: {
           dataDefineList: [
             {
-              path: "macro_china_pmi_yearly",
-              xField: "date",
-              yField: "pmi",
+              yName: "中国官方制造业PMI",
               valueHandel: this.pmiHandel,
-              xFormat: formatDate(),
               // commonSeries: lineDateSeries,
               // yAxis: {name: 'pmi', type: 'value',max: 'dataMax', min: 'dataMin',},
             },
             {
-              path: "macro_china_ppi_yearly",
-              xField: "date",
-              yField: "ppi",
+              yName: "中国PPI",
               valueHandel: this.ppiHandel,
-              xFormat: formatDate(),
               commonSeries: lineDateSeries,
               yAxis: {name: 'ppi', type: 'value',max: 'dataMax', min: 'dataMin',},
             },
             {
-              data: indicators,
-              xField: "quarter",
-              yField: "opYoy",
-              yName:"A股营业利润增长率",
-              xFormat: formatDate(),
-              // commonSeries: lineStackDateSeries,
-              commonSeries: lineDateSeries,
-              yAxis: {name: '百分比', type: 'value',max: 'dataMax', min: 'dataMin',},
-            },
-            {
-              path: "bond_zh_us_rate",
-              xField: "日期",
-              yField: "中国国债收益率10年",
-              xFormat: formatDate(),
+              yName: "中国国债收益率10年",
               commonSeries: lineDateSeries,
               yAxis: {name: '收益率', type: 'value',max: 'dataMax', min: 'dataMin',},
-            },
-            {
-              path: "bond_zh_us_rate",
-              xField: "日期",
-              yField: "美国国债收益率10年",
-              xFormat: formatDate(),
-              // commonSeries: lineDateSeries,
-              // yAxis: {name: '收益率', type: 'value',max: 'dataMax', min: 'dataMin',},
-            },
+            }
           ],
           dataHandleList:[
             { resultField:"pmi扩张", handel:function(tar){
-                if(tar["pmi"]){
-                  return tar["pmi"] -50;
+                if(tar["中国官方制造业PMI"]){
+                  return tar["中国官方制造业PMI"] -50;
                 }
                 return null;
               },
@@ -237,34 +190,25 @@ export default {
             },
 
           ],
-          mergeKey: "日期",
+          mergeKey: "date",
         },
         cnbs_watch:{
           dataDefineList: [
             {
-              path: "stock_zh_index_daily",
-              param:{symbol:"sh000001"},
-              xField: "date",
-              yField: "close",
               yName:"上证指数",
-              xFormat: formatDate(),
               series: {
                 type: 'line',
                 smooth: true,
                 connectNulls: true,
                 symbol: 'none',
                 encode: {
-                  x: "日期",
+                  x: "date",
                   y: "上证指数"
                 },
               },
               yAxis: {name: '上证', type: 'value',offset: 120,},
             },
             {
-              path: "stock_zh_index_daily",
-              param:{symbol:"sh000300"},
-              xField: "date",
-              yField: "close",
               yName:"沪深300",
               xFormat: formatDate(),
               series: {
@@ -273,26 +217,21 @@ export default {
                 connectNulls: true,
                 symbol: 'none',
                 encode: {
-                  x: "日期",
+                  x: "date",
                   y: "沪深300"
                 },
               },
               yAxis: {name: '沪深300', type: 'value',offset: 120,},
             },
             {
-              path: "stock_zh_index_daily",
-              param:{symbol:"sz399006"},
-              xField: "date",
-              yField: "close",
               yName:"创业板",
-              xFormat: formatDate(),
               series: {
                 type: 'line',
                 smooth: true,
                 connectNulls: true,
                 symbol: 'none',
                 encode: {
-                  x: "日期",
+                  x: "date",
                   y: "创业板"
                 },
               },
@@ -301,7 +240,7 @@ export default {
           ],
           dataHandleList:[
           ],
-          mergeKey: "日期",
+          mergeKey: "date",
         }
       },
       mergeData:[]
@@ -320,48 +259,6 @@ export default {
   methods: {
     getData() {
     },
-    pmiHandel(dataList){
-      let resultList = [];
-      let date = new Date("2005-02-01");
-
-      for (let i = 0; i < dataList.length; i++) {
-        date = new Date( date.setMonth(date.getMonth() + 1));
-        if (dataList[i] === 0){
-          dataList[i] = dataList[i-1];
-        }
-        resultList.push({"pmi":dataList[i],"date":parseTime(date)});
-      }
-      console.info("pmiHandel")
-      console.info(resultList)
-      return resultList;
-    },
-    ppiHandel(dataList){
-      let resultList = [];
-      let date = new Date("1995-07-01");
-
-      for (let i = 0; i < dataList.length; i++) {
-        date = new Date( date.setMonth(date.getMonth() + 1));
-        if (dataList[i] === 0){
-          dataList[i] = dataList[i-1];
-        }
-        resultList.push({"ppi":dataList[i],"date":parseTime(date)});
-      }
-      return resultList;
-    },
-    usappiHandel(dataList){
-      let resultList = [];
-      let date = new Date("2008-02-26");
-
-      for (let i = 0; i < dataList.length; i++) {
-        date = new Date( date.setMonth(date.getMonth() + 1));
-        if (dataList[i] === 0){
-          dataList[i] = dataList[i-1];
-        }
-        resultList.push({"美国ppi":dataList[i],"date":parseTime(date)});
-      }
-      return resultList;
-    },
-
     addEvent(chartDef, mergeData){
       let eventList=[
         {日期: "2007年8月9日", 事件:"次贷危机"},

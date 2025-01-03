@@ -1,17 +1,19 @@
 package com.ruoyi.hemerdinger.finance.util;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DataUtils {
 
     /**
      * 填充日期并线性插值
+     *
      * @param data
      * @return
      */
@@ -21,105 +23,92 @@ public class DataUtils {
         }
         // 剔除date为空的数据
         data.removeIf(item -> item.get("date") == null);
-        // 按日期排序
-        data.sort(Comparator.comparing(o -> ((String) o.get("date"))));
-
         LocalDate minDate = LocalDate.parse(((String) data.get(0).get("date")));
         LocalDate maxDate = LocalDate.parse(((String) data.get(data.size() - 1).get("date")));
 
         // 为每一列创建创建用于快速查找现有日期及其值的映射
         Map<LocalDate, JSONObject> valueMap = new HashMap<>();
         for (JSONObject item : data) {
-            JSONObject valueJ = new JSONObject();
             LocalDate date = LocalDate.parse((String) item.get("date"));
-
-            for (String col : columns) {
-                String value = item.getString(col);
-                if (value == null || !NumberUtils.isCreatable(value)) {
-                    continue;
-                }
-                valueJ.put( col, Double.parseDouble(value));
-            }
-            valueMap.put(date, valueJ);
+            valueMap.put(date, item);
         }
 
         List<JSONObject> filledData = new ArrayList<>();
         LocalDate currentDate = minDate;
 
-        while (!currentDate.isAfter(maxDate)) {
-            JSONObject entry = new JSONObject();
-            entry.put("date", currentDate.toString());
-
-            for (String col : columns) {
-                Double v = interpolateColumn(col, valueMap, currentDate);
-                if (v == null){
-                    entry.put(col, null);
-                    continue;
-                }
-                // 转成String保留小数点后两位
-                v = Double.parseDouble(String.format("%.2f", v));
-                entry.put(col, v);
+        HashMap<String, List<LocalDate>> nullCloumnDates = new HashMap<>();
+        HashMap<String, Double> cloumnLastValue = new HashMap<>();
+        // 如果有空缺日期进行填充
+        while (currentDate.isBefore(maxDate)) {
+            JSONObject entry;
+            if (!valueMap.containsKey(currentDate)) {
+                // 如果当前日期没有值，则创建一个空的JSON对象，用于插值
+                entry = new JSONObject();
+                entry.put("date", currentDate.toString());
+                valueMap.put(currentDate, entry);
+                filledData.add(entry);
+            } else {
+                entry = valueMap.get(currentDate);
+                filledData.add(entry);
             }
 
-            filledData.add(entry);
+            // 记录每一列空缺值两端的日期以及两端的值
+            for (String col : columns) {
+                if (col.equals("中国国债收益率10年")){
+                    System.out.println("中国国债收益率10年");
+                }
+                Double value = null;
+                if (entry.containsKey(col)) {
+                    value = entry.getDouble(col);
+                }
+                // 如果是空值，进行记录
+                if (null == value) {
+                    List<LocalDate> nullDates = null;
+                    if (!nullCloumnDates.containsKey(col)) {
+                        nullDates = new ArrayList<>();
+                        nullCloumnDates.put(col, nullDates);
+                    }else {
+                        nullDates = nullCloumnDates.get(col);
+                    }
+                    nullDates.add(currentDate);
+                    continue;
+                }
+                // 如果是非空值, 检查空值列表及上一个有效值, 进行插值
+                Double lastValue = null;
+                if (cloumnLastValue.containsKey(col)) {
+                    lastValue = cloumnLastValue.get(col);
+                }
+                // 如果没有上一个有效值，记录当前值, 且清空列表
+                if (null == lastValue) {
+                    cloumnLastValue.put(col, value);
+                    nullCloumnDates.put(col, new ArrayList<>());
+                    continue;
+                }
+                // 如果上一个有效值存在，则进行插值
+                // 获取当前列的空缺日期列表
+                List<LocalDate> nullDates = nullCloumnDates.get(col);
+                // 如果当前列没有空缺日期，则直接跳过
+                if (CollectionUtils.isEmpty(nullDates)) {
+                    cloumnLastValue.put(col, value);
+                    continue;
+                }
+
+                // 进行线性插值
+                Integer dateSize = nullDates.size();
+                Double valueSpan = (value - lastValue) / (dateSize + 1);
+                for (int i = 0; i < nullDates.size(); i++) {
+                    LocalDate localDate = nullDates.get(i);
+                    JSONObject jsonObject = valueMap.get(localDate);
+                    int j = i + 1;
+                    Double v = lastValue + j * valueSpan;
+                    jsonObject.put(col, v);
+                }
+                cloumnLastValue.put(col, value);
+                nullCloumnDates.put(col, new ArrayList<>());
+            }
             currentDate = currentDate.plusDays(1);
         }
-
         return filledData;
     }
 
-    /**
-     * 线性插值
-     * @param column
-     * @param valueMap
-     * @param targetDate
-     * @return
-     */
-    private static Double interpolateColumn(String column, Map<LocalDate, JSONObject> valueMap, LocalDate targetDate) {
-        LocalDate prevDate = null;
-        Double prevValue = null;
-        LocalDate nextDate = null;
-        Double nextValue = null;
-        Set<LocalDate> localDates = valueMap.keySet();
-        // 升序排列localDates
-        List<LocalDate> localDatesList = localDates.stream().sorted().collect(Collectors.toList());
-        // 查找具有实际值前一项和后一项
-        for (LocalDate date : localDatesList) {
-            JSONObject jsonObject = valueMap.get(date);
-            if (!jsonObject.containsKey(column)){
-                continue;
-            }
-            Double v = jsonObject.getDouble(column);
-            if (v == null){
-                continue;
-            }
-            if (!date.isAfter(targetDate) && jsonObject.containsKey(column)) {
-                // 如果
-                prevDate = date;
-                prevValue = v;
-            }
-            if (date.isAfter(targetDate) && jsonObject.containsKey(column)) {
-                nextDate = date;
-                nextValue = v;
-                break; // Stop once we find the next item
-            }
-        }
-
-        if (prevDate == null || nextDate == null) {
-            // 如果没有找到prev或next，就不能插入
-            return null;
-        }
-
-        // 如果是前一个日期，就返回前一个值
-        if (prevDate.isEqual(targetDate)){
-            return prevValue;
-        }
-
-        long daysDiff = ChronoUnit.DAYS.between(prevDate, nextDate);
-        double valueDiff = nextValue - prevValue;
-        double dailyIncrement = valueDiff / daysDiff;
-
-        long daysFromPrev = ChronoUnit.DAYS.between(prevDate, targetDate);
-        return prevValue + dailyIncrement * daysFromPrev;
-    }
 }

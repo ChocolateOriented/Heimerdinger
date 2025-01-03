@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : home
+ Source Server         : 本地-mysql
  Source Server Type    : MySQL
- Source Server Version : 80031
- Source Host           : localhost:3306
+ Source Server Version : 80018
+ Source Host           : 127.0.0.1:3306
  Source Schema         : heimerdinger
 
  Target Server Type    : MySQL
- Target Server Version : 80031
+ Target Server Version : 80018
  File Encoding         : 65001
 
- Date: 02/12/2024 22:45:39
+ Date: 03/01/2025 12:15:44
 */
 
 SET NAMES utf8mb4;
@@ -22,18 +22,18 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `act_workflow_formdata`;
 CREATE TABLE `act_workflow_formdata`  (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
-  `business_key` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '事务key',
-  `form_key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '表单Key',
-  `control_id` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '表单id',
-  `control_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '表单名',
-  `control_value` varchar(2000) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '表单值',
-  `task_node_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '任务节点名称',
-  `create_name` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者姓名',
-  `create_by` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一标识符',
+  `business_key` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '事务key',
+  `form_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单Key',
+  `control_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单id',
+  `control_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单名',
+  `control_value` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '表单值',
+  `task_node_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务节点名称',
+  `create_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者姓名',
+  `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '动态表单' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '动态表单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of act_workflow_formdata
@@ -44,10 +44,10 @@ CREATE TABLE `act_workflow_formdata`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `dbbardata`;
 CREATE TABLE `dbbardata`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `exchange` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `datetime` datetime(0) NOT NULL,
+  `datetime` datetime NOT NULL,
   `interval` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `volume` float NOT NULL,
   `turnover` float NOT NULL,
@@ -57,8 +57,8 @@ CREATE TABLE `dbbardata`  (
   `low_price` float NOT NULL,
   `close_price` float NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `dbbardata_symbol_exchange_interval_datetime`(`symbol`, `exchange`, `interval`, `datetime`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 955430 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `dbbardata_symbol_exchange_interval_datetime`(`symbol` ASC, `exchange` ASC, `interval` ASC, `datetime` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dbbardata
@@ -69,17 +69,17 @@ CREATE TABLE `dbbardata`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `dbbaroverview`;
 CREATE TABLE `dbbaroverview`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `exchange` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `interval` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `count` int NOT NULL,
-  `start` datetime(0) NOT NULL,
-  `end` datetime(0) NOT NULL,
+  `count` int(11) NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `dbbaroverview_symbol_exchange_interval`(`symbol`, `exchange`, `interval`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 300 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `dbbaroverview_symbol_exchange_interval`(`symbol` ASC, `exchange` ASC, `interval` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 300 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dbbaroverview
@@ -390,7 +390,7 @@ INSERT INTO `dbbaroverview` VALUES (300, '001289', 'SZSE', 'd', 269, '2000-01-04
 -- ----------------------------
 DROP TABLE IF EXISTS `dbtickdata`;
 CREATE TABLE `dbtickdata`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `exchange` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `datetime` datetime(3) NOT NULL,
@@ -426,10 +426,10 @@ CREATE TABLE `dbtickdata`  (
   `ask_volume_3` float NULL DEFAULT NULL,
   `ask_volume_4` float NULL DEFAULT NULL,
   `ask_volume_5` float NULL DEFAULT NULL,
-  `localtime` datetime(0) NULL DEFAULT NULL,
+  `localtime` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `dbtickdata_symbol_exchange_datetime`(`symbol`, `exchange`, `datetime`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `dbtickdata_symbol_exchange_datetime`(`symbol` ASC, `exchange` ASC, `datetime` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dbtickdata
@@ -440,15 +440,15 @@ CREATE TABLE `dbtickdata`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `dbtickoverview`;
 CREATE TABLE `dbtickoverview`  (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `symbol` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `exchange` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `count` int NOT NULL,
-  `start` datetime(0) NOT NULL,
-  `end` datetime(0) NOT NULL,
+  `count` int(11) NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `dbtickoverview_symbol_exchange`(`symbol`, `exchange`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `dbtickoverview_symbol_exchange`(`symbol` ASC, `exchange` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dbtickoverview
@@ -459,16 +459,16 @@ CREATE TABLE `dbtickoverview`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `finance_position_plan`;
 CREATE TABLE `finance_position_plan`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '资产名称',
   `target_amount` decimal(24, 3) NULL DEFAULT NULL COMMENT '计划持仓',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '持仓计划' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '持仓计划' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of finance_position_plan
@@ -486,7 +486,7 @@ INSERT INTO `finance_position_plan` VALUES (7, '0', NULL, '2023-11-27 16:56:49',
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_table`;
 CREATE TABLE `gen_table`  (
-  `table_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `table_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '表名称',
   `table_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '表描述',
   `sub_table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '关联子表的表名',
@@ -502,12 +502,12 @@ CREATE TABLE `gen_table`  (
   `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
   `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '其它生成选项',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table
@@ -520,13 +520,14 @@ INSERT INTO `gen_table` VALUES (9, 'stock_trace', '股票追踪', NULL, NULL, 'S
 INSERT INTO `gen_table` VALUES (10, 'gpt_fiction', '小说', NULL, NULL, 'GptFiction', 'crud', 'com.ruoyi.hemerdinger.gpt', 'gpt', 'fiction', '小说', 'lijingxiang', '0', '/', '{\"parentMenuId\":2025}', 'admin', '2024-05-27 08:31:31', '', '2024-05-27 08:48:59', NULL);
 INSERT INTO `gen_table` VALUES (12, 'gpt_fiction_paragraph', '段落', NULL, NULL, 'GptFictionParagraph', 'crud', 'com.ruoyi.hemerdinger.gpt', 'gpt', 'fictionParagraph', '段落', 'lijingxiang', '0', '/', '{\"parentMenuId\":2025}', 'admin', '2024-05-27 08:31:31', '', '2024-05-27 09:16:12', NULL);
 INSERT INTO `gen_table` VALUES (13, 'gpt_fiction_data', '小说数据', NULL, NULL, 'GptFictionData', 'crud', 'com.ruoyi.hemerdinger.gpt', 'gpt', 'fictionData', '小说数据', 'lijingxiang', '0', '/', '{\"parentMenuId\":\"2025\"}', 'admin', '2024-05-27 08:45:13', '', '2024-05-27 09:16:34', NULL);
+INSERT INTO `gen_table` VALUES (14, 'stock_dict', '股票追踪', NULL, NULL, 'StockDict', 'crud', 'com.ruoyi.hemerdinger.finance', 'finance', 'stockDict', '股票字典', 'lijingxiang', '0', '/', '{\"parentMenuId\":2018}', 'admin', '2024-12-10 16:16:46', '', '2024-12-10 16:19:53', NULL);
 
 -- ----------------------------
 -- Table structure for gen_table_column
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_table_column`;
 CREATE TABLE `gen_table_column`  (
-  `column_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `column_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `table_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '归属表编号',
   `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列名称',
   `column_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '列描述',
@@ -543,13 +544,13 @@ CREATE TABLE `gen_table_column`  (
   `query_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
   `html_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
   `dict_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
-  `sort` int NULL DEFAULT NULL COMMENT '排序',
+  `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 199 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 203 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -646,23 +647,27 @@ INSERT INTO `gen_table_column` VALUES (196, '13', 'file_id', '上传id', 'varcha
 INSERT INTO `gen_table_column` VALUES (197, '13', 'fiction_id', '小说id', 'varchar(255)', 'String', 'fictionId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2024-05-27 08:45:13', '', '2024-05-27 09:16:34');
 INSERT INTO `gen_table_column` VALUES (198, '12', 'volume_frame_id', '卷框架ID', 'bigint', 'Long', 'volumeFrameId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 10, '', '2024-05-27 14:38:20', '', NULL);
 INSERT INTO `gen_table_column` VALUES (199, '12', 'role_status_id', '主角状态ID', 'bigint', 'Long', 'roleStatusId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 13, '', '2024-05-27 14:38:20', '', NULL);
+INSERT INTO `gen_table_column` VALUES (200, '14', 'id', 'id', 'bigint(20)', 'Long', 'id', '1', '1', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2024-12-10 16:16:46', '', '2024-12-10 16:19:53');
+INSERT INTO `gen_table_column` VALUES (201, '14', 'name', '名称', 'varchar(255)', 'String', 'name', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 2, 'admin', '2024-12-10 16:16:46', '', '2024-12-10 16:19:53');
+INSERT INTO `gen_table_column` VALUES (202, '14', 'code', '代码', 'varchar(255)', 'String', 'code', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2024-12-10 16:16:46', '', '2024-12-10 16:19:53');
+INSERT INTO `gen_table_column` VALUES (203, '14', 'bourse', '交易所', 'varchar(255)', 'String', 'bourse', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2024-12-10 16:16:46', '', '2024-12-10 16:19:53');
 
 -- ----------------------------
 -- Table structure for gpt_fiction
 -- ----------------------------
 DROP TABLE IF EXISTS `gpt_fiction`;
 CREATE TABLE `gpt_fiction`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名称',
   `summary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '概要',
   `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '封面',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '小说' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '小说' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gpt_fiction
@@ -673,17 +678,17 @@ CREATE TABLE `gpt_fiction`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `gpt_fiction_data`;
 CREATE TABLE `gpt_fiction_data`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '内容JSON',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `file_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '上传id',
-  `fiction_id` bigint NULL DEFAULT NULL COMMENT '小说id',
+  `fiction_id` bigint(20) NULL DEFAULT NULL COMMENT '小说id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '小说数据' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '小说数据' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gpt_fiction_data
@@ -694,21 +699,21 @@ CREATE TABLE `gpt_fiction_data`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `gpt_fiction_paragraph`;
 CREATE TABLE `gpt_fiction_paragraph`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `content` varchar(900) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '内容',
   `options_json` varchar(900) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '选项JSON, 包含选项对应的全局框架和章节框架,以及下一段落ID',
-  `fiction_frame_id` bigint NULL DEFAULT NULL COMMENT '全局框架ID',
-  `volume_frame_id` bigint NULL DEFAULT NULL COMMENT '卷框架ID',
-  `fiction_id` bigint NULL DEFAULT NULL COMMENT '小说ID',
-  `serial` int NULL DEFAULT NULL COMMENT '序号',
-  `role_status_id` bigint NULL DEFAULT NULL COMMENT '主角状态ID',
+  `fiction_frame_id` bigint(20) NULL DEFAULT NULL COMMENT '全局框架ID',
+  `volume_frame_id` bigint(20) NULL DEFAULT NULL COMMENT '卷框架ID',
+  `fiction_id` bigint(20) NULL DEFAULT NULL COMMENT '小说ID',
+  `serial` int(11) NULL DEFAULT NULL COMMENT '序号',
+  `role_status_id` bigint(20) NULL DEFAULT NULL COMMENT '主角状态ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '段落' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '段落' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of gpt_fiction_paragraph
@@ -719,8 +724,8 @@ CREATE TABLE `gpt_fiction_paragraph`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `hibernate_sequence`;
 CREATE TABLE `hibernate_sequence`  (
-  `next_val` bigint NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `next_val` bigint(20) NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hibernate_sequence
@@ -732,17 +737,17 @@ INSERT INTO `hibernate_sequence` VALUES (1);
 -- ----------------------------
 DROP TABLE IF EXISTS `indicator`;
 CREATE TABLE `indicator`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '指标名称',
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '指标编码',
   `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '值',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '经济指标' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '经济指标' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of indicator
@@ -767,7 +772,7 @@ CREATE TABLE `macro_bond_zh_us_rate`  (
   `zh_bond_rate_5year` double NULL DEFAULT NULL,
   `zh_gdp_growth_rate` double NULL DEFAULT NULL,
   PRIMARY KEY (`date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of macro_bond_zh_us_rate
@@ -781,7 +786,7 @@ CREATE TABLE `macro_china_cpi_yearly`  (
   `date` datetime(6) NOT NULL,
   `cpi` double NULL DEFAULT NULL,
   PRIMARY KEY (`date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of macro_china_cpi_yearly
@@ -796,7 +801,7 @@ CREATE TABLE `macro_china_pmi_yearly`  (
   `pmi` double NULL DEFAULT NULL,
   `prediction_pmi` double NULL DEFAULT NULL,
   PRIMARY KEY (`date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of macro_china_pmi_yearly
@@ -811,7 +816,7 @@ CREATE TABLE `macro_china_ppi_yearly`  (
   `ppi` double NULL DEFAULT NULL,
   `prediction_ppi` double NULL DEFAULT NULL,
   PRIMARY KEY (`date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of macro_china_ppi_yearly
@@ -840,7 +845,7 @@ CREATE TABLE `macro_china_supply_of_money`  (
   `saving_deposits` double NULL DEFAULT NULL,
   `saving_deposits_growth` double NULL DEFAULT NULL,
   PRIMARY KEY (`date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of macro_china_supply_of_money
@@ -857,7 +862,7 @@ CREATE TABLE `macro_stock_a_all_pb`  (
   `quantile_in_recent10years_equal_weight_averagepb` double NULL DEFAULT NULL,
   `quantile_in_recent10years_middlepb` double NULL DEFAULT NULL,
   PRIMARY KEY (`date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of macro_stock_a_all_pb
@@ -878,95 +883,97 @@ CREATE TABLE `macro_stock_a_ttm_lyr`  (
   `quantile_in_recent10years_middle_pe_lyr` double NULL DEFAULT NULL,
   `quantile_in_recent10years_middle_pe_ttm` double NULL DEFAULT NULL,
   PRIMARY KEY (`date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of macro_stock_a_ttm_lyr
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for QRTZ_BLOB_TRIGGERS
+-- Table structure for qrtz_blob_triggers
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_BLOB_TRIGGERS`;
-CREATE TABLE `QRTZ_BLOB_TRIGGERS`  (
+DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+CREATE TABLE `qrtz_blob_triggers`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
   `blob_data` blob NULL COMMENT '存放持久化Trigger对象',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Blob类型的触发器表' ROW_FORMAT = Dynamic;
+  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Blob类型的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_BLOB_TRIGGERS
+-- Records of qrtz_blob_triggers
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for QRTZ_CALENDARS
+-- Table structure for qrtz_calendars
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_CALENDARS`;
-CREATE TABLE `QRTZ_CALENDARS`  (
+DROP TABLE IF EXISTS `qrtz_calendars`;
+CREATE TABLE `qrtz_calendars`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `calendar_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '日历名称',
   `calendar` blob NOT NULL COMMENT '存放持久化calendar对象',
   PRIMARY KEY (`sched_name`, `calendar_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日历信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日历信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_CALENDARS
+-- Records of qrtz_calendars
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for QRTZ_CRON_TRIGGERS
+-- Table structure for qrtz_cron_triggers
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_CRON_TRIGGERS`;
-CREATE TABLE `QRTZ_CRON_TRIGGERS`  (
+DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+CREATE TABLE `qrtz_cron_triggers`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
   `cron_expression` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'cron表达式',
   `time_zone_id` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '时区',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Cron类型的触发器表' ROW_FORMAT = Dynamic;
+  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = 'Cron类型的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_CRON_TRIGGERS
+-- Records of qrtz_cron_triggers
 -- ----------------------------
-INSERT INTO `QRTZ_CRON_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai');
-INSERT INTO `QRTZ_CRON_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', '0/15 * * * * ?', 'Asia/Shanghai');
-INSERT INTO `QRTZ_CRON_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', '0/20 * * * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', '0/15 * * * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', '0/20 * * * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME4', 'DEFAULT', '0 0 4 * * ? *', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME5', 'DEFAULT', '0 0 3 * * ? *', 'Asia/Shanghai');
 
 -- ----------------------------
--- Table structure for QRTZ_FIRED_TRIGGERS
+-- Table structure for qrtz_fired_triggers
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_FIRED_TRIGGERS`;
-CREATE TABLE `QRTZ_FIRED_TRIGGERS`  (
+DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+CREATE TABLE `qrtz_fired_triggers`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `entry_id` varchar(95) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度器实例id',
   `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
   `instance_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度器实例名',
-  `fired_time` bigint NOT NULL COMMENT '触发的时间',
-  `sched_time` bigint NOT NULL COMMENT '定时器制定的时间',
-  `priority` int NOT NULL COMMENT '优先级',
+  `fired_time` bigint(20) NOT NULL COMMENT '触发的时间',
+  `sched_time` bigint(20) NOT NULL COMMENT '定时器制定的时间',
+  `priority` int(11) NOT NULL COMMENT '优先级',
   `state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态',
   `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '任务名称',
   `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '任务组名',
   `is_nonconcurrent` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否并发',
   `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '是否接受恢复执行',
   PRIMARY KEY (`sched_name`, `entry_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '已触发的触发器表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '已触发的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_FIRED_TRIGGERS
+-- Records of qrtz_fired_triggers
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for QRTZ_JOB_DETAILS
+-- Table structure for qrtz_job_details
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_JOB_DETAILS`;
-CREATE TABLE `QRTZ_JOB_DETAILS`  (
+DROP TABLE IF EXISTS `qrtz_job_details`;
+CREATE TABLE `qrtz_job_details`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务名称',
   `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务组名',
@@ -978,156 +985,160 @@ CREATE TABLE `QRTZ_JOB_DETAILS`  (
   `requests_recovery` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '是否接受恢复执行',
   `job_data` blob NULL COMMENT '存放持久化job对象',
   PRIMARY KEY (`sched_name`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '任务详细信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '任务详细信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_JOB_DETAILS
+-- Records of qrtz_job_details
 -- ----------------------------
-INSERT INTO `QRTZ_JOB_DETAILS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000184A76A2FE878707400007070707400013174000E302F3130202A202A202A202A203F74001172795461736B2E72794E6F506172616D7374000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000001740018E7B3BBE7BB9FE9BB98E8AEA4EFBC88E697A0E58F82EFBC8974000133740001317800);
-INSERT INTO `QRTZ_JOB_DETAILS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000184A76A2FE878707400007070707400013174000E302F3135202A202A202A202A203F74001572795461736B2E7279506172616D7328277279272974000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000002740018E7B3BBE7BB9FE9BB98E8AEA4EFBC88E69C89E58F82EFBC8974000133740001317800);
-INSERT INTO `QRTZ_JOB_DETAILS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000184A76A2FE878707400007070707400013174000E302F3230202A202A202A202A203F74003872795461736B2E72794D756C7469706C65506172616D7328277279272C20747275652C20323030304C2C203331362E3530442C203130302974000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000003740018E7B3BBE7BB9FE9BB98E8AEA4EFBC88E5A49AE58F82EFBC8974000133740001317800);
+INSERT INTO `qrtz_job_details` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000184A76A2FE878707400007070707400013174000E302F3130202A202A202A202A203F74001172795461736B2E72794E6F506172616D7374000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000001740018E7B3BBE7BB9FE9BB98E8AEA4EFBC88E697A0E58F82EFBC8974000133740001317800);
+INSERT INTO `qrtz_job_details` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000184A76A2FE878707400007070707400013174000E302F3135202A202A202A202A203F74001572795461736B2E7279506172616D7328277279272974000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000002740018E7B3BBE7BB9FE9BB98E8AEA4EFBC88E69C89E58F82EFBC8974000133740001317800);
+INSERT INTO `qrtz_job_details` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000184A76A2FE878707400007070707400013174000E302F3230202A202A202A202A203F74003872795461736B2E72794D756C7469706C65506172616D7328277279272C20747275652C20323030304C2C203331362E3530442C203130302974000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000003740018E7B3BBE7BB9FE9BB98E8AEA4EFBC88E5A49AE58F82EFBC8974000133740001317800);
+INSERT INTO `qrtz_job_details` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME4', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000193AFCF8C7878707400007070707400013174000D3020302034202A202A203F202A740025696E64696361746F72536572766963652E75706461746544617973496E64696361746F727374000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000004740012E69BB4E696B0E98791E89E8DE68C87E6A08774000131740001307800);
+INSERT INTO `qrtz_job_details` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME5', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000F5441534B5F50524F504552544945537372001E636F6D2E72756F79692E71756172747A2E646F6D61696E2E5379734A6F6200000000000000010200084C000A636F6E63757272656E747400124C6A6176612F6C616E672F537472696E673B4C000E63726F6E45787072657373696F6E71007E00094C000C696E766F6B6554617267657471007E00094C00086A6F6247726F757071007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C00076A6F624E616D6571007E00094C000D6D697366697265506F6C69637971007E00094C000673746174757371007E000978720027636F6D2E72756F79692E636F6D6D6F6E2E636F72652E646F6D61696E2E42617365456E7469747900000000000000010200074C0008637265617465427971007E00094C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C0006706172616D7371007E00034C000672656D61726B71007E00094C000B73656172636856616C756571007E00094C0008757064617465427971007E00094C000A75706461746554696D6571007E000C787074000561646D696E7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000193D2EAEE0078707400007070707400013174000D3020302033202A202A203F202A74001E73746F636B44696374536572766963652E7361766553746F636B4C69737474000744454641554C547372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000005740012E68B89E58F96E882A1E7A5A8E5AD97E585B874000131740001307800);
 
 -- ----------------------------
--- Table structure for QRTZ_LOCKS
+-- Table structure for qrtz_locks
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_LOCKS`;
-CREATE TABLE `QRTZ_LOCKS`  (
+DROP TABLE IF EXISTS `qrtz_locks`;
+CREATE TABLE `qrtz_locks`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `lock_name` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '悲观锁名称',
   PRIMARY KEY (`sched_name`, `lock_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '存储的悲观锁信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '存储的悲观锁信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_LOCKS
+-- Records of qrtz_locks
 -- ----------------------------
-INSERT INTO `QRTZ_LOCKS` VALUES ('RuoyiScheduler', 'STATE_ACCESS');
-INSERT INTO `QRTZ_LOCKS` VALUES ('RuoyiScheduler', 'TRIGGER_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('RuoyiScheduler', 'STATE_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('RuoyiScheduler', 'TRIGGER_ACCESS');
 
 -- ----------------------------
--- Table structure for QRTZ_PAUSED_TRIGGER_GRPS
+-- Table structure for qrtz_paused_trigger_grps
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_PAUSED_TRIGGER_GRPS`;
-CREATE TABLE `QRTZ_PAUSED_TRIGGER_GRPS`  (
+DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+CREATE TABLE `qrtz_paused_trigger_grps`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
   PRIMARY KEY (`sched_name`, `trigger_group`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '暂停的触发器表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '暂停的触发器表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_PAUSED_TRIGGER_GRPS
+-- Records of qrtz_paused_trigger_grps
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for QRTZ_SCHEDULER_STATE
+-- Table structure for qrtz_scheduler_state
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_SCHEDULER_STATE`;
-CREATE TABLE `QRTZ_SCHEDULER_STATE`  (
+DROP TABLE IF EXISTS `qrtz_scheduler_state`;
+CREATE TABLE `qrtz_scheduler_state`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `instance_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '实例名称',
-  `last_checkin_time` bigint NOT NULL COMMENT '上次检查时间',
-  `checkin_interval` bigint NOT NULL COMMENT '检查间隔时间',
+  `last_checkin_time` bigint(20) NOT NULL COMMENT '上次检查时间',
+  `checkin_interval` bigint(20) NOT NULL COMMENT '检查间隔时间',
   PRIMARY KEY (`sched_name`, `instance_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '调度器状态表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '调度器状态表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_SCHEDULER_STATE
+-- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `QRTZ_SCHEDULER_STATE` VALUES ('RuoyiScheduler', 'DESKTOP-G4CUL5O1716800944756', 1716828000031, 15000);
+INSERT INTO `qrtz_scheduler_state` VALUES ('RuoyiScheduler', 'ljx-work1734795893947', 1734889106682, 15000);
 
 -- ----------------------------
--- Table structure for QRTZ_SIMPLE_TRIGGERS
+-- Table structure for qrtz_simple_triggers
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_SIMPLE_TRIGGERS`;
-CREATE TABLE `QRTZ_SIMPLE_TRIGGERS`  (
+DROP TABLE IF EXISTS `qrtz_simple_triggers`;
+CREATE TABLE `qrtz_simple_triggers`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
-  `repeat_count` bigint NOT NULL COMMENT '重复的次数统计',
-  `repeat_interval` bigint NOT NULL COMMENT '重复的间隔时间',
-  `times_triggered` bigint NOT NULL COMMENT '已经触发的次数',
+  `repeat_count` bigint(20) NOT NULL COMMENT '重复的次数统计',
+  `repeat_interval` bigint(20) NOT NULL COMMENT '重复的间隔时间',
+  `times_triggered` bigint(20) NOT NULL COMMENT '已经触发的次数',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '简单触发器的信息表' ROW_FORMAT = Dynamic;
+  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '简单触发器的信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_SIMPLE_TRIGGERS
+-- Records of qrtz_simple_triggers
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for QRTZ_SIMPROP_TRIGGERS
+-- Table structure for qrtz_simprop_triggers
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_SIMPROP_TRIGGERS`;
-CREATE TABLE `QRTZ_SIMPROP_TRIGGERS`  (
+DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
+CREATE TABLE `qrtz_simprop_triggers`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_name的外键',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_triggers表trigger_group的外键',
   `str_prop_1` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第一个参数',
   `str_prop_2` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第二个参数',
   `str_prop_3` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'String类型的trigger的第三个参数',
-  `int_prop_1` int NULL DEFAULT NULL COMMENT 'int类型的trigger的第一个参数',
-  `int_prop_2` int NULL DEFAULT NULL COMMENT 'int类型的trigger的第二个参数',
-  `long_prop_1` bigint NULL DEFAULT NULL COMMENT 'long类型的trigger的第一个参数',
-  `long_prop_2` bigint NULL DEFAULT NULL COMMENT 'long类型的trigger的第二个参数',
+  `int_prop_1` int(11) NULL DEFAULT NULL COMMENT 'int类型的trigger的第一个参数',
+  `int_prop_2` int(11) NULL DEFAULT NULL COMMENT 'int类型的trigger的第二个参数',
+  `long_prop_1` bigint(20) NULL DEFAULT NULL COMMENT 'long类型的trigger的第一个参数',
+  `long_prop_2` bigint(20) NULL DEFAULT NULL COMMENT 'long类型的trigger的第二个参数',
   `dec_prop_1` decimal(13, 4) NULL DEFAULT NULL COMMENT 'decimal类型的trigger的第一个参数',
   `dec_prop_2` decimal(13, 4) NULL DEFAULT NULL COMMENT 'decimal类型的trigger的第二个参数',
   `bool_prop_1` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Boolean类型的trigger的第一个参数',
   `bool_prop_2` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT 'Boolean类型的trigger的第二个参数',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '同步机制的行锁表' ROW_FORMAT = Dynamic;
+  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '同步机制的行锁表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_SIMPROP_TRIGGERS
+-- Records of qrtz_simprop_triggers
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for QRTZ_TRIGGERS
+-- Table structure for qrtz_triggers
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_TRIGGERS`;
-CREATE TABLE `QRTZ_TRIGGERS`  (
+DROP TABLE IF EXISTS `qrtz_triggers`;
+CREATE TABLE `qrtz_triggers`  (
   `sched_name` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调度名称',
   `trigger_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器的名字',
   `trigger_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器所属组的名字',
   `job_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_job_details表job_name的外键',
   `job_group` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'qrtz_job_details表job_group的外键',
   `description` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '相关介绍',
-  `next_fire_time` bigint NULL DEFAULT NULL COMMENT '上一次触发时间（毫秒）',
-  `prev_fire_time` bigint NULL DEFAULT NULL COMMENT '下一次触发时间（默认为-1表示不触发）',
-  `priority` int NULL DEFAULT NULL COMMENT '优先级',
+  `next_fire_time` bigint(20) NULL DEFAULT NULL COMMENT '上一次触发时间（毫秒）',
+  `prev_fire_time` bigint(20) NULL DEFAULT NULL COMMENT '下一次触发时间（默认为-1表示不触发）',
+  `priority` int(11) NULL DEFAULT NULL COMMENT '优先级',
   `trigger_state` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器状态',
   `trigger_type` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '触发器的类型',
-  `start_time` bigint NOT NULL COMMENT '开始时间',
-  `end_time` bigint NULL DEFAULT NULL COMMENT '结束时间',
+  `start_time` bigint(20) NOT NULL COMMENT '开始时间',
+  `end_time` bigint(20) NULL DEFAULT NULL COMMENT '结束时间',
   `calendar_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日程表名称',
-  `misfire_instr` smallint NULL DEFAULT NULL COMMENT '补偿执行的策略',
+  `misfire_instr` smallint(6) NULL DEFAULT NULL COMMENT '补偿执行的策略',
   `job_data` blob NULL COMMENT '存放持久化job对象',
   PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`) USING BTREE,
-  INDEX `sched_name`(`sched_name`, `job_name`, `job_group`) USING BTREE,
-  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `QRTZ_JOB_DETAILS` (`sched_name`, `job_name`, `job_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '触发器详细信息表' ROW_FORMAT = Dynamic;
+  INDEX `sched_name`(`sched_name` ASC, `job_name` ASC, `job_group` ASC) USING BTREE,
+  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `qrtz_job_details` (`sched_name`, `job_name`, `job_group`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '触发器详细信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of QRTZ_TRIGGERS
+-- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1716800950000, -1, 5, 'PAUSED', 'CRON', 1716800944000, 0, NULL, 2, '');
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1716800955000, -1, 5, 'PAUSED', 'CRON', 1716800944000, 0, NULL, 2, '');
-INSERT INTO `QRTZ_TRIGGERS` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1716800960000, -1, 5, 'PAUSED', 'CRON', 1716800944000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 1734795900000, -1, 5, 'PAUSED', 'CRON', 1734795894000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', 'TASK_CLASS_NAME2', 'DEFAULT', NULL, 1734795900000, -1, 5, 'PAUSED', 'CRON', 1734795894000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', 'TASK_CLASS_NAME3', 'DEFAULT', NULL, 1734795900000, -1, 5, 'PAUSED', 'CRON', 1734795894000, 0, NULL, 2, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME4', 'DEFAULT', 'TASK_CLASS_NAME4', 'DEFAULT', NULL, 1734897600000, 1734811200000, 5, 'WAITING', 'CRON', 1734795894000, 0, NULL, -1, '');
+INSERT INTO `qrtz_triggers` VALUES ('RuoyiScheduler', 'TASK_CLASS_NAME5', 'DEFAULT', 'TASK_CLASS_NAME5', 'DEFAULT', NULL, 1734894000000, 1734807600000, 5, 'WAITING', 'CRON', 1734795894000, 0, NULL, -1, '');
 
 -- ----------------------------
 -- Table structure for stock_data_config
 -- ----------------------------
 DROP TABLE IF EXISTS `stock_data_config`;
 CREATE TABLE `stock_data_config`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  `data_index` int NULL DEFAULT NULL COMMENT '索引',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `data_index` int(11) NULL DEFAULT NULL COMMENT '索引',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '股票数据映射配置' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '股票数据映射配置' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of stock_data_config
@@ -1135,26 +1146,5718 @@ CREATE TABLE `stock_data_config`  (
 INSERT INTO `stock_data_config` VALUES (1, '0', NULL, NULL, NULL, NULL, 3, 'price');
 
 -- ----------------------------
+-- Table structure for stock_dict
+-- ----------------------------
+DROP TABLE IF EXISTS `stock_dict`;
+CREATE TABLE `stock_dict`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名称',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '代码',
+  `bourse` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易所',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5676 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '股票追踪' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of stock_dict
+-- ----------------------------
+INSERT INTO `stock_dict` VALUES (1, '中研股份', '688716', 'sh');
+INSERT INTO `stock_dict` VALUES (2, '乐鑫科技', '688018', 'sh');
+INSERT INTO `stock_dict` VALUES (3, '埃夫特-U', '688165', 'sh');
+INSERT INTO `stock_dict` VALUES (4, '光云科技', '688365', 'sh');
+INSERT INTO `stock_dict` VALUES (5, '会通股份', '688219', 'sh');
+INSERT INTO `stock_dict` VALUES (6, '凌志软件', '688588', 'sh');
+INSERT INTO `stock_dict` VALUES (7, '浙海德曼', '688577', 'sh');
+INSERT INTO `stock_dict` VALUES (8, '成都华微', '688709', 'sh');
+INSERT INTO `stock_dict` VALUES (9, '敏芯股份', '688286', 'sh');
+INSERT INTO `stock_dict` VALUES (10, '思科瑞', '688053', 'sh');
+INSERT INTO `stock_dict` VALUES (11, '奥普特', '688686', 'sh');
+INSERT INTO `stock_dict` VALUES (12, '禾川科技', '688320', 'sh');
+INSERT INTO `stock_dict` VALUES (13, '华远地产', '600743', 'sh');
+INSERT INTO `stock_dict` VALUES (14, '江南高纤', '600527', 'sh');
+INSERT INTO `stock_dict` VALUES (15, '广安爱众', '600979', 'sh');
+INSERT INTO `stock_dict` VALUES (16, '华丽家族', '600503', 'sh');
+INSERT INTO `stock_dict` VALUES (17, '山东玻纤', '605006', 'sh');
+INSERT INTO `stock_dict` VALUES (18, '福达股份', '603166', 'sh');
+INSERT INTO `stock_dict` VALUES (19, '帅丰电器', '605336', 'sh');
+INSERT INTO `stock_dict` VALUES (20, '永辉超市', '601933', 'sh');
+INSERT INTO `stock_dict` VALUES (21, '安记食品', '603696', 'sh');
+INSERT INTO `stock_dict` VALUES (22, '弘讯科技', '603015', 'sh');
+INSERT INTO `stock_dict` VALUES (23, '湘邮科技', '600476', 'sh');
+INSERT INTO `stock_dict` VALUES (24, '东尼电子', '603595', 'sh');
+INSERT INTO `stock_dict` VALUES (25, '家家悦', '603708', 'sh');
+INSERT INTO `stock_dict` VALUES (26, '东百集团', '600693', 'sh');
+INSERT INTO `stock_dict` VALUES (27, '宁波精达', '603088', 'sh');
+INSERT INTO `stock_dict` VALUES (28, '李子园', '605337', 'sh');
+INSERT INTO `stock_dict` VALUES (29, '同庆楼', '605108', 'sh');
+INSERT INTO `stock_dict` VALUES (30, '中国卫星', '600118', 'sh');
+INSERT INTO `stock_dict` VALUES (31, '华菱精工', '603356', 'sh');
+INSERT INTO `stock_dict` VALUES (32, '天域生物', '603717', 'sh');
+INSERT INTO `stock_dict` VALUES (33, '盛景微', '603375', 'sh');
+INSERT INTO `stock_dict` VALUES (34, '移远通信', '603236', 'sh');
+INSERT INTO `stock_dict` VALUES (35, '北特科技', '603009', 'sh');
+INSERT INTO `stock_dict` VALUES (36, '乐惠国际', '603076', 'sh');
+INSERT INTO `stock_dict` VALUES (37, '金田股份', '601609', 'sh');
+INSERT INTO `stock_dict` VALUES (38, '新华传媒', '600825', 'sh');
+INSERT INTO `stock_dict` VALUES (39, '鸣志电器', '603728', 'sh');
+INSERT INTO `stock_dict` VALUES (40, '柯力传感', '603662', 'sh');
+INSERT INTO `stock_dict` VALUES (41, '华扬联众', '603825', 'sh');
+INSERT INTO `stock_dict` VALUES (42, '一鸣食品', '605179', 'sh');
+INSERT INTO `stock_dict` VALUES (43, '国联股份', '603613', 'sh');
+INSERT INTO `stock_dict` VALUES (44, '友好集团', '600778', 'sh');
+INSERT INTO `stock_dict` VALUES (45, '宜宾纸业', '600793', 'sh');
+INSERT INTO `stock_dict` VALUES (46, '葫芦娃', '605199', 'sh');
+INSERT INTO `stock_dict` VALUES (47, '良品铺子', '603719', 'sh');
+INSERT INTO `stock_dict` VALUES (48, '金自天正', '600560', 'sh');
+INSERT INTO `stock_dict` VALUES (49, '惠发食品', '603536', 'sh');
+INSERT INTO `stock_dict` VALUES (50, '复旦复华', '600624', 'sh');
+INSERT INTO `stock_dict` VALUES (51, '卓郎智能', '600545', 'sh');
+INSERT INTO `stock_dict` VALUES (52, '惠而浦', '600983', 'sh');
+INSERT INTO `stock_dict` VALUES (53, '海天瑞声', '688787', 'sh');
+INSERT INTO `stock_dict` VALUES (54, '文峰股份', '601010', 'sh');
+INSERT INTO `stock_dict` VALUES (55, '虹软科技', '688088', 'sh');
+INSERT INTO `stock_dict` VALUES (56, '当虹科技', '688039', 'sh');
+INSERT INTO `stock_dict` VALUES (57, '洪田股份', '603800', 'sh');
+INSERT INTO `stock_dict` VALUES (58, '江苏北人', '688218', 'sh');
+INSERT INTO `stock_dict` VALUES (59, '广钢气体', '688548', 'sh');
+INSERT INTO `stock_dict` VALUES (60, '悦安新材', '688786', 'sh');
+INSERT INTO `stock_dict` VALUES (61, '莱斯信息', '688631', 'sh');
+INSERT INTO `stock_dict` VALUES (62, '合合信息', '688615', 'sh');
+INSERT INTO `stock_dict` VALUES (63, '步科股份', '688160', 'sh');
+INSERT INTO `stock_dict` VALUES (64, '哈森股份', '603958', 'sh');
+INSERT INTO `stock_dict` VALUES (65, '万控智造', '603070', 'sh');
+INSERT INTO `stock_dict` VALUES (66, '天智航-U', '688277', 'sh');
+INSERT INTO `stock_dict` VALUES (67, '绿的谐波', '688017', 'sh');
+INSERT INTO `stock_dict` VALUES (68, '瀚川智能', '688022', 'sh');
+INSERT INTO `stock_dict` VALUES (69, '长江通信', '600345', 'sh');
+INSERT INTO `stock_dict` VALUES (70, '祥源文旅', '600576', 'sh');
+INSERT INTO `stock_dict` VALUES (71, '首旅酒店', '600258', 'sh');
+INSERT INTO `stock_dict` VALUES (72, '统一股份', '600506', 'sh');
+INSERT INTO `stock_dict` VALUES (73, '爱玛科技', '603529', 'sh');
+INSERT INTO `stock_dict` VALUES (74, '大唐电信', '600198', 'sh');
+INSERT INTO `stock_dict` VALUES (75, '福昕软件', '688095', 'sh');
+INSERT INTO `stock_dict` VALUES (76, '全筑股份', '603030', 'sh');
+INSERT INTO `stock_dict` VALUES (77, '来伊份', '603777', 'sh');
+INSERT INTO `stock_dict` VALUES (78, '金鸿顺', '603922', 'sh');
+INSERT INTO `stock_dict` VALUES (79, '光电股份', '600184', 'sh');
+INSERT INTO `stock_dict` VALUES (80, '格灵深瞳', '688207', 'sh');
+INSERT INTO `stock_dict` VALUES (81, '天味食品', '603317', 'sh');
+INSERT INTO `stock_dict` VALUES (82, '凌云光', '688400', 'sh');
+INSERT INTO `stock_dict` VALUES (83, '锦泓集团', '603518', 'sh');
+INSERT INTO `stock_dict` VALUES (84, '中国卫通', '601698', 'sh');
+INSERT INTO `stock_dict` VALUES (85, '动力源', '600405', 'sh');
+INSERT INTO `stock_dict` VALUES (86, '引力传媒', '603598', 'sh');
+INSERT INTO `stock_dict` VALUES (87, '春雪食品', '605567', 'sh');
+INSERT INTO `stock_dict` VALUES (88, '臻镭科技', '688270', 'sh');
+INSERT INTO `stock_dict` VALUES (89, '国盾量子', '688027', 'sh');
+INSERT INTO `stock_dict` VALUES (90, '青松建化', '600425', 'sh');
+INSERT INTO `stock_dict` VALUES (91, '极米科技', '688696', 'sh');
+INSERT INTO `stock_dict` VALUES (92, '风语筑', '603466', 'sh');
+INSERT INTO `stock_dict` VALUES (93, '金博股份', '688598', 'sh');
+INSERT INTO `stock_dict` VALUES (94, '长盈通', '688143', 'sh');
+INSERT INTO `stock_dict` VALUES (95, '纳睿雷达', '688522', 'sh');
+INSERT INTO `stock_dict` VALUES (96, '磁谷科技', '688448', 'sh');
+INSERT INTO `stock_dict` VALUES (97, '禾信仪器', '688622', 'sh');
+INSERT INTO `stock_dict` VALUES (98, '丸美生物', '603983', 'sh');
+INSERT INTO `stock_dict` VALUES (99, '安恒信息', '688023', 'sh');
+INSERT INTO `stock_dict` VALUES (100, '佳驰科技', '688708', 'sh');
+INSERT INTO `stock_dict` VALUES (101, '联创光电', '600363', 'sh');
+INSERT INTO `stock_dict` VALUES (102, '倍轻松', '688793', 'sh');
+INSERT INTO `stock_dict` VALUES (103, '新亚电子', '605277', 'sh');
+INSERT INTO `stock_dict` VALUES (104, '波导股份', '600130', 'sh');
+INSERT INTO `stock_dict` VALUES (105, '振华股份', '603067', 'sh');
+INSERT INTO `stock_dict` VALUES (106, '力帆科技', '601777', 'sh');
+INSERT INTO `stock_dict` VALUES (107, '必得科技', '605298', 'sh');
+INSERT INTO `stock_dict` VALUES (108, '杰华特', '688141', 'sh');
+INSERT INTO `stock_dict` VALUES (109, '爱科赛博', '688719', 'sh');
+INSERT INTO `stock_dict` VALUES (110, '三友医疗', '688085', 'sh');
+INSERT INTO `stock_dict` VALUES (111, '智明达', '688636', 'sh');
+INSERT INTO `stock_dict` VALUES (112, '华曙高科', '688433', 'sh');
+INSERT INTO `stock_dict` VALUES (113, '*ST卓朗', '600225', 'sh');
+INSERT INTO `stock_dict` VALUES (114, '振华风光', '688439', 'sh');
+INSERT INTO `stock_dict` VALUES (115, '国光连锁', '605188', 'sh');
+INSERT INTO `stock_dict` VALUES (116, '四创电子', '600990', 'sh');
+INSERT INTO `stock_dict` VALUES (117, '上海沪工', '603131', 'sh');
+INSERT INTO `stock_dict` VALUES (118, '国茂股份', '603915', 'sh');
+INSERT INTO `stock_dict` VALUES (119, '新相微', '688593', 'sh');
+INSERT INTO `stock_dict` VALUES (120, '美尔雅', '600107', 'sh');
+INSERT INTO `stock_dict` VALUES (121, '星环科技-U', '688031', 'sh');
+INSERT INTO `stock_dict` VALUES (122, '中无人机', '688297', 'sh');
+INSERT INTO `stock_dict` VALUES (123, '豪森智能', '688529', 'sh');
+INSERT INTO `stock_dict` VALUES (124, '科森科技', '603626', 'sh');
+INSERT INTO `stock_dict` VALUES (125, '大智慧', '601519', 'sh');
+INSERT INTO `stock_dict` VALUES (126, '香飘飘', '603711', 'sh');
+INSERT INTO `stock_dict` VALUES (127, '康为世纪', '688426', 'sh');
+INSERT INTO `stock_dict` VALUES (128, '南京熊猫', '600775', 'sh');
+INSERT INTO `stock_dict` VALUES (129, '旭升集团', '603305', 'sh');
+INSERT INTO `stock_dict` VALUES (130, '奥比中光-UW', '688322', 'sh');
+INSERT INTO `stock_dict` VALUES (131, '三棵树', '603737', 'sh');
+INSERT INTO `stock_dict` VALUES (132, '高华科技', '688539', 'sh');
+INSERT INTO `stock_dict` VALUES (133, '老凤祥', '600612', 'sh');
+INSERT INTO `stock_dict` VALUES (134, '霍莱沃', '688682', 'sh');
+INSERT INTO `stock_dict` VALUES (135, '日播时尚', '603196', 'sh');
+INSERT INTO `stock_dict` VALUES (136, '绿能慧充', '600212', 'sh');
+INSERT INTO `stock_dict` VALUES (137, '北京人力', '600861', 'sh');
+INSERT INTO `stock_dict` VALUES (138, 'ST春天', '600381', 'sh');
+INSERT INTO `stock_dict` VALUES (139, '凌云股份', '600480', 'sh');
+INSERT INTO `stock_dict` VALUES (140, '天润乳业', '600419', 'sh');
+INSERT INTO `stock_dict` VALUES (141, '晨光新材', '605399', 'sh');
+INSERT INTO `stock_dict` VALUES (142, '国芳集团', '601086', 'sh');
+INSERT INTO `stock_dict` VALUES (143, '三江购物', '601116', 'sh');
+INSERT INTO `stock_dict` VALUES (144, '斯瑞新材', '688102', 'sh');
+INSERT INTO `stock_dict` VALUES (145, '国网信通', '600131', 'sh');
+INSERT INTO `stock_dict` VALUES (146, '骄成超声', '688392', 'sh');
+INSERT INTO `stock_dict` VALUES (147, '信达地产', '600657', 'sh');
+INSERT INTO `stock_dict` VALUES (148, '中央商场', '600280', 'sh');
+INSERT INTO `stock_dict` VALUES (149, '翔港科技', '603499', 'sh');
+INSERT INTO `stock_dict` VALUES (150, '生物股份', '600201', 'sh');
+INSERT INTO `stock_dict` VALUES (151, '晶品特装', '688084', 'sh');
+INSERT INTO `stock_dict` VALUES (152, '税友股份', '603171', 'sh');
+INSERT INTO `stock_dict` VALUES (153, '今世缘', '603369', 'sh');
+INSERT INTO `stock_dict` VALUES (154, '盛邦安全', '688651', 'sh');
+INSERT INTO `stock_dict` VALUES (155, '锦江酒店', '600754', 'sh');
+INSERT INTO `stock_dict` VALUES (156, '润达医疗', '603108', 'sh');
+INSERT INTO `stock_dict` VALUES (157, '华大智造', '688114', 'sh');
+INSERT INTO `stock_dict` VALUES (158, '苏州龙杰', '603332', 'sh');
+INSERT INTO `stock_dict` VALUES (159, '永安期货', '600927', 'sh');
+INSERT INTO `stock_dict` VALUES (160, '柏楚电子', '688188', 'sh');
+INSERT INTO `stock_dict` VALUES (161, '华锐精密', '688059', 'sh');
+INSERT INTO `stock_dict` VALUES (162, '金发科技', '600143', 'sh');
+INSERT INTO `stock_dict` VALUES (163, '金石资源', '603505', 'sh');
+INSERT INTO `stock_dict` VALUES (164, '宝兰德', '688058', 'sh');
+INSERT INTO `stock_dict` VALUES (165, '安凯微', '688620', 'sh');
+INSERT INTO `stock_dict` VALUES (166, '德马科技', '688360', 'sh');
+INSERT INTO `stock_dict` VALUES (167, '美芯晟', '688458', 'sh');
+INSERT INTO `stock_dict` VALUES (168, '江淮汽车', '600418', 'sh');
+INSERT INTO `stock_dict` VALUES (169, '亿嘉和', '603666', 'sh');
+INSERT INTO `stock_dict` VALUES (170, '爱婴室', '603214', 'sh');
+INSERT INTO `stock_dict` VALUES (171, '浩瀚深度', '688292', 'sh');
+INSERT INTO `stock_dict` VALUES (172, '东安动力', '600178', 'sh');
+INSERT INTO `stock_dict` VALUES (173, '千禾味业', '603027', 'sh');
+INSERT INTO `stock_dict` VALUES (174, '思特威-W', '688213', 'sh');
+INSERT INTO `stock_dict` VALUES (175, '艾为电子', '688798', 'sh');
+INSERT INTO `stock_dict` VALUES (176, '桃李面包', '603866', 'sh');
+INSERT INTO `stock_dict` VALUES (177, '中望软件', '688083', 'sh');
+INSERT INTO `stock_dict` VALUES (178, '华依科技', '688071', 'sh');
+INSERT INTO `stock_dict` VALUES (179, '科沃斯', '603486', 'sh');
+INSERT INTO `stock_dict` VALUES (180, '日辰股份', '603755', 'sh');
+INSERT INTO `stock_dict` VALUES (181, '安井食品', '603345', 'sh');
+INSERT INTO `stock_dict` VALUES (182, '继峰股份', '603997', 'sh');
+INSERT INTO `stock_dict` VALUES (183, '均普智能', '688306', 'sh');
+INSERT INTO `stock_dict` VALUES (184, '南卫股份', '603880', 'sh');
+INSERT INTO `stock_dict` VALUES (185, '德昌股份', '605555', 'sh');
+INSERT INTO `stock_dict` VALUES (186, '三人行', '605168', 'sh');
+INSERT INTO `stock_dict` VALUES (187, '航天电子', '600879', 'sh');
+INSERT INTO `stock_dict` VALUES (188, '广州酒家', '603043', 'sh');
+INSERT INTO `stock_dict` VALUES (189, '京仪装备', '688652', 'sh');
+INSERT INTO `stock_dict` VALUES (190, '长华集团', '605018', 'sh');
+INSERT INTO `stock_dict` VALUES (191, '电科芯片', '600877', 'sh');
+INSERT INTO `stock_dict` VALUES (192, '雅运股份', '603790', 'sh');
+INSERT INTO `stock_dict` VALUES (193, '人福医药', '600079', 'sh');
+INSERT INTO `stock_dict` VALUES (194, '晋拓股份', '603211', 'sh');
+INSERT INTO `stock_dict` VALUES (195, '裕太微-U', '688515', 'sh');
+INSERT INTO `stock_dict` VALUES (196, '安博通', '688168', 'sh');
+INSERT INTO `stock_dict` VALUES (197, '坤恒顺维', '688283', 'sh');
+INSERT INTO `stock_dict` VALUES (198, '蓝特光学', '688127', 'sh');
+INSERT INTO `stock_dict` VALUES (199, '安路科技', '688107', 'sh');
+INSERT INTO `stock_dict` VALUES (200, '旗滨集团', '601636', 'sh');
+INSERT INTO `stock_dict` VALUES (201, '云从科技-UW', '688327', 'sh');
+INSERT INTO `stock_dict` VALUES (202, '巨星农牧', '603477', 'sh');
+INSERT INTO `stock_dict` VALUES (203, '中复神鹰', '688295', 'sh');
+INSERT INTO `stock_dict` VALUES (204, '新城控股', '601155', 'sh');
+INSERT INTO `stock_dict` VALUES (205, '格尔软件', '603232', 'sh');
+INSERT INTO `stock_dict` VALUES (206, '沃格光电', '603773', 'sh');
+INSERT INTO `stock_dict` VALUES (207, '多伦科技', '603528', 'sh');
+INSERT INTO `stock_dict` VALUES (208, '包钢股份', '600010', 'sh');
+INSERT INTO `stock_dict` VALUES (209, '奥普科技', '603551', 'sh');
+INSERT INTO `stock_dict` VALUES (210, '天永智能', '603895', 'sh');
+INSERT INTO `stock_dict` VALUES (211, '富淼科技', '688350', 'sh');
+INSERT INTO `stock_dict` VALUES (212, '长龄液压', '605389', 'sh');
+INSERT INTO `stock_dict` VALUES (213, '大商股份', '600694', 'sh');
+INSERT INTO `stock_dict` VALUES (214, '嘉元科技', '688388', 'sh');
+INSERT INTO `stock_dict` VALUES (215, '科博达', '603786', 'sh');
+INSERT INTO `stock_dict` VALUES (216, '恒玄科技', '688608', 'sh');
+INSERT INTO `stock_dict` VALUES (217, '天洋新材', '603330', 'sh');
+INSERT INTO `stock_dict` VALUES (218, '首药控股-U', '688197', 'sh');
+INSERT INTO `stock_dict` VALUES (219, '经纬恒润-W', '688326', 'sh');
+INSERT INTO `stock_dict` VALUES (220, '峰岹科技', '688279', 'sh');
+INSERT INTO `stock_dict` VALUES (221, '德新科技', '603032', 'sh');
+INSERT INTO `stock_dict` VALUES (222, '东兴证券', '601198', 'sh');
+INSERT INTO `stock_dict` VALUES (223, '卓易信息', '688258', 'sh');
+INSERT INTO `stock_dict` VALUES (224, '华秦科技', '688281', 'sh');
+INSERT INTO `stock_dict` VALUES (225, '新炬网络', '605398', 'sh');
+INSERT INTO `stock_dict` VALUES (226, '华培动力', '603121', 'sh');
+INSERT INTO `stock_dict` VALUES (227, '南京商旅', '600250', 'sh');
+INSERT INTO `stock_dict` VALUES (228, '鼎际得', '603255', 'sh');
+INSERT INTO `stock_dict` VALUES (229, '巴比食品', '605338', 'sh');
+INSERT INTO `stock_dict` VALUES (230, '永泰能源', '600157', 'sh');
+INSERT INTO `stock_dict` VALUES (231, '永和股份', '605020', 'sh');
+INSERT INTO `stock_dict` VALUES (232, '麦迪科技', '603990', 'sh');
+INSERT INTO `stock_dict` VALUES (233, '长江投资', '600119', 'sh');
+INSERT INTO `stock_dict` VALUES (234, '华熙生物', '688363', 'sh');
+INSERT INTO `stock_dict` VALUES (235, '盟升电子', '688311', 'sh');
+INSERT INTO `stock_dict` VALUES (236, '东威科技', '688700', 'sh');
+INSERT INTO `stock_dict` VALUES (237, '常润股份', '603201', 'sh');
+INSERT INTO `stock_dict` VALUES (238, '普源精电', '688337', 'sh');
+INSERT INTO `stock_dict` VALUES (239, '嘉和美康', '688246', 'sh');
+INSERT INTO `stock_dict` VALUES (240, '中润光学', '688307', 'sh');
+INSERT INTO `stock_dict` VALUES (241, '芯动联科', '688582', 'sh');
+INSERT INTO `stock_dict` VALUES (242, '珀莱雅', '603605', 'sh');
+INSERT INTO `stock_dict` VALUES (243, '宁波韵升', '600366', 'sh');
+INSERT INTO `stock_dict` VALUES (244, '太极集团', '600129', 'sh');
+INSERT INTO `stock_dict` VALUES (245, '致远互联', '688369', 'sh');
+INSERT INTO `stock_dict` VALUES (246, '水发燃气', '603318', 'sh');
+INSERT INTO `stock_dict` VALUES (247, '恒立液压', '601100', 'sh');
+INSERT INTO `stock_dict` VALUES (248, '卧龙电驱', '600580', 'sh');
+INSERT INTO `stock_dict` VALUES (249, '联测科技', '688113', 'sh');
+INSERT INTO `stock_dict` VALUES (250, '九号公司-WD', '689009', 'sh');
+INSERT INTO `stock_dict` VALUES (251, '南侨食品', '605339', 'sh');
+INSERT INTO `stock_dict` VALUES (252, '中科飞测', '688361', 'sh');
+INSERT INTO `stock_dict` VALUES (253, '生益科技', '600183', 'sh');
+INSERT INTO `stock_dict` VALUES (254, '豪能股份', '603809', 'sh');
+INSERT INTO `stock_dict` VALUES (255, '韩建河山', '603616', 'sh');
+INSERT INTO `stock_dict` VALUES (256, '龙元建设', '600491', 'sh');
+INSERT INTO `stock_dict` VALUES (257, '罗曼股份', '605289', 'sh');
+INSERT INTO `stock_dict` VALUES (258, '王府井', '600859', 'sh');
+INSERT INTO `stock_dict` VALUES (259, '均胜电子', '600699', 'sh');
+INSERT INTO `stock_dict` VALUES (260, '奇安信-U', '688561', 'sh');
+INSERT INTO `stock_dict` VALUES (261, '世华科技', '688093', 'sh');
+INSERT INTO `stock_dict` VALUES (262, '莫高股份', '600543', 'sh');
+INSERT INTO `stock_dict` VALUES (263, '开普云', '688228', 'sh');
+INSERT INTO `stock_dict` VALUES (264, '好莱客', '603898', 'sh');
+INSERT INTO `stock_dict` VALUES (265, '海尔生物', '688139', 'sh');
+INSERT INTO `stock_dict` VALUES (266, '水星家纺', '603365', 'sh');
+INSERT INTO `stock_dict` VALUES (267, '天下秀', '600556', 'sh');
+INSERT INTO `stock_dict` VALUES (268, '华鼎股份', '601113', 'sh');
+INSERT INTO `stock_dict` VALUES (269, '芯海科技', '688595', 'sh');
+INSERT INTO `stock_dict` VALUES (270, '思瑞浦', '688536', 'sh');
+INSERT INTO `stock_dict` VALUES (271, '朗博科技', '603655', 'sh');
+INSERT INTO `stock_dict` VALUES (272, '五芳斋', '603237', 'sh');
+INSERT INTO `stock_dict` VALUES (273, '诺力股份', '603611', 'sh');
+INSERT INTO `stock_dict` VALUES (274, '之江生物', '688317', 'sh');
+INSERT INTO `stock_dict` VALUES (275, '中闽能源', '600163', 'sh');
+INSERT INTO `stock_dict` VALUES (276, '欧科亿', '688308', 'sh');
+INSERT INTO `stock_dict` VALUES (277, '杰普特', '688025', 'sh');
+INSERT INTO `stock_dict` VALUES (278, '泰晶科技', '603738', 'sh');
+INSERT INTO `stock_dict` VALUES (279, '海信视像', '600060', 'sh');
+INSERT INTO `stock_dict` VALUES (280, '氯碱化工', '600618', 'sh');
+INSERT INTO `stock_dict` VALUES (281, '联德股份', '605060', 'sh');
+INSERT INTO `stock_dict` VALUES (282, '概伦电子', '688206', 'sh');
+INSERT INTO `stock_dict` VALUES (283, '正弦电气', '688395', 'sh');
+INSERT INTO `stock_dict` VALUES (284, '沪硅产业', '688126', 'sh');
+INSERT INTO `stock_dict` VALUES (285, '比依股份', '603215', 'sh');
+INSERT INTO `stock_dict` VALUES (286, '三维股份', '603033', 'sh');
+INSERT INTO `stock_dict` VALUES (287, '杭叉集团', '603298', 'sh');
+INSERT INTO `stock_dict` VALUES (288, '招商证券', '600999', 'sh');
+INSERT INTO `stock_dict` VALUES (289, '益丰药房', '603939', 'sh');
+INSERT INTO `stock_dict` VALUES (290, '九联科技', '688609', 'sh');
+INSERT INTO `stock_dict` VALUES (291, '世运电路', '603920', 'sh');
+INSERT INTO `stock_dict` VALUES (292, '维远股份', '600955', 'sh');
+INSERT INTO `stock_dict` VALUES (293, '鑫科材料', '600255', 'sh');
+INSERT INTO `stock_dict` VALUES (294, '老白干酒', '600559', 'sh');
+INSERT INTO `stock_dict` VALUES (295, '伯特利', '603596', 'sh');
+INSERT INTO `stock_dict` VALUES (296, '皓元医药', '688131', 'sh');
+INSERT INTO `stock_dict` VALUES (297, '航天宏图', '688066', 'sh');
+INSERT INTO `stock_dict` VALUES (298, '永信至诚', '688244', 'sh');
+INSERT INTO `stock_dict` VALUES (299, '博众精工', '688097', 'sh');
+INSERT INTO `stock_dict` VALUES (300, '梦百合', '603313', 'sh');
+INSERT INTO `stock_dict` VALUES (301, '德龙激光', '688170', 'sh');
+INSERT INTO `stock_dict` VALUES (302, '津投城开', '600322', 'sh');
+INSERT INTO `stock_dict` VALUES (303, '富信科技', '688662', 'sh');
+INSERT INTO `stock_dict` VALUES (304, '光格科技', '688450', 'sh');
+INSERT INTO `stock_dict` VALUES (305, '润本股份', '603193', 'sh');
+INSERT INTO `stock_dict` VALUES (306, '航天晨光', '600501', 'sh');
+INSERT INTO `stock_dict` VALUES (307, '新世界', '600628', 'sh');
+INSERT INTO `stock_dict` VALUES (308, '索通发展', '603612', 'sh');
+INSERT INTO `stock_dict` VALUES (309, '信捷电气', '603416', 'sh');
+INSERT INTO `stock_dict` VALUES (310, '海天味业', '603288', 'sh');
+INSERT INTO `stock_dict` VALUES (311, '国睿科技', '600562', 'sh');
+INSERT INTO `stock_dict` VALUES (312, '哈投股份', '600864', 'sh');
+INSERT INTO `stock_dict` VALUES (313, '迎驾贡酒', '603198', 'sh');
+INSERT INTO `stock_dict` VALUES (314, '中信博', '688408', 'sh');
+INSERT INTO `stock_dict` VALUES (315, '湘财股份', '600095', 'sh');
+INSERT INTO `stock_dict` VALUES (316, '有友食品', '603697', 'sh');
+INSERT INTO `stock_dict` VALUES (317, '伟思医疗', '688580', 'sh');
+INSERT INTO `stock_dict` VALUES (318, '泰坦科技', '688133', 'sh');
+INSERT INTO `stock_dict` VALUES (319, '东来技术', '688129', 'sh');
+INSERT INTO `stock_dict` VALUES (320, '横店影视', '603103', 'sh');
+INSERT INTO `stock_dict` VALUES (321, '莱特光电', '688150', 'sh');
+INSERT INTO `stock_dict` VALUES (322, '埃科光电', '688610', 'sh');
+INSERT INTO `stock_dict` VALUES (323, '曲江文旅', '600706', 'sh');
+INSERT INTO `stock_dict` VALUES (324, '新致软件', '688590', 'sh');
+INSERT INTO `stock_dict` VALUES (325, '伊利股份', '600887', 'sh');
+INSERT INTO `stock_dict` VALUES (326, '新点软件', '688232', 'sh');
+INSERT INTO `stock_dict` VALUES (327, '盛科通信-U', '688702', 'sh');
+INSERT INTO `stock_dict` VALUES (328, '四方光电', '688665', 'sh');
+INSERT INTO `stock_dict` VALUES (329, '康拓医疗', '688314', 'sh');
+INSERT INTO `stock_dict` VALUES (330, '舍得酒业', '600702', 'sh');
+INSERT INTO `stock_dict` VALUES (331, '新疆众和', '600888', 'sh');
+INSERT INTO `stock_dict` VALUES (332, '九牧王', '601566', 'sh');
+INSERT INTO `stock_dict` VALUES (333, '顾家家居', '603816', 'sh');
+INSERT INTO `stock_dict` VALUES (334, '招商银行', '600036', 'sh');
+INSERT INTO `stock_dict` VALUES (335, '太平鸟', '603877', 'sh');
+INSERT INTO `stock_dict` VALUES (336, '明志科技', '688355', 'sh');
+INSERT INTO `stock_dict` VALUES (337, '欧莱新材', '688530', 'sh');
+INSERT INTO `stock_dict` VALUES (338, 'ST广物', '600603', 'sh');
+INSERT INTO `stock_dict` VALUES (339, '普元信息', '688118', 'sh');
+INSERT INTO `stock_dict` VALUES (340, '奥来德', '688378', 'sh');
+INSERT INTO `stock_dict` VALUES (341, '福日电子', '600203', 'sh');
+INSERT INTO `stock_dict` VALUES (342, '福莱新材', '605488', 'sh');
+INSERT INTO `stock_dict` VALUES (343, '华光新材', '688379', 'sh');
+INSERT INTO `stock_dict` VALUES (344, '龙旗科技', '603341', 'sh');
+INSERT INTO `stock_dict` VALUES (345, '浩欧博', '688656', 'sh');
+INSERT INTO `stock_dict` VALUES (346, '火炬电子', '603678', 'sh');
+INSERT INTO `stock_dict` VALUES (347, '杭州解百', '600814', 'sh');
+INSERT INTO `stock_dict` VALUES (348, '昊海生科', '688366', 'sh');
+INSERT INTO `stock_dict` VALUES (349, '清越科技', '688496', 'sh');
+INSERT INTO `stock_dict` VALUES (350, '北方导航', '600435', 'sh');
+INSERT INTO `stock_dict` VALUES (351, '中国国航', '601111', 'sh');
+INSERT INTO `stock_dict` VALUES (352, '欧派家居', '603833', 'sh');
+INSERT INTO `stock_dict` VALUES (353, '巨化股份', '600160', 'sh');
+INSERT INTO `stock_dict` VALUES (354, '富创精密', '688409', 'sh');
+INSERT INTO `stock_dict` VALUES (355, '奕瑞科技', '688301', 'sh');
+INSERT INTO `stock_dict` VALUES (356, '保隆科技', '603197', 'sh');
+INSERT INTO `stock_dict` VALUES (357, '光明乳业', '600597', 'sh');
+INSERT INTO `stock_dict` VALUES (358, '石头科技', '688169', 'sh');
+INSERT INTO `stock_dict` VALUES (359, '山西汾酒', '600809', 'sh');
+INSERT INTO `stock_dict` VALUES (360, '君实生物-U', '688180', 'sh');
+INSERT INTO `stock_dict` VALUES (361, '山大地纬', '688579', 'sh');
+INSERT INTO `stock_dict` VALUES (362, '星宇股份', '601799', 'sh');
+INSERT INTO `stock_dict` VALUES (363, '睿创微纳', '688002', 'sh');
+INSERT INTO `stock_dict` VALUES (364, '彩虹股份', '600707', 'sh');
+INSERT INTO `stock_dict` VALUES (365, '特宝生物', '688278', 'sh');
+INSERT INTO `stock_dict` VALUES (366, '三星新材', '603578', 'sh');
+INSERT INTO `stock_dict` VALUES (367, '得邦照明', '603303', 'sh');
+INSERT INTO `stock_dict` VALUES (368, '龙软科技', '688078', 'sh');
+INSERT INTO `stock_dict` VALUES (369, 'XD上海电', '601595', 'sh');
+INSERT INTO `stock_dict` VALUES (370, '法狮龙', '605318', 'sh');
+INSERT INTO `stock_dict` VALUES (371, '东芯股份', '688110', 'sh');
+INSERT INTO `stock_dict` VALUES (372, '晶丰明源', '688368', 'sh');
+INSERT INTO `stock_dict` VALUES (373, '亚信安全', '688225', 'sh');
+INSERT INTO `stock_dict` VALUES (374, '返利科技', '600228', 'sh');
+INSERT INTO `stock_dict` VALUES (375, '国光电气', '688776', 'sh');
+INSERT INTO `stock_dict` VALUES (376, '优刻得-W', '688158', 'sh');
+INSERT INTO `stock_dict` VALUES (377, '中炬高新', '600872', 'sh');
+INSERT INTO `stock_dict` VALUES (378, '神通科技', '605228', 'sh');
+INSERT INTO `stock_dict` VALUES (379, '济川药业', '600566', 'sh');
+INSERT INTO `stock_dict` VALUES (380, '中国太保', '601601', 'sh');
+INSERT INTO `stock_dict` VALUES (381, '华峰铝业', '601702', 'sh');
+INSERT INTO `stock_dict` VALUES (382, '龙图光罩', '688721', 'sh');
+INSERT INTO `stock_dict` VALUES (383, '绝味食品', '603517', 'sh');
+INSERT INTO `stock_dict` VALUES (384, '永鼎股份', '600105', 'sh');
+INSERT INTO `stock_dict` VALUES (385, '新疆天业', '600075', 'sh');
+INSERT INTO `stock_dict` VALUES (386, '四川长虹', '600839', 'sh');
+INSERT INTO `stock_dict` VALUES (387, '金山办公', '688111', 'sh');
+INSERT INTO `stock_dict` VALUES (388, '云赛智联', '600602', 'sh');
+INSERT INTO `stock_dict` VALUES (389, '东阳光', '600673', 'sh');
+INSERT INTO `stock_dict` VALUES (390, '澳华内镜', '688212', 'sh');
+INSERT INTO `stock_dict` VALUES (391, '立霸股份', '603519', 'sh');
+INSERT INTO `stock_dict` VALUES (392, '交大昂立', '600530', 'sh');
+INSERT INTO `stock_dict` VALUES (393, '鸿远电子', '603267', 'sh');
+INSERT INTO `stock_dict` VALUES (394, '天目湖', '603136', 'sh');
+INSERT INTO `stock_dict` VALUES (395, '拓普集团', '601689', 'sh');
+INSERT INTO `stock_dict` VALUES (396, '海航控股', '600221', 'sh');
+INSERT INTO `stock_dict` VALUES (397, '飞乐音响', '600651', 'sh');
+INSERT INTO `stock_dict` VALUES (398, '厦门象屿', '600057', 'sh');
+INSERT INTO `stock_dict` VALUES (399, '星德胜', '603344', 'sh');
+INSERT INTO `stock_dict` VALUES (400, '欧亚集团', '600697', 'sh');
+INSERT INTO `stock_dict` VALUES (401, '华恒生物', '688639', 'sh');
+INSERT INTO `stock_dict` VALUES (402, '伊力特', '600197', 'sh');
+INSERT INTO `stock_dict` VALUES (403, '九华旅游', '603199', 'sh');
+INSERT INTO `stock_dict` VALUES (404, '天岳先进', '688234', 'sh');
+INSERT INTO `stock_dict` VALUES (405, '安琪酵母', '600298', 'sh');
+INSERT INTO `stock_dict` VALUES (406, '华发股份', '600325', 'sh');
+INSERT INTO `stock_dict` VALUES (407, '乐凯胶片', '600135', 'sh');
+INSERT INTO `stock_dict` VALUES (408, '中科软', '603927', 'sh');
+INSERT INTO `stock_dict` VALUES (409, '科捷智能', '688455', 'sh');
+INSERT INTO `stock_dict` VALUES (410, '克来机电', '603960', 'sh');
+INSERT INTO `stock_dict` VALUES (411, '中国中免', '601888', 'sh');
+INSERT INTO `stock_dict` VALUES (412, '百龙创园', '605016', 'sh');
+INSERT INTO `stock_dict` VALUES (413, '重庆百货', '600729', 'sh');
+INSERT INTO `stock_dict` VALUES (414, '威胜信息', '688100', 'sh');
+INSERT INTO `stock_dict` VALUES (415, '龙腾光电', '688055', 'sh');
+INSERT INTO `stock_dict` VALUES (416, '中视传媒', '600088', 'sh');
+INSERT INTO `stock_dict` VALUES (417, '路维光电', '688401', 'sh');
+INSERT INTO `stock_dict` VALUES (418, '瑞芯微', '603893', 'sh');
+INSERT INTO `stock_dict` VALUES (419, '博睿数据', '688229', 'sh');
+INSERT INTO `stock_dict` VALUES (420, '汇顶科技', '603160', 'sh');
+INSERT INTO `stock_dict` VALUES (421, '天臣医疗', '688013', 'sh');
+INSERT INTO `stock_dict` VALUES (422, '通策医疗', '600763', 'sh');
+INSERT INTO `stock_dict` VALUES (423, '中源家居', '603709', 'sh');
+INSERT INTO `stock_dict` VALUES (424, '纵横股份', '688070', 'sh');
+INSERT INTO `stock_dict` VALUES (425, '恒生电子', '600570', 'sh');
+INSERT INTO `stock_dict` VALUES (426, '浩辰软件', '688657', 'sh');
+INSERT INTO `stock_dict` VALUES (427, '鼎阳科技', '688112', 'sh');
+INSERT INTO `stock_dict` VALUES (428, '铜峰电子', '600237', 'sh');
+INSERT INTO `stock_dict` VALUES (429, '美诺华', '603538', 'sh');
+INSERT INTO `stock_dict` VALUES (430, '哈铁科技', '688459', 'sh');
+INSERT INTO `stock_dict` VALUES (431, '紫燕食品', '603057', 'sh');
+INSERT INTO `stock_dict` VALUES (432, 'XD贵州茅', '600519', 'sh');
+INSERT INTO `stock_dict` VALUES (433, '维维股份', '600300', 'sh');
+INSERT INTO `stock_dict` VALUES (434, '隆达股份', '688231', 'sh');
+INSERT INTO `stock_dict` VALUES (435, '宝立食品', '603170', 'sh');
+INSERT INTO `stock_dict` VALUES (436, '顶点软件', '603383', 'sh');
+INSERT INTO `stock_dict` VALUES (437, '福立旺', '688678', 'sh');
+INSERT INTO `stock_dict` VALUES (438, '*ST宁科', '600165', 'sh');
+INSERT INTO `stock_dict` VALUES (439, '映翰通', '688080', 'sh');
+INSERT INTO `stock_dict` VALUES (440, '信安世纪', '688201', 'sh');
+INSERT INTO `stock_dict` VALUES (441, '新疆火炬', '603080', 'sh');
+INSERT INTO `stock_dict` VALUES (442, '昆药集团', '600422', 'sh');
+INSERT INTO `stock_dict` VALUES (443, '赛轮轮胎', '601058', 'sh');
+INSERT INTO `stock_dict` VALUES (444, '嘉澳环保', '603822', 'sh');
+INSERT INTO `stock_dict` VALUES (445, '养元饮品', '603156', 'sh');
+INSERT INTO `stock_dict` VALUES (446, '大全能源', '688303', 'sh');
+INSERT INTO `stock_dict` VALUES (447, '中科星图', '688568', 'sh');
+INSERT INTO `stock_dict` VALUES (448, '威高骨科', '688161', 'sh');
+INSERT INTO `stock_dict` VALUES (449, '莱克电气', '603355', 'sh');
+INSERT INTO `stock_dict` VALUES (450, '莲花控股', '600186', 'sh');
+INSERT INTO `stock_dict` VALUES (451, '新光光电', '688011', 'sh');
+INSERT INTO `stock_dict` VALUES (452, '大豪科技', '603025', 'sh');
+INSERT INTO `stock_dict` VALUES (453, '有研粉材', '688456', 'sh');
+INSERT INTO `stock_dict` VALUES (454, '晨丰科技', '603685', 'sh');
+INSERT INTO `stock_dict` VALUES (455, '航天环宇', '688523', 'sh');
+INSERT INTO `stock_dict` VALUES (456, '金陵饭店', '601007', 'sh');
+INSERT INTO `stock_dict` VALUES (457, '金辰股份', '603396', 'sh');
+INSERT INTO `stock_dict` VALUES (458, '云天励飞-U', '688343', 'sh');
+INSERT INTO `stock_dict` VALUES (459, '华脉科技', '603042', 'sh');
+INSERT INTO `stock_dict` VALUES (460, '江山股份', '600389', 'sh');
+INSERT INTO `stock_dict` VALUES (461, '新赛股份', '600540', 'sh');
+INSERT INTO `stock_dict` VALUES (462, '西藏城投', '600773', 'sh');
+INSERT INTO `stock_dict` VALUES (463, '爱科科技', '688092', 'sh');
+INSERT INTO `stock_dict` VALUES (464, '国新文化', '600636', 'sh');
+INSERT INTO `stock_dict` VALUES (465, '希荻微', '688173', 'sh');
+INSERT INTO `stock_dict` VALUES (466, '快克智能', '603203', 'sh');
+INSERT INTO `stock_dict` VALUES (467, '光峰科技', '688007', 'sh');
+INSERT INTO `stock_dict` VALUES (468, '长阳科技', '688299', 'sh');
+INSERT INTO `stock_dict` VALUES (469, '金牌家居', '603180', 'sh');
+INSERT INTO `stock_dict` VALUES (470, '灿瑞科技', '688061', 'sh');
+INSERT INTO `stock_dict` VALUES (471, '腾景科技', '688195', 'sh');
+INSERT INTO `stock_dict` VALUES (472, '江苏吴中', '600200', 'sh');
+INSERT INTO `stock_dict` VALUES (473, '立昂微', '605358', 'sh');
+INSERT INTO `stock_dict` VALUES (474, '佳华科技', '688051', 'sh');
+INSERT INTO `stock_dict` VALUES (475, '新华保险', '601336', 'sh');
+INSERT INTO `stock_dict` VALUES (476, '中船特气', '688146', 'sh');
+INSERT INTO `stock_dict` VALUES (477, '富吉瑞', '688272', 'sh');
+INSERT INTO `stock_dict` VALUES (478, '天玛智控', '688570', 'sh');
+INSERT INTO `stock_dict` VALUES (479, '东微半导', '688261', 'sh');
+INSERT INTO `stock_dict` VALUES (480, '汉商集团', '600774', 'sh');
+INSERT INTO `stock_dict` VALUES (481, '安徽合力', '600761', 'sh');
+INSERT INTO `stock_dict` VALUES (482, '巨一科技', '688162', 'sh');
+INSERT INTO `stock_dict` VALUES (483, '三六零', '601360', 'sh');
+INSERT INTO `stock_dict` VALUES (484, '新华百货', '600785', 'sh');
+INSERT INTO `stock_dict` VALUES (485, '翱捷科技-U', '688220', 'sh');
+INSERT INTO `stock_dict` VALUES (486, '工大高科', '688367', 'sh');
+INSERT INTO `stock_dict` VALUES (487, '掌阅科技', '603533', 'sh');
+INSERT INTO `stock_dict` VALUES (488, '亚通股份', '600692', 'sh');
+INSERT INTO `stock_dict` VALUES (489, '中国电影', '600977', 'sh');
+INSERT INTO `stock_dict` VALUES (490, '昊华科技', '600378', 'sh');
+INSERT INTO `stock_dict` VALUES (491, '万华化学', '600309', 'sh');
+INSERT INTO `stock_dict` VALUES (492, '金海通', '603061', 'sh');
+INSERT INTO `stock_dict` VALUES (493, '微芯生物', '688321', 'sh');
+INSERT INTO `stock_dict` VALUES (494, '奥精医疗', '688613', 'sh');
+INSERT INTO `stock_dict` VALUES (495, '昀冢科技', '688260', 'sh');
+INSERT INTO `stock_dict` VALUES (496, '新凤鸣', '603225', 'sh');
+INSERT INTO `stock_dict` VALUES (497, '甬矽电子', '688362', 'sh');
+INSERT INTO `stock_dict` VALUES (498, '保利发展', '600048', 'sh');
+INSERT INTO `stock_dict` VALUES (499, '百大集团', '600865', 'sh');
+INSERT INTO `stock_dict` VALUES (500, '日盈电子', '603286', 'sh');
+INSERT INTO `stock_dict` VALUES (501, '华峰测控', '688200', 'sh');
+INSERT INTO `stock_dict` VALUES (502, '江航装备', '688586', 'sh');
+INSERT INTO `stock_dict` VALUES (503, '人民同泰', '600829', 'sh');
+INSERT INTO `stock_dict` VALUES (504, '华海清科', '688120', 'sh');
+INSERT INTO `stock_dict` VALUES (505, '浙江东方', '600120', 'sh');
+INSERT INTO `stock_dict` VALUES (506, '诺禾致源', '688315', 'sh');
+INSERT INTO `stock_dict` VALUES (507, '瑞华泰', '688323', 'sh');
+INSERT INTO `stock_dict` VALUES (508, '工商银行', '601398', 'sh');
+INSERT INTO `stock_dict` VALUES (509, '苏州科达', '603660', 'sh');
+INSERT INTO `stock_dict` VALUES (510, '呈和科技', '688625', 'sh');
+INSERT INTO `stock_dict` VALUES (511, '南亚新材', '688519', 'sh');
+INSERT INTO `stock_dict` VALUES (512, '安达智能', '688125', 'sh');
+INSERT INTO `stock_dict` VALUES (513, '沃尔德', '688028', 'sh');
+INSERT INTO `stock_dict` VALUES (514, '东方通信', '600776', 'sh');
+INSERT INTO `stock_dict` VALUES (515, '至正股份', '603991', 'sh');
+INSERT INTO `stock_dict` VALUES (516, '均瑶健康', '605388', 'sh');
+INSERT INTO `stock_dict` VALUES (517, '信达证券', '601059', 'sh');
+INSERT INTO `stock_dict` VALUES (518, '博汇科技', '688004', 'sh');
+INSERT INTO `stock_dict` VALUES (519, '芯源微', '688037', 'sh');
+INSERT INTO `stock_dict` VALUES (520, '华海药业', '600521', 'sh');
+INSERT INTO `stock_dict` VALUES (521, '涪陵电力', '600452', 'sh');
+INSERT INTO `stock_dict` VALUES (522, '重庆路桥', '600106', 'sh');
+INSERT INTO `stock_dict` VALUES (523, '上海临港', '600848', 'sh');
+INSERT INTO `stock_dict` VALUES (524, '长光华芯', '688048', 'sh');
+INSERT INTO `stock_dict` VALUES (525, '上声电子', '688533', 'sh');
+INSERT INTO `stock_dict` VALUES (526, '洪都航空', '600316', 'sh');
+INSERT INTO `stock_dict` VALUES (527, '科思科技', '688788', 'sh');
+INSERT INTO `stock_dict` VALUES (528, '心脉医疗', '688016', 'sh');
+INSERT INTO `stock_dict` VALUES (529, '外服控股', '600662', 'sh');
+INSERT INTO `stock_dict` VALUES (530, '音飞储存', '603066', 'sh');
+INSERT INTO `stock_dict` VALUES (531, '有研新材', '600206', 'sh');
+INSERT INTO `stock_dict` VALUES (532, '景业智能', '688290', 'sh');
+INSERT INTO `stock_dict` VALUES (533, '珠海冠宇', '688772', 'sh');
+INSERT INTO `stock_dict` VALUES (534, '华达新材', '605158', 'sh');
+INSERT INTO `stock_dict` VALUES (535, '圣诺生物', '688117', 'sh');
+INSERT INTO `stock_dict` VALUES (536, '纳微科技', '688690', 'sh');
+INSERT INTO `stock_dict` VALUES (537, '纳芯微', '688052', 'sh');
+INSERT INTO `stock_dict` VALUES (538, '深科达', '688328', 'sh');
+INSERT INTO `stock_dict` VALUES (539, '国博电子', '688375', 'sh');
+INSERT INTO `stock_dict` VALUES (540, '明微电子', '688699', 'sh');
+INSERT INTO `stock_dict` VALUES (541, '中控技术', '688777', 'sh');
+INSERT INTO `stock_dict` VALUES (542, '纽威数控', '688697', 'sh');
+INSERT INTO `stock_dict` VALUES (543, '普冉股份', '688766', 'sh');
+INSERT INTO `stock_dict` VALUES (544, '金证股份', '600446', 'sh');
+INSERT INTO `stock_dict` VALUES (545, '上纬新材', '688585', 'sh');
+INSERT INTO `stock_dict` VALUES (546, '华鲁恒升', '600426', 'sh');
+INSERT INTO `stock_dict` VALUES (547, '建设银行', '601939', 'sh');
+INSERT INTO `stock_dict` VALUES (548, '曲美家居', '603818', 'sh');
+INSERT INTO `stock_dict` VALUES (549, '浦发银行', '600000', 'sh');
+INSERT INTO `stock_dict` VALUES (550, '中国平安', '601318', 'sh');
+INSERT INTO `stock_dict` VALUES (551, '新益昌', '688383', 'sh');
+INSERT INTO `stock_dict` VALUES (552, '扬州金泉', '603307', 'sh');
+INSERT INTO `stock_dict` VALUES (553, '泰凌微', '688591', 'sh');
+INSERT INTO `stock_dict` VALUES (554, '东软集团', '600718', 'sh');
+INSERT INTO `stock_dict` VALUES (555, '新农开发', '600359', 'sh');
+INSERT INTO `stock_dict` VALUES (556, '天马科技', '603668', 'sh');
+INSERT INTO `stock_dict` VALUES (557, '武进不锈', '603878', 'sh');
+INSERT INTO `stock_dict` VALUES (558, '中芯国际', '688981', 'sh');
+INSERT INTO `stock_dict` VALUES (559, '奥特维', '688516', 'sh');
+INSERT INTO `stock_dict` VALUES (560, '南方航空', '600029', 'sh');
+INSERT INTO `stock_dict` VALUES (561, '芯导科技', '688230', 'sh');
+INSERT INTO `stock_dict` VALUES (562, '龙高股份', '605086', 'sh');
+INSERT INTO `stock_dict` VALUES (563, '中微公司', '688012', 'sh');
+INSERT INTO `stock_dict` VALUES (564, '必易微', '688045', 'sh');
+INSERT INTO `stock_dict` VALUES (565, '中触媒', '688267', 'sh');
+INSERT INTO `stock_dict` VALUES (566, '云涌科技', '688060', 'sh');
+INSERT INTO `stock_dict` VALUES (567, '菱电电控', '688667', 'sh');
+INSERT INTO `stock_dict` VALUES (568, '飞科电器', '603868', 'sh');
+INSERT INTO `stock_dict` VALUES (569, '海量数据', '603138', 'sh');
+INSERT INTO `stock_dict` VALUES (570, '亚翔集成', '603929', 'sh');
+INSERT INTO `stock_dict` VALUES (571, '百合股份', '603102', 'sh');
+INSERT INTO `stock_dict` VALUES (572, '南威软件', '603636', 'sh');
+INSERT INTO `stock_dict` VALUES (573, '振华新材', '688707', 'sh');
+INSERT INTO `stock_dict` VALUES (574, '交通银行', '601328', 'sh');
+INSERT INTO `stock_dict` VALUES (575, '建霖家居', '603408', 'sh');
+INSERT INTO `stock_dict` VALUES (576, '明冠新材', '688560', 'sh');
+INSERT INTO `stock_dict` VALUES (577, '天德钰', '688252', 'sh');
+INSERT INTO `stock_dict` VALUES (578, '神工股份', '688233', 'sh');
+INSERT INTO `stock_dict` VALUES (579, '伟测科技', '688372', 'sh');
+INSERT INTO `stock_dict` VALUES (580, '帕瓦股份', '688184', 'sh');
+INSERT INTO `stock_dict` VALUES (581, '百奥泰', '688177', 'sh');
+INSERT INTO `stock_dict` VALUES (582, '汇鸿集团', '600981', 'sh');
+INSERT INTO `stock_dict` VALUES (583, '艾力斯', '688578', 'sh');
+INSERT INTO `stock_dict` VALUES (584, '南华期货', '603093', 'sh');
+INSERT INTO `stock_dict` VALUES (585, '阿科力', '603722', 'sh');
+INSERT INTO `stock_dict` VALUES (586, '普门科技', '688389', 'sh');
+INSERT INTO `stock_dict` VALUES (587, '博力威', '688345', 'sh');
+INSERT INTO `stock_dict` VALUES (588, '中华企业', '600675', 'sh');
+INSERT INTO `stock_dict` VALUES (589, '成都银行', '601838', 'sh');
+INSERT INTO `stock_dict` VALUES (590, '同仁堂', '600085', 'sh');
+INSERT INTO `stock_dict` VALUES (591, '聚合顺', '605166', 'sh');
+INSERT INTO `stock_dict` VALUES (592, '迈威生物-U', '688062', 'sh');
+INSERT INTO `stock_dict` VALUES (593, '纵横通信', '603602', 'sh');
+INSERT INTO `stock_dict` VALUES (594, '西藏药业', '600211', 'sh');
+INSERT INTO `stock_dict` VALUES (595, '美迪凯', '688079', 'sh');
+INSERT INTO `stock_dict` VALUES (596, '天宜上佳', '688033', 'sh');
+INSERT INTO `stock_dict` VALUES (597, '晶华微', '688130', 'sh');
+INSERT INTO `stock_dict` VALUES (598, '航发科技', '600391', 'sh');
+INSERT INTO `stock_dict` VALUES (599, '味知香', '605089', 'sh');
+INSERT INTO `stock_dict` VALUES (600, '黄山旅游', '600054', 'sh');
+INSERT INTO `stock_dict` VALUES (601, '福蓉科技', '603327', 'sh');
+INSERT INTO `stock_dict` VALUES (602, '倍加洁', '603059', 'sh');
+INSERT INTO `stock_dict` VALUES (603, '孚能科技', '688567', 'sh');
+INSERT INTO `stock_dict` VALUES (604, '中微半导', '688380', 'sh');
+INSERT INTO `stock_dict` VALUES (605, '泰瑞机器', '603289', 'sh');
+INSERT INTO `stock_dict` VALUES (606, '南方传媒', '601900', 'sh');
+INSERT INTO `stock_dict` VALUES (607, '安杰思', '688581', 'sh');
+INSERT INTO `stock_dict` VALUES (608, 'XD重庆啤', '600132', 'sh');
+INSERT INTO `stock_dict` VALUES (609, '豫园股份', '600655', 'sh');
+INSERT INTO `stock_dict` VALUES (610, '东鹏饮料', '605499', 'sh');
+INSERT INTO `stock_dict` VALUES (611, '信科移动-U', '688387', 'sh');
+INSERT INTO `stock_dict` VALUES (612, '中创股份', '688695', 'sh');
+INSERT INTO `stock_dict` VALUES (613, '百联股份', '600827', 'sh');
+INSERT INTO `stock_dict` VALUES (614, '凯盛科技', '600552', 'sh');
+INSERT INTO `stock_dict` VALUES (615, '力聚热能', '603391', 'sh');
+INSERT INTO `stock_dict` VALUES (616, '金牛化工', '600722', 'sh');
+INSERT INTO `stock_dict` VALUES (617, '新洁能', '605111', 'sh');
+INSERT INTO `stock_dict` VALUES (618, '恒誉环保', '688309', 'sh');
+INSERT INTO `stock_dict` VALUES (619, '华正新材', '603186', 'sh');
+INSERT INTO `stock_dict` VALUES (620, '聚石化学', '688669', 'sh');
+INSERT INTO `stock_dict` VALUES (621, '宝地矿业', '601121', 'sh');
+INSERT INTO `stock_dict` VALUES (622, '微导纳米', '688147', 'sh');
+INSERT INTO `stock_dict` VALUES (623, '爱普股份', '603020', 'sh');
+INSERT INTO `stock_dict` VALUES (624, '雪峰科技', '603227', 'sh');
+INSERT INTO `stock_dict` VALUES (625, '用友网络', '600588', 'sh');
+INSERT INTO `stock_dict` VALUES (626, '国盛智科', '688558', 'sh');
+INSERT INTO `stock_dict` VALUES (627, '至纯科技', '603690', 'sh');
+INSERT INTO `stock_dict` VALUES (628, '杭钢股份', '600126', 'sh');
+INSERT INTO `stock_dict` VALUES (629, '中国银行', '601988', 'sh');
+INSERT INTO `stock_dict` VALUES (630, '恒尚节能', '603137', 'sh');
+INSERT INTO `stock_dict` VALUES (631, '特变电工', '600089', 'sh');
+INSERT INTO `stock_dict` VALUES (632, '牧高笛', '603908', 'sh');
+INSERT INTO `stock_dict` VALUES (633, 'XD中信证', '600030', 'sh');
+INSERT INTO `stock_dict` VALUES (634, '应流股份', '603308', 'sh');
+INSERT INTO `stock_dict` VALUES (635, '盛泰集团', '605138', 'sh');
+INSERT INTO `stock_dict` VALUES (636, '银座股份', '600858', 'sh');
+INSERT INTO `stock_dict` VALUES (637, '航天软件', '688562', 'sh');
+INSERT INTO `stock_dict` VALUES (638, '凯尔达', '688255', 'sh');
+INSERT INTO `stock_dict` VALUES (639, '数据港', '603881', 'sh');
+INSERT INTO `stock_dict` VALUES (640, '紫金矿业', '601899', 'sh');
+INSERT INTO `stock_dict` VALUES (641, '云路股份', '688190', 'sh');
+INSERT INTO `stock_dict` VALUES (642, '德邦股份', '603056', 'sh');
+INSERT INTO `stock_dict` VALUES (643, '赛微微电', '688325', 'sh');
+INSERT INTO `stock_dict` VALUES (644, '达仁堂', '600329', 'sh');
+INSERT INTO `stock_dict` VALUES (645, '春秋航空', '601021', 'sh');
+INSERT INTO `stock_dict` VALUES (646, '银河微电', '688689', 'sh');
+INSERT INTO `stock_dict` VALUES (647, '佳都科技', '600728', 'sh');
+INSERT INTO `stock_dict` VALUES (648, '立航科技', '603261', 'sh');
+INSERT INTO `stock_dict` VALUES (649, '海尔智家', '600690', 'sh');
+INSERT INTO `stock_dict` VALUES (650, '金迪克', '688670', 'sh');
+INSERT INTO `stock_dict` VALUES (651, '航天信息', '600271', 'sh');
+INSERT INTO `stock_dict` VALUES (652, '燕麦科技', '688312', 'sh');
+INSERT INTO `stock_dict` VALUES (653, '城建发展', '600266', 'sh');
+INSERT INTO `stock_dict` VALUES (654, '金徽酒', '603919', 'sh');
+INSERT INTO `stock_dict` VALUES (655, '金橙子', '688291', 'sh');
+INSERT INTO `stock_dict` VALUES (656, '艾迪药业', '688488', 'sh');
+INSERT INTO `stock_dict` VALUES (657, '航天机电', '600151', 'sh');
+INSERT INTO `stock_dict` VALUES (658, '帝奥微', '688381', 'sh');
+INSERT INTO `stock_dict` VALUES (659, '玲珑轮胎', '601966', 'sh');
+INSERT INTO `stock_dict` VALUES (660, '科德数控', '688305', 'sh');
+INSERT INTO `stock_dict` VALUES (661, '红塔证券', '601236', 'sh');
+INSERT INTO `stock_dict` VALUES (662, '禾丰股份', '603609', 'sh');
+INSERT INTO `stock_dict` VALUES (663, '天承科技', '688603', 'sh');
+INSERT INTO `stock_dict` VALUES (664, '正元地信', '688509', 'sh');
+INSERT INTO `stock_dict` VALUES (665, '清溢光电', '688138', 'sh');
+INSERT INTO `stock_dict` VALUES (666, '上海银行', '601229', 'sh');
+INSERT INTO `stock_dict` VALUES (667, '天通股份', '600330', 'sh');
+INSERT INTO `stock_dict` VALUES (668, '中航沈飞', '600760', 'sh');
+INSERT INTO `stock_dict` VALUES (669, '中国交建', '601800', 'sh');
+INSERT INTO `stock_dict` VALUES (670, '纬德信息', '688171', 'sh');
+INSERT INTO `stock_dict` VALUES (671, '展鹏科技', '603488', 'sh');
+INSERT INTO `stock_dict` VALUES (672, '上海家化', '600315', 'sh');
+INSERT INTO `stock_dict` VALUES (673, '行动教育', '605098', 'sh');
+INSERT INTO `stock_dict` VALUES (674, '密尔克卫', '603713', 'sh');
+INSERT INTO `stock_dict` VALUES (675, '创耀科技', '688259', 'sh');
+INSERT INTO `stock_dict` VALUES (676, '航发动力', '600893', 'sh');
+INSERT INTO `stock_dict` VALUES (677, '海光信息', '688041', 'sh');
+INSERT INTO `stock_dict` VALUES (678, '紫金银行', '601860', 'sh');
+INSERT INTO `stock_dict` VALUES (679, '隧道股份', '600820', 'sh');
+INSERT INTO `stock_dict` VALUES (680, '首开股份', '600376', 'sh');
+INSERT INTO `stock_dict` VALUES (681, '海天精工', '601882', 'sh');
+INSERT INTO `stock_dict` VALUES (682, '神州细胞-U', '688520', 'sh');
+INSERT INTO `stock_dict` VALUES (683, '豪悦护理', '605009', 'sh');
+INSERT INTO `stock_dict` VALUES (684, '财富趋势', '688318', 'sh');
+INSERT INTO `stock_dict` VALUES (685, '电科数字', '600850', 'sh');
+INSERT INTO `stock_dict` VALUES (686, '苏盐井神', '603299', 'sh');
+INSERT INTO `stock_dict` VALUES (687, '网达软件', '603189', 'sh');
+INSERT INTO `stock_dict` VALUES (688, '英方软件', '688435', 'sh');
+INSERT INTO `stock_dict` VALUES (689, '神马电力', '603530', 'sh');
+INSERT INTO `stock_dict` VALUES (690, '美腾科技', '688420', 'sh');
+INSERT INTO `stock_dict` VALUES (691, '井松智能', '688251', 'sh');
+INSERT INTO `stock_dict` VALUES (692, '青岛啤酒', '600600', 'sh');
+INSERT INTO `stock_dict` VALUES (693, '金宏气体', '688106', 'sh');
+INSERT INTO `stock_dict` VALUES (694, '景津装备', '603279', 'sh');
+INSERT INTO `stock_dict` VALUES (695, '复旦微电', '688385', 'sh');
+INSERT INTO `stock_dict` VALUES (696, '光明肉业', '600073', 'sh');
+INSERT INTO `stock_dict` VALUES (697, '浙文影业', '601599', 'sh');
+INSERT INTO `stock_dict` VALUES (698, '金科环境', '688466', 'sh');
+INSERT INTO `stock_dict` VALUES (699, '长城汽车', '601633', 'sh');
+INSERT INTO `stock_dict` VALUES (700, '杰克股份', '603337', 'sh');
+INSERT INTO `stock_dict` VALUES (701, '菜百股份', '605599', 'sh');
+INSERT INTO `stock_dict` VALUES (702, '科达制造', '600499', 'sh');
+INSERT INTO `stock_dict` VALUES (703, '众辰科技', '603275', 'sh');
+INSERT INTO `stock_dict` VALUES (704, 'ST曙光', '600303', 'sh');
+INSERT INTO `stock_dict` VALUES (705, '海泰发展', '600082', 'sh');
+INSERT INTO `stock_dict` VALUES (706, '博瑞医药', '688166', 'sh');
+INSERT INTO `stock_dict` VALUES (707, '上工申贝', '600843', 'sh');
+INSERT INTO `stock_dict` VALUES (708, '华新水泥', '600801', 'sh');
+INSERT INTO `stock_dict` VALUES (709, '西部超导', '688122', 'sh');
+INSERT INTO `stock_dict` VALUES (710, '佰维存储', '688525', 'sh');
+INSERT INTO `stock_dict` VALUES (711, '赛腾股份', '603283', 'sh');
+INSERT INTO `stock_dict` VALUES (712, '亚宝药业', '600351', 'sh');
+INSERT INTO `stock_dict` VALUES (713, '科兴制药', '688136', 'sh');
+INSERT INTO `stock_dict` VALUES (714, '航亚科技', '688510', 'sh');
+INSERT INTO `stock_dict` VALUES (715, '国检集团', '603060', 'sh');
+INSERT INTO `stock_dict` VALUES (716, '海螺水泥', '600585', 'sh');
+INSERT INTO `stock_dict` VALUES (717, '国科军工', '688543', 'sh');
+INSERT INTO `stock_dict` VALUES (718, '中源协和', '600645', 'sh');
+INSERT INTO `stock_dict` VALUES (719, '口子窖', '603589', 'sh');
+INSERT INTO `stock_dict` VALUES (720, '有研硅', '688432', 'sh');
+INSERT INTO `stock_dict` VALUES (721, '泽璟制药-U', '688266', 'sh');
+INSERT INTO `stock_dict` VALUES (722, '中马传动', '603767', 'sh');
+INSERT INTO `stock_dict` VALUES (723, '莱尔科技', '688683', 'sh');
+INSERT INTO `stock_dict` VALUES (724, '上海九百', '600838', 'sh');
+INSERT INTO `stock_dict` VALUES (725, '品茗科技', '688109', 'sh');
+INSERT INTO `stock_dict` VALUES (726, '华立股份', '603038', 'sh');
+INSERT INTO `stock_dict` VALUES (727, '中材国际', '600970', 'sh');
+INSERT INTO `stock_dict` VALUES (728, '江苏银行', '600919', 'sh');
+INSERT INTO `stock_dict` VALUES (729, '汇成股份', '688403', 'sh');
+INSERT INTO `stock_dict` VALUES (730, '凯赛生物', '688065', 'sh');
+INSERT INTO `stock_dict` VALUES (731, '沪农商行', '601825', 'sh');
+INSERT INTO `stock_dict` VALUES (732, '共创草坪', '605099', 'sh');
+INSERT INTO `stock_dict` VALUES (733, '威迈斯', '688612', 'sh');
+INSERT INTO `stock_dict` VALUES (734, '三元股份', '600429', 'sh');
+INSERT INTO `stock_dict` VALUES (735, '丽人丽妆', '605136', 'sh');
+INSERT INTO `stock_dict` VALUES (736, '凯因科技', '688687', 'sh');
+INSERT INTO `stock_dict` VALUES (737, '芯原股份', '688521', 'sh');
+INSERT INTO `stock_dict` VALUES (738, '恒顺醋业', '600305', 'sh');
+INSERT INTO `stock_dict` VALUES (739, '兰剑智能', '688557', 'sh');
+INSERT INTO `stock_dict` VALUES (740, '*ST天创', '603608', 'sh');
+INSERT INTO `stock_dict` VALUES (741, '灿芯股份', '688691', 'sh');
+INSERT INTO `stock_dict` VALUES (742, '公牛集团', '603195', 'sh');
+INSERT INTO `stock_dict` VALUES (743, '卓越新能', '688196', 'sh');
+INSERT INTO `stock_dict` VALUES (744, '中航高科', '600862', 'sh');
+INSERT INTO `stock_dict` VALUES (745, '中国电研', '688128', 'sh');
+INSERT INTO `stock_dict` VALUES (746, '吉贝尔', '688566', 'sh');
+INSERT INTO `stock_dict` VALUES (747, '绿地控股', '600606', 'sh');
+INSERT INTO `stock_dict` VALUES (748, '迅捷兴', '688655', 'sh');
+INSERT INTO `stock_dict` VALUES (749, '南京新百', '600682', 'sh');
+INSERT INTO `stock_dict` VALUES (750, '浪潮软件', '600756', 'sh');
+INSERT INTO `stock_dict` VALUES (751, '星光农机', '603789', 'sh');
+INSERT INTO `stock_dict` VALUES (752, '盛美上海', '688082', 'sh');
+INSERT INTO `stock_dict` VALUES (753, '片仔癀', '600436', 'sh');
+INSERT INTO `stock_dict` VALUES (754, '广东明珠', '600382', 'sh');
+INSERT INTO `stock_dict` VALUES (755, '农业银行', '601288', 'sh');
+INSERT INTO `stock_dict` VALUES (756, '誉辰智能', '688638', 'sh');
+INSERT INTO `stock_dict` VALUES (757, '老百姓', '603883', 'sh');
+INSERT INTO `stock_dict` VALUES (758, '微电生理-U', '688351', 'sh');
+INSERT INTO `stock_dict` VALUES (759, '神农集团', '605296', 'sh');
+INSERT INTO `stock_dict` VALUES (760, '晶华新材', '603683', 'sh');
+INSERT INTO `stock_dict` VALUES (761, '春秋电子', '603890', 'sh');
+INSERT INTO `stock_dict` VALUES (762, '天风证券', '601162', 'sh');
+INSERT INTO `stock_dict` VALUES (763, '中国海防', '600764', 'sh');
+INSERT INTO `stock_dict` VALUES (764, '志邦家居', '603801', 'sh');
+INSERT INTO `stock_dict` VALUES (765, '浙商证券', '601878', 'sh');
+INSERT INTO `stock_dict` VALUES (766, '西藏旅游', '600749', 'sh');
+INSERT INTO `stock_dict` VALUES (767, '海通证券', '600837', 'sh');
+INSERT INTO `stock_dict` VALUES (768, '可川科技', '603052', 'sh');
+INSERT INTO `stock_dict` VALUES (769, '兰生股份', '600826', 'sh');
+INSERT INTO `stock_dict` VALUES (770, '博瑞传播', '600880', 'sh');
+INSERT INTO `stock_dict` VALUES (771, '兴业证券', '601377', 'sh');
+INSERT INTO `stock_dict` VALUES (772, '大地熊', '688077', 'sh');
+INSERT INTO `stock_dict` VALUES (773, '华海诚科', '688535', 'sh');
+INSERT INTO `stock_dict` VALUES (774, '益民集团', '600824', 'sh');
+INSERT INTO `stock_dict` VALUES (775, '岱美股份', '603730', 'sh');
+INSERT INTO `stock_dict` VALUES (776, '索辰科技', '688507', 'sh');
+INSERT INTO `stock_dict` VALUES (777, '兴业银行', '601166', 'sh');
+INSERT INTO `stock_dict` VALUES (778, '三未信安', '688489', 'sh');
+INSERT INTO `stock_dict` VALUES (779, '皖仪科技', '688600', 'sh');
+INSERT INTO `stock_dict` VALUES (780, '依顿电子', '603328', 'sh');
+INSERT INTO `stock_dict` VALUES (781, '元祖股份', '603886', 'sh');
+INSERT INTO `stock_dict` VALUES (782, '*ST导航', '688282', 'sh');
+INSERT INTO `stock_dict` VALUES (783, '新宏泰', '603016', 'sh');
+INSERT INTO `stock_dict` VALUES (784, '国联证券', '601456', 'sh');
+INSERT INTO `stock_dict` VALUES (785, '恒林股份', '603661', 'sh');
+INSERT INTO `stock_dict` VALUES (786, '西宁特钢', '600117', 'sh');
+INSERT INTO `stock_dict` VALUES (787, '晶晨股份', '688099', 'sh');
+INSERT INTO `stock_dict` VALUES (788, '东材科技', '601208', 'sh');
+INSERT INTO `stock_dict` VALUES (789, '景旺电子', '603228', 'sh');
+INSERT INTO `stock_dict` VALUES (790, '邮储银行', '601658', 'sh');
+INSERT INTO `stock_dict` VALUES (791, 'XD诺唯赞', '688105', 'sh');
+INSERT INTO `stock_dict` VALUES (792, '天合光能', '688599', 'sh');
+INSERT INTO `stock_dict` VALUES (793, '优利德', '688628', 'sh');
+INSERT INTO `stock_dict` VALUES (794, '鲁信创投', '600783', 'sh');
+INSERT INTO `stock_dict` VALUES (795, '安集科技', '688019', 'sh');
+INSERT INTO `stock_dict` VALUES (796, '中泰证券', '600918', 'sh');
+INSERT INTO `stock_dict` VALUES (797, '共进股份', '603118', 'sh');
+INSERT INTO `stock_dict` VALUES (798, '利扬芯片', '688135', 'sh');
+INSERT INTO `stock_dict` VALUES (799, '蔚蓝生物', '603739', 'sh');
+INSERT INTO `stock_dict` VALUES (800, '天鹅股份', '603029', 'sh');
+INSERT INTO `stock_dict` VALUES (801, '喜临门', '603008', 'sh');
+INSERT INTO `stock_dict` VALUES (802, '中巨芯-U', '688549', 'sh');
+INSERT INTO `stock_dict` VALUES (803, '力鼎光电', '605118', 'sh');
+INSERT INTO `stock_dict` VALUES (804, '全柴动力', '600218', 'sh');
+INSERT INTO `stock_dict` VALUES (805, '贵航股份', '600523', 'sh');
+INSERT INTO `stock_dict` VALUES (806, '财通证券', '601108', 'sh');
+INSERT INTO `stock_dict` VALUES (807, '舒华体育', '605299', 'sh');
+INSERT INTO `stock_dict` VALUES (808, '索宝蛋白', '603231', 'sh');
+INSERT INTO `stock_dict` VALUES (809, '福瑞达', '600223', 'sh');
+INSERT INTO `stock_dict` VALUES (810, '海目星', '688559', 'sh');
+INSERT INTO `stock_dict` VALUES (811, '新日股份', '603787', 'sh');
+INSERT INTO `stock_dict` VALUES (812, '大丰实业', '603081', 'sh');
+INSERT INTO `stock_dict` VALUES (813, '上海沿浦', '605128', 'sh');
+INSERT INTO `stock_dict` VALUES (814, '大湖股份', '600257', 'sh');
+INSERT INTO `stock_dict` VALUES (815, '同益中', '688722', 'sh');
+INSERT INTO `stock_dict` VALUES (816, '五矿资本', '600390', 'sh');
+INSERT INTO `stock_dict` VALUES (817, '凤凰光学', '600071', 'sh');
+INSERT INTO `stock_dict` VALUES (818, '英科再生', '688087', 'sh');
+INSERT INTO `stock_dict` VALUES (819, '金盘科技', '688676', 'sh');
+INSERT INTO `stock_dict` VALUES (820, '格科微', '688728', 'sh');
+INSERT INTO `stock_dict` VALUES (821, '国泰君安', '601211', 'sh');
+INSERT INTO `stock_dict` VALUES (822, '北京银行', '601169', 'sh');
+INSERT INTO `stock_dict` VALUES (823, '宝钛股份', '600456', 'sh');
+INSERT INTO `stock_dict` VALUES (824, '会稽山', '601579', 'sh');
+INSERT INTO `stock_dict` VALUES (825, '众鑫股份', '603091', 'sh');
+INSERT INTO `stock_dict` VALUES (826, '爱威科技', '688067', 'sh');
+INSERT INTO `stock_dict` VALUES (827, '浙商银行', '601916', 'sh');
+INSERT INTO `stock_dict` VALUES (828, '上海电气', '601727', 'sh');
+INSERT INTO `stock_dict` VALUES (829, '中青旅', '600138', 'sh');
+INSERT INTO `stock_dict` VALUES (830, '双元科技', '688623', 'sh');
+INSERT INTO `stock_dict` VALUES (831, '京投发展', '600683', 'sh');
+INSERT INTO `stock_dict` VALUES (832, '保变电气', '600550', 'sh');
+INSERT INTO `stock_dict` VALUES (833, '国金证券', '600109', 'sh');
+INSERT INTO `stock_dict` VALUES (834, '华泰证券', '601688', 'sh');
+INSERT INTO `stock_dict` VALUES (835, '吉比特', '603444', 'sh');
+INSERT INTO `stock_dict` VALUES (836, '南模生物', '688265', 'sh');
+INSERT INTO `stock_dict` VALUES (837, '统联精密', '688210', 'sh');
+INSERT INTO `stock_dict` VALUES (838, '康希通信', '688653', 'sh');
+INSERT INTO `stock_dict` VALUES (839, '芯朋微', '688508', 'sh');
+INSERT INTO `stock_dict` VALUES (840, '中信尼雅', '600084', 'sh');
+INSERT INTO `stock_dict` VALUES (841, '冠石科技', '605588', 'sh');
+INSERT INTO `stock_dict` VALUES (842, '中交设计', '600720', 'sh');
+INSERT INTO `stock_dict` VALUES (843, '瑞可达', '688800', 'sh');
+INSERT INTO `stock_dict` VALUES (844, '中贝通信', '603220', 'sh');
+INSERT INTO `stock_dict` VALUES (845, '苑东生物', '688513', 'sh');
+INSERT INTO `stock_dict` VALUES (846, '耐科装备', '688419', 'sh');
+INSERT INTO `stock_dict` VALUES (847, '中邮科技', '688648', 'sh');
+INSERT INTO `stock_dict` VALUES (848, '尚纬股份', '603333', 'sh');
+INSERT INTO `stock_dict` VALUES (849, '南微医学', '688029', 'sh');
+INSERT INTO `stock_dict` VALUES (850, '长鸿高科', '605008', 'sh');
+INSERT INTO `stock_dict` VALUES (851, '华创云信', '600155', 'sh');
+INSERT INTO `stock_dict` VALUES (852, '天能股份', '688819', 'sh');
+INSERT INTO `stock_dict` VALUES (853, '雅戈尔', '600177', 'sh');
+INSERT INTO `stock_dict` VALUES (854, '中信建投', '601066', 'sh');
+INSERT INTO `stock_dict` VALUES (855, '山东药玻', '600529', 'sh');
+INSERT INTO `stock_dict` VALUES (856, '山东钢铁', '600022', 'sh');
+INSERT INTO `stock_dict` VALUES (857, '宁夏建材', '600449', 'sh');
+INSERT INTO `stock_dict` VALUES (858, '常青股份', '603768', 'sh');
+INSERT INTO `stock_dict` VALUES (859, '鼎信通讯', '603421', 'sh');
+INSERT INTO `stock_dict` VALUES (860, '中国中车', '601766', 'sh');
+INSERT INTO `stock_dict` VALUES (861, '中银证券', '601696', 'sh');
+INSERT INTO `stock_dict` VALUES (862, '交运股份', '600676', 'sh');
+INSERT INTO `stock_dict` VALUES (863, '英集芯', '688209', 'sh');
+INSERT INTO `stock_dict` VALUES (864, '海汽集团', '603069', 'sh');
+INSERT INTO `stock_dict` VALUES (865, '合盛硅业', '603260', 'sh');
+INSERT INTO `stock_dict` VALUES (866, '派斯林', '600215', 'sh');
+INSERT INTO `stock_dict` VALUES (867, '瑞斯康达', '603803', 'sh');
+INSERT INTO `stock_dict` VALUES (868, '电魂网络', '603258', 'sh');
+INSERT INTO `stock_dict` VALUES (869, '春兰股份', '600854', 'sh');
+INSERT INTO `stock_dict` VALUES (870, '天成自控', '603085', 'sh');
+INSERT INTO `stock_dict` VALUES (871, '辽港股份', '601880', 'sh');
+INSERT INTO `stock_dict` VALUES (872, '三角轮胎', '601163', 'sh');
+INSERT INTO `stock_dict` VALUES (873, '三孚股份', '603938', 'sh');
+INSERT INTO `stock_dict` VALUES (874, '海优新材', '688680', 'sh');
+INSERT INTO `stock_dict` VALUES (875, '内蒙一机', '600967', 'sh');
+INSERT INTO `stock_dict` VALUES (876, '苏农银行', '603323', 'sh');
+INSERT INTO `stock_dict` VALUES (877, '天坛生物', '600161', 'sh');
+INSERT INTO `stock_dict` VALUES (878, '天富能源', '600509', 'sh');
+INSERT INTO `stock_dict` VALUES (879, '新锐股份', '688257', 'sh');
+INSERT INTO `stock_dict` VALUES (880, '金钼股份', '601958', 'sh');
+INSERT INTO `stock_dict` VALUES (881, '空港股份', '600463', 'sh');
+INSERT INTO `stock_dict` VALUES (882, '江山欧派', '603208', 'sh');
+INSERT INTO `stock_dict` VALUES (883, '长久物流', '603569', 'sh');
+INSERT INTO `stock_dict` VALUES (884, '恒兴新材', '603276', 'sh');
+INSERT INTO `stock_dict` VALUES (885, '烽火通信', '600498', 'sh');
+INSERT INTO `stock_dict` VALUES (886, '东方证券', '600958', 'sh');
+INSERT INTO `stock_dict` VALUES (887, '新坐标', '603040', 'sh');
+INSERT INTO `stock_dict` VALUES (888, '容百科技', '688005', 'sh');
+INSERT INTO `stock_dict` VALUES (889, '妙可蓝多', '600882', 'sh');
+INSERT INTO `stock_dict` VALUES (890, '超卓航科', '688237', 'sh');
+INSERT INTO `stock_dict` VALUES (891, '创力集团', '603012', 'sh');
+INSERT INTO `stock_dict` VALUES (892, '茂业商业', '600828', 'sh');
+INSERT INTO `stock_dict` VALUES (893, '克劳斯', '600579', 'sh');
+INSERT INTO `stock_dict` VALUES (894, '健民集团', '600976', 'sh');
+INSERT INTO `stock_dict` VALUES (895, '西安银行', '600928', 'sh');
+INSERT INTO `stock_dict` VALUES (896, '丛麟科技', '688370', 'sh');
+INSERT INTO `stock_dict` VALUES (897, '江苏索普', '600746', 'sh');
+INSERT INTO `stock_dict` VALUES (898, '湘电股份', '600416', 'sh');
+INSERT INTO `stock_dict` VALUES (899, '歌华有线', '600037', 'sh');
+INSERT INTO `stock_dict` VALUES (900, '晨光股份', '603899', 'sh');
+INSERT INTO `stock_dict` VALUES (901, '久日新材', '688199', 'sh');
+INSERT INTO `stock_dict` VALUES (902, '嘉必优', '688089', 'sh');
+INSERT INTO `stock_dict` VALUES (903, '南网科技', '688248', 'sh');
+INSERT INTO `stock_dict` VALUES (904, '大名城', '600094', 'sh');
+INSERT INTO `stock_dict` VALUES (905, '冠农股份', '600251', 'sh');
+INSERT INTO `stock_dict` VALUES (906, '天微电子', '688511', 'sh');
+INSERT INTO `stock_dict` VALUES (907, '震有科技', '688418', 'sh');
+INSERT INTO `stock_dict` VALUES (908, '中直股份', '600038', 'sh');
+INSERT INTO `stock_dict` VALUES (909, '贵州燃气', '600903', 'sh');
+INSERT INTO `stock_dict` VALUES (910, '华荣股份', '603855', 'sh');
+INSERT INTO `stock_dict` VALUES (911, '禾迈股份', '688032', 'sh');
+INSERT INTO `stock_dict` VALUES (912, '诺泰生物', '688076', 'sh');
+INSERT INTO `stock_dict` VALUES (913, '盛洋科技', '603703', 'sh');
+INSERT INTO `stock_dict` VALUES (914, '小方制药', '603207', 'sh');
+INSERT INTO `stock_dict` VALUES (915, '民生银行', '600016', 'sh');
+INSERT INTO `stock_dict` VALUES (916, '海澜之家', '600398', 'sh');
+INSERT INTO `stock_dict` VALUES (917, '复洁环保', '688335', 'sh');
+INSERT INTO `stock_dict` VALUES (918, '国脉文化', '600640', 'sh');
+INSERT INTO `stock_dict` VALUES (919, '航天长峰', '600855', 'sh');
+INSERT INTO `stock_dict` VALUES (920, '江化微', '603078', 'sh');
+INSERT INTO `stock_dict` VALUES (921, '金隅集团', '601992', 'sh');
+INSERT INTO `stock_dict` VALUES (922, '创新新材', '600361', 'sh');
+INSERT INTO `stock_dict` VALUES (923, '中航机载', '600372', 'sh');
+INSERT INTO `stock_dict` VALUES (924, '西山科技', '688576', 'sh');
+INSERT INTO `stock_dict` VALUES (925, '昱能科技', '688348', 'sh');
+INSERT INTO `stock_dict` VALUES (926, 'ST明诚', '600136', 'sh');
+INSERT INTO `stock_dict` VALUES (927, '国旅联合', '600358', 'sh');
+INSERT INTO `stock_dict` VALUES (928, '淮北矿业', '600985', 'sh');
+INSERT INTO `stock_dict` VALUES (929, '凯迪股份', '605288', 'sh');
+INSERT INTO `stock_dict` VALUES (930, '中国通号', '688009', 'sh');
+INSERT INTO `stock_dict` VALUES (931, '香江控股', '600162', 'sh');
+INSERT INTO `stock_dict` VALUES (932, '荣泰健康', '603579', 'sh');
+INSERT INTO `stock_dict` VALUES (933, '福耀玻璃', '600660', 'sh');
+INSERT INTO `stock_dict` VALUES (934, '灵康药业', '603669', 'sh');
+INSERT INTO `stock_dict` VALUES (935, '航宇科技', '688239', 'sh');
+INSERT INTO `stock_dict` VALUES (936, '水井坊', '600779', 'sh');
+INSERT INTO `stock_dict` VALUES (937, '抚顺特钢', '600399', 'sh');
+INSERT INTO `stock_dict` VALUES (938, '大东方', '600327', 'sh');
+INSERT INTO `stock_dict` VALUES (939, '海利尔', '603639', 'sh');
+INSERT INTO `stock_dict` VALUES (940, '万东医疗', '600055', 'sh');
+INSERT INTO `stock_dict` VALUES (941, '仁度生物', '688193', 'sh');
+INSERT INTO `stock_dict` VALUES (942, '新五丰', '600975', 'sh');
+INSERT INTO `stock_dict` VALUES (943, '陕鼓动力', '601369', 'sh');
+INSERT INTO `stock_dict` VALUES (944, '亚通精工', '603190', 'sh');
+INSERT INTO `stock_dict` VALUES (945, '华康股份', '605077', 'sh');
+INSERT INTO `stock_dict` VALUES (946, '长城军工', '601606', 'sh');
+INSERT INTO `stock_dict` VALUES (947, '和邦生物', '603077', 'sh');
+INSERT INTO `stock_dict` VALUES (948, '南京证券', '601990', 'sh');
+INSERT INTO `stock_dict` VALUES (949, '兆易创新', '603986', 'sh');
+INSERT INTO `stock_dict` VALUES (950, '新华医疗', '600587', 'sh');
+INSERT INTO `stock_dict` VALUES (951, '华鑫股份', '600621', 'sh');
+INSERT INTO `stock_dict` VALUES (952, '福成股份', '600965', 'sh');
+INSERT INTO `stock_dict` VALUES (953, '华润双鹤', '600062', 'sh');
+INSERT INTO `stock_dict` VALUES (954, '福元医药', '601089', 'sh');
+INSERT INTO `stock_dict` VALUES (955, '恒为科技', '603496', 'sh');
+INSERT INTO `stock_dict` VALUES (956, '广晟有色', '600259', 'sh');
+INSERT INTO `stock_dict` VALUES (957, '弘元绿能', '603185', 'sh');
+INSERT INTO `stock_dict` VALUES (958, '永艺股份', '603600', 'sh');
+INSERT INTO `stock_dict` VALUES (959, '易德龙', '603380', 'sh');
+INSERT INTO `stock_dict` VALUES (960, '新华网', '603888', 'sh');
+INSERT INTO `stock_dict` VALUES (961, '三旺通信', '688618', 'sh');
+INSERT INTO `stock_dict` VALUES (962, '金徽股份', '603132', 'sh');
+INSERT INTO `stock_dict` VALUES (963, '惠达卫浴', '603385', 'sh');
+INSERT INTO `stock_dict` VALUES (964, '亚士创能', '603378', 'sh');
+INSERT INTO `stock_dict` VALUES (965, '好太太', '603848', 'sh');
+INSERT INTO `stock_dict` VALUES (966, '中牧股份', '600195', 'sh');
+INSERT INTO `stock_dict` VALUES (967, '天士力', '600535', 'sh');
+INSERT INTO `stock_dict` VALUES (968, '康辰药业', '603590', 'sh');
+INSERT INTO `stock_dict` VALUES (969, '欧普照明', '603515', 'sh');
+INSERT INTO `stock_dict` VALUES (970, '科威尔', '688551', 'sh');
+INSERT INTO `stock_dict` VALUES (971, '金达莱', '688057', 'sh');
+INSERT INTO `stock_dict` VALUES (972, '德邦科技', '688035', 'sh');
+INSERT INTO `stock_dict` VALUES (973, '皖新传媒', '601801', 'sh');
+INSERT INTO `stock_dict` VALUES (974, '康缘药业', '600557', 'sh');
+INSERT INTO `stock_dict` VALUES (975, '宝信软件', '600845', 'sh');
+INSERT INTO `stock_dict` VALUES (976, '新风光', '688663', 'sh');
+INSERT INTO `stock_dict` VALUES (977, '健之佳', '605266', 'sh');
+INSERT INTO `stock_dict` VALUES (978, '麒麟信安', '688152', 'sh');
+INSERT INTO `stock_dict` VALUES (979, '同方股份', '600100', 'sh');
+INSERT INTO `stock_dict` VALUES (980, '中国铝业', '601600', 'sh');
+INSERT INTO `stock_dict` VALUES (981, '高测股份', '688556', 'sh');
+INSERT INTO `stock_dict` VALUES (982, '华特气体', '688268', 'sh');
+INSERT INTO `stock_dict` VALUES (983, '电子城', '600658', 'sh');
+INSERT INTO `stock_dict` VALUES (984, '张江高科', '600895', 'sh');
+INSERT INTO `stock_dict` VALUES (985, '格林达', '603931', 'sh');
+INSERT INTO `stock_dict` VALUES (986, '佳力图', '603912', 'sh');
+INSERT INTO `stock_dict` VALUES (987, '华体科技', '603679', 'sh');
+INSERT INTO `stock_dict` VALUES (988, '岳阳林纸', '600963', 'sh');
+INSERT INTO `stock_dict` VALUES (989, '鼎通科技', '688668', 'sh');
+INSERT INTO `stock_dict` VALUES (990, '洪通燃气', '605169', 'sh');
+INSERT INTO `stock_dict` VALUES (991, '金龙汽车', '600686', 'sh');
+INSERT INTO `stock_dict` VALUES (992, '腾达建设', '600512', 'sh');
+INSERT INTO `stock_dict` VALUES (993, '江西铜业', '600362', 'sh');
+INSERT INTO `stock_dict` VALUES (994, '南京高科', '600064', 'sh');
+INSERT INTO `stock_dict` VALUES (995, '金地集团', '600383', 'sh');
+INSERT INTO `stock_dict` VALUES (996, '龙韵股份', '603729', 'sh');
+INSERT INTO `stock_dict` VALUES (997, '中船科技', '600072', 'sh');
+INSERT INTO `stock_dict` VALUES (998, '康鹏科技', '688602', 'sh');
+INSERT INTO `stock_dict` VALUES (999, '长源东谷', '603950', 'sh');
+INSERT INTO `stock_dict` VALUES (1000, '兴通股份', '603209', 'sh');
+INSERT INTO `stock_dict` VALUES (1001, '徕木股份', '603633', 'sh');
+INSERT INTO `stock_dict` VALUES (1002, '中国人寿', '601628', 'sh');
+INSERT INTO `stock_dict` VALUES (1003, '菲沃泰', '688371', 'sh');
+INSERT INTO `stock_dict` VALUES (1004, '神力股份', '603819', 'sh');
+INSERT INTO `stock_dict` VALUES (1005, '迪生力', '603335', 'sh');
+INSERT INTO `stock_dict` VALUES (1006, '韦尔股份', '603501', 'sh');
+INSERT INTO `stock_dict` VALUES (1007, '广誉远', '600771', 'sh');
+INSERT INTO `stock_dict` VALUES (1008, '京源环保', '688096', 'sh');
+INSERT INTO `stock_dict` VALUES (1009, '北方稀土', '600111', 'sh');
+INSERT INTO `stock_dict` VALUES (1010, '华北制药', '600812', 'sh');
+INSERT INTO `stock_dict` VALUES (1011, '圣湘生物', '688289', 'sh');
+INSERT INTO `stock_dict` VALUES (1012, '杭可科技', '688006', 'sh');
+INSERT INTO `stock_dict` VALUES (1013, '珍宝岛', '603567', 'sh');
+INSERT INTO `stock_dict` VALUES (1014, '厦门空港', '600897', 'sh');
+INSERT INTO `stock_dict` VALUES (1015, '唯赛勃', '688718', 'sh');
+INSERT INTO `stock_dict` VALUES (1016, '浙江自然', '605080', 'sh');
+INSERT INTO `stock_dict` VALUES (1017, '博拓生物', '688767', 'sh');
+INSERT INTO `stock_dict` VALUES (1018, '春风动力', '603129', 'sh');
+INSERT INTO `stock_dict` VALUES (1019, '苏豪弘业', '600128', 'sh');
+INSERT INTO `stock_dict` VALUES (1020, '古越龙山', '600059', 'sh');
+INSERT INTO `stock_dict` VALUES (1021, '闻泰科技', '600745', 'sh');
+INSERT INTO `stock_dict` VALUES (1022, '中国建筑', '601668', 'sh');
+INSERT INTO `stock_dict` VALUES (1023, '贵阳银行', '601997', 'sh');
+INSERT INTO `stock_dict` VALUES (1024, '羚锐制药', '600285', 'sh');
+INSERT INTO `stock_dict` VALUES (1025, '云天化', '600096', 'sh');
+INSERT INTO `stock_dict` VALUES (1026, '科前生物', '688526', 'sh');
+INSERT INTO `stock_dict` VALUES (1027, '白银有色', '601212', 'sh');
+INSERT INTO `stock_dict` VALUES (1028, '海南椰岛', '600238', 'sh');
+INSERT INTO `stock_dict` VALUES (1029, '浙江鼎力', '603338', 'sh');
+INSERT INTO `stock_dict` VALUES (1030, 'ST柯利达', '603828', 'sh');
+INSERT INTO `stock_dict` VALUES (1031, '西部黄金', '601069', 'sh');
+INSERT INTO `stock_dict` VALUES (1032, '甬金股份', '603995', 'sh');
+INSERT INTO `stock_dict` VALUES (1033, '招商南油', '601975', 'sh');
+INSERT INTO `stock_dict` VALUES (1034, '沐邦高科', '603398', 'sh');
+INSERT INTO `stock_dict` VALUES (1035, '中粮糖业', '600737', 'sh');
+INSERT INTO `stock_dict` VALUES (1036, '钜泉科技', '688391', 'sh');
+INSERT INTO `stock_dict` VALUES (1037, '炬芯科技', '688049', 'sh');
+INSERT INTO `stock_dict` VALUES (1038, '三一重工', '600031', 'sh');
+INSERT INTO `stock_dict` VALUES (1039, '睿能科技', '603933', 'sh');
+INSERT INTO `stock_dict` VALUES (1040, '天准科技', '688003', 'sh');
+INSERT INTO `stock_dict` VALUES (1041, '步长制药', '603858', 'sh');
+INSERT INTO `stock_dict` VALUES (1042, '康希诺', '688185', 'sh');
+INSERT INTO `stock_dict` VALUES (1043, '三祥新材', '603663', 'sh');
+INSERT INTO `stock_dict` VALUES (1044, '福达合金', '603045', 'sh');
+INSERT INTO `stock_dict` VALUES (1045, '艾迪精密', '603638', 'sh');
+INSERT INTO `stock_dict` VALUES (1046, '中航重机', '600765', 'sh');
+INSERT INTO `stock_dict` VALUES (1047, '八一钢铁', '600581', 'sh');
+INSERT INTO `stock_dict` VALUES (1048, '甘李药业', '603087', 'sh');
+INSERT INTO `stock_dict` VALUES (1049, '亚辉龙', '688575', 'sh');
+INSERT INTO `stock_dict` VALUES (1050, '中船防务', '600685', 'sh');
+INSERT INTO `stock_dict` VALUES (1051, '贵研铂业', '600459', 'sh');
+INSERT INTO `stock_dict` VALUES (1052, '三达膜', '688101', 'sh');
+INSERT INTO `stock_dict` VALUES (1053, '海正生材', '688203', 'sh');
+INSERT INTO `stock_dict` VALUES (1054, '广西广电', '600936', 'sh');
+INSERT INTO `stock_dict` VALUES (1055, '杭州银行', '600926', 'sh');
+INSERT INTO `stock_dict` VALUES (1056, '金种子酒', '600199', 'sh');
+INSERT INTO `stock_dict` VALUES (1057, '中信银行', '601998', 'sh');
+INSERT INTO `stock_dict` VALUES (1058, '航天动力', '600343', 'sh');
+INSERT INTO `stock_dict` VALUES (1059, '航民股份', '600987', 'sh');
+INSERT INTO `stock_dict` VALUES (1060, '交控科技', '688015', 'sh');
+INSERT INTO `stock_dict` VALUES (1061, '佳禾食品', '605300', 'sh');
+INSERT INTO `stock_dict` VALUES (1062, '中储股份', '600787', 'sh');
+INSERT INTO `stock_dict` VALUES (1063, '狮头股份', '600539', 'sh');
+INSERT INTO `stock_dict` VALUES (1064, '柳药集团', '603368', 'sh');
+INSERT INTO `stock_dict` VALUES (1065, '光大银行', '601818', 'sh');
+INSERT INTO `stock_dict` VALUES (1066, '岩石股份', '600696', 'sh');
+INSERT INTO `stock_dict` VALUES (1067, '中国人保', '601319', 'sh');
+INSERT INTO `stock_dict` VALUES (1068, '新化股份', '603867', 'sh');
+INSERT INTO `stock_dict` VALUES (1069, '三美股份', '603379', 'sh');
+INSERT INTO `stock_dict` VALUES (1070, '海容冷链', '603187', 'sh');
+INSERT INTO `stock_dict` VALUES (1071, '亚虹医药-U', '688176', 'sh');
+INSERT INTO `stock_dict` VALUES (1072, '红蜻蜓', '603116', 'sh');
+INSERT INTO `stock_dict` VALUES (1073, '中国银河', '601881', 'sh');
+INSERT INTO `stock_dict` VALUES (1074, '瑞晟智能', '688215', 'sh');
+INSERT INTO `stock_dict` VALUES (1075, '国投资本', '600061', 'sh');
+INSERT INTO `stock_dict` VALUES (1076, '荣昌生物', '688331', 'sh');
+INSERT INTO `stock_dict` VALUES (1077, '南山铝业', '600219', 'sh');
+INSERT INTO `stock_dict` VALUES (1078, '青云科技-U', '688316', 'sh');
+INSERT INTO `stock_dict` VALUES (1079, 'ST沪科', '600608', 'sh');
+INSERT INTO `stock_dict` VALUES (1080, '宏微科技', '688711', 'sh');
+INSERT INTO `stock_dict` VALUES (1081, '旭光电子', '600353', 'sh');
+INSERT INTO `stock_dict` VALUES (1082, '桐昆股份', '601233', 'sh');
+INSERT INTO `stock_dict` VALUES (1083, '泉阳泉', '600189', 'sh');
+INSERT INTO `stock_dict` VALUES (1084, '金诚信', '603979', 'sh');
+INSERT INTO `stock_dict` VALUES (1085, '外高桥', '600648', 'sh');
+INSERT INTO `stock_dict` VALUES (1086, '德林海', '688069', 'sh');
+INSERT INTO `stock_dict` VALUES (1087, '滨化股份', '601678', 'sh');
+INSERT INTO `stock_dict` VALUES (1088, '科汇股份', '688681', 'sh');
+INSERT INTO `stock_dict` VALUES (1089, '通化东宝', '600867', 'sh');
+INSERT INTO `stock_dict` VALUES (1090, '芯碁微装', '688630', 'sh');
+INSERT INTO `stock_dict` VALUES (1091, '德业股份', '605117', 'sh');
+INSERT INTO `stock_dict` VALUES (1092, '中国东航', '600115', 'sh');
+INSERT INTO `stock_dict` VALUES (1093, '中化国际', '600500', 'sh');
+INSERT INTO `stock_dict` VALUES (1094, 'ST舜天', '600287', 'sh');
+INSERT INTO `stock_dict` VALUES (1095, '大千生态', '603955', 'sh');
+INSERT INTO `stock_dict` VALUES (1096, '福光股份', '688010', 'sh');
+INSERT INTO `stock_dict` VALUES (1097, '皖维高新', '600063', 'sh');
+INSERT INTO `stock_dict` VALUES (1098, '无锡振华', '605319', 'sh');
+INSERT INTO `stock_dict` VALUES (1099, '中科微至', '688211', 'sh');
+INSERT INTO `stock_dict` VALUES (1100, '华兴源创', '688001', 'sh');
+INSERT INTO `stock_dict` VALUES (1101, '翠微股份', '603123', 'sh');
+INSERT INTO `stock_dict` VALUES (1102, '鼎龙科技', '603004', 'sh');
+INSERT INTO `stock_dict` VALUES (1103, '中原证券', '601375', 'sh');
+INSERT INTO `stock_dict` VALUES (1104, '凯立新材', '688269', 'sh');
+INSERT INTO `stock_dict` VALUES (1105, '爱博医疗', '688050', 'sh');
+INSERT INTO `stock_dict` VALUES (1106, '太平洋', '601099', 'sh');
+INSERT INTO `stock_dict` VALUES (1107, '晶升股份', '688478', 'sh');
+INSERT INTO `stock_dict` VALUES (1108, '宏力达', '688330', 'sh');
+INSERT INTO `stock_dict` VALUES (1109, '富佳股份', '603219', 'sh');
+INSERT INTO `stock_dict` VALUES (1110, '松井股份', '688157', 'sh');
+INSERT INTO `stock_dict` VALUES (1111, '国芯科技', '688262', 'sh');
+INSERT INTO `stock_dict` VALUES (1112, '银都股份', '603277', 'sh');
+INSERT INTO `stock_dict` VALUES (1113, '恒力石化', '600346', 'sh');
+INSERT INTO `stock_dict` VALUES (1114, '彤程新材', '603650', 'sh');
+INSERT INTO `stock_dict` VALUES (1115, '友车科技', '688479', 'sh');
+INSERT INTO `stock_dict` VALUES (1116, '市北高新', '600604', 'sh');
+INSERT INTO `stock_dict` VALUES (1117, '建发股份', '600153', 'sh');
+INSERT INTO `stock_dict` VALUES (1118, '瑞茂通', '600180', 'sh');
+INSERT INTO `stock_dict` VALUES (1119, '健盛集团', '603558', 'sh');
+INSERT INTO `stock_dict` VALUES (1120, '西南证券', '600369', 'sh');
+INSERT INTO `stock_dict` VALUES (1121, '热威股份', '603075', 'sh');
+INSERT INTO `stock_dict` VALUES (1122, '重庆水务', '601158', 'sh');
+INSERT INTO `stock_dict` VALUES (1123, '派能科技', '688063', 'sh');
+INSERT INTO `stock_dict` VALUES (1124, '益诺思', '688710', 'sh');
+INSERT INTO `stock_dict` VALUES (1125, '气派科技', '688216', 'sh');
+INSERT INTO `stock_dict` VALUES (1126, '陆家嘴', '600663', 'sh');
+INSERT INTO `stock_dict` VALUES (1127, '大参林', '603233', 'sh');
+INSERT INTO `stock_dict` VALUES (1128, '铂力特', '688333', 'sh');
+INSERT INTO `stock_dict` VALUES (1129, '齐鲁银行', '601665', 'sh');
+INSERT INTO `stock_dict` VALUES (1130, '悦康药业', '688658', 'sh');
+INSERT INTO `stock_dict` VALUES (1131, '有方科技', '688159', 'sh');
+INSERT INTO `stock_dict` VALUES (1132, '九州通', '600998', 'sh');
+INSERT INTO `stock_dict` VALUES (1133, '和顺石油', '603353', 'sh');
+INSERT INTO `stock_dict` VALUES (1134, '上海物贸', '600822', 'sh');
+INSERT INTO `stock_dict` VALUES (1135, '中国电建', '601669', 'sh');
+INSERT INTO `stock_dict` VALUES (1136, '博汇纸业', '600966', 'sh');
+INSERT INTO `stock_dict` VALUES (1137, '九丰能源', '605090', 'sh');
+INSERT INTO `stock_dict` VALUES (1138, '三一重能', '688349', 'sh');
+INSERT INTO `stock_dict` VALUES (1139, '金开新能', '600821', 'sh');
+INSERT INTO `stock_dict` VALUES (1140, '中国国贸', '600007', 'sh');
+INSERT INTO `stock_dict` VALUES (1141, '精进电动-UW', '688280', 'sh');
+INSERT INTO `stock_dict` VALUES (1142, '和元生物', '688238', 'sh');
+INSERT INTO `stock_dict` VALUES (1143, '西上海', '605151', 'sh');
+INSERT INTO `stock_dict` VALUES (1144, '上海机场', '600009', 'sh');
+INSERT INTO `stock_dict` VALUES (1145, '金晶科技', '600586', 'sh');
+INSERT INTO `stock_dict` VALUES (1146, '五矿新能', '688779', 'sh');
+INSERT INTO `stock_dict` VALUES (1147, '金枫酒业', '600616', 'sh');
+INSERT INTO `stock_dict` VALUES (1148, '昭衍新药', '603127', 'sh');
+INSERT INTO `stock_dict` VALUES (1149, '伟时电子', '605218', 'sh');
+INSERT INTO `stock_dict` VALUES (1150, '美迪西', '688202', 'sh');
+INSERT INTO `stock_dict` VALUES (1151, '苏州高新', '600736', 'sh');
+INSERT INTO `stock_dict` VALUES (1152, '华安证券', '600909', 'sh');
+INSERT INTO `stock_dict` VALUES (1153, '三安光电', '600703', 'sh');
+INSERT INTO `stock_dict` VALUES (1154, '力芯微', '688601', 'sh');
+INSERT INTO `stock_dict` VALUES (1155, '中远海特', '600428', 'sh');
+INSERT INTO `stock_dict` VALUES (1156, '键凯科技', '688356', 'sh');
+INSERT INTO `stock_dict` VALUES (1157, '华达科技', '603358', 'sh');
+INSERT INTO `stock_dict` VALUES (1158, '中科通达', '688038', 'sh');
+INSERT INTO `stock_dict` VALUES (1159, '和达科技', '688296', 'sh');
+INSERT INTO `stock_dict` VALUES (1160, '仕佳光子', '688313', 'sh');
+INSERT INTO `stock_dict` VALUES (1161, '维科技术', '600152', 'sh');
+INSERT INTO `stock_dict` VALUES (1162, '郴电国际', '600969', 'sh');
+INSERT INTO `stock_dict` VALUES (1163, '科林电气', '603050', 'sh');
+INSERT INTO `stock_dict` VALUES (1164, '洛阳钼业', '603993', 'sh');
+INSERT INTO `stock_dict` VALUES (1165, '联瑞新材', '688300', 'sh');
+INSERT INTO `stock_dict` VALUES (1166, '潞安环能', '601699', 'sh');
+INSERT INTO `stock_dict` VALUES (1167, '格力地产', '600185', 'sh');
+INSERT INTO `stock_dict` VALUES (1168, '信雅达', '600571', 'sh');
+INSERT INTO `stock_dict` VALUES (1169, '隆鑫通用', '603766', 'sh');
+INSERT INTO `stock_dict` VALUES (1170, '海天股份', '603759', 'sh');
+INSERT INTO `stock_dict` VALUES (1171, '浪莎股份', '600137', 'sh');
+INSERT INTO `stock_dict` VALUES (1172, '永新光学', '603297', 'sh');
+INSERT INTO `stock_dict` VALUES (1173, '中国软件', '600536', 'sh');
+INSERT INTO `stock_dict` VALUES (1174, '陕西煤业', '601225', 'sh');
+INSERT INTO `stock_dict` VALUES (1175, '中国化学', '601117', 'sh');
+INSERT INTO `stock_dict` VALUES (1176, '东吴证券', '601555', 'sh');
+INSERT INTO `stock_dict` VALUES (1177, '西部矿业', '601168', 'sh');
+INSERT INTO `stock_dict` VALUES (1178, '中盐化工', '600328', 'sh');
+INSERT INTO `stock_dict` VALUES (1179, '山石网科', '688030', 'sh');
+INSERT INTO `stock_dict` VALUES (1180, '联翔股份', '603272', 'sh');
+INSERT INTO `stock_dict` VALUES (1181, '申通地铁', '600834', 'sh');
+INSERT INTO `stock_dict` VALUES (1182, '复星医药', '600196', 'sh');
+INSERT INTO `stock_dict` VALUES (1183, '锴威特', '688693', 'sh');
+INSERT INTO `stock_dict` VALUES (1184, '中国黄金', '600916', 'sh');
+INSERT INTO `stock_dict` VALUES (1185, '佰仁医疗', '688198', 'sh');
+INSERT INTO `stock_dict` VALUES (1186, 'ST目药', '600671', 'sh');
+INSERT INTO `stock_dict` VALUES (1187, '海通发展', '603162', 'sh');
+INSERT INTO `stock_dict` VALUES (1188, '白云电器', '603861', 'sh');
+INSERT INTO `stock_dict` VALUES (1189, '白云机场', '600004', 'sh');
+INSERT INTO `stock_dict` VALUES (1190, '罗普特', '688619', 'sh');
+INSERT INTO `stock_dict` VALUES (1191, '浙江龙盛', '600352', 'sh');
+INSERT INTO `stock_dict` VALUES (1192, '中公高科', '603860', 'sh');
+INSERT INTO `stock_dict` VALUES (1193, '中国神华', '601088', 'sh');
+INSERT INTO `stock_dict` VALUES (1194, '艾艾精工', '603580', 'sh');
+INSERT INTO `stock_dict` VALUES (1195, '惠泉啤酒', '600573', 'sh');
+INSERT INTO `stock_dict` VALUES (1196, '醋化股份', '603968', 'sh');
+INSERT INTO `stock_dict` VALUES (1197, '森特股份', '603098', 'sh');
+INSERT INTO `stock_dict` VALUES (1198, '*ST通脉', '603559', 'sh');
+INSERT INTO `stock_dict` VALUES (1199, '浙数文化', '600633', 'sh');
+INSERT INTO `stock_dict` VALUES (1200, '安德利', '605198', 'sh');
+INSERT INTO `stock_dict` VALUES (1201, '盛和资源', '600392', 'sh');
+INSERT INTO `stock_dict` VALUES (1202, '联合水务', '603291', 'sh');
+INSERT INTO `stock_dict` VALUES (1203, '派克新材', '605123', 'sh');
+INSERT INTO `stock_dict` VALUES (1204, '赛伍技术', '603212', 'sh');
+INSERT INTO `stock_dict` VALUES (1205, '慧智微-U', '688512', 'sh');
+INSERT INTO `stock_dict` VALUES (1206, '威尔药业', '603351', 'sh');
+INSERT INTO `stock_dict` VALUES (1207, '维力医疗', '603309', 'sh');
+INSERT INTO `stock_dict` VALUES (1208, '望变电气', '603191', 'sh');
+INSERT INTO `stock_dict` VALUES (1209, '普莱柯', '603566', 'sh');
+INSERT INTO `stock_dict` VALUES (1210, '剑桥科技', '603083', 'sh');
+INSERT INTO `stock_dict` VALUES (1211, '长飞光纤', '601869', 'sh');
+INSERT INTO `stock_dict` VALUES (1212, '圆通速递', '600233', 'sh');
+INSERT INTO `stock_dict` VALUES (1213, '艾华集团', '603989', 'sh');
+INSERT INTO `stock_dict` VALUES (1214, '安图生物', '603658', 'sh');
+INSERT INTO `stock_dict` VALUES (1215, '万泰生物', '603392', 'sh');
+INSERT INTO `stock_dict` VALUES (1216, '华润微', '688396', 'sh');
+INSERT INTO `stock_dict` VALUES (1217, '国机通用', '600444', 'sh');
+INSERT INTO `stock_dict` VALUES (1218, '如通股份', '603036', 'sh');
+INSERT INTO `stock_dict` VALUES (1219, '新奥股份', '600803', 'sh');
+INSERT INTO `stock_dict` VALUES (1220, '仙鹤股份', '603733', 'sh');
+INSERT INTO `stock_dict` VALUES (1221, '伟明环保', '603568', 'sh');
+INSERT INTO `stock_dict` VALUES (1222, '工业富联', '601138', 'sh');
+INSERT INTO `stock_dict` VALUES (1223, '正泰电器', '601877', 'sh');
+INSERT INTO `stock_dict` VALUES (1224, '寿仙谷', '603896', 'sh');
+INSERT INTO `stock_dict` VALUES (1225, '振德医疗', '603301', 'sh');
+INSERT INTO `stock_dict` VALUES (1226, '上海洗霸', '603200', 'sh');
+INSERT INTO `stock_dict` VALUES (1227, '成大生物', '688739', 'sh');
+INSERT INTO `stock_dict` VALUES (1228, '晶方科技', '603005', 'sh');
+INSERT INTO `stock_dict` VALUES (1229, '士兰微', '600460', 'sh');
+INSERT INTO `stock_dict` VALUES (1230, '白云山', '600332', 'sh');
+INSERT INTO `stock_dict` VALUES (1231, '中广天择', '603721', 'sh');
+INSERT INTO `stock_dict` VALUES (1232, '中国船舶', '600150', 'sh');
+INSERT INTO `stock_dict` VALUES (1233, '中金公司', '601995', 'sh');
+INSERT INTO `stock_dict` VALUES (1234, '固德威', '688390', 'sh');
+INSERT INTO `stock_dict` VALUES (1235, 'XD艾罗能', '688717', 'sh');
+INSERT INTO `stock_dict` VALUES (1236, '逸飞激光', '688646', 'sh');
+INSERT INTO `stock_dict` VALUES (1237, '先锋精科', '688605', 'sh');
+INSERT INTO `stock_dict` VALUES (1238, '力合微', '688589', 'sh');
+INSERT INTO `stock_dict` VALUES (1239, '铁科轨道', '688569', 'sh');
+INSERT INTO `stock_dict` VALUES (1240, '退市泽达', '688555', 'sh');
+INSERT INTO `stock_dict` VALUES (1241, '复旦张江', '688505', 'sh');
+INSERT INTO `stock_dict` VALUES (1242, '青达环保', '688501', 'sh');
+INSERT INTO `stock_dict` VALUES (1243, '三孚新科', '688359', 'sh');
+INSERT INTO `stock_dict` VALUES (1244, '颀中科技', '688352', 'sh');
+INSERT INTO `stock_dict` VALUES (1245, '欧林生物', '688319', 'sh');
+INSERT INTO `stock_dict` VALUES (1246, '宣泰医药', '688247', 'sh');
+INSERT INTO `stock_dict` VALUES (1247, '晶科能源', '688223', 'sh');
+INSERT INTO `stock_dict` VALUES (1248, '高凌信息', '688175', 'sh');
+INSERT INTO `stock_dict` VALUES (1249, '赛伦生物', '688163', 'sh');
+INSERT INTO `stock_dict` VALUES (1250, '芳源股份', '688148', 'sh');
+INSERT INTO `stock_dict` VALUES (1251, '赛诺医疗', '688108', 'sh');
+INSERT INTO `stock_dict` VALUES (1252, '退市紫晶', '688086', 'sh');
+INSERT INTO `stock_dict` VALUES (1253, '四方新材', '605122', 'sh');
+INSERT INTO `stock_dict` VALUES (1254, '明新旭腾', '605068', 'sh');
+INSERT INTO `stock_dict` VALUES (1255, '合兴股份', '605005', 'sh');
+INSERT INTO `stock_dict` VALUES (1256, '退市中新', '603996', 'sh');
+INSERT INTO `stock_dict` VALUES (1257, '正川股份', '603976', 'sh');
+INSERT INTO `stock_dict` VALUES (1258, '建业股份', '603948', 'sh');
+INSERT INTO `stock_dict` VALUES (1259, '博敏电子', '603936', 'sh');
+INSERT INTO `stock_dict` VALUES (1260, '金域医学', '603882', 'sh');
+INSERT INTO `stock_dict` VALUES (1261, 'ST智知', '603869', 'sh');
+INSERT INTO `stock_dict` VALUES (1262, '秦安股份', '603758', 'sh');
+INSERT INTO `stock_dict` VALUES (1263, '麒盛科技', '603610', 'sh');
+INSERT INTO `stock_dict` VALUES (1264, '退市博天', '603603', 'sh');
+INSERT INTO `stock_dict` VALUES (1265, '高能环境', '603588', 'sh');
+INSERT INTO `stock_dict` VALUES (1266, 'ST贵人', '603555', 'sh');
+INSERT INTO `stock_dict` VALUES (1267, '南都物业', '603506', 'sh');
+INSERT INTO `stock_dict` VALUES (1268, '贵州三力', '603439', 'sh');
+INSERT INTO `stock_dict` VALUES (1269, '基蛋生物', '603387', 'sh');
+INSERT INTO `stock_dict` VALUES (1270, 'ST东时', '603377', 'sh');
+INSERT INTO `stock_dict` VALUES (1271, '安邦护卫', '603373', 'sh');
+INSERT INTO `stock_dict` VALUES (1272, '诺邦股份', '603238', 'sh');
+INSERT INTO `stock_dict` VALUES (1273, '济民健康', '603222', 'sh');
+INSERT INTO `stock_dict` VALUES (1274, '中力股份', '603194', 'sh');
+INSERT INTO `stock_dict` VALUES (1275, '退市拉夏', '603157', 'sh');
+INSERT INTO `stock_dict` VALUES (1276, '上海建科', '603153', 'sh');
+INSERT INTO `stock_dict` VALUES (1277, '退市碳元', '603133', 'sh');
+INSERT INTO `stock_dict` VALUES (1278, '*ST威帝', '603023', 'sh');
+INSERT INTO `stock_dict` VALUES (1279, '奥康国际', '603001', 'sh');
+INSERT INTO `stock_dict` VALUES (1280, '出版传媒', '601999', 'sh');
+INSERT INTO `stock_dict` VALUES (1281, '苏垦农发', '601952', 'sh');
+INSERT INTO `stock_dict` VALUES (1282, '京运通', '601908', 'sh');
+INSERT INTO `stock_dict` VALUES (1283, '美凯龙', '601828', 'sh');
+INSERT INTO `stock_dict` VALUES (1284, '友发集团', '601686', 'sh');
+INSERT INTO `stock_dict` VALUES (1285, '北辰实业', '601588', 'sh');
+INSERT INTO `stock_dict` VALUES (1286, '退市锐电', '601558', 'sh');
+INSERT INTO `stock_dict` VALUES (1287, '利群股份', '601366', 'sh');
+INSERT INTO `stock_dict` VALUES (1288, '中国北车', '601299', 'sh');
+INSERT INTO `stock_dict` VALUES (1289, '*ST二重', '601268', 'sh');
+INSERT INTO `stock_dict` VALUES (1290, '*ST庞大', '601258', 'sh');
+INSERT INTO `stock_dict` VALUES (1291, '中国铁建', '601186', 'sh');
+INSERT INTO `stock_dict` VALUES (1292, '常熟银行', '601128', 'sh');
+INSERT INTO `stock_dict` VALUES (1293, '南京银行', '601009', 'sh');
+INSERT INTO `stock_dict` VALUES (1294, '晋亿实业', '601002', 'sh');
+INSERT INTO `stock_dict` VALUES (1295, '广汽长丰', '600991', 'sh');
+INSERT INTO `stock_dict` VALUES (1296, '建设机械', '600984', 'sh');
+INSERT INTO `stock_dict` VALUES (1297, '*ST宜生', '600978', 'sh');
+INSERT INTO `stock_dict` VALUES (1298, '重庆燃气', '600917', 'sh');
+INSERT INTO `stock_dict` VALUES (1299, '财达证券', '600906', 'sh');
+INSERT INTO `stock_dict` VALUES (1300, '*ST信联', '600899', 'sh');
+INSERT INTO `stock_dict` VALUES (1301, '退市海医', '600896', 'sh');
+INSERT INTO `stock_dict` VALUES (1302, '退市秋林', '600891', 'sh');
+INSERT INTO `stock_dict` VALUES (1303, '退市中房', '600890', 'sh');
+INSERT INTO `stock_dict` VALUES (1304, '博闻科技', '600883', 'sh');
+INSERT INTO `stock_dict` VALUES (1305, '*ST北科', '600878', 'sh');
+INSERT INTO `stock_dict` VALUES (1306, '退市厦华', '600870', 'sh');
+INSERT INTO `stock_dict` VALUES (1307, '退市中天', '600856', 'sh');
+INSERT INTO `stock_dict` VALUES (1308, '*ST中川', '600852', 'sh');
+INSERT INTO `stock_dict` VALUES (1309, '上药转换', '600849', 'sh');
+INSERT INTO `stock_dict` VALUES (1310, '中西药业', '600842', 'sh');
+INSERT INTO `stock_dict` VALUES (1311, '新湖创业', '600840', 'sh');
+INSERT INTO `stock_dict` VALUES (1312, '*ST易连', '600836', 'sh');
+INSERT INTO `stock_dict` VALUES (1313, '东方明珠', '600832', 'sh');
+INSERT INTO `stock_dict` VALUES (1314, '*ST世茂', '600823', 'sh');
+INSERT INTO `stock_dict` VALUES (1315, '建元信托', '600816', 'sh');
+INSERT INTO `stock_dict` VALUES (1316, 'ST鞍一工', '600813', 'sh');
+INSERT INTO `stock_dict` VALUES (1317, '退市昆机', '600806', 'sh');
+INSERT INTO `stock_dict` VALUES (1318, '*ST龙科', '600799', 'sh');
+INSERT INTO `stock_dict` VALUES (1319, '*ST达曼', '600788', 'sh');
+INSERT INTO `stock_dict` VALUES (1320, '东方锅炉', '600786', 'sh');
+INSERT INTO `stock_dict` VALUES (1321, '新钢股份', '600782', 'sh');
+INSERT INTO `stock_dict` VALUES (1322, '退市辅仁', '600781', 'sh');
+INSERT INTO `stock_dict` VALUES (1323, 'S*ST龙昌', '600772', 'sh');
+INSERT INTO `stock_dict` VALUES (1324, '退市运盛', '600767', 'sh');
+INSERT INTO `stock_dict` VALUES (1325, '退市园城', '600766', 'sh');
+INSERT INTO `stock_dict` VALUES (1326, 'S*ST金荔', '600762', 'sh');
+INSERT INTO `stock_dict` VALUES (1327, '厦门国贸', '600755', 'sh');
+INSERT INTO `stock_dict` VALUES (1328, '*ST哈慈', '600752', 'sh');
+INSERT INTO `stock_dict` VALUES (1329, '退市大控', '600747', 'sh');
+INSERT INTO `stock_dict` VALUES (1330, '山西焦化', '600740', 'sh');
+INSERT INTO `stock_dict` VALUES (1331, '辽宁成大', '600739', 'sh');
+INSERT INTO `stock_dict` VALUES (1332, '丽尚国潮', '600738', 'sh');
+INSERT INTO `stock_dict` VALUES (1333, '实达集团', '600734', 'sh');
+INSERT INTO `stock_dict` VALUES (1334, '云维股份', '600725', 'sh');
+INSERT INTO `stock_dict` VALUES (1335, '宁波富达', '600724', 'sh');
+INSERT INTO `stock_dict` VALUES (1336, '首商股份', '600723', 'sh');
+INSERT INTO `stock_dict` VALUES (1337, '百花医药', '600721', 'sh');
+INSERT INTO `stock_dict` VALUES (1338, '凤凰股份', '600716', 'sh');
+INSERT INTO `stock_dict` VALUES (1339, 'ST生态', '600709', 'sh');
+INSERT INTO `stock_dict` VALUES (1340, '退市工新', '600701', 'sh');
+INSERT INTO `stock_dict` VALUES (1341, '*ST数码', '600700', 'sh');
+INSERT INTO `stock_dict` VALUES (1342, '湖南天雁', '600698', 'sh');
+INSERT INTO `stock_dict` VALUES (1343, '退市绿庭', '600695', 'sh');
+INSERT INTO `stock_dict` VALUES (1344, '阳煤化工', '600691', 'sh');
+INSERT INTO `stock_dict` VALUES (1345, '退市刚泰', '600687', 'sh');
+INSERT INTO `stock_dict` VALUES (1346, '珠江股份', '600684', 'sh');
+INSERT INTO `stock_dict` VALUES (1347, '*ST上普', '600680', 'sh');
+INSERT INTO `stock_dict` VALUES (1348, '*ST航通', '600677', 'sh');
+INSERT INTO `stock_dict` VALUES (1349, '*ST华圣', '600672', 'sh');
+INSERT INTO `stock_dict` VALUES (1350, '*ST斯达', '600670', 'sh');
+INSERT INTO `stock_dict` VALUES (1351, '*ST鞍成', '600669', 'sh');
+INSERT INTO `stock_dict` VALUES (1352, '*ST花雕', '600659', 'sh');
+INSERT INTO `stock_dict` VALUES (1353, '退市博元', '600656', 'sh');
+INSERT INTO `stock_dict` VALUES (1354, '退市游久', '600652', 'sh');
+INSERT INTO `stock_dict` VALUES (1355, '退市同达', '600647', 'sh');
+INSERT INTO `stock_dict` VALUES (1356, 'ST国嘉', '600646', 'sh');
+INSERT INTO `stock_dict` VALUES (1357, '乐山电力', '600644', 'sh');
+INSERT INTO `stock_dict` VALUES (1358, '爱建集团', '600643', 'sh');
+INSERT INTO `stock_dict` VALUES (1359, '浦东金桥', '600639', 'sh');
+INSERT INTO `stock_dict` VALUES (1360, '退市富控', '600634', 'sh');
+INSERT INTO `stock_dict` VALUES (1361, '华联商厦', '600632', 'sh');
+INSERT INTO `stock_dict` VALUES (1362, '百联股份', '600631', 'sh');
+INSERT INTO `stock_dict` VALUES (1363, '龙头股份', '600630', 'sh');
+INSERT INTO `stock_dict` VALUES (1364, '上电股份', '600627', 'sh');
+INSERT INTO `stock_dict` VALUES (1365, '申达股份', '600626', 'sh');
+INSERT INTO `stock_dict` VALUES (1366, 'PT水仙', '600625', 'sh');
+INSERT INTO `stock_dict` VALUES (1367, '退市鹏起', '600614', 'sh');
+INSERT INTO `stock_dict` VALUES (1368, '中毅达', '600610', 'sh');
+INSERT INTO `stock_dict` VALUES (1369, '上实医药', '600607', 'sh');
+INSERT INTO `stock_dict` VALUES (1370, '方正科技', '600601', 'sh');
+INSERT INTO `stock_dict` VALUES (1371, '龙溪股份', '600592', 'sh');
+INSERT INTO `stock_dict` VALUES (1372, '*ST上航', '600591', 'sh');
+INSERT INTO `stock_dict` VALUES (1373, '大位科技', '600589', 'sh');
+INSERT INTO `stock_dict` VALUES (1374, '海油工程', '600583', 'sh');
+INSERT INTO `stock_dict` VALUES (1375, '京能电力', '600578', 'sh');
+INSERT INTO `stock_dict` VALUES (1376, 'ST迪马', '600565', 'sh');
+INSERT INTO `stock_dict` VALUES (1377, '退市海创', '600555', 'sh');
+INSERT INTO `stock_dict` VALUES (1378, '太行水泥', '600553', 'sh');
+INSERT INTO `stock_dict` VALUES (1379, '退市未来', '600532', 'sh');
+INSERT INTO `stock_dict` VALUES (1380, '豫光金铅', '600531', 'sh');
+INSERT INTO `stock_dict` VALUES (1381, '方大炭素', '600516', 'sh');
+INSERT INTO `stock_dict` VALUES (1382, '黑牡丹', '600510', 'sh');
+INSERT INTO `stock_dict` VALUES (1383, '安徽建工', '600502', 'sh');
+INSERT INTO `stock_dict` VALUES (1384, '*ST信威', '600485', 'sh');
+INSERT INTO `stock_dict` VALUES (1385, '包头铝业', '600472', 'sh');
+INSERT INTO `stock_dict` VALUES (1386, '好当家', '600467', 'sh');
+INSERT INTO `stock_dict` VALUES (1387, '*ST蓝光', '600466', 'sh');
+INSERT INTO `stock_dict` VALUES (1388, '退市吉恩', '600432', 'sh');
+INSERT INTO `stock_dict` VALUES (1389, '三友化工', '600409', 'sh');
+INSERT INTO `stock_dict` VALUES (1390, '退市海润', '600401', 'sh');
+INSERT INTO `stock_dict` VALUES (1391, 'ST粤泰', '600393', 'sh');
+INSERT INTO `stock_dict` VALUES (1392, '退市金泰', '600385', 'sh');
+INSERT INTO `stock_dict` VALUES (1393, 'ST通葡', '600365', 'sh');
+INSERT INTO `stock_dict` VALUES (1394, '承德钒钛', '600357', 'sh');
+INSERT INTO `stock_dict` VALUES (1395, '华夏幸福', '600340', 'sh');
+INSERT INTO `stock_dict` VALUES (1396, '长春燃气', '600333', 'sh');
+INSERT INTO `stock_dict` VALUES (1397, '正源股份', '600321', 'sh');
+INSERT INTO `stock_dict` VALUES (1398, '营口港', '600317', 'sh');
+INSERT INTO `stock_dict` VALUES (1399, '*ST荣华', '600311', 'sh');
+INSERT INTO `stock_dict` VALUES (1400, '退市商城', '600306', 'sh');
+INSERT INTO `stock_dict` VALUES (1401, '广汇汽车', '600297', 'sh');
+INSERT INTO `stock_dict` VALUES (1402, 'S兰铝', '600296', 'sh');
+INSERT INTO `stock_dict` VALUES (1403, '三峡新材', '600293', 'sh');
+INSERT INTO `stock_dict` VALUES (1404, '退市西水', '600291', 'sh');
+INSERT INTO `stock_dict` VALUES (1405, '*ST华仪', '600290', 'sh');
+INSERT INTO `stock_dict` VALUES (1406, '*ST信通', '600289', 'sh');
+INSERT INTO `stock_dict` VALUES (1407, 'S*ST国瓷', '600286', 'sh');
+INSERT INTO `stock_dict` VALUES (1408, 'ST亿利', '600277', 'sh');
+INSERT INTO `stock_dict` VALUES (1409, '退市昌鱼', '600275', 'sh');
+INSERT INTO `stock_dict` VALUES (1410, '嘉化能源', '600273', 'sh');
+INSERT INTO `stock_dict` VALUES (1411, '外运发展', '600270', 'sh');
+INSERT INTO `stock_dict` VALUES (1412, '路桥建设', '600263', 'sh');
+INSERT INTO `stock_dict` VALUES (1413, '*ST凯乐', '600260', 'sh');
+INSERT INTO `stock_dict` VALUES (1414, '天方药业', '600253', 'sh');
+INSERT INTO `stock_dict` VALUES (1415, '*ST成城', '600247', 'sh');
+INSERT INTO `stock_dict` VALUES (1416, '退市中昌', '600242', 'sh');
+INSERT INTO `stock_dict` VALUES (1417, '退市华业', '600240', 'sh');
+INSERT INTO `stock_dict` VALUES (1418, 'ST阳光', '600220', 'sh');
+INSERT INTO `stock_dict` VALUES (1419, '中再资环', '600217', 'sh');
+INSERT INTO `stock_dict` VALUES (1420, '*ST亚星', '600213', 'sh');
+INSERT INTO `stock_dict` VALUES (1421, '退市罗顿', '600209', 'sh');
+INSERT INTO `stock_dict` VALUES (1422, 'S山东铝', '600205', 'sh');
+INSERT INTO `stock_dict` VALUES (1423, 'S*ST云大', '600181', 'sh');
+INSERT INTO `stock_dict` VALUES (1424, '退市美都', '600175', 'sh');
+INSERT INTO `stock_dict` VALUES (1425, '太原重工', '600169', 'sh');
+INSERT INTO `stock_dict` VALUES (1426, '中体产业', '600158', 'sh');
+INSERT INTO `stock_dict` VALUES (1427, '退市环球', '600146', 'sh');
+INSERT INTO `stock_dict` VALUES (1428, '退市新亿', '600145', 'sh');
+INSERT INTO `stock_dict` VALUES (1429, '*ST西源', '600139', 'sh');
+INSERT INTO `stock_dict` VALUES (1430, '*ST宏图', '600122', 'sh');
+INSERT INTO `stock_dict` VALUES (1431, '三峡水利', '600116', 'sh');
+INSERT INTO `stock_dict` VALUES (1432, '东睦股份', '600114', 'sh');
+INSERT INTO `stock_dict` VALUES (1433, '*ST天成', '600112', 'sh');
+INSERT INTO `stock_dict` VALUES (1434, '莱钢股份', '600102', 'sh');
+INSERT INTO `stock_dict` VALUES (1435, '退市易见', '600093', 'sh');
+INSERT INTO `stock_dict` VALUES (1436, 'S*ST精密', '600092', 'sh');
+INSERT INTO `stock_dict` VALUES (1437, '退市明科', '600091', 'sh');
+INSERT INTO `stock_dict` VALUES (1438, '退市济堂', '600090', 'sh');
+INSERT INTO `stock_dict` VALUES (1439, '退市长油', '600087', 'sh');
+INSERT INTO `stock_dict` VALUES (1440, '退市金钰', '600086', 'sh');
+INSERT INTO `stock_dict` VALUES (1441, '*ST宋都', '600077', 'sh');
+INSERT INTO `stock_dict` VALUES (1442, '退市保千', '600074', 'sh');
+INSERT INTO `stock_dict` VALUES (1443, '退市银鸽', '600069', 'sh');
+INSERT INTO `stock_dict` VALUES (1444, '葛洲坝', '600068', 'sh');
+INSERT INTO `stock_dict` VALUES (1445, '*ST联谊', '600065', 'sh');
+INSERT INTO `stock_dict` VALUES (1446, '中国医药', '600056', 'sh');
+INSERT INTO `stock_dict` VALUES (1447, '华夏银行', '600015', 'sh');
+INSERT INTO `stock_dict` VALUES (1448, '首创环保', '600008', 'sh');
+INSERT INTO `stock_dict` VALUES (1449, '武钢股份', '600005', 'sh');
+INSERT INTO `stock_dict` VALUES (1450, 'ST东北高', '600003', 'sh');
+INSERT INTO `stock_dict` VALUES (1451, '齐鲁石化', '600002', 'sh');
+INSERT INTO `stock_dict` VALUES (1452, '邯郸钢铁', '600001', 'sh');
+INSERT INTO `stock_dict` VALUES (1453, '文一科技', '600520', 'sh');
+INSERT INTO `stock_dict` VALUES (1454, '新天然气', '603393', 'sh');
+INSERT INTO `stock_dict` VALUES (1455, '拱东医疗', '605369', 'sh');
+INSERT INTO `stock_dict` VALUES (1456, '鹿山新材', '603051', 'sh');
+INSERT INTO `stock_dict` VALUES (1457, '利元亨', '688499', 'sh');
+INSERT INTO `stock_dict` VALUES (1458, '国电南瑞', '600406', 'sh');
+INSERT INTO `stock_dict` VALUES (1459, '硕世生物', '688399', 'sh');
+INSERT INTO `stock_dict` VALUES (1460, '永臻股份', '603381', 'sh');
+INSERT INTO `stock_dict` VALUES (1461, '南芯科技', '688484', 'sh');
+INSERT INTO `stock_dict` VALUES (1462, '信宇人', '688573', 'sh');
+INSERT INTO `stock_dict` VALUES (1463, '京华激光', '603607', 'sh');
+INSERT INTO `stock_dict` VALUES (1464, '隆基绿能', '601012', 'sh');
+INSERT INTO `stock_dict` VALUES (1465, '广大特材', '688186', 'sh');
+INSERT INTO `stock_dict` VALUES (1466, '嘉环科技', '603206', 'sh');
+INSERT INTO `stock_dict` VALUES (1467, '东方材料', '603110', 'sh');
+INSERT INTO `stock_dict` VALUES (1468, '北矿科技', '600980', 'sh');
+INSERT INTO `stock_dict` VALUES (1469, '东方电气', '600875', 'sh');
+INSERT INTO `stock_dict` VALUES (1470, '中科曙光', '603019', 'sh');
+INSERT INTO `stock_dict` VALUES (1471, '城地香江', '603887', 'sh');
+INSERT INTO `stock_dict` VALUES (1472, '太和水', '605081', 'sh');
+INSERT INTO `stock_dict` VALUES (1473, '麦澜德', '688273', 'sh');
+INSERT INTO `stock_dict` VALUES (1474, '嘉华股份', '603182', 'sh');
+INSERT INTO `stock_dict` VALUES (1475, '海兴电力', '603556', 'sh');
+INSERT INTO `stock_dict` VALUES (1476, '明泰铝业', '601677', 'sh');
+INSERT INTO `stock_dict` VALUES (1477, '斯达半导', '603290', 'sh');
+INSERT INTO `stock_dict` VALUES (1478, '台华新材', '603055', 'sh');
+INSERT INTO `stock_dict` VALUES (1479, '嘉诚国际', '603535', 'sh');
+INSERT INTO `stock_dict` VALUES (1480, '方盛制药', '603998', 'sh');
+INSERT INTO `stock_dict` VALUES (1481, '圣龙股份', '603178', 'sh');
+INSERT INTO `stock_dict` VALUES (1482, '卫信康', '603676', 'sh');
+INSERT INTO `stock_dict` VALUES (1483, '秦川物联', '688528', 'sh');
+INSERT INTO `stock_dict` VALUES (1484, '尖峰集团', '600668', 'sh');
+INSERT INTO `stock_dict` VALUES (1485, '华友钴业', '603799', 'sh');
+INSERT INTO `stock_dict` VALUES (1486, '福鞍股份', '603315', 'sh');
+INSERT INTO `stock_dict` VALUES (1487, '恒盛能源', '605580', 'sh');
+INSERT INTO `stock_dict` VALUES (1488, '宝光股份', '600379', 'sh');
+INSERT INTO `stock_dict` VALUES (1489, '聚辰股份', '688123', 'sh');
+INSERT INTO `stock_dict` VALUES (1490, '华光环能', '600475', 'sh');
+INSERT INTO `stock_dict` VALUES (1491, '华嵘控股', '600421', 'sh');
+INSERT INTO `stock_dict` VALUES (1492, '寒武纪-U', '688256', 'sh');
+INSERT INTO `stock_dict` VALUES (1493, '天龙股份', '603266', 'sh');
+INSERT INTO `stock_dict` VALUES (1494, '江盐集团', '601065', 'sh');
+INSERT INTO `stock_dict` VALUES (1495, '新安股份', '600596', 'sh');
+INSERT INTO `stock_dict` VALUES (1496, '长沙银行', '601577', 'sh');
+INSERT INTO `stock_dict` VALUES (1497, '艾隆科技', '688329', 'sh');
+INSERT INTO `stock_dict` VALUES (1498, '宁波中百', '600857', 'sh');
+INSERT INTO `stock_dict` VALUES (1499, '东方明珠', '600637', 'sh');
+INSERT INTO `stock_dict` VALUES (1500, '王力安防', '605268', 'sh');
+INSERT INTO `stock_dict` VALUES (1501, '莎普爱思', '603168', 'sh');
+INSERT INTO `stock_dict` VALUES (1502, '神驰机电', '603109', 'sh');
+INSERT INTO `stock_dict` VALUES (1503, '康惠制药', '603139', 'sh');
+INSERT INTO `stock_dict` VALUES (1504, '爱柯迪', '600933', 'sh');
+INSERT INTO `stock_dict` VALUES (1505, '立达信', '605365', 'sh');
+INSERT INTO `stock_dict` VALUES (1506, '五矿发展', '600058', 'sh');
+INSERT INTO `stock_dict` VALUES (1507, '庚星股份', '600753', 'sh');
+INSERT INTO `stock_dict` VALUES (1508, '坤彩科技', '603826', 'sh');
+INSERT INTO `stock_dict` VALUES (1509, '思维列控', '603508', 'sh');
+INSERT INTO `stock_dict` VALUES (1510, '开滦股份', '600997', 'sh');
+INSERT INTO `stock_dict` VALUES (1511, '海南矿业', '601969', 'sh');
+INSERT INTO `stock_dict` VALUES (1512, '金健米业', '600127', 'sh');
+INSERT INTO `stock_dict` VALUES (1513, '国泰集团', '603977', 'sh');
+INSERT INTO `stock_dict` VALUES (1514, '广汇能源', '600256', 'sh');
+INSERT INTO `stock_dict` VALUES (1515, '环旭电子', '601231', 'sh');
+INSERT INTO `stock_dict` VALUES (1516, '健友股份', '603707', 'sh');
+INSERT INTO `stock_dict` VALUES (1517, '永冠新材', '603681', 'sh');
+INSERT INTO `stock_dict` VALUES (1518, '上海机电', '600835', 'sh');
+INSERT INTO `stock_dict` VALUES (1519, '华资实业', '600191', 'sh');
+INSERT INTO `stock_dict` VALUES (1520, '长白山', '603099', 'sh');
+INSERT INTO `stock_dict` VALUES (1521, '唯捷创芯', '688153', 'sh');
+INSERT INTO `stock_dict` VALUES (1522, '绿色动力', '601330', 'sh');
+INSERT INTO `stock_dict` VALUES (1523, '卓然股份', '688121', 'sh');
+INSERT INTO `stock_dict` VALUES (1524, '广日股份', '600894', 'sh');
+INSERT INTO `stock_dict` VALUES (1525, '交建股份', '603815', 'sh');
+INSERT INTO `stock_dict` VALUES (1526, '山煤国际', '600546', 'sh');
+INSERT INTO `stock_dict` VALUES (1527, '容知日新', '688768', 'sh');
+INSERT INTO `stock_dict` VALUES (1528, '和林微纳', '688661', 'sh');
+INSERT INTO `stock_dict` VALUES (1529, '野马电池', '605378', 'sh');
+INSERT INTO `stock_dict` VALUES (1530, '通宝能源', '600780', 'sh');
+INSERT INTO `stock_dict` VALUES (1531, '海欣股份', '600851', 'sh');
+INSERT INTO `stock_dict` VALUES (1532, '雪天盐业', '600929', 'sh');
+INSERT INTO `stock_dict` VALUES (1533, '凤竹纺织', '600493', 'sh');
+INSERT INTO `stock_dict` VALUES (1534, '杭州柯林', '688611', 'sh');
+INSERT INTO `stock_dict` VALUES (1535, '无锡银行', '600908', 'sh');
+INSERT INTO `stock_dict` VALUES (1536, '中自科技', '688737', 'sh');
+INSERT INTO `stock_dict` VALUES (1537, '海南华铁', '603300', 'sh');
+INSERT INTO `stock_dict` VALUES (1538, '健康元', '600380', 'sh');
+INSERT INTO `stock_dict` VALUES (1539, '香溢融通', '600830', 'sh');
+INSERT INTO `stock_dict` VALUES (1540, '华域汽车', '600741', 'sh');
+INSERT INTO `stock_dict` VALUES (1541, '瑞丰银行', '601528', 'sh');
+INSERT INTO `stock_dict` VALUES (1542, '新黄浦', '600638', 'sh');
+INSERT INTO `stock_dict` VALUES (1543, '云中马', '603130', 'sh');
+INSERT INTO `stock_dict` VALUES (1544, '西高院', '688334', 'sh');
+INSERT INTO `stock_dict` VALUES (1545, '百隆东方', '601339', 'sh');
+INSERT INTO `stock_dict` VALUES (1546, '苏能股份', '600925', 'sh');
+INSERT INTO `stock_dict` VALUES (1547, '泰豪科技', '600590', 'sh');
+INSERT INTO `stock_dict` VALUES (1548, '方邦股份', '688020', 'sh');
+INSERT INTO `stock_dict` VALUES (1549, '华虹公司', '688347', 'sh');
+INSERT INTO `stock_dict` VALUES (1550, '亚星化学', '600319', 'sh');
+INSERT INTO `stock_dict` VALUES (1551, '马应龙', '600993', 'sh');
+INSERT INTO `stock_dict` VALUES (1552, '阿拉丁', '688179', 'sh');
+INSERT INTO `stock_dict` VALUES (1553, '大元泵业', '603757', 'sh');
+INSERT INTO `stock_dict` VALUES (1554, '精智达', '688627', 'sh');
+INSERT INTO `stock_dict` VALUES (1555, '凯盛新能', '600876', 'sh');
+INSERT INTO `stock_dict` VALUES (1556, '司太立', '603520', 'sh');
+INSERT INTO `stock_dict` VALUES (1557, '万丰股份', '603172', 'sh');
+INSERT INTO `stock_dict` VALUES (1558, '中重科技', '603135', 'sh');
+INSERT INTO `stock_dict` VALUES (1559, '航天南湖', '688552', 'sh');
+INSERT INTO `stock_dict` VALUES (1560, '永杉锂业', '603399', 'sh');
+INSERT INTO `stock_dict` VALUES (1561, '中海油服', '601808', 'sh');
+INSERT INTO `stock_dict` VALUES (1562, '常熟汽饰', '603035', 'sh');
+INSERT INTO `stock_dict` VALUES (1563, '开创国际', '600097', 'sh');
+INSERT INTO `stock_dict` VALUES (1564, 'ST华微', '600360', 'sh');
+INSERT INTO `stock_dict` VALUES (1565, '北巴传媒', '600386', 'sh');
+INSERT INTO `stock_dict` VALUES (1566, '中国重工', '601989', 'sh');
+INSERT INTO `stock_dict` VALUES (1567, '北大荒', '600598', 'sh');
+INSERT INTO `stock_dict` VALUES (1568, '永兴股份', '601033', 'sh');
+INSERT INTO `stock_dict` VALUES (1569, '长电科技', '600584', 'sh');
+INSERT INTO `stock_dict` VALUES (1570, '洪城环境', '600461', 'sh');
+INSERT INTO `stock_dict` VALUES (1571, '吉华集团', '603980', 'sh');
+INSERT INTO `stock_dict` VALUES (1572, '小商品城', '600415', 'sh');
+INSERT INTO `stock_dict` VALUES (1573, '智洋创新', '688191', 'sh');
+INSERT INTO `stock_dict` VALUES (1574, '宏发股份', '600885', 'sh');
+INSERT INTO `stock_dict` VALUES (1575, '卧龙地产', '600173', 'sh');
+INSERT INTO `stock_dict` VALUES (1576, '咸亨国际', '605056', 'sh');
+INSERT INTO `stock_dict` VALUES (1577, '三峰环境', '601827', 'sh');
+INSERT INTO `stock_dict` VALUES (1578, '中路股份', '600818', 'sh');
+INSERT INTO `stock_dict` VALUES (1579, '淮河能源', '600575', 'sh');
+INSERT INTO `stock_dict` VALUES (1580, '光大嘉宝', '600622', 'sh');
+INSERT INTO `stock_dict` VALUES (1581, '龙净环保', '600388', 'sh');
+INSERT INTO `stock_dict` VALUES (1582, '骆驼股份', '601311', 'sh');
+INSERT INTO `stock_dict` VALUES (1583, '赤峰黄金', '600988', 'sh');
+INSERT INTO `stock_dict` VALUES (1584, '中远海能', '600026', 'sh');
+INSERT INTO `stock_dict` VALUES (1585, '上海环境', '601200', 'sh');
+INSERT INTO `stock_dict` VALUES (1586, '国中水务', '600187', 'sh');
+INSERT INTO `stock_dict` VALUES (1587, '睿昂基因', '688217', 'sh');
+INSERT INTO `stock_dict` VALUES (1588, '浙江医药', '600216', 'sh');
+INSERT INTO `stock_dict` VALUES (1589, '澳弘电子', '605058', 'sh');
+INSERT INTO `stock_dict` VALUES (1590, '恒丰纸业', '600356', 'sh');
+INSERT INTO `stock_dict` VALUES (1591, '轻纺城', '600790', 'sh');
+INSERT INTO `stock_dict` VALUES (1592, '中航产融', '600705', 'sh');
+INSERT INTO `stock_dict` VALUES (1593, '首创证券', '601136', 'sh');
+INSERT INTO `stock_dict` VALUES (1594, '海利生物', '603718', 'sh');
+INSERT INTO `stock_dict` VALUES (1595, '神马股份', '600810', 'sh');
+INSERT INTO `stock_dict` VALUES (1596, '高铁电气', '688285', 'sh');
+INSERT INTO `stock_dict` VALUES (1597, '上实发展', '600748', 'sh');
+INSERT INTO `stock_dict` VALUES (1598, '中农立华', '603970', 'sh');
+INSERT INTO `stock_dict` VALUES (1599, '汇通能源', '600605', 'sh');
+INSERT INTO `stock_dict` VALUES (1600, '海南机场', '600515', 'sh');
+INSERT INTO `stock_dict` VALUES (1601, '科美诊断', '688468', 'sh');
+INSERT INTO `stock_dict` VALUES (1602, '三生国健', '688336', 'sh');
+INSERT INTO `stock_dict` VALUES (1603, '联芸科技', '688449', 'sh');
+INSERT INTO `stock_dict` VALUES (1604, '天安新材', '603725', 'sh');
+INSERT INTO `stock_dict` VALUES (1605, '万德斯', '688178', 'sh');
+INSERT INTO `stock_dict` VALUES (1606, '广州港', '601228', 'sh');
+INSERT INTO `stock_dict` VALUES (1607, '梅花生物', '600873', 'sh');
+INSERT INTO `stock_dict` VALUES (1608, '杭华股份', '688571', 'sh');
+INSERT INTO `stock_dict` VALUES (1609, '拉普拉斯', '688726', 'sh');
+INSERT INTO `stock_dict` VALUES (1610, '南网储能', '600995', 'sh');
+INSERT INTO `stock_dict` VALUES (1611, '阳光照明', '600261', 'sh');
+INSERT INTO `stock_dict` VALUES (1612, '中创物流', '603967', 'sh');
+INSERT INTO `stock_dict` VALUES (1613, '江中药业', '600750', 'sh');
+INSERT INTO `stock_dict` VALUES (1614, '中国中冶', '601618', 'sh');
+INSERT INTO `stock_dict` VALUES (1615, '浙文互联', '600986', 'sh');
+INSERT INTO `stock_dict` VALUES (1616, '亚光股份', '603282', 'sh');
+INSERT INTO `stock_dict` VALUES (1617, '沪光股份', '605333', 'sh');
+INSERT INTO `stock_dict` VALUES (1618, '汇得科技', '603192', 'sh');
+INSERT INTO `stock_dict` VALUES (1619, '石英股份', '603688', 'sh');
+INSERT INTO `stock_dict` VALUES (1620, '中国动力', '600482', 'sh');
+INSERT INTO `stock_dict` VALUES (1621, '中国中铁', '601390', 'sh');
+INSERT INTO `stock_dict` VALUES (1622, '恒银科技', '603106', 'sh');
+INSERT INTO `stock_dict` VALUES (1623, '郑煤机', '601717', 'sh');
+INSERT INTO `stock_dict` VALUES (1624, '迈得医疗', '688310', 'sh');
+INSERT INTO `stock_dict` VALUES (1625, '山东高速', '600350', 'sh');
+INSERT INTO `stock_dict` VALUES (1626, '丽岛新材', '603937', 'sh');
+INSERT INTO `stock_dict` VALUES (1627, '煜邦电力', '688597', 'sh');
+INSERT INTO `stock_dict` VALUES (1628, '浦东建设', '600284', 'sh');
+INSERT INTO `stock_dict` VALUES (1629, '红豆股份', '600400', 'sh');
+INSERT INTO `stock_dict` VALUES (1630, '衢州发展', '600208', 'sh');
+INSERT INTO `stock_dict` VALUES (1631, '云南城投', '600239', 'sh');
+INSERT INTO `stock_dict` VALUES (1632, '冠城新材', '600067', 'sh');
+INSERT INTO `stock_dict` VALUES (1633, '上海石化', '600688', 'sh');
+INSERT INTO `stock_dict` VALUES (1634, '湘油泵', '603319', 'sh');
+INSERT INTO `stock_dict` VALUES (1635, '地素时尚', '603587', 'sh');
+INSERT INTO `stock_dict` VALUES (1636, '驰宏锌锗', '600497', 'sh');
+INSERT INTO `stock_dict` VALUES (1637, '元利科技', '603217', 'sh');
+INSERT INTO `stock_dict` VALUES (1638, '海航科技', '600751', 'sh');
+INSERT INTO `stock_dict` VALUES (1639, '兰石重装', '603169', 'sh');
+INSERT INTO `stock_dict` VALUES (1640, '博威合金', '601137', 'sh');
+INSERT INTO `stock_dict` VALUES (1641, '碧兴物联', '688671', 'sh');
+INSERT INTO `stock_dict` VALUES (1642, '厦门钨业', '600549', 'sh');
+INSERT INTO `stock_dict` VALUES (1643, '大龙地产', '600159', 'sh');
+INSERT INTO `stock_dict` VALUES (1644, '方正证券', '601901', 'sh');
+INSERT INTO `stock_dict` VALUES (1645, '龙迅股份', '688486', 'sh');
+INSERT INTO `stock_dict` VALUES (1646, '美思德', '603041', 'sh');
+INSERT INTO `stock_dict` VALUES (1647, '海南橡胶', '601118', 'sh');
+INSERT INTO `stock_dict` VALUES (1648, '杉杉股份', '600884', 'sh');
+INSERT INTO `stock_dict` VALUES (1649, '华丰股份', '605100', 'sh');
+INSERT INTO `stock_dict` VALUES (1650, '蓝天燃气', '605368', 'sh');
+INSERT INTO `stock_dict` VALUES (1651, '国网英大', '600517', 'sh');
+INSERT INTO `stock_dict` VALUES (1652, '安旭生物', '688075', 'sh');
+INSERT INTO `stock_dict` VALUES (1653, 'XD建龙微', '688357', 'sh');
+INSERT INTO `stock_dict` VALUES (1654, '上海汽配', '603107', 'sh');
+INSERT INTO `stock_dict` VALUES (1655, '中铁工业', '600528', 'sh');
+INSERT INTO `stock_dict` VALUES (1656, '东亚药业', '605177', 'sh');
+INSERT INTO `stock_dict` VALUES (1657, '慧辰股份', '688500', 'sh');
+INSERT INTO `stock_dict` VALUES (1658, '文灿股份', '603348', 'sh');
+INSERT INTO `stock_dict` VALUES (1659, '贵绳股份', '600992', 'sh');
+INSERT INTO `stock_dict` VALUES (1660, '起帆电缆', '605222', 'sh');
+INSERT INTO `stock_dict` VALUES (1661, '中国移动', '600941', 'sh');
+INSERT INTO `stock_dict` VALUES (1662, '华锡有色', '600301', 'sh');
+INSERT INTO `stock_dict` VALUES (1663, '梦天家居', '603216', 'sh');
+INSERT INTO `stock_dict` VALUES (1664, '九鼎投资', '600053', 'sh');
+INSERT INTO `stock_dict` VALUES (1665, '澳柯玛', '600336', 'sh');
+INSERT INTO `stock_dict` VALUES (1666, '盘江股份', '600395', 'sh');
+INSERT INTO `stock_dict` VALUES (1667, '博通集成', '603068', 'sh');
+INSERT INTO `stock_dict` VALUES (1668, '汇通集团', '603176', 'sh');
+INSERT INTO `stock_dict` VALUES (1669, '物产中大', '600704', 'sh');
+INSERT INTO `stock_dict` VALUES (1670, '东航物流', '601156', 'sh');
+INSERT INTO `stock_dict` VALUES (1671, '镇海股份', '603637', 'sh');
+INSERT INTO `stock_dict` VALUES (1672, '近岸蛋白', '688137', 'sh');
+INSERT INTO `stock_dict` VALUES (1673, '安彩高科', '600207', 'sh');
+INSERT INTO `stock_dict` VALUES (1674, '江苏金租', '600901', 'sh');
+INSERT INTO `stock_dict` VALUES (1675, '盛剑科技', '603324', 'sh');
+INSERT INTO `stock_dict` VALUES (1676, '人民网', '603000', 'sh');
+INSERT INTO `stock_dict` VALUES (1677, '上海贝岭', '600171', 'sh');
+INSERT INTO `stock_dict` VALUES (1678, '迪哲医药-U', '688192', 'sh');
+INSERT INTO `stock_dict` VALUES (1679, '华阳股份', '600348', 'sh');
+INSERT INTO `stock_dict` VALUES (1680, '青山纸业', '600103', 'sh');
+INSERT INTO `stock_dict` VALUES (1681, '鼎胜新材', '603876', 'sh');
+INSERT INTO `stock_dict` VALUES (1682, '贵广网络', '600996', 'sh');
+INSERT INTO `stock_dict` VALUES (1683, '综艺股份', '600770', 'sh');
+INSERT INTO `stock_dict` VALUES (1684, 'ST盛屯', '600711', 'sh');
+INSERT INTO `stock_dict` VALUES (1685, '柏诚股份', '601133', 'sh');
+INSERT INTO `stock_dict` VALUES (1686, '奥福环保', '688021', 'sh');
+INSERT INTO `stock_dict` VALUES (1687, '悦达投资', '600805', 'sh');
+INSERT INTO `stock_dict` VALUES (1688, '京能置业', '600791', 'sh');
+INSERT INTO `stock_dict` VALUES (1689, '川投能源', '600674', 'sh');
+INSERT INTO `stock_dict` VALUES (1690, '康恩贝', '600572', 'sh');
+INSERT INTO `stock_dict` VALUES (1691, '铁建重工', '688425', 'sh');
+INSERT INTO `stock_dict` VALUES (1692, 'XD福莱特', '601865', 'sh');
+INSERT INTO `stock_dict` VALUES (1693, '紫江企业', '600210', 'sh');
+INSERT INTO `stock_dict` VALUES (1694, '浙江仙通', '603239', 'sh');
+INSERT INTO `stock_dict` VALUES (1695, '中国能建', '601868', 'sh');
+INSERT INTO `stock_dict` VALUES (1696, '邦彦技术', '688132', 'sh');
+INSERT INTO `stock_dict` VALUES (1697, '清源股份', '603628', 'sh');
+INSERT INTO `stock_dict` VALUES (1698, '科力远', '600478', 'sh');
+INSERT INTO `stock_dict` VALUES (1699, '中远海控', '601919', 'sh');
+INSERT INTO `stock_dict` VALUES (1700, '吉视传媒', '601929', 'sh');
+INSERT INTO `stock_dict` VALUES (1701, '郑州煤电', '600121', 'sh');
+INSERT INTO `stock_dict` VALUES (1702, '中信重工', '601608', 'sh');
+INSERT INTO `stock_dict` VALUES (1703, '星湖科技', '600866', 'sh');
+INSERT INTO `stock_dict` VALUES (1704, '三峡能源', '600905', 'sh');
+INSERT INTO `stock_dict` VALUES (1705, '诺德股份', '600110', 'sh');
+INSERT INTO `stock_dict` VALUES (1706, '桂冠电力', '600236', 'sh');
+INSERT INTO `stock_dict` VALUES (1707, '园林股份', '605303', 'sh');
+INSERT INTO `stock_dict` VALUES (1708, '上海雅仕', '603329', 'sh');
+INSERT INTO `stock_dict` VALUES (1709, '唐山港', '601000', 'sh');
+INSERT INTO `stock_dict` VALUES (1710, '国机汽车', '600335', 'sh');
+INSERT INTO `stock_dict` VALUES (1711, '中国电信', '601728', 'sh');
+INSERT INTO `stock_dict` VALUES (1712, '上海凤凰', '600679', 'sh');
+INSERT INTO `stock_dict` VALUES (1713, '拓荆科技', '688072', 'sh');
+INSERT INTO `stock_dict` VALUES (1714, '兰花科创', '600123', 'sh');
+INSERT INTO `stock_dict` VALUES (1715, '赛特新材', '688398', 'sh');
+INSERT INTO `stock_dict` VALUES (1716, '中际联合', '605305', 'sh');
+INSERT INTO `stock_dict` VALUES (1717, '圣晖集成', '603163', 'sh');
+INSERT INTO `stock_dict` VALUES (1718, '株冶集团', '600961', 'sh');
+INSERT INTO `stock_dict` VALUES (1719, '华旺科技', '605377', 'sh');
+INSERT INTO `stock_dict` VALUES (1720, '国药股份', '600511', 'sh');
+INSERT INTO `stock_dict` VALUES (1721, '宿迁联盛', '603065', 'sh');
+INSERT INTO `stock_dict` VALUES (1722, '华贸物流', '603128', 'sh');
+INSERT INTO `stock_dict` VALUES (1723, '瑞联新材', '688550', 'sh');
+INSERT INTO `stock_dict` VALUES (1724, '中国石化', '600028', 'sh');
+INSERT INTO `stock_dict` VALUES (1725, '星球石墨', '688633', 'sh');
+INSERT INTO `stock_dict` VALUES (1726, '键邦股份', '603285', 'sh');
+INSERT INTO `stock_dict` VALUES (1727, '华强科技', '688151', 'sh');
+INSERT INTO `stock_dict` VALUES (1728, '中金黄金', '600489', 'sh');
+INSERT INTO `stock_dict` VALUES (1729, '博迈科', '603727', 'sh');
+INSERT INTO `stock_dict` VALUES (1730, '元琛科技', '688659', 'sh');
+INSERT INTO `stock_dict` VALUES (1731, '百克生物', '688276', 'sh');
+INSERT INTO `stock_dict` VALUES (1732, '司南导航', '688592', 'sh');
+INSERT INTO `stock_dict` VALUES (1733, '晋西车轴', '600495', 'sh');
+INSERT INTO `stock_dict` VALUES (1734, '中国汽研', '601965', 'sh');
+INSERT INTO `stock_dict` VALUES (1735, '新经典', '603096', 'sh');
+INSERT INTO `stock_dict` VALUES (1736, '宝丰能源', '600989', 'sh');
+INSERT INTO `stock_dict` VALUES (1737, '宁波能源', '600982', 'sh');
+INSERT INTO `stock_dict` VALUES (1738, '中新集团', '601512', 'sh');
+INSERT INTO `stock_dict` VALUES (1739, '安阳钢铁', '600569', 'sh');
+INSERT INTO `stock_dict` VALUES (1740, '天新药业', '603235', 'sh');
+INSERT INTO `stock_dict` VALUES (1741, '华通线缆', '605196', 'sh');
+INSERT INTO `stock_dict` VALUES (1742, '开开实业', '600272', 'sh');
+INSERT INTO `stock_dict` VALUES (1743, '钱江水利', '600283', 'sh');
+INSERT INTO `stock_dict` VALUES (1744, '大恒科技', '600288', 'sh');
+INSERT INTO `stock_dict` VALUES (1745, '新力金融', '600318', 'sh');
+INSERT INTO `stock_dict` VALUES (1746, '哈药股份', '600664', 'sh');
+INSERT INTO `stock_dict` VALUES (1747, '歌力思', '603808', 'sh');
+INSERT INTO `stock_dict` VALUES (1748, '畅联股份', '603648', 'sh');
+INSERT INTO `stock_dict` VALUES (1749, '亚普股份', '603013', 'sh');
+INSERT INTO `stock_dict` VALUES (1750, '中信金属', '601061', 'sh');
+INSERT INTO `stock_dict` VALUES (1751, '浙江新能', '600032', 'sh');
+INSERT INTO `stock_dict` VALUES (1752, '麦加芯彩', '603062', 'sh');
+INSERT INTO `stock_dict` VALUES (1753, '华泰股份', '600308', 'sh');
+INSERT INTO `stock_dict` VALUES (1754, '奥锐特', '605116', 'sh');
+INSERT INTO `stock_dict` VALUES (1755, '圣达生物', '603079', 'sh');
+INSERT INTO `stock_dict` VALUES (1756, '安孚科技', '603031', 'sh');
+INSERT INTO `stock_dict` VALUES (1757, '达梦数据', '688692', 'sh');
+INSERT INTO `stock_dict` VALUES (1758, '梅轮电梯', '603321', 'sh');
+INSERT INTO `stock_dict` VALUES (1759, '朗迪集团', '603726', 'sh');
+INSERT INTO `stock_dict` VALUES (1760, '东方创业', '600278', 'sh');
+INSERT INTO `stock_dict` VALUES (1761, '海程邦达', '603836', 'sh');
+INSERT INTO `stock_dict` VALUES (1762, '太极实业', '600667', 'sh');
+INSERT INTO `stock_dict` VALUES (1763, '原尚股份', '603813', 'sh');
+INSERT INTO `stock_dict` VALUES (1764, '正裕工业', '603089', 'sh');
+INSERT INTO `stock_dict` VALUES (1765, '龙版传媒', '605577', 'sh');
+INSERT INTO `stock_dict` VALUES (1766, '时代出版', '600551', 'sh');
+INSERT INTO `stock_dict` VALUES (1767, '骏亚科技', '603386', 'sh');
+INSERT INTO `stock_dict` VALUES (1768, '*ST富润', '600070', 'sh');
+INSERT INTO `stock_dict` VALUES (1769, '兖矿能源', '600188', 'sh');
+INSERT INTO `stock_dict` VALUES (1770, '先惠技术', '688155', 'sh');
+INSERT INTO `stock_dict` VALUES (1771, '酒钢宏兴', '600307', 'sh');
+INSERT INTO `stock_dict` VALUES (1772, '东方环宇', '603706', 'sh');
+INSERT INTO `stock_dict` VALUES (1773, '福斯特', '603806', 'sh');
+INSERT INTO `stock_dict` VALUES (1774, '亿晶光电', '600537', 'sh');
+INSERT INTO `stock_dict` VALUES (1775, 'ST锦港', '600190', 'sh');
+INSERT INTO `stock_dict` VALUES (1776, '上汽集团', '600104', 'sh');
+INSERT INTO `stock_dict` VALUES (1777, '华银电力', '600744', 'sh');
+INSERT INTO `stock_dict` VALUES (1778, '农发种业', '600313', 'sh');
+INSERT INTO `stock_dict` VALUES (1779, '新澳股份', '603889', 'sh');
+INSERT INTO `stock_dict` VALUES (1780, '兴发集团', '600141', 'sh');
+INSERT INTO `stock_dict` VALUES (1781, '南京医药', '600713', 'sh');
+INSERT INTO `stock_dict` VALUES (1782, '四川成渝', '601107', 'sh');
+INSERT INTO `stock_dict` VALUES (1783, '国电南自', '600268', 'sh');
+INSERT INTO `stock_dict` VALUES (1784, '宝钢股份', '600019', 'sh');
+INSERT INTO `stock_dict` VALUES (1785, '奥翔药业', '603229', 'sh');
+INSERT INTO `stock_dict` VALUES (1786, '大秦铁路', '601006', 'sh');
+INSERT INTO `stock_dict` VALUES (1787, '通用股份', '601500', 'sh');
+INSERT INTO `stock_dict` VALUES (1788, '宏辉果蔬', '603336', 'sh');
+INSERT INTO `stock_dict` VALUES (1789, '蓝科高新', '601798', 'sh');
+INSERT INTO `stock_dict` VALUES (1790, '我乐家居', '603326', 'sh');
+INSERT INTO `stock_dict` VALUES (1791, '一拖股份', '601038', 'sh');
+INSERT INTO `stock_dict` VALUES (1792, '东方生物', '688298', 'sh');
+INSERT INTO `stock_dict` VALUES (1793, '万里股份', '600847', 'sh');
+INSERT INTO `stock_dict` VALUES (1794, '上海港湾', '605598', 'sh');
+INSERT INTO `stock_dict` VALUES (1795, '百达精工', '603331', 'sh');
+INSERT INTO `stock_dict` VALUES (1796, '法兰泰克', '603966', 'sh');
+INSERT INTO `stock_dict` VALUES (1797, '菲林格尔', '603226', 'sh');
+INSERT INTO `stock_dict` VALUES (1798, '广西能源', '600310', 'sh');
+INSERT INTO `stock_dict` VALUES (1799, '亚星锚链', '601890', 'sh');
+INSERT INTO `stock_dict` VALUES (1800, '腾龙股份', '603158', 'sh');
+INSERT INTO `stock_dict` VALUES (1801, '新通联', '603022', 'sh');
+INSERT INTO `stock_dict` VALUES (1802, '重庆钢铁', '601005', 'sh');
+INSERT INTO `stock_dict` VALUES (1803, '吉祥航空', '603885', 'sh');
+INSERT INTO `stock_dict` VALUES (1804, '宁波富邦', '600768', 'sh');
+INSERT INTO `stock_dict` VALUES (1805, '宏盛股份', '603090', 'sh');
+INSERT INTO `stock_dict` VALUES (1806, '萤石网络', '688475', 'sh');
+INSERT INTO `stock_dict` VALUES (1807, '成都燃气', '603053', 'sh');
+INSERT INTO `stock_dict` VALUES (1808, '国力股份', '688103', 'sh');
+INSERT INTO `stock_dict` VALUES (1809, '艾森股份', '688720', 'sh');
+INSERT INTO `stock_dict` VALUES (1810, '锦江航运', '601083', 'sh');
+INSERT INTO `stock_dict` VALUES (1811, '科华控股', '603161', 'sh');
+INSERT INTO `stock_dict` VALUES (1812, '彩蝶实业', '603073', 'sh');
+INSERT INTO `stock_dict` VALUES (1813, '宁波海运', '600798', 'sh');
+INSERT INTO `stock_dict` VALUES (1814, '中国一重', '601106', 'sh');
+INSERT INTO `stock_dict` VALUES (1815, '柳化股份', '600423', 'sh');
+INSERT INTO `stock_dict` VALUES (1816, '国邦医药', '605507', 'sh');
+INSERT INTO `stock_dict` VALUES (1817, '山外山', '688410', 'sh');
+INSERT INTO `stock_dict` VALUES (1818, '锦和商管', '603682', 'sh');
+INSERT INTO `stock_dict` VALUES (1819, '铁龙物流', '600125', 'sh');
+INSERT INTO `stock_dict` VALUES (1820, '招商轮船', '601872', 'sh');
+INSERT INTO `stock_dict` VALUES (1821, '澜起科技', '688008', 'sh');
+INSERT INTO `stock_dict` VALUES (1822, '华能水电', '600025', 'sh');
+INSERT INTO `stock_dict` VALUES (1823, '京沪高铁', '601816', 'sh');
+INSERT INTO `stock_dict` VALUES (1824, '安通控股', '600179', 'sh');
+INSERT INTO `stock_dict` VALUES (1825, '灿勤科技', '688182', 'sh');
+INSERT INTO `stock_dict` VALUES (1826, '超讯通信', '603322', 'sh');
+INSERT INTO `stock_dict` VALUES (1827, '金海高科', '603311', 'sh');
+INSERT INTO `stock_dict` VALUES (1828, '晶科科技', '601778', 'sh');
+INSERT INTO `stock_dict` VALUES (1829, '亚盛集团', '600108', 'sh');
+INSERT INTO `stock_dict` VALUES (1830, '时代万恒', '600241', 'sh');
+INSERT INTO `stock_dict` VALUES (1831, '华纺股份', '600448', 'sh');
+INSERT INTO `stock_dict` VALUES (1832, 'ST中珠', '600568', 'sh');
+INSERT INTO `stock_dict` VALUES (1833, '联美控股', '600167', 'sh');
+INSERT INTO `stock_dict` VALUES (1834, '森林包装', '605500', 'sh');
+INSERT INTO `stock_dict` VALUES (1835, '百傲化学', '603360', 'sh');
+INSERT INTO `stock_dict` VALUES (1836, '宏盛华源', '601096', 'sh');
+INSERT INTO `stock_dict` VALUES (1837, '浙江黎明', '603048', 'sh');
+INSERT INTO `stock_dict` VALUES (1838, '万向德农', '600371', 'sh');
+INSERT INTO `stock_dict` VALUES (1839, '芯能科技', '603105', 'sh');
+INSERT INTO `stock_dict` VALUES (1840, '西典新能', '603312', 'sh');
+INSERT INTO `stock_dict` VALUES (1841, '圣泉集团', '605589', 'sh');
+INSERT INTO `stock_dict` VALUES (1842, '洲际油气', '600759', 'sh');
+INSERT INTO `stock_dict` VALUES (1843, '天元智能', '603273', 'sh');
+INSERT INTO `stock_dict` VALUES (1844, '德宏股份', '603701', 'sh');
+INSERT INTO `stock_dict` VALUES (1845, '国投中鲁', '600962', 'sh');
+INSERT INTO `stock_dict` VALUES (1846, '五洲特纸', '605007', 'sh');
+INSERT INTO `stock_dict` VALUES (1847, '标准股份', '600302', 'sh');
+INSERT INTO `stock_dict` VALUES (1848, '万林物流', '603117', 'sh');
+INSERT INTO `stock_dict` VALUES (1849, '江苏新能', '603693', 'sh');
+INSERT INTO `stock_dict` VALUES (1850, '上港集团', '600018', 'sh');
+INSERT INTO `stock_dict` VALUES (1851, '申联生物', '688098', 'sh');
+INSERT INTO `stock_dict` VALUES (1852, '动力新科', '600841', 'sh');
+INSERT INTO `stock_dict` VALUES (1853, '耀皮玻璃', '600819', 'sh');
+INSERT INTO `stock_dict` VALUES (1854, '山东黄金', '600547', 'sh');
+INSERT INTO `stock_dict` VALUES (1855, '热景生物', '688068', 'sh');
+INSERT INTO `stock_dict` VALUES (1856, '中钢洛耐', '688119', 'sh');
+INSERT INTO `stock_dict` VALUES (1857, '福建水泥', '600802', 'sh');
+INSERT INTO `stock_dict` VALUES (1858, '厦门银行', '601187', 'sh');
+INSERT INTO `stock_dict` VALUES (1859, '中国核建', '601611', 'sh');
+INSERT INTO `stock_dict` VALUES (1860, '九州一轨', '688485', 'sh');
+INSERT INTO `stock_dict` VALUES (1861, '江河集团', '601886', 'sh');
+INSERT INTO `stock_dict` VALUES (1862, '中天科技', '600522', 'sh');
+INSERT INTO `stock_dict` VALUES (1863, '千金药业', '600479', 'sh');
+INSERT INTO `stock_dict` VALUES (1864, '上海医药', '601607', 'sh');
+INSERT INTO `stock_dict` VALUES (1865, '建研院', '603183', 'sh');
+INSERT INTO `stock_dict` VALUES (1866, '天普股份', '605255', 'sh');
+INSERT INTO `stock_dict` VALUES (1867, '苏博特', '603916', 'sh');
+INSERT INTO `stock_dict` VALUES (1868, '亚邦股份', '603188', 'sh');
+INSERT INTO `stock_dict` VALUES (1869, '福龙马', '603686', 'sh');
+INSERT INTO `stock_dict` VALUES (1870, '宁波高发', '603788', 'sh');
+INSERT INTO `stock_dict` VALUES (1871, '安迪苏', '600299', 'sh');
+INSERT INTO `stock_dict` VALUES (1872, '上海能源', '600508', 'sh');
+INSERT INTO `stock_dict` VALUES (1873, '诺诚健华-U', '688428', 'sh');
+INSERT INTO `stock_dict` VALUES (1874, '万通发展', '600246', 'sh');
+INSERT INTO `stock_dict` VALUES (1875, '恒源煤电', '600971', 'sh');
+INSERT INTO `stock_dict` VALUES (1876, '振华重工', '600320', 'sh');
+INSERT INTO `stock_dict` VALUES (1877, '东贝集团', '601956', 'sh');
+INSERT INTO `stock_dict` VALUES (1878, '阳光诺和', '688621', 'sh');
+INSERT INTO `stock_dict` VALUES (1879, '华阳新材', '600281', 'sh');
+INSERT INTO `stock_dict` VALUES (1880, '宝钢包装', '601968', 'sh');
+INSERT INTO `stock_dict` VALUES (1881, '康欣新材', '600076', 'sh');
+INSERT INTO `stock_dict` VALUES (1882, '祥生医疗', '688358', 'sh');
+INSERT INTO `stock_dict` VALUES (1883, '华生科技', '605180', 'sh');
+INSERT INTO `stock_dict` VALUES (1884, '宏华数科', '688789', 'sh');
+INSERT INTO `stock_dict` VALUES (1885, '金冠电气', '688517', 'sh');
+INSERT INTO `stock_dict` VALUES (1886, '风神股份', '600469', 'sh');
+INSERT INTO `stock_dict` VALUES (1887, '时代新材', '600458', 'sh');
+INSERT INTO `stock_dict` VALUES (1888, '泛亚微透', '688386', 'sh');
+INSERT INTO `stock_dict` VALUES (1889, '澄星股份', '600078', 'sh');
+INSERT INTO `stock_dict` VALUES (1890, '辰欣药业', '603367', 'sh');
+INSERT INTO `stock_dict` VALUES (1891, '昂立教育', '600661', 'sh');
+INSERT INTO `stock_dict` VALUES (1892, '大晟文化', '600892', 'sh');
+INSERT INTO `stock_dict` VALUES (1893, '日月股份', '603218', 'sh');
+INSERT INTO `stock_dict` VALUES (1894, '海泰新光', '688677', 'sh');
+INSERT INTO `stock_dict` VALUES (1895, '云煤能源', '600792', 'sh');
+INSERT INTO `stock_dict` VALUES (1896, '晶合集成', '688249', 'sh');
+INSERT INTO `stock_dict` VALUES (1897, '和辉光电-U', '688538', 'sh');
+INSERT INTO `stock_dict` VALUES (1898, '中国海油', '600938', 'sh');
+INSERT INTO `stock_dict` VALUES (1899, '国晟科技', '603778', 'sh');
+INSERT INTO `stock_dict` VALUES (1900, '浙江东日', '600113', 'sh');
+INSERT INTO `stock_dict` VALUES (1901, '鲁抗医药', '600789', 'sh');
+INSERT INTO `stock_dict` VALUES (1902, '华纳药厂', '688799', 'sh');
+INSERT INTO `stock_dict` VALUES (1903, '振江股份', '603507', 'sh');
+INSERT INTO `stock_dict` VALUES (1904, '新亚强', '603155', 'sh');
+INSERT INTO `stock_dict` VALUES (1905, '爱丽家居', '603221', 'sh');
+INSERT INTO `stock_dict` VALUES (1906, '四川路桥', '600039', 'sh');
+INSERT INTO `stock_dict` VALUES (1907, '华丰科技', '688629', 'sh');
+INSERT INTO `stock_dict` VALUES (1908, '电气风电', '688660', 'sh');
+INSERT INTO `stock_dict` VALUES (1909, '天津港', '600717', 'sh');
+INSERT INTO `stock_dict` VALUES (1910, '武汉控股', '600168', 'sh');
+INSERT INTO `stock_dict` VALUES (1911, '湖南海利', '600731', 'sh');
+INSERT INTO `stock_dict` VALUES (1912, '菲达环保', '600526', 'sh');
+INSERT INTO `stock_dict` VALUES (1913, '协和电子', '605258', 'sh');
+INSERT INTO `stock_dict` VALUES (1914, '渤海轮渡', '603167', 'sh');
+INSERT INTO `stock_dict` VALUES (1915, '天地科技', '600582', 'sh');
+INSERT INTO `stock_dict` VALUES (1916, '利通电子', '603629', 'sh');
+INSERT INTO `stock_dict` VALUES (1917, '路德环境', '688156', 'sh');
+INSERT INTO `stock_dict` VALUES (1918, '红四方', '603395', 'sh');
+INSERT INTO `stock_dict` VALUES (1919, '北汽蓝谷', '600733', 'sh');
+INSERT INTO `stock_dict` VALUES (1920, '金能科技', '603113', 'sh');
+INSERT INTO `stock_dict` VALUES (1921, '风范股份', '601700', 'sh');
+INSERT INTO `stock_dict` VALUES (1922, '林海股份', '600099', 'sh');
+INSERT INTO `stock_dict` VALUES (1923, '丰山集团', '603810', 'sh');
+INSERT INTO `stock_dict` VALUES (1924, '新华文轩', '601811', 'sh');
+INSERT INTO `stock_dict` VALUES (1925, '百川能源', '600681', 'sh');
+INSERT INTO `stock_dict` VALUES (1926, '中国核电', '601985', 'sh');
+INSERT INTO `stock_dict` VALUES (1927, '天正电气', '605066', 'sh');
+INSERT INTO `stock_dict` VALUES (1928, '铁流股份', '603926', 'sh');
+INSERT INTO `stock_dict` VALUES (1929, '美邦股份', '605033', 'sh');
+INSERT INTO `stock_dict` VALUES (1930, '扬农化工', '600486', 'sh');
+INSERT INTO `stock_dict` VALUES (1931, '江西长运', '600561', 'sh');
+INSERT INTO `stock_dict` VALUES (1932, '海正药业', '600267', 'sh');
+INSERT INTO `stock_dict` VALUES (1933, '安正时尚', '603839', 'sh');
+INSERT INTO `stock_dict` VALUES (1934, '神奇制药', '600613', 'sh');
+INSERT INTO `stock_dict` VALUES (1935, '明星电力', '600101', 'sh');
+INSERT INTO `stock_dict` VALUES (1936, '银龙股份', '603969', 'sh');
+INSERT INTO `stock_dict` VALUES (1937, '林洋能源', '601222', 'sh');
+INSERT INTO `stock_dict` VALUES (1938, '中铝国际', '601068', 'sh');
+INSERT INTO `stock_dict` VALUES (1939, '宇通重工', '600817', 'sh');
+INSERT INTO `stock_dict` VALUES (1940, '通达电气', '603390', 'sh');
+INSERT INTO `stock_dict` VALUES (1941, '东宏股份', '603856', 'sh');
+INSERT INTO `stock_dict` VALUES (1942, '广汽集团', '601238', 'sh');
+INSERT INTO `stock_dict` VALUES (1943, '中国巨石', '600176', 'sh');
+INSERT INTO `stock_dict` VALUES (1944, '宁波建工', '601789', 'sh');
+INSERT INTO `stock_dict` VALUES (1945, '重庆建工', '600939', 'sh');
+INSERT INTO `stock_dict` VALUES (1946, '中国石油', '601857', 'sh');
+INSERT INTO `stock_dict` VALUES (1947, '时空科技', '605178', 'sh');
+INSERT INTO `stock_dict` VALUES (1948, '金天钛业', '688750', 'sh');
+INSERT INTO `stock_dict` VALUES (1949, '恒通股份', '603223', 'sh');
+INSERT INTO `stock_dict` VALUES (1950, '一汽富维', '600742', 'sh');
+INSERT INTO `stock_dict` VALUES (1951, '芯联集成-U', '688469', 'sh');
+INSERT INTO `stock_dict` VALUES (1952, '*ST博信', '600083', 'sh');
+INSERT INTO `stock_dict` VALUES (1953, '国电电力', '600795', 'sh');
+INSERT INTO `stock_dict` VALUES (1954, '华勤技术', '603296', 'sh');
+INSERT INTO `stock_dict` VALUES (1955, '松霖科技', '603992', 'sh');
+INSERT INTO `stock_dict` VALUES (1956, '四方科技', '603339', 'sh');
+INSERT INTO `stock_dict` VALUES (1957, '健尔康', '603205', 'sh');
+INSERT INTO `stock_dict` VALUES (1958, '重庆银行', '601963', 'sh');
+INSERT INTO `stock_dict` VALUES (1959, '川仪股份', '603100', 'sh');
+INSERT INTO `stock_dict` VALUES (1960, '同济科技', '600846', 'sh');
+INSERT INTO `stock_dict` VALUES (1961, '江瀚新材', '603281', 'sh');
+INSERT INTO `stock_dict` VALUES (1962, '平高电气', '600312', 'sh');
+INSERT INTO `stock_dict` VALUES (1963, '陕建股份', '600248', 'sh');
+INSERT INTO `stock_dict` VALUES (1964, '渝农商行', '601077', 'sh');
+INSERT INTO `stock_dict` VALUES (1965, '海星股份', '603115', 'sh');
+INSERT INTO `stock_dict` VALUES (1966, '皖天然气', '603689', 'sh');
+INSERT INTO `stock_dict` VALUES (1967, '内蒙新华', '603230', 'sh');
+INSERT INTO `stock_dict` VALUES (1968, '福莱蒽特', '605566', 'sh');
+INSERT INTO `stock_dict` VALUES (1969, '浙能电力', '600023', 'sh');
+INSERT INTO `stock_dict` VALUES (1970, 'ST起步', '603557', 'sh');
+INSERT INTO `stock_dict` VALUES (1971, '嘉泽新能', '601619', 'sh');
+INSERT INTO `stock_dict` VALUES (1972, '鹏欣资源', '600490', 'sh');
+INSERT INTO `stock_dict` VALUES (1973, '康德莱', '603987', 'sh');
+INSERT INTO `stock_dict` VALUES (1974, '北元集团', '601568', 'sh');
+INSERT INTO `stock_dict` VALUES (1975, '三房巷', '600370', 'sh');
+INSERT INTO `stock_dict` VALUES (1976, '奥泰生物', '688606', 'sh');
+INSERT INTO `stock_dict` VALUES (1977, '北方股份', '600262', 'sh');
+INSERT INTO `stock_dict` VALUES (1978, '东风股份', '600006', 'sh');
+INSERT INTO `stock_dict` VALUES (1979, '永创智能', '603901', 'sh');
+INSERT INTO `stock_dict` VALUES (1980, '莱绅通灵', '603900', 'sh');
+INSERT INTO `stock_dict` VALUES (1981, '宝胜股份', '600973', 'sh');
+INSERT INTO `stock_dict` VALUES (1982, '节能风电', '601016', 'sh');
+INSERT INTO `stock_dict` VALUES (1983, '君禾股份', '603617', 'sh');
+INSERT INTO `stock_dict` VALUES (1984, '精工钢构', '600496', 'sh');
+INSERT INTO `stock_dict` VALUES (1985, '泛微网络', '603039', 'sh');
+INSERT INTO `stock_dict` VALUES (1986, '内蒙华电', '600863', 'sh');
+INSERT INTO `stock_dict` VALUES (1987, '创兴资源', '600193', 'sh');
+INSERT INTO `stock_dict` VALUES (1988, '德创环保', '603177', 'sh');
+INSERT INTO `stock_dict` VALUES (1989, '日联科技', '688531', 'sh');
+INSERT INTO `stock_dict` VALUES (1990, '设计总院', '603357', 'sh');
+INSERT INTO `stock_dict` VALUES (1991, '建发合诚', '603909', 'sh');
+INSERT INTO `stock_dict` VALUES (1992, '九洲药业', '603456', 'sh');
+INSERT INTO `stock_dict` VALUES (1993, '璞泰来', '603659', 'sh');
+INSERT INTO `stock_dict` VALUES (1994, '华电科工', '601226', 'sh');
+INSERT INTO `stock_dict` VALUES (1995, '威奥股份', '605001', 'sh');
+INSERT INTO `stock_dict` VALUES (1996, '方大特钢', '600507', 'sh');
+INSERT INTO `stock_dict` VALUES (1997, '众望布艺', '605003', 'sh');
+INSERT INTO `stock_dict` VALUES (1998, '众源新材', '603527', 'sh');
+INSERT INTO `stock_dict` VALUES (1999, '邦基科技', '603151', 'sh');
+INSERT INTO `stock_dict` VALUES (2000, '万朗磁塑', '603150', 'sh');
+INSERT INTO `stock_dict` VALUES (2001, '中国联通', '600050', 'sh');
+INSERT INTO `stock_dict` VALUES (2002, '上海电力', '600021', 'sh');
+INSERT INTO `stock_dict` VALUES (2003, '中材节能', '603126', 'sh');
+INSERT INTO `stock_dict` VALUES (2004, '际华集团', '601718', 'sh');
+INSERT INTO `stock_dict` VALUES (2005, '中孚实业', '600595', 'sh');
+INSERT INTO `stock_dict` VALUES (2006, '春立医疗', '688236', 'sh');
+INSERT INTO `stock_dict` VALUES (2007, '绿城水务', '601368', 'sh');
+INSERT INTO `stock_dict` VALUES (2008, '浙江荣泰', '603119', 'sh');
+INSERT INTO `stock_dict` VALUES (2009, '盟科药业-U', '688373', 'sh');
+INSERT INTO `stock_dict` VALUES (2010, '柳钢股份', '601003', 'sh');
+INSERT INTO `stock_dict` VALUES (2011, '新泉股份', '603179', 'sh');
+INSERT INTO `stock_dict` VALUES (2012, '祥和实业', '603500', 'sh');
+INSERT INTO `stock_dict` VALUES (2013, '敦煌种业', '600354', 'sh');
+INSERT INTO `stock_dict` VALUES (2014, '时创能源', '688429', 'sh');
+INSERT INTO `stock_dict` VALUES (2015, '海峡环保', '603817', 'sh');
+INSERT INTO `stock_dict` VALUES (2016, '创业环保', '600874', 'sh');
+INSERT INTO `stock_dict` VALUES (2017, '第一医药', '600833', 'sh');
+INSERT INTO `stock_dict` VALUES (2018, '鲁北化工', '600727', 'sh');
+INSERT INTO `stock_dict` VALUES (2019, '杭齿前进', '601177', 'sh');
+INSERT INTO `stock_dict` VALUES (2020, '国药现代', '600420', 'sh');
+INSERT INTO `stock_dict` VALUES (2021, '大胜达', '603687', 'sh');
+INSERT INTO `stock_dict` VALUES (2022, '海创药业-U', '688302', 'sh');
+INSERT INTO `stock_dict` VALUES (2023, '中国高科', '600730', 'sh');
+INSERT INTO `stock_dict` VALUES (2024, '苏美达', '600710', 'sh');
+INSERT INTO `stock_dict` VALUES (2025, '丰华股份', '600615', 'sh');
+INSERT INTO `stock_dict` VALUES (2026, '长江传媒', '600757', 'sh');
+INSERT INTO `stock_dict` VALUES (2027, '时代电气', '688187', 'sh');
+INSERT INTO `stock_dict` VALUES (2028, '嵘泰股份', '605133', 'sh');
+INSERT INTO `stock_dict` VALUES (2029, '中曼石油', '603619', 'sh');
+INSERT INTO `stock_dict` VALUES (2030, '合富中国', '603122', 'sh');
+INSERT INTO `stock_dict` VALUES (2031, '金鹰股份', '600232', 'sh');
+INSERT INTO `stock_dict` VALUES (2032, '华盛锂电', '688353', 'sh');
+INSERT INTO `stock_dict` VALUES (2033, '龙芯中科', '688047', 'sh');
+INSERT INTO `stock_dict` VALUES (2034, '亿华通-U', '688339', 'sh');
+INSERT INTO `stock_dict` VALUES (2035, '镇洋发展', '603213', 'sh');
+INSERT INTO `stock_dict` VALUES (2036, '远东股份', '600869', 'sh');
+INSERT INTO `stock_dict` VALUES (2037, '杭电股份', '603618', 'sh');
+INSERT INTO `stock_dict` VALUES (2038, '绿田机械', '605259', 'sh');
+INSERT INTO `stock_dict` VALUES (2039, '浙大网新', '600797', 'sh');
+INSERT INTO `stock_dict` VALUES (2040, '物产环能', '603071', 'sh');
+INSERT INTO `stock_dict` VALUES (2041, '勘设股份', '603458', 'sh');
+INSERT INTO `stock_dict` VALUES (2042, '英诺特', '688253', 'sh');
+INSERT INTO `stock_dict` VALUES (2043, '大唐发电', '601991', 'sh');
+INSERT INTO `stock_dict` VALUES (2044, 'ST广网', '600831', 'sh');
+INSERT INTO `stock_dict` VALUES (2045, '厦工股份', '600815', 'sh');
+INSERT INTO `stock_dict` VALUES (2046, '宁波港', '601018', 'sh');
+INSERT INTO `stock_dict` VALUES (2047, '鸿泉物联', '688288', 'sh');
+INSERT INTO `stock_dict` VALUES (2048, '南新制药', '688189', 'sh');
+INSERT INTO `stock_dict` VALUES (2049, '江南水务', '601199', 'sh');
+INSERT INTO `stock_dict` VALUES (2050, '两面针', '600249', 'sh');
+INSERT INTO `stock_dict` VALUES (2051, '新天绿能', '600956', 'sh');
+INSERT INTO `stock_dict` VALUES (2052, '四方股份', '601126', 'sh');
+INSERT INTO `stock_dict` VALUES (2053, '中恒集团', '600252', 'sh');
+INSERT INTO `stock_dict` VALUES (2054, '炬光科技', '688167', 'sh');
+INSERT INTO `stock_dict` VALUES (2055, '广州发展', '600098', 'sh');
+INSERT INTO `stock_dict` VALUES (2056, '同力日升', '605286', 'sh');
+INSERT INTO `stock_dict` VALUES (2057, '中谷物流', '603565', 'sh');
+INSERT INTO `stock_dict` VALUES (2058, '长城电工', '600192', 'sh');
+INSERT INTO `stock_dict` VALUES (2059, '宁波联合', '600051', 'sh');
+INSERT INTO `stock_dict` VALUES (2060, '北自科技', '603082', 'sh');
+INSERT INTO `stock_dict` VALUES (2061, 'XD中衡设', '603017', 'sh');
+INSERT INTO `stock_dict` VALUES (2062, '上海建工', '600170', 'sh');
+INSERT INTO `stock_dict` VALUES (2063, '浙版传媒', '601921', 'sh');
+INSERT INTO `stock_dict` VALUES (2064, '东方电缆', '603606', 'sh');
+INSERT INTO `stock_dict` VALUES (2065, '赛福天', '603028', 'sh');
+INSERT INTO `stock_dict` VALUES (2066, '福田汽车', '600166', 'sh');
+INSERT INTO `stock_dict` VALUES (2067, 'XD福建高', '600033', 'sh');
+INSERT INTO `stock_dict` VALUES (2068, '诚意药业', '603811', 'sh');
+INSERT INTO `stock_dict` VALUES (2069, '太龙药业', '600222', 'sh');
+INSERT INTO `stock_dict` VALUES (2070, '宁水集团', '603700', 'sh');
+INSERT INTO `stock_dict` VALUES (2071, '西大门', '605155', 'sh');
+INSERT INTO `stock_dict` VALUES (2072, '红星发展', '600367', 'sh');
+INSERT INTO `stock_dict` VALUES (2073, '万业企业', '600641', 'sh');
+INSERT INTO `stock_dict` VALUES (2074, '世茂能源', '605028', 'sh');
+INSERT INTO `stock_dict` VALUES (2075, '华胜天成', '600410', 'sh');
+INSERT INTO `stock_dict` VALUES (2076, '巍华新材', '603310', 'sh');
+INSERT INTO `stock_dict` VALUES (2077, '利柏特', '605167', 'sh');
+INSERT INTO `stock_dict` VALUES (2078, '晋控煤业', '601001', 'sh');
+INSERT INTO `stock_dict` VALUES (2079, '捷昌驱动', '603583', 'sh');
+INSERT INTO `stock_dict` VALUES (2080, '华谊集团', '600623', 'sh');
+INSERT INTO `stock_dict` VALUES (2081, '杭州热电', '605011', 'sh');
+INSERT INTO `stock_dict` VALUES (2082, '翔宇医疗', '688626', 'sh');
+INSERT INTO `stock_dict` VALUES (2083, '宏达股份', '600331', 'sh');
+INSERT INTO `stock_dict` VALUES (2084, '中科蓝讯', '688332', 'sh');
+INSERT INTO `stock_dict` VALUES (2085, '楚天高速', '600035', 'sh');
+INSERT INTO `stock_dict` VALUES (2086, '宏和科技', '603256', 'sh');
+INSERT INTO `stock_dict` VALUES (2087, '大众公用', '600635', 'sh');
+INSERT INTO `stock_dict` VALUES (2088, '深圳燃气', '601139', 'sh');
+INSERT INTO `stock_dict` VALUES (2089, '爱旭股份', '600732', 'sh');
+INSERT INTO `stock_dict` VALUES (2090, '万盛股份', '603010', 'sh');
+INSERT INTO `stock_dict` VALUES (2091, '华能国际', '600011', 'sh');
+INSERT INTO `stock_dict` VALUES (2092, '宇通客车', '600066', 'sh');
+INSERT INTO `stock_dict` VALUES (2093, '南钢股份', '600282', 'sh');
+INSERT INTO `stock_dict` VALUES (2094, '亚振家居', '603389', 'sh');
+INSERT INTO `stock_dict` VALUES (2095, '东湖高新', '600133', 'sh');
+INSERT INTO `stock_dict` VALUES (2096, '中国外运', '601598', 'sh');
+INSERT INTO `stock_dict` VALUES (2097, '恒润股份', '603985', 'sh');
+INSERT INTO `stock_dict` VALUES (2098, '赛恩斯', '688480', 'sh');
+INSERT INTO `stock_dict` VALUES (2099, '汇宇制药-W', '688553', 'sh');
+INSERT INTO `stock_dict` VALUES (2100, '天地源', '600665', 'sh');
+INSERT INTO `stock_dict` VALUES (2101, '茶花股份', '603615', 'sh');
+INSERT INTO `stock_dict` VALUES (2102, '金麒麟', '603586', 'sh');
+INSERT INTO `stock_dict` VALUES (2103, '平煤股份', '601666', 'sh');
+INSERT INTO `stock_dict` VALUES (2104, '中国西电', '601179', 'sh');
+INSERT INTO `stock_dict` VALUES (2105, '中原高速', '600020', 'sh');
+INSERT INTO `stock_dict` VALUES (2106, '福然德', '605050', 'sh');
+INSERT INTO `stock_dict` VALUES (2107, '西力科技', '688616', 'sh');
+INSERT INTO `stock_dict` VALUES (2108, '常青科技', '603125', 'sh');
+INSERT INTO `stock_dict` VALUES (2109, '南宁百货', '600712', 'sh');
+INSERT INTO `stock_dict` VALUES (2110, '精达股份', '600577', 'sh');
+INSERT INTO `stock_dict` VALUES (2111, '华电能源', '600726', 'sh');
+INSERT INTO `stock_dict` VALUES (2112, '卓锦股份', '688701', 'sh');
+INSERT INTO `stock_dict` VALUES (2113, '东望时代', '600052', 'sh');
+INSERT INTO `stock_dict` VALUES (2114, '益佰制药', '600594', 'sh');
+INSERT INTO `stock_dict` VALUES (2115, '洛凯股份', '603829', 'sh');
+INSERT INTO `stock_dict` VALUES (2116, '泉峰汽车', '603982', 'sh');
+INSERT INTO `stock_dict` VALUES (2117, '*ST九有', '600462', 'sh');
+INSERT INTO `stock_dict` VALUES (2118, '恒烁股份', '688416', 'sh');
+INSERT INTO `stock_dict` VALUES (2119, '城投控股', '600649', 'sh');
+INSERT INTO `stock_dict` VALUES (2120, '东峰集团', '601515', 'sh');
+INSERT INTO `stock_dict` VALUES (2121, '西昌电力', '600505', 'sh');
+INSERT INTO `stock_dict` VALUES (2122, '正和生态', '605069', 'sh');
+INSERT INTO `stock_dict` VALUES (2123, '福斯达', '603173', 'sh');
+INSERT INTO `stock_dict` VALUES (2124, '连云港', '601008', 'sh');
+INSERT INTO `stock_dict` VALUES (2125, '上海亚虹', '603159', 'sh');
+INSERT INTO `stock_dict` VALUES (2126, '渤海汽车', '600960', 'sh');
+INSERT INTO `stock_dict` VALUES (2127, '百合花', '603823', 'sh');
+INSERT INTO `stock_dict` VALUES (2128, '亨通光电', '600487', 'sh');
+INSERT INTO `stock_dict` VALUES (2129, '厦钨新能', '688778', 'sh');
+INSERT INTO `stock_dict` VALUES (2130, '永茂泰', '605208', 'sh');
+INSERT INTO `stock_dict` VALUES (2131, '富春染织', '605189', 'sh');
+INSERT INTO `stock_dict` VALUES (2132, '广电电气', '601616', 'sh');
+INSERT INTO `stock_dict` VALUES (2133, '宁波远洋', '601022', 'sh');
+INSERT INTO `stock_dict` VALUES (2134, '康尼机电', '603111', 'sh');
+INSERT INTO `stock_dict` VALUES (2135, '申能股份', '600642', 'sh');
+INSERT INTO `stock_dict` VALUES (2136, '上海谊众', '688091', 'sh');
+INSERT INTO `stock_dict` VALUES (2137, '合力科技', '603917', 'sh');
+INSERT INTO `stock_dict` VALUES (2138, '国新能源', '600617', 'sh');
+INSERT INTO `stock_dict` VALUES (2139, '保税科技', '600794', 'sh');
+INSERT INTO `stock_dict` VALUES (2140, '联影医疗', '688271', 'sh');
+INSERT INTO `stock_dict` VALUES (2141, '苏利股份', '603585', 'sh');
+INSERT INTO `stock_dict` VALUES (2142, '华设集团', '603018', 'sh');
+INSERT INTO `stock_dict` VALUES (2143, '康隆达', '603665', 'sh');
+INSERT INTO `stock_dict` VALUES (2144, '津药药业', '600488', 'sh');
+INSERT INTO `stock_dict` VALUES (2145, '瀚蓝环境', '600323', 'sh');
+INSERT INTO `stock_dict` VALUES (2146, '中国科传', '601858', 'sh');
+INSERT INTO `stock_dict` VALUES (2147, '安乃达', '603350', 'sh');
+INSERT INTO `stock_dict` VALUES (2148, 'S佳通', '600182', 'sh');
+INSERT INTO `stock_dict` VALUES (2149, '前沿生物-U', '688221', 'sh');
+INSERT INTO `stock_dict` VALUES (2150, '博隆技术', '603325', 'sh');
+INSERT INTO `stock_dict` VALUES (2151, '大西洋', '600558', 'sh');
+INSERT INTO `stock_dict` VALUES (2152, '洁特生物', '688026', 'sh');
+INSERT INTO `stock_dict` VALUES (2153, '迪贝电气', '603320', 'sh');
+INSERT INTO `stock_dict` VALUES (2154, '新华锦', '600735', 'sh');
+INSERT INTO `stock_dict` VALUES (2155, '美埃科技', '688376', 'sh');
+INSERT INTO `stock_dict` VALUES (2156, '城市传媒', '600229', 'sh');
+INSERT INTO `stock_dict` VALUES (2157, '昊华能源', '601101', 'sh');
+INSERT INTO `stock_dict` VALUES (2158, '石化油服', '600871', 'sh');
+INSERT INTO `stock_dict` VALUES (2159, '廊坊发展', '600149', 'sh');
+INSERT INTO `stock_dict` VALUES (2160, '华塑股份', '600935', 'sh');
+INSERT INTO `stock_dict` VALUES (2161, '联泰环保', '603797', 'sh');
+INSERT INTO `stock_dict` VALUES (2162, '中持股份', '603903', 'sh');
+INSERT INTO `stock_dict` VALUES (2163, '上海三毛', '600689', 'sh');
+INSERT INTO `stock_dict` VALUES (2164, '茂莱光学', '688502', 'sh');
+INSERT INTO `stock_dict` VALUES (2165, '华电辽能', '600396', 'sh');
+INSERT INTO `stock_dict` VALUES (2166, '海鸥股份', '603269', 'sh');
+INSERT INTO `stock_dict` VALUES (2167, '上海合晶', '688584', 'sh');
+INSERT INTO `stock_dict` VALUES (2168, '东风科技', '600081', 'sh');
+INSERT INTO `stock_dict` VALUES (2169, '长江电力', '600900', 'sh');
+INSERT INTO `stock_dict` VALUES (2170, '吉鑫科技', '601218', 'sh');
+INSERT INTO `stock_dict` VALUES (2171, '中煤能源', '601898', 'sh');
+INSERT INTO `stock_dict` VALUES (2172, '中国出版', '601949', 'sh');
+INSERT INTO `stock_dict` VALUES (2173, '联环药业', '600513', 'sh');
+INSERT INTO `stock_dict` VALUES (2174, '诚邦股份', '603316', 'sh');
+INSERT INTO `stock_dict` VALUES (2175, '吉林高速', '601518', 'sh');
+INSERT INTO `stock_dict` VALUES (2176, '光大证券', '601788', 'sh');
+INSERT INTO `stock_dict` VALUES (2177, '安必平', '688393', 'sh');
+INSERT INTO `stock_dict` VALUES (2178, '秦港股份', '601326', 'sh');
+INSERT INTO `stock_dict` VALUES (2179, '山鹰国际', '600567', 'sh');
+INSERT INTO `stock_dict` VALUES (2180, '航天工程', '603698', 'sh');
+INSERT INTO `stock_dict` VALUES (2181, '*ST海越', '600387', 'sh');
+INSERT INTO `stock_dict` VALUES (2182, '皖通高速', '600012', 'sh');
+INSERT INTO `stock_dict` VALUES (2183, '大众交通', '600611', 'sh');
+INSERT INTO `stock_dict` VALUES (2184, '天奈科技', '688116', 'sh');
+INSERT INTO `stock_dict` VALUES (2185, '德才股份', '605287', 'sh');
+INSERT INTO `stock_dict` VALUES (2186, '淳中科技', '603516', 'sh');
+INSERT INTO `stock_dict` VALUES (2187, '海油发展', '600968', 'sh');
+INSERT INTO `stock_dict` VALUES (2188, '合锻智能', '603011', 'sh');
+INSERT INTO `stock_dict` VALUES (2189, '正帆科技', '688596', 'sh');
+INSERT INTO `stock_dict` VALUES (2190, '瑞松科技', '688090', 'sh');
+INSERT INTO `stock_dict` VALUES (2191, '中远海发', '601866', 'sh');
+INSERT INTO `stock_dict` VALUES (2192, '马钢股份', '600808', 'sh');
+INSERT INTO `stock_dict` VALUES (2193, '道通科技', '688208', 'sh');
+INSERT INTO `stock_dict` VALUES (2194, '西藏天路', '600326', 'sh');
+INSERT INTO `stock_dict` VALUES (2195, '大有能源', '600403', 'sh');
+INSERT INTO `stock_dict` VALUES (2196, '赣粤高速', '600269', 'sh');
+INSERT INTO `stock_dict` VALUES (2197, '海立股份', '600619', 'sh');
+INSERT INTO `stock_dict` VALUES (2198, '五洲交通', '600368', 'sh');
+INSERT INTO `stock_dict` VALUES (2199, '联明股份', '603006', 'sh');
+INSERT INTO `stock_dict` VALUES (2200, '兴业股份', '603928', 'sh');
+INSERT INTO `stock_dict` VALUES (2201, 'ST永悦', '603879', 'sh');
+INSERT INTO `stock_dict` VALUES (2202, '力源科技', '688565', 'sh');
+INSERT INTO `stock_dict` VALUES (2203, '凤凰传媒', '601928', 'sh');
+INSERT INTO `stock_dict` VALUES (2204, '嘉友国际', '603871', 'sh');
+INSERT INTO `stock_dict` VALUES (2205, '*ST大药', '603963', 'sh');
+INSERT INTO `stock_dict` VALUES (2206, '新集能源', '601918', 'sh');
+INSERT INTO `stock_dict` VALUES (2207, '景谷林业', '600265', 'sh');
+INSERT INTO `stock_dict` VALUES (2208, '哈空调', '600202', 'sh');
+INSERT INTO `stock_dict` VALUES (2209, '华翔股份', '603112', 'sh');
+INSERT INTO `stock_dict` VALUES (2210, '再升科技', '603601', 'sh');
+INSERT INTO `stock_dict` VALUES (2211, '丰林集团', '601996', 'sh');
+INSERT INTO `stock_dict` VALUES (2212, '百济神州-U', '688235', 'sh');
+INSERT INTO `stock_dict` VALUES (2213, '汇金通', '603577', 'sh');
+INSERT INTO `stock_dict` VALUES (2214, '鲁银投资', '600784', 'sh');
+INSERT INTO `stock_dict` VALUES (2215, '冠盛股份', '605088', 'sh');
+INSERT INTO `stock_dict` VALUES (2216, '读者传媒', '603999', 'sh');
+INSERT INTO `stock_dict` VALUES (2217, '济高发展', '600807', 'sh');
+INSERT INTO `stock_dict` VALUES (2218, '青岛港', '601298', 'sh');
+INSERT INTO `stock_dict` VALUES (2219, '英利汽车', '601279', 'sh');
+INSERT INTO `stock_dict` VALUES (2220, '奇精机械', '603677', 'sh');
+INSERT INTO `stock_dict` VALUES (2221, '陕西黑猫', '601015', 'sh');
+INSERT INTO `stock_dict` VALUES (2222, '国发股份', '600538', 'sh');
+INSERT INTO `stock_dict` VALUES (2223, '惠泰医疗', '688617', 'sh');
+INSERT INTO `stock_dict` VALUES (2224, '锦江在线', '600650', 'sh');
+INSERT INTO `stock_dict` VALUES (2225, '冠豪高新', '600433', 'sh');
+INSERT INTO `stock_dict` VALUES (2226, '联赢激光', '688518', 'sh');
+INSERT INTO `stock_dict` VALUES (2227, '宁沪高速', '600377', 'sh');
+INSERT INTO `stock_dict` VALUES (2228, '长春一东', '600148', 'sh');
+INSERT INTO `stock_dict` VALUES (2229, '新中港', '605162', 'sh');
+INSERT INTO `stock_dict` VALUES (2230, '凯众股份', '603037', 'sh');
+INSERT INTO `stock_dict` VALUES (2231, '药明康德', '603259', 'sh');
+INSERT INTO `stock_dict` VALUES (2232, '金瑞矿业', '600714', 'sh');
+INSERT INTO `stock_dict` VALUES (2233, 'ST新潮', '600777', 'sh');
+INSERT INTO `stock_dict` VALUES (2234, '怡球资源', '601388', 'sh');
+INSERT INTO `stock_dict` VALUES (2235, '东珠生态', '603359', 'sh');
+INSERT INTO `stock_dict` VALUES (2236, '长园集团', '600525', 'sh');
+INSERT INTO `stock_dict` VALUES (2237, '三星医疗', '601567', 'sh');
+INSERT INTO `stock_dict` VALUES (2238, '鄂尔多斯', '600295', 'sh');
+INSERT INTO `stock_dict` VALUES (2239, '江苏华辰', '603097', 'sh');
+INSERT INTO `stock_dict` VALUES (2240, '渤海化学', '600800', 'sh');
+INSERT INTO `stock_dict` VALUES (2241, 'ST观典', '688287', 'sh');
+INSERT INTO `stock_dict` VALUES (2242, '丹化科技', '600844', 'sh');
+INSERT INTO `stock_dict` VALUES (2243, '深高速', '600548', 'sh');
+INSERT INTO `stock_dict` VALUES (2244, '江苏有线', '600959', 'sh');
+INSERT INTO `stock_dict` VALUES (2245, '康众医疗', '688607', 'sh');
+INSERT INTO `stock_dict` VALUES (2246, '*ST鹏博', '600804', 'sh');
+INSERT INTO `stock_dict` VALUES (2247, '重庆港', '600279', 'sh');
+INSERT INTO `stock_dict` VALUES (2248, '中油工程', '600339', 'sh');
+INSERT INTO `stock_dict` VALUES (2249, '迎丰股份', '605055', 'sh');
+INSERT INTO `stock_dict` VALUES (2250, '威派格', '603956', 'sh');
+INSERT INTO `stock_dict` VALUES (2251, '福能股份', '600483', 'sh');
+INSERT INTO `stock_dict` VALUES (2252, '中南传媒', '601098', 'sh');
+INSERT INTO `stock_dict` VALUES (2253, '智翔金泰-U', '688443', 'sh');
+INSERT INTO `stock_dict` VALUES (2254, '大连圣亚', '600593', 'sh');
+INSERT INTO `stock_dict` VALUES (2255, '六国化工', '600470', 'sh');
+INSERT INTO `stock_dict` VALUES (2256, '航材股份', '688563', 'sh');
+INSERT INTO `stock_dict` VALUES (2257, 'XD辽宁能', '600758', 'sh');
+INSERT INTO `stock_dict` VALUES (2258, '通威股份', '600438', 'sh');
+INSERT INTO `stock_dict` VALUES (2259, '源杰科技', '688498', 'sh');
+INSERT INTO `stock_dict` VALUES (2260, '拉芳家化', '603630', 'sh');
+INSERT INTO `stock_dict` VALUES (2261, '迈信林', '688685', 'sh');
+INSERT INTO `stock_dict` VALUES (2262, '中文传媒', '600373', 'sh');
+INSERT INTO `stock_dict` VALUES (2263, '民丰特纸', '600235', 'sh');
+INSERT INTO `stock_dict` VALUES (2264, '燕东微', '688172', 'sh');
+INSERT INTO `stock_dict` VALUES (2265, '华建集团', '600629', 'sh');
+INSERT INTO `stock_dict` VALUES (2266, '华电国际', '600027', 'sh');
+INSERT INTO `stock_dict` VALUES (2267, '今创集团', '603680', 'sh');
+INSERT INTO `stock_dict` VALUES (2268, '广深铁路', '601333', 'sh');
+INSERT INTO `stock_dict` VALUES (2269, '宝泰隆', '601011', 'sh');
+INSERT INTO `stock_dict` VALUES (2270, '药康生物', '688046', 'sh');
+INSERT INTO `stock_dict` VALUES (2271, '精伦电子', '600355', 'sh');
+INSERT INTO `stock_dict` VALUES (2272, '越剑智能', '603095', 'sh');
+INSERT INTO `stock_dict` VALUES (2273, '先达股份', '603086', 'sh');
+INSERT INTO `stock_dict` VALUES (2274, '石大胜华', '603026', 'sh');
+INSERT INTO `stock_dict` VALUES (2275, '泰禾智能', '603656', 'sh');
+INSERT INTO `stock_dict` VALUES (2276, '龙江交通', '601188', 'sh');
+INSERT INTO `stock_dict` VALUES (2277, '通源环境', '688679', 'sh');
+INSERT INTO `stock_dict` VALUES (2278, '日照港', '600017', 'sh');
+INSERT INTO `stock_dict` VALUES (2279, '八方股份', '603489', 'sh');
+INSERT INTO `stock_dict` VALUES (2280, '中安科', '600654', 'sh');
+INSERT INTO `stock_dict` VALUES (2281, '奥瑞德', '600666', 'sh');
+INSERT INTO `stock_dict` VALUES (2282, '安泰集团', '600408', 'sh');
+INSERT INTO `stock_dict` VALUES (2283, '广信股份', '603599', 'sh');
+INSERT INTO `stock_dict` VALUES (2284, '思林杰', '688115', 'sh');
+INSERT INTO `stock_dict` VALUES (2285, '明阳智能', '601615', 'sh');
+INSERT INTO `stock_dict` VALUES (2286, '伟创电气', '688698', 'sh');
+INSERT INTO `stock_dict` VALUES (2287, '金杯汽车', '600609', 'sh');
+INSERT INTO `stock_dict` VALUES (2288, '国投电力', '600886', 'sh');
+INSERT INTO `stock_dict` VALUES (2289, '栖霞建设', '600533', 'sh');
+INSERT INTO `stock_dict` VALUES (2290, '*ST美讯', '600898', 'sh');
+INSERT INTO `stock_dict` VALUES (2291, '聚和材料', '688503', 'sh');
+INSERT INTO `stock_dict` VALUES (2292, '赛科希德', '688338', 'sh');
+INSERT INTO `stock_dict` VALUES (2293, '美克家居', '600337', 'sh');
+INSERT INTO `stock_dict` VALUES (2294, '华钰矿业', '601020', 'sh');
+INSERT INTO `stock_dict` VALUES (2295, '博通股份', '600455', 'sh');
+INSERT INTO `stock_dict` VALUES (2296, '爱慕股份', '603511', 'sh');
+INSERT INTO `stock_dict` VALUES (2297, '松发股份', '603268', 'sh');
+INSERT INTO `stock_dict` VALUES (2298, '亨通股份', '600226', 'sh');
+INSERT INTO `stock_dict` VALUES (2299, '雪龙集团', '603949', 'sh');
+INSERT INTO `stock_dict` VALUES (2300, '确成股份', '605183', 'sh');
+INSERT INTO `stock_dict` VALUES (2301, '兴图新科', '688081', 'sh');
+INSERT INTO `stock_dict` VALUES (2302, '*ST傲农', '603363', 'sh');
+INSERT INTO `stock_dict` VALUES (2303, '健麾信息', '605186', 'sh');
+INSERT INTO `stock_dict` VALUES (2304, '龙蟠科技', '603906', 'sh');
+INSERT INTO `stock_dict` VALUES (2305, '京城股份', '600860', 'sh');
+INSERT INTO `stock_dict` VALUES (2306, '成都先导', '688222', 'sh');
+INSERT INTO `stock_dict` VALUES (2307, '沧州大化', '600230', 'sh');
+INSERT INTO `stock_dict` VALUES (2308, '龙建股份', '600853', 'sh');
+INSERT INTO `stock_dict` VALUES (2309, '大连热电', '600719', 'sh');
+INSERT INTO `stock_dict` VALUES (2310, '奥浦迈', '688293', 'sh');
+INSERT INTO `stock_dict` VALUES (2311, '凌钢股份', '600231', 'sh');
+INSERT INTO `stock_dict` VALUES (2312, '华懋科技', '603306', 'sh');
+INSERT INTO `stock_dict` VALUES (2313, '博迁新材', '605376', 'sh');
+INSERT INTO `stock_dict` VALUES (2314, '春光科技', '603657', 'sh');
+INSERT INTO `stock_dict` VALUES (2315, '四川金顶', '600678', 'sh');
+INSERT INTO `stock_dict` VALUES (2316, '东方集团', '600811', 'sh');
+INSERT INTO `stock_dict` VALUES (2317, '宏柏新材', '605366', 'sh');
+INSERT INTO `stock_dict` VALUES (2318, '金花股份', '600080', 'sh');
+INSERT INTO `stock_dict` VALUES (2319, '百利天恒-U', '688506', 'sh');
+INSERT INTO `stock_dict` VALUES (2320, '赤天化', '600227', 'sh');
+INSERT INTO `stock_dict` VALUES (2321, '纽威股份', '603699', 'sh');
+INSERT INTO `stock_dict` VALUES (2322, '恒瑞医药', '600276', 'sh');
+INSERT INTO `stock_dict` VALUES (2323, '集友股份', '603429', 'sh');
+INSERT INTO `stock_dict` VALUES (2324, '荣晟环保', '603165', 'sh');
+INSERT INTO `stock_dict` VALUES (2325, '华升股份', '600156', 'sh');
+INSERT INTO `stock_dict` VALUES (2326, '国机重装', '601399', 'sh');
+INSERT INTO `stock_dict` VALUES (2327, '康普顿', '603798', 'sh');
+INSERT INTO `stock_dict` VALUES (2328, '*ST汉马', '600375', 'sh');
+INSERT INTO `stock_dict` VALUES (2329, '正平股份', '603843', 'sh');
+INSERT INTO `stock_dict` VALUES (2330, '传音控股', '688036', 'sh');
+INSERT INTO `stock_dict` VALUES (2331, '百利电气', '600468', 'sh');
+INSERT INTO `stock_dict` VALUES (2332, '*ST龙宇', '603003', 'sh');
+INSERT INTO `stock_dict` VALUES (2333, '汇嘉时代', '603101', 'sh');
+INSERT INTO `stock_dict` VALUES (2334, '杭萧钢构', '600477', 'sh');
+INSERT INTO `stock_dict` VALUES (2335, '永吉股份', '603058', 'sh');
+INSERT INTO `stock_dict` VALUES (2336, '威腾电气', '688226', 'sh');
+INSERT INTO `stock_dict` VALUES (2337, '阿特斯', '688472', 'sh');
+INSERT INTO `stock_dict` VALUES (2338, '安源煤业', '600397', 'sh');
+INSERT INTO `stock_dict` VALUES (2339, '毕得医药', '688073', 'sh');
+INSERT INTO `stock_dict` VALUES (2340, '莱伯泰科', '688056', 'sh');
+INSERT INTO `stock_dict` VALUES (2341, '玉龙股份', '601028', 'sh');
+INSERT INTO `stock_dict` VALUES (2342, '塞力医疗', '603716', 'sh');
+INSERT INTO `stock_dict` VALUES (2343, '双良节能', '600481', 'sh');
+INSERT INTO `stock_dict` VALUES (2344, '*ST文投', '600715', 'sh');
+INSERT INTO `stock_dict` VALUES (2345, '君正集团', '601216', 'sh');
+INSERT INTO `stock_dict` VALUES (2346, '远达环保', '600292', 'sh');
+INSERT INTO `stock_dict` VALUES (2347, 'ST元成', '603388', 'sh');
+INSERT INTO `stock_dict` VALUES (2348, '迪威尔', '688377', 'sh');
+INSERT INTO `stock_dict` VALUES (2349, '长城科技', '603897', 'sh');
+INSERT INTO `stock_dict` VALUES (2350, '梅雁吉祥', '600868', 'sh');
+INSERT INTO `stock_dict` VALUES (2351, '瑞贝卡', '600439', 'sh');
+INSERT INTO `stock_dict` VALUES (2352, '益方生物-U', '688382', 'sh');
+INSERT INTO `stock_dict` VALUES (2353, '四通股份', '603838', 'sh');
+INSERT INTO `stock_dict` VALUES (2354, '山东出版', '601019', 'sh');
+INSERT INTO `stock_dict` VALUES (2355, '金桥信息', '603918', 'sh');
+INSERT INTO `stock_dict` VALUES (2356, '西藏珠峰', '600338', 'sh');
+INSERT INTO `stock_dict` VALUES (2357, '禾望电气', '603063', 'sh');
+INSERT INTO `stock_dict` VALUES (2358, '天宸股份', '600620', 'sh');
+INSERT INTO `stock_dict` VALUES (2359, '*ST花王', '603007', 'sh');
+INSERT INTO `stock_dict` VALUES (2360, '皇马科技', '603181', 'sh');
+INSERT INTO `stock_dict` VALUES (2361, '德科立', '688205', 'sh');
+INSERT INTO `stock_dict` VALUES (2362, '亚泰集团', '600881', 'sh');
+INSERT INTO `stock_dict` VALUES (2363, '七一二', '603712', 'sh');
+INSERT INTO `stock_dict` VALUES (2364, '申华控股', '600653', 'sh');
+INSERT INTO `stock_dict` VALUES (2365, '万润新能', '688275', 'sh');
+INSERT INTO `stock_dict` VALUES (2366, '光明地产', '600708', 'sh');
+INSERT INTO `stock_dict` VALUES (2367, '深圳新星', '603978', 'sh');
+INSERT INTO `stock_dict` VALUES (2368, '青海华鼎', '600243', 'sh');
+INSERT INTO `stock_dict` VALUES (2369, '五洲新春', '603667', 'sh');
+INSERT INTO `stock_dict` VALUES (2370, '南京化纤', '600889', 'sh');
+INSERT INTO `stock_dict` VALUES (2371, '八亿时空', '688181', 'sh');
+INSERT INTO `stock_dict` VALUES (2372, '壹石通', '688733', 'sh');
+INSERT INTO `stock_dict` VALUES (2373, '山东华鹏', '603021', 'sh');
+INSERT INTO `stock_dict` VALUES (2374, '品高股份', '688227', 'sh');
+INSERT INTO `stock_dict` VALUES (2375, '祥龙电业', '600769', 'sh');
+INSERT INTO `stock_dict` VALUES (2376, '生益电子', '688183', 'sh');
+INSERT INTO `stock_dict` VALUES (2377, 'ST百利', '603959', 'sh');
+INSERT INTO `stock_dict` VALUES (2378, '*ST科新', '600234', 'sh');
+INSERT INTO `stock_dict` VALUES (2379, 'ST熊猫', '600599', 'sh');
+INSERT INTO `stock_dict` VALUES (2380, '康美药业', '600518', 'sh');
+INSERT INTO `stock_dict` VALUES (2381, '松炀资源', '603863', 'sh');
+INSERT INTO `stock_dict` VALUES (2382, '宏昌电子', '603002', 'sh');
+INSERT INTO `stock_dict` VALUES (2383, '中电电机', '603988', 'sh');
+INSERT INTO `stock_dict` VALUES (2384, '法拉电子', '600563', 'sh');
+INSERT INTO `stock_dict` VALUES (2385, '南方路机', '603280', 'sh');
+INSERT INTO `stock_dict` VALUES (2386, '永安行', '603776', 'sh');
+INSERT INTO `stock_dict` VALUES (2387, '赛力斯', '601127', 'sh');
+INSERT INTO `stock_dict` VALUES (2388, '钱江生化', '600796', 'sh');
+INSERT INTO `stock_dict` VALUES (2389, '威龙股份', '603779', 'sh');
+INSERT INTO `stock_dict` VALUES (2390, '金帝股份', '603270', 'sh');
+INSERT INTO `stock_dict` VALUES (2391, '日出东方', '603366', 'sh');
+INSERT INTO `stock_dict` VALUES (2392, '黄河旋风', '600172', 'sh');
+INSERT INTO `stock_dict` VALUES (2393, '能科科技', '603859', 'sh');
+INSERT INTO `stock_dict` VALUES (2394, '大业股份', '603278', 'sh');
+INSERT INTO `stock_dict` VALUES (2395, '嘉亨家化', '300955', 'sz');
+INSERT INTO `stock_dict` VALUES (2396, '神思电子', '300479', 'sz');
+INSERT INTO `stock_dict` VALUES (2397, '熊猫乳品', '300898', 'sz');
+INSERT INTO `stock_dict` VALUES (2398, '值得买', '300785', 'sz');
+INSERT INTO `stock_dict` VALUES (2399, '新瀚新材', '301076', 'sz');
+INSERT INTO `stock_dict` VALUES (2400, '益客食品', '301116', 'sz');
+INSERT INTO `stock_dict` VALUES (2401, '森霸传感', '300701', 'sz');
+INSERT INTO `stock_dict` VALUES (2402, '汉威科技', '300007', 'sz');
+INSERT INTO `stock_dict` VALUES (2403, '工大科雅', '301197', 'sz');
+INSERT INTO `stock_dict` VALUES (2404, '西部牧业', '300106', 'sz');
+INSERT INTO `stock_dict` VALUES (2405, '新美星', '300509', 'sz');
+INSERT INTO `stock_dict` VALUES (2406, '华昌达', '300278', 'sz');
+INSERT INTO `stock_dict` VALUES (2407, '三丰智能', '300276', 'sz');
+INSERT INTO `stock_dict` VALUES (2408, '天利科技', '300399', 'sz');
+INSERT INTO `stock_dict` VALUES (2409, '深水海纳', '300961', 'sz');
+INSERT INTO `stock_dict` VALUES (2410, '幸福蓝海', '300528', 'sz');
+INSERT INTO `stock_dict` VALUES (2411, '万辰集团', '300972', 'sz');
+INSERT INTO `stock_dict` VALUES (2412, '飞利信', '300287', 'sz');
+INSERT INTO `stock_dict` VALUES (2413, '创源股份', '300703', 'sz');
+INSERT INTO `stock_dict` VALUES (2414, '山科智能', '300897', 'sz');
+INSERT INTO `stock_dict` VALUES (2415, '斯菱股份', '301550', 'sz');
+INSERT INTO `stock_dict` VALUES (2416, '星光股份', '002076', 'sz');
+INSERT INTO `stock_dict` VALUES (2417, '南极电商', '002127', 'sz');
+INSERT INTO `stock_dict` VALUES (2418, '文科股份', '002775', 'sz');
+INSERT INTO `stock_dict` VALUES (2419, '财信发展', '000838', 'sz');
+INSERT INTO `stock_dict` VALUES (2420, '海欣食品', '002702', 'sz');
+INSERT INTO `stock_dict` VALUES (2421, '麦趣尔', '002719', 'sz');
+INSERT INTO `stock_dict` VALUES (2422, '煌上煌', '002695', 'sz');
+INSERT INTO `stock_dict` VALUES (2423, '巨轮智能', '002031', 'sz');
+INSERT INTO `stock_dict` VALUES (2424, '索菱股份', '002766', 'sz');
+INSERT INTO `stock_dict` VALUES (2425, '榕基软件', '002474', 'sz');
+INSERT INTO `stock_dict` VALUES (2426, '博纳影业', '001330', 'sz');
+INSERT INTO `stock_dict` VALUES (2427, '东方智造', '002175', 'sz');
+INSERT INTO `stock_dict` VALUES (2428, '山子高科', '000981', 'sz');
+INSERT INTO `stock_dict` VALUES (2429, '奋达科技', '002681', 'sz');
+INSERT INTO `stock_dict` VALUES (2430, '金财互联', '002530', 'sz');
+INSERT INTO `stock_dict` VALUES (2431, '奥飞娱乐', '002292', 'sz');
+INSERT INTO `stock_dict` VALUES (2432, '新乳业', '002946', 'sz');
+INSERT INTO `stock_dict` VALUES (2433, '奥维通信', '002231', 'sz');
+INSERT INTO `stock_dict` VALUES (2434, '襄阳轴承', '000678', 'sz');
+INSERT INTO `stock_dict` VALUES (2435, '国盛金控', '002670', 'sz');
+INSERT INTO `stock_dict` VALUES (2436, '宏达新材', '002211', 'sz');
+INSERT INTO `stock_dict` VALUES (2437, '爱仕达', '002403', 'sz');
+INSERT INTO `stock_dict` VALUES (2438, '沃特股份', '002886', 'sz');
+INSERT INTO `stock_dict` VALUES (2439, '精工科技', '002006', 'sz');
+INSERT INTO `stock_dict` VALUES (2440, '西安饮食', '000721', 'sz');
+INSERT INTO `stock_dict` VALUES (2441, '汉王科技', '002362', 'sz');
+INSERT INTO `stock_dict` VALUES (2442, '科力尔', '002892', 'sz');
+INSERT INTO `stock_dict` VALUES (2443, '建设工业', '002265', 'sz');
+INSERT INTO `stock_dict` VALUES (2444, '新时达', '002527', 'sz');
+INSERT INTO `stock_dict` VALUES (2445, '天桥起重', '002523', 'sz');
+INSERT INTO `stock_dict` VALUES (2446, '天娱数科', '002354', 'sz');
+INSERT INTO `stock_dict` VALUES (2447, '天润工业', '002283', 'sz');
+INSERT INTO `stock_dict` VALUES (2448, '美邦服饰', '002269', 'sz');
+INSERT INTO `stock_dict` VALUES (2449, '御银股份', '002177', 'sz');
+INSERT INTO `stock_dict` VALUES (2450, '三维通信', '002115', 'sz');
+INSERT INTO `stock_dict` VALUES (2451, '中欣氟材', '002915', 'sz');
+INSERT INTO `stock_dict` VALUES (2452, '上海瀚讯', '300762', 'sz');
+INSERT INTO `stock_dict` VALUES (2453, '华纬科技', '001380', 'sz');
+INSERT INTO `stock_dict` VALUES (2454, '泰尔股份', '002347', 'sz');
+INSERT INTO `stock_dict` VALUES (2455, '青木科技', '301110', 'sz');
+INSERT INTO `stock_dict` VALUES (2456, '鑫铂股份', '003038', 'sz');
+INSERT INTO `stock_dict` VALUES (2457, '双塔食品', '002481', 'sz');
+INSERT INTO `stock_dict` VALUES (2458, '阳光乳业', '001318', 'sz');
+INSERT INTO `stock_dict` VALUES (2459, '东方精工', '002611', 'sz');
+INSERT INTO `stock_dict` VALUES (2460, '吉林化纤', '000420', 'sz');
+INSERT INTO `stock_dict` VALUES (2461, '久其软件', '002279', 'sz');
+INSERT INTO `stock_dict` VALUES (2462, '日上集团', '002593', 'sz');
+INSERT INTO `stock_dict` VALUES (2463, '拓邦股份', '002139', 'sz');
+INSERT INTO `stock_dict` VALUES (2464, '粤 传 媒', '002181', 'sz');
+INSERT INTO `stock_dict` VALUES (2465, '中百集团', '000759', 'sz');
+INSERT INTO `stock_dict` VALUES (2466, '海螺新材', '000619', 'sz');
+INSERT INTO `stock_dict` VALUES (2467, '东方海洋', '002086', 'sz');
+INSERT INTO `stock_dict` VALUES (2468, '德展健康', '000813', 'sz');
+INSERT INTO `stock_dict` VALUES (2469, '胜利精密', '002426', 'sz');
+INSERT INTO `stock_dict` VALUES (2470, '居然智家', '000785', 'sz');
+INSERT INTO `stock_dict` VALUES (2471, '中坚科技', '002779', 'sz');
+INSERT INTO `stock_dict` VALUES (2472, '双林股份', '300100', 'sz');
+INSERT INTO `stock_dict` VALUES (2473, '东华测试', '300354', 'sz');
+INSERT INTO `stock_dict` VALUES (2474, '立高食品', '300973', 'sz');
+INSERT INTO `stock_dict` VALUES (2475, '乾照光电', '300102', 'sz');
+INSERT INTO `stock_dict` VALUES (2476, '广哈通信', '300711', 'sz');
+INSERT INTO `stock_dict` VALUES (2477, '富临精工', '300432', 'sz');
+INSERT INTO `stock_dict` VALUES (2478, '熙菱信息', '300588', 'sz');
+INSERT INTO `stock_dict` VALUES (2479, '昊志机电', '300503', 'sz');
+INSERT INTO `stock_dict` VALUES (2480, '华大九天', '301269', 'sz');
+INSERT INTO `stock_dict` VALUES (2481, '矩子科技', '300802', 'sz');
+INSERT INTO `stock_dict` VALUES (2482, '双一科技', '300690', 'sz');
+INSERT INTO `stock_dict` VALUES (2483, '肇民科技', '301000', 'sz');
+INSERT INTO `stock_dict` VALUES (2484, '壹网壹创', '300792', 'sz');
+INSERT INTO `stock_dict` VALUES (2485, '航天智造', '300446', 'sz');
+INSERT INTO `stock_dict` VALUES (2486, '精研科技', '300709', 'sz');
+INSERT INTO `stock_dict` VALUES (2487, '常山药业', '300255', 'sz');
+INSERT INTO `stock_dict` VALUES (2488, '屹通新材', '300930', 'sz');
+INSERT INTO `stock_dict` VALUES (2489, '科信技术', '300565', 'sz');
+INSERT INTO `stock_dict` VALUES (2490, '固高科技', '301510', 'sz');
+INSERT INTO `stock_dict` VALUES (2491, '兆威机电', '003021', 'sz');
+INSERT INTO `stock_dict` VALUES (2492, '西测测试', '301306', 'sz');
+INSERT INTO `stock_dict` VALUES (2493, '金现代', '300830', 'sz');
+INSERT INTO `stock_dict` VALUES (2494, '山东矿机', '002526', 'sz');
+INSERT INTO `stock_dict` VALUES (2495, '中科信息', '300678', 'sz');
+INSERT INTO `stock_dict` VALUES (2496, '瑞鹄模具', '002997', 'sz');
+INSERT INTO `stock_dict` VALUES (2497, '德恩精工', '300780', 'sz');
+INSERT INTO `stock_dict` VALUES (2498, '软通动力', '301236', 'sz');
+INSERT INTO `stock_dict` VALUES (2499, '皇氏集团', '002329', 'sz');
+INSERT INTO `stock_dict` VALUES (2500, '苏州天脉', '301626', 'sz');
+INSERT INTO `stock_dict` VALUES (2501, '星徽股份', '300464', 'sz');
+INSERT INTO `stock_dict` VALUES (2502, '丰立智能', '301368', 'sz');
+INSERT INTO `stock_dict` VALUES (2503, '立方数科', '300344', 'sz');
+INSERT INTO `stock_dict` VALUES (2504, '汤姆猫', '300459', 'sz');
+INSERT INTO `stock_dict` VALUES (2505, '久盛电气', '301082', 'sz');
+INSERT INTO `stock_dict` VALUES (2506, '兆丰股份', '300695', 'sz');
+INSERT INTO `stock_dict` VALUES (2507, '汉得信息', '300170', 'sz');
+INSERT INTO `stock_dict` VALUES (2508, '思泰克', '301568', 'sz');
+INSERT INTO `stock_dict` VALUES (2509, '科大智能', '300222', 'sz');
+INSERT INTO `stock_dict` VALUES (2510, '珠城科技', '301280', 'sz');
+INSERT INTO `stock_dict` VALUES (2511, '中鼎股份', '000887', 'sz');
+INSERT INTO `stock_dict` VALUES (2512, '新动力', '300152', 'sz');
+INSERT INTO `stock_dict` VALUES (2513, '海亮股份', '002203', 'sz');
+INSERT INTO `stock_dict` VALUES (2514, '全志科技', '300458', 'sz');
+INSERT INTO `stock_dict` VALUES (2515, '火星人', '300894', 'sz');
+INSERT INTO `stock_dict` VALUES (2516, '汉宇集团', '300403', 'sz');
+INSERT INTO `stock_dict` VALUES (2517, '神剑股份', '002361', 'sz');
+INSERT INTO `stock_dict` VALUES (2518, '拓尔思', '300229', 'sz');
+INSERT INTO `stock_dict` VALUES (2519, '天音控股', '000829', 'sz');
+INSERT INTO `stock_dict` VALUES (2520, '华民股份', '300345', 'sz');
+INSERT INTO `stock_dict` VALUES (2521, '捷邦科技', '301326', 'sz');
+INSERT INTO `stock_dict` VALUES (2522, '新研股份', '300159', 'sz');
+INSERT INTO `stock_dict` VALUES (2523, '利亚德', '300296', 'sz');
+INSERT INTO `stock_dict` VALUES (2524, '苏交科', '300284', 'sz');
+INSERT INTO `stock_dict` VALUES (2525, '凯淳股份', '301001', 'sz');
+INSERT INTO `stock_dict` VALUES (2526, '鸿博股份', '002229', 'sz');
+INSERT INTO `stock_dict` VALUES (2527, '万讯自控', '300112', 'sz');
+INSERT INTO `stock_dict` VALUES (2528, '焦点科技', '002315', 'sz');
+INSERT INTO `stock_dict` VALUES (2529, '南方精工', '002553', 'sz');
+INSERT INTO `stock_dict` VALUES (2530, '数字认证', '300579', 'sz');
+INSERT INTO `stock_dict` VALUES (2531, '冠昊生物', '300238', 'sz');
+INSERT INTO `stock_dict` VALUES (2532, '超捷股份', '301005', 'sz');
+INSERT INTO `stock_dict` VALUES (2533, '阿莱德', '301419', 'sz');
+INSERT INTO `stock_dict` VALUES (2534, '友邦吊顶', '002718', 'sz');
+INSERT INTO `stock_dict` VALUES (2535, '宝丽迪', '300905', 'sz');
+INSERT INTO `stock_dict` VALUES (2536, '朗玛信息', '300288', 'sz');
+INSERT INTO `stock_dict` VALUES (2537, '中岩大地', '003001', 'sz');
+INSERT INTO `stock_dict` VALUES (2538, '千味央厨', '001215', 'sz');
+INSERT INTO `stock_dict` VALUES (2539, '震裕科技', '300953', 'sz');
+INSERT INTO `stock_dict` VALUES (2540, '华辰装备', '300809', 'sz');
+INSERT INTO `stock_dict` VALUES (2541, '山东赫达', '002810', 'sz');
+INSERT INTO `stock_dict` VALUES (2542, '华凯易佰', '300592', 'sz');
+INSERT INTO `stock_dict` VALUES (2543, '汇绿生态', '001267', 'sz');
+INSERT INTO `stock_dict` VALUES (2544, '万丰奥威', '002085', 'sz');
+INSERT INTO `stock_dict` VALUES (2545, '百邦科技', '300736', 'sz');
+INSERT INTO `stock_dict` VALUES (2546, '智动力', '300686', 'sz');
+INSERT INTO `stock_dict` VALUES (2547, '贝因美', '002570', 'sz');
+INSERT INTO `stock_dict` VALUES (2548, '好想你', '002582', 'sz');
+INSERT INTO `stock_dict` VALUES (2549, '佳讯飞鸿', '300213', 'sz');
+INSERT INTO `stock_dict` VALUES (2550, '德美化工', '002054', 'sz');
+INSERT INTO `stock_dict` VALUES (2551, '雷曼光电', '300162', 'sz');
+INSERT INTO `stock_dict` VALUES (2552, '楚天龙', '003040', 'sz');
+INSERT INTO `stock_dict` VALUES (2553, '超频三', '300647', 'sz');
+INSERT INTO `stock_dict` VALUES (2554, '省广集团', '002400', 'sz');
+INSERT INTO `stock_dict` VALUES (2555, '君亭酒店', '301073', 'sz');
+INSERT INTO `stock_dict` VALUES (2556, '神雾节能', '000820', 'sz');
+INSERT INTO `stock_dict` VALUES (2557, '贝斯特', '300580', 'sz');
+INSERT INTO `stock_dict` VALUES (2558, '今天国际', '300532', 'sz');
+INSERT INTO `stock_dict` VALUES (2559, '赛象科技', '002337', 'sz');
+INSERT INTO `stock_dict` VALUES (2560, '东山精密', '002384', 'sz');
+INSERT INTO `stock_dict` VALUES (2561, '远大智能', '002689', 'sz');
+INSERT INTO `stock_dict` VALUES (2562, '浩洋股份', '300833', 'sz');
+INSERT INTO `stock_dict` VALUES (2563, '苏州固锝', '002079', 'sz');
+INSERT INTO `stock_dict` VALUES (2564, '宗申动力', '001696', 'sz');
+INSERT INTO `stock_dict` VALUES (2565, '吉宏股份', '002803', 'sz');
+INSERT INTO `stock_dict` VALUES (2566, '爱朋医疗', '300753', 'sz');
+INSERT INTO `stock_dict` VALUES (2567, '思特奇', '300608', 'sz');
+INSERT INTO `stock_dict` VALUES (2568, '青鸟消防', '002960', 'sz');
+INSERT INTO `stock_dict` VALUES (2569, '青岛食品', '001219', 'sz');
+INSERT INTO `stock_dict` VALUES (2570, '实丰文化', '002862', 'sz');
+INSERT INTO `stock_dict` VALUES (2571, '晨曦航空', '300581', 'sz');
+INSERT INTO `stock_dict` VALUES (2572, '甘化科工', '000576', 'sz');
+INSERT INTO `stock_dict` VALUES (2573, '江苏雷利', '300660', 'sz');
+INSERT INTO `stock_dict` VALUES (2574, '东方国信', '300166', 'sz');
+INSERT INTO `stock_dict` VALUES (2575, '竞业达', '003005', 'sz');
+INSERT INTO `stock_dict` VALUES (2576, '西部建设', '002302', 'sz');
+INSERT INTO `stock_dict` VALUES (2577, '合众思壮', '002383', 'sz');
+INSERT INTO `stock_dict` VALUES (2578, 'ST三圣', '002742', 'sz');
+INSERT INTO `stock_dict` VALUES (2579, '天龙集团', '300063', 'sz');
+INSERT INTO `stock_dict` VALUES (2580, '天茂集团', '000627', 'sz');
+INSERT INTO `stock_dict` VALUES (2581, '比音勒芬', '002832', 'sz');
+INSERT INTO `stock_dict` VALUES (2582, '博实结', '301608', 'sz');
+INSERT INTO `stock_dict` VALUES (2583, 'ST西发', '000752', 'sz');
+INSERT INTO `stock_dict` VALUES (2584, '零点有数', '301169', 'sz');
+INSERT INTO `stock_dict` VALUES (2585, '*ST同洲', '002052', 'sz');
+INSERT INTO `stock_dict` VALUES (2586, '*ST景峰', '000908', 'sz');
+INSERT INTO `stock_dict` VALUES (2587, '科锐国际', '300662', 'sz');
+INSERT INTO `stock_dict` VALUES (2588, '奇德新材', '300995', 'sz');
+INSERT INTO `stock_dict` VALUES (2589, '杰恩设计', '300668', 'sz');
+INSERT INTO `stock_dict` VALUES (2590, '广生堂', '300436', 'sz');
+INSERT INTO `stock_dict` VALUES (2591, '雷赛智能', '002979', 'sz');
+INSERT INTO `stock_dict` VALUES (2592, 'ST金鸿', '000669', 'sz');
+INSERT INTO `stock_dict` VALUES (2593, '我爱我家', '000560', 'sz');
+INSERT INTO `stock_dict` VALUES (2594, '埃斯顿', '002747', 'sz');
+INSERT INTO `stock_dict` VALUES (2595, '海信家电', '000921', 'sz');
+INSERT INTO `stock_dict` VALUES (2596, '恒辉安防', '300952', 'sz');
+INSERT INTO `stock_dict` VALUES (2597, '依米康', '300249', 'sz');
+INSERT INTO `stock_dict` VALUES (2598, '紫天科技', '300280', 'sz');
+INSERT INTO `stock_dict` VALUES (2599, '北路智控', '301195', 'sz');
+INSERT INTO `stock_dict` VALUES (2600, '*ST人乐', '002336', 'sz');
+INSERT INTO `stock_dict` VALUES (2601, '精测电子', '300567', 'sz');
+INSERT INTO `stock_dict` VALUES (2602, '庄园牧场', '002910', 'sz');
+INSERT INTO `stock_dict` VALUES (2603, '海伦哲', '300201', 'sz');
+INSERT INTO `stock_dict` VALUES (2604, '炼石航空', '000697', 'sz');
+INSERT INTO `stock_dict` VALUES (2605, '山东章鼓', '002598', 'sz');
+INSERT INTO `stock_dict` VALUES (2606, '安达维尔', '300719', 'sz');
+INSERT INTO `stock_dict` VALUES (2607, '天奇股份', '002009', 'sz');
+INSERT INTO `stock_dict` VALUES (2608, '风光股份', '301100', 'sz');
+INSERT INTO `stock_dict` VALUES (2609, '航宇微', '300053', 'sz');
+INSERT INTO `stock_dict` VALUES (2610, '光线传媒', '300251', 'sz');
+INSERT INTO `stock_dict` VALUES (2611, '冰川网络', '300533', 'sz');
+INSERT INTO `stock_dict` VALUES (2612, '万润股份', '002643', 'sz');
+INSERT INTO `stock_dict` VALUES (2613, '宏源药业', '301246', 'sz');
+INSERT INTO `stock_dict` VALUES (2614, '小崧股份', '002723', 'sz');
+INSERT INTO `stock_dict` VALUES (2615, '东杰智能', '300486', 'sz');
+INSERT INTO `stock_dict` VALUES (2616, '安培龙', '301413', 'sz');
+INSERT INTO `stock_dict` VALUES (2617, '天奥电子', '002935', 'sz');
+INSERT INTO `stock_dict` VALUES (2618, '威力传动', '300904', 'sz');
+INSERT INTO `stock_dict` VALUES (2619, '华阳国际', '002949', 'sz');
+INSERT INTO `stock_dict` VALUES (2620, '博实股份', '002698', 'sz');
+INSERT INTO `stock_dict` VALUES (2621, '苏奥传感', '300507', 'sz');
+INSERT INTO `stock_dict` VALUES (2622, '硕贝德', '300322', 'sz');
+INSERT INTO `stock_dict` VALUES (2623, '声迅股份', '003004', 'sz');
+INSERT INTO `stock_dict` VALUES (2624, '祥明智能', '301226', 'sz');
+INSERT INTO `stock_dict` VALUES (2625, '新 大 陆', '000997', 'sz');
+INSERT INTO `stock_dict` VALUES (2626, '优德精密', '300549', 'sz');
+INSERT INTO `stock_dict` VALUES (2627, '濮耐股份', '002225', 'sz');
+INSERT INTO `stock_dict` VALUES (2628, '兄弟科技', '002562', 'sz');
+INSERT INTO `stock_dict` VALUES (2629, '奥海科技', '002993', 'sz');
+INSERT INTO `stock_dict` VALUES (2630, '嘉戎技术', '301148', 'sz');
+INSERT INTO `stock_dict` VALUES (2631, '科创信息', '300730', 'sz');
+INSERT INTO `stock_dict` VALUES (2632, '星辉娱乐', '300043', 'sz');
+INSERT INTO `stock_dict` VALUES (2633, '遥望科技', '002291', 'sz');
+INSERT INTO `stock_dict` VALUES (2634, '万马股份', '002276', 'sz');
+INSERT INTO `stock_dict` VALUES (2635, '安联锐视', '301042', 'sz');
+INSERT INTO `stock_dict` VALUES (2636, '润欣科技', '300493', 'sz');
+INSERT INTO `stock_dict` VALUES (2637, '鱼跃医疗', '002223', 'sz');
+INSERT INTO `stock_dict` VALUES (2638, '新疆交建', '002941', 'sz');
+INSERT INTO `stock_dict` VALUES (2639, '诚益通', '300430', 'sz');
+INSERT INTO `stock_dict` VALUES (2640, '大富科技', '300134', 'sz');
+INSERT INTO `stock_dict` VALUES (2641, '壶化股份', '003002', 'sz');
+INSERT INTO `stock_dict` VALUES (2642, '长青科技', '001324', 'sz');
+INSERT INTO `stock_dict` VALUES (2643, '万泽股份', '000534', 'sz');
+INSERT INTO `stock_dict` VALUES (2644, '拓斯达', '300607', 'sz');
+INSERT INTO `stock_dict` VALUES (2645, '佰奥智能', '300836', 'sz');
+INSERT INTO `stock_dict` VALUES (2646, '张小泉', '301055', 'sz');
+INSERT INTO `stock_dict` VALUES (2647, '天银机电', '300342', 'sz');
+INSERT INTO `stock_dict` VALUES (2648, '安诺其', '300067', 'sz');
+INSERT INTO `stock_dict` VALUES (2649, '汇纳科技', '300609', 'sz');
+INSERT INTO `stock_dict` VALUES (2650, '*ST金时', '002951', 'sz');
+INSERT INTO `stock_dict` VALUES (2651, '中科金财', '002657', 'sz');
+INSERT INTO `stock_dict` VALUES (2652, '龙大美食', '002726', 'sz');
+INSERT INTO `stock_dict` VALUES (2653, '长盛轴承', '300718', 'sz');
+INSERT INTO `stock_dict` VALUES (2654, '高新兴', '300098', 'sz');
+INSERT INTO `stock_dict` VALUES (2655, '金盾股份', '300411', 'sz');
+INSERT INTO `stock_dict` VALUES (2656, '锐明技术', '002970', 'sz');
+INSERT INTO `stock_dict` VALUES (2657, '怡合达', '301029', 'sz');
+INSERT INTO `stock_dict` VALUES (2658, '聚灿光电', '300708', 'sz');
+INSERT INTO `stock_dict` VALUES (2659, '凯盛新材', '301069', 'sz');
+INSERT INTO `stock_dict` VALUES (2660, '佳缘科技', '301117', 'sz');
+INSERT INTO `stock_dict` VALUES (2661, '深城交', '301091', 'sz');
+INSERT INTO `stock_dict` VALUES (2662, '南兴股份', '002757', 'sz');
+INSERT INTO `stock_dict` VALUES (2663, '四川九洲', '000801', 'sz');
+INSERT INTO `stock_dict` VALUES (2664, '航新科技', '300424', 'sz');
+INSERT INTO `stock_dict` VALUES (2665, '金运激光', '300220', 'sz');
+INSERT INTO `stock_dict` VALUES (2666, '国安达', '300902', 'sz');
+INSERT INTO `stock_dict` VALUES (2667, '海大集团', '002311', 'sz');
+INSERT INTO `stock_dict` VALUES (2668, '万达电影', '002739', 'sz');
+INSERT INTO `stock_dict` VALUES (2669, '珠江钢琴', '002678', 'sz');
+INSERT INTO `stock_dict` VALUES (2670, '天振股份', '301356', 'sz');
+INSERT INTO `stock_dict` VALUES (2671, '信隆健康', '002105', 'sz');
+INSERT INTO `stock_dict` VALUES (2672, '图南股份', '300855', 'sz');
+INSERT INTO `stock_dict` VALUES (2673, '百润股份', '002568', 'sz');
+INSERT INTO `stock_dict` VALUES (2674, '新晨科技', '300542', 'sz');
+INSERT INTO `stock_dict` VALUES (2675, '世联行', '002285', 'sz');
+INSERT INTO `stock_dict` VALUES (2676, '北新路桥', '002307', 'sz');
+INSERT INTO `stock_dict` VALUES (2677, '必创科技', '300667', 'sz');
+INSERT INTO `stock_dict` VALUES (2678, '中洲特材', '300963', 'sz');
+INSERT INTO `stock_dict` VALUES (2679, '天地在线', '002995', 'sz');
+INSERT INTO `stock_dict` VALUES (2680, '华如科技', '301302', 'sz');
+INSERT INTO `stock_dict` VALUES (2681, '立昂技术', '300603', 'sz');
+INSERT INTO `stock_dict` VALUES (2682, '光洋股份', '002708', 'sz');
+INSERT INTO `stock_dict` VALUES (2683, '捷成股份', '300182', 'sz');
+INSERT INTO `stock_dict` VALUES (2684, '爱美客', '300896', 'sz');
+INSERT INTO `stock_dict` VALUES (2685, '英飞特', '300582', 'sz');
+INSERT INTO `stock_dict` VALUES (2686, '致欧科技', '301376', 'sz');
+INSERT INTO `stock_dict` VALUES (2687, '真爱美家', '003041', 'sz');
+INSERT INTO `stock_dict` VALUES (2688, '供销大集', '000564', 'sz');
+INSERT INTO `stock_dict` VALUES (2689, '罗平锌电', '002114', 'sz');
+INSERT INTO `stock_dict` VALUES (2690, '瑞玛精密', '002976', 'sz');
+INSERT INTO `stock_dict` VALUES (2691, '深康佳Ａ', '000016', 'sz');
+INSERT INTO `stock_dict` VALUES (2692, '科陆电子', '002121', 'sz');
+INSERT INTO `stock_dict` VALUES (2693, '通程控股', '000419', 'sz');
+INSERT INTO `stock_dict` VALUES (2694, '博思软件', '300525', 'sz');
+INSERT INTO `stock_dict` VALUES (2695, '双乐股份', '301036', 'sz');
+INSERT INTO `stock_dict` VALUES (2696, '九阳股份', '002242', 'sz');
+INSERT INTO `stock_dict` VALUES (2697, '新兴装备', '002933', 'sz');
+INSERT INTO `stock_dict` VALUES (2698, '共达电声', '002655', 'sz');
+INSERT INTO `stock_dict` VALUES (2699, '瑞丰新材', '300910', 'sz');
+INSERT INTO `stock_dict` VALUES (2700, '克明食品', '002661', 'sz');
+INSERT INTO `stock_dict` VALUES (2701, '远兴能源', '000683', 'sz');
+INSERT INTO `stock_dict` VALUES (2702, '水晶光电', '002273', 'sz');
+INSERT INTO `stock_dict` VALUES (2703, '亚玛顿', '002623', 'sz');
+INSERT INTO `stock_dict` VALUES (2704, '永和智控', '002795', 'sz');
+INSERT INTO `stock_dict` VALUES (2705, '百普赛斯', '301080', 'sz');
+INSERT INTO `stock_dict` VALUES (2706, '中电港', '001287', 'sz');
+INSERT INTO `stock_dict` VALUES (2707, '肯特股份', '301591', 'sz');
+INSERT INTO `stock_dict` VALUES (2708, '爱施德', '002416', 'sz');
+INSERT INTO `stock_dict` VALUES (2709, '航天智装', '300455', 'sz');
+INSERT INTO `stock_dict` VALUES (2710, '雷迪克', '300652', 'sz');
+INSERT INTO `stock_dict` VALUES (2711, '星网宇达', '002829', 'sz');
+INSERT INTO `stock_dict` VALUES (2712, '蓝英装备', '300293', 'sz');
+INSERT INTO `stock_dict` VALUES (2713, '双环传动', '002472', 'sz');
+INSERT INTO `stock_dict` VALUES (2714, '华宝新能', '301327', 'sz');
+INSERT INTO `stock_dict` VALUES (2715, '金百泽', '301041', 'sz');
+INSERT INTO `stock_dict` VALUES (2716, '乔治白', '002687', 'sz');
+INSERT INTO `stock_dict` VALUES (2717, 'ST美谷', '000615', 'sz');
+INSERT INTO `stock_dict` VALUES (2718, '中捷资源', '002021', 'sz');
+INSERT INTO `stock_dict` VALUES (2719, '甘源食品', '002991', 'sz');
+INSERT INTO `stock_dict` VALUES (2720, '罗博特科', '300757', 'sz');
+INSERT INTO `stock_dict` VALUES (2721, '科大讯飞', '002230', 'sz');
+INSERT INTO `stock_dict` VALUES (2722, '萃华珠宝', '002731', 'sz');
+INSERT INTO `stock_dict` VALUES (2723, '汇金科技', '300561', 'sz');
+INSERT INTO `stock_dict` VALUES (2724, '翰宇药业', '300199', 'sz');
+INSERT INTO `stock_dict` VALUES (2725, '大连友谊', '000679', 'sz');
+INSERT INTO `stock_dict` VALUES (2726, '三只松鼠', '300783', 'sz');
+INSERT INTO `stock_dict` VALUES (2727, '美亚光电', '002690', 'sz');
+INSERT INTO `stock_dict` VALUES (2728, '华英农业', '002321', 'sz');
+INSERT INTO `stock_dict` VALUES (2729, '金信诺', '300252', 'sz');
+INSERT INTO `stock_dict` VALUES (2730, '五方光电', '002962', 'sz');
+INSERT INTO `stock_dict` VALUES (2731, '亚光科技', '300123', 'sz');
+INSERT INTO `stock_dict` VALUES (2732, '漫步者', '002351', 'sz');
+INSERT INTO `stock_dict` VALUES (2733, '创识科技', '300941', 'sz');
+INSERT INTO `stock_dict` VALUES (2734, 'TCL科技', '000100', 'sz');
+INSERT INTO `stock_dict` VALUES (2735, '仲景食品', '300908', 'sz');
+INSERT INTO `stock_dict` VALUES (2736, '普天科技', '002544', 'sz');
+INSERT INTO `stock_dict` VALUES (2737, '长江材料', '001296', 'sz');
+INSERT INTO `stock_dict` VALUES (2738, '真兰仪表', '301303', 'sz');
+INSERT INTO `stock_dict` VALUES (2739, '金太阳', '300606', 'sz');
+INSERT INTO `stock_dict` VALUES (2740, '和晶科技', '300279', 'sz');
+INSERT INTO `stock_dict` VALUES (2741, '可孚医疗', '301087', 'sz');
+INSERT INTO `stock_dict` VALUES (2742, '中科海讯', '300810', 'sz');
+INSERT INTO `stock_dict` VALUES (2743, '香山股份', '002870', 'sz');
+INSERT INTO `stock_dict` VALUES (2744, '百纳千成', '300291', 'sz');
+INSERT INTO `stock_dict` VALUES (2745, '铖昌科技', '001270', 'sz');
+INSERT INTO `stock_dict` VALUES (2746, '亿田智能', '300911', 'sz');
+INSERT INTO `stock_dict` VALUES (2747, '欢瑞世纪', '000892', 'sz');
+INSERT INTO `stock_dict` VALUES (2748, '唐德影视', '300426', 'sz');
+INSERT INTO `stock_dict` VALUES (2749, '中超控股', '002471', 'sz');
+INSERT INTO `stock_dict` VALUES (2750, '三态股份', '301558', 'sz');
+INSERT INTO `stock_dict` VALUES (2751, '英搏尔', '300681', 'sz');
+INSERT INTO `stock_dict` VALUES (2752, '经纬辉开', '300120', 'sz');
+INSERT INTO `stock_dict` VALUES (2753, '万里扬', '002434', 'sz');
+INSERT INTO `stock_dict` VALUES (2754, '盐津铺子', '002847', 'sz');
+INSERT INTO `stock_dict` VALUES (2755, '聚飞光电', '300303', 'sz');
+INSERT INTO `stock_dict` VALUES (2756, '星华新材', '301077', 'sz');
+INSERT INTO `stock_dict` VALUES (2757, 'ST浩源', '002700', 'sz');
+INSERT INTO `stock_dict` VALUES (2758, '蓝盾光电', '300862', 'sz');
+INSERT INTO `stock_dict` VALUES (2759, '中兴商业', '000715', 'sz');
+INSERT INTO `stock_dict` VALUES (2760, '深纺织Ａ', '000045', 'sz');
+INSERT INTO `stock_dict` VALUES (2761, '领益智造', '002600', 'sz');
+INSERT INTO `stock_dict` VALUES (2762, '中国重汽', '000951', 'sz');
+INSERT INTO `stock_dict` VALUES (2763, '金智科技', '002090', 'sz');
+INSERT INTO `stock_dict` VALUES (2764, '合百集团', '000417', 'sz');
+INSERT INTO `stock_dict` VALUES (2765, '三元生物', '301206', 'sz');
+INSERT INTO `stock_dict` VALUES (2766, '蓝晓科技', '300487', 'sz');
+INSERT INTO `stock_dict` VALUES (2767, '大中矿业', '001203', 'sz');
+INSERT INTO `stock_dict` VALUES (2768, '夏厦精密', '001306', 'sz');
+INSERT INTO `stock_dict` VALUES (2769, '安泰科技', '000969', 'sz');
+INSERT INTO `stock_dict` VALUES (2770, '鹏鼎控股', '002938', 'sz');
+INSERT INTO `stock_dict` VALUES (2771, '达华智能', '002512', 'sz');
+INSERT INTO `stock_dict` VALUES (2772, '微光股份', '002801', 'sz');
+INSERT INTO `stock_dict` VALUES (2773, '通力科技', '301255', 'sz');
+INSERT INTO `stock_dict` VALUES (2774, '金发拉比', '002762', 'sz');
+INSERT INTO `stock_dict` VALUES (2775, '阿尔特', '300825', 'sz');
+INSERT INTO `stock_dict` VALUES (2776, '富春股份', '300299', 'sz');
+INSERT INTO `stock_dict` VALUES (2777, '诺 普 信', '002215', 'sz');
+INSERT INTO `stock_dict` VALUES (2778, '新 华 都', '002264', 'sz');
+INSERT INTO `stock_dict` VALUES (2779, '欢乐家', '300997', 'sz');
+INSERT INTO `stock_dict` VALUES (2780, '普瑞眼科', '301239', 'sz');
+INSERT INTO `stock_dict` VALUES (2781, '雷电微力', '301050', 'sz');
+INSERT INTO `stock_dict` VALUES (2782, '日丰股份', '002953', 'sz');
+INSERT INTO `stock_dict` VALUES (2783, '田中精机', '300461', 'sz');
+INSERT INTO `stock_dict` VALUES (2784, '信邦制药', '002390', 'sz');
+INSERT INTO `stock_dict` VALUES (2785, '法本信息', '300925', 'sz');
+INSERT INTO `stock_dict` VALUES (2786, '奥飞数据', '300738', 'sz');
+INSERT INTO `stock_dict` VALUES (2787, '易普力', '002096', 'sz');
+INSERT INTO `stock_dict` VALUES (2788, '扬帆新材', '300637', 'sz');
+INSERT INTO `stock_dict` VALUES (2789, '建艺集团', '002789', 'sz');
+INSERT INTO `stock_dict` VALUES (2790, '侨银股份', '002973', 'sz');
+INSERT INTO `stock_dict` VALUES (2791, '远东传动', '002406', 'sz');
+INSERT INTO `stock_dict` VALUES (2792, '华阳智能', '301502', 'sz');
+INSERT INTO `stock_dict` VALUES (2793, '恒铭达', '002947', 'sz');
+INSERT INTO `stock_dict` VALUES (2794, '吴通控股', '300292', 'sz');
+INSERT INTO `stock_dict` VALUES (2795, '太极股份', '002368', 'sz');
+INSERT INTO `stock_dict` VALUES (2796, '华鹏飞', '300350', 'sz');
+INSERT INTO `stock_dict` VALUES (2797, '燕塘乳业', '002732', 'sz');
+INSERT INTO `stock_dict` VALUES (2798, '道道全', '002852', 'sz');
+INSERT INTO `stock_dict` VALUES (2799, '露笑科技', '002617', 'sz');
+INSERT INTO `stock_dict` VALUES (2800, '中青宝', '300052', 'sz');
+INSERT INTO `stock_dict` VALUES (2801, '水羊股份', '300740', 'sz');
+INSERT INTO `stock_dict` VALUES (2802, '正强股份', '301119', 'sz');
+INSERT INTO `stock_dict` VALUES (2803, '西麦食品', '002956', 'sz');
+INSERT INTO `stock_dict` VALUES (2804, '索菲亚', '002572', 'sz');
+INSERT INTO `stock_dict` VALUES (2805, '北方长龙', '301357', 'sz');
+INSERT INTO `stock_dict` VALUES (2806, '中孚信息', '300659', 'sz');
+INSERT INTO `stock_dict` VALUES (2807, '创意信息', '300366', 'sz');
+INSERT INTO `stock_dict` VALUES (2808, '观想科技', '301213', 'sz');
+INSERT INTO `stock_dict` VALUES (2809, '华致酒行', '300755', 'sz');
+INSERT INTO `stock_dict` VALUES (2810, '智立方', '301312', 'sz');
+INSERT INTO `stock_dict` VALUES (2811, '果麦文化', '301052', 'sz');
+INSERT INTO `stock_dict` VALUES (2812, '鸿日达', '301285', 'sz');
+INSERT INTO `stock_dict` VALUES (2813, '金固股份', '002488', 'sz');
+INSERT INTO `stock_dict` VALUES (2814, '深物业A', '000011', 'sz');
+INSERT INTO `stock_dict` VALUES (2815, '沪宁股份', '300669', 'sz');
+INSERT INTO `stock_dict` VALUES (2816, '中海达', '300177', 'sz');
+INSERT INTO `stock_dict` VALUES (2817, '和泰机电', '001225', 'sz');
+INSERT INTO `stock_dict` VALUES (2818, '宏英智能', '001266', 'sz');
+INSERT INTO `stock_dict` VALUES (2819, '聚光科技', '300203', 'sz');
+INSERT INTO `stock_dict` VALUES (2820, '力合科创', '002243', 'sz');
+INSERT INTO `stock_dict` VALUES (2821, '普路通', '002769', 'sz');
+INSERT INTO `stock_dict` VALUES (2822, '亚香股份', '301220', 'sz');
+INSERT INTO `stock_dict` VALUES (2823, '福能东方', '300173', 'sz');
+INSERT INTO `stock_dict` VALUES (2824, '银河电子', '002519', 'sz');
+INSERT INTO `stock_dict` VALUES (2825, '泸州老窖', '000568', 'sz');
+INSERT INTO `stock_dict` VALUES (2826, '中密控股', '300470', 'sz');
+INSERT INTO `stock_dict` VALUES (2827, '美联新材', '300586', 'sz');
+INSERT INTO `stock_dict` VALUES (2828, '聚赛龙', '301131', 'sz');
+INSERT INTO `stock_dict` VALUES (2829, '建新股份', '300107', 'sz');
+INSERT INTO `stock_dict` VALUES (2830, '神州信息', '000555', 'sz');
+INSERT INTO `stock_dict` VALUES (2831, '宏达电子', '300726', 'sz');
+INSERT INTO `stock_dict` VALUES (2832, '数字政通', '300075', 'sz');
+INSERT INTO `stock_dict` VALUES (2833, '小熊电器', '002959', 'sz');
+INSERT INTO `stock_dict` VALUES (2834, '唯科科技', '301196', 'sz');
+INSERT INTO `stock_dict` VALUES (2835, '大悦城', '000031', 'sz');
+INSERT INTO `stock_dict` VALUES (2836, '国恩股份', '002768', 'sz');
+INSERT INTO `stock_dict` VALUES (2837, '科瑞技术', '002957', 'sz');
+INSERT INTO `stock_dict` VALUES (2838, '双象股份', '002395', 'sz');
+INSERT INTO `stock_dict` VALUES (2839, '华联股份', '000882', 'sz');
+INSERT INTO `stock_dict` VALUES (2840, '赛摩智能', '300466', 'sz');
+INSERT INTO `stock_dict` VALUES (2841, '华帝股份', '002035', 'sz');
+INSERT INTO `stock_dict` VALUES (2842, '红旗连锁', '002697', 'sz');
+INSERT INTO `stock_dict` VALUES (2843, '国城矿业', '000688', 'sz');
+INSERT INTO `stock_dict` VALUES (2844, '天玑科技', '300245', 'sz');
+INSERT INTO `stock_dict` VALUES (2845, '荣联科技', '002642', 'sz');
+INSERT INTO `stock_dict` VALUES (2846, '海格通信', '002465', 'sz');
+INSERT INTO `stock_dict` VALUES (2847, '爱司凯', '300521', 'sz');
+INSERT INTO `stock_dict` VALUES (2848, '三维天地', '301159', 'sz');
+INSERT INTO `stock_dict` VALUES (2849, '华宇软件', '300271', 'sz');
+INSERT INTO `stock_dict` VALUES (2850, '洲明科技', '300232', 'sz');
+INSERT INTO `stock_dict` VALUES (2851, '中大力德', '002896', 'sz');
+INSERT INTO `stock_dict` VALUES (2852, '安克创新', '300866', 'sz');
+INSERT INTO `stock_dict` VALUES (2853, '圣农发展', '002299', 'sz');
+INSERT INTO `stock_dict` VALUES (2854, '涛涛车业', '301345', 'sz');
+INSERT INTO `stock_dict` VALUES (2855, '光华科技', '002741', 'sz');
+INSERT INTO `stock_dict` VALUES (2856, '恒华科技', '300365', 'sz');
+INSERT INTO `stock_dict` VALUES (2857, '理邦仪器', '300206', 'sz');
+INSERT INTO `stock_dict` VALUES (2858, '*ST天沃', '002564', 'sz');
+INSERT INTO `stock_dict` VALUES (2859, '中信出版', '300788', 'sz');
+INSERT INTO `stock_dict` VALUES (2860, '群兴玩具', '002575', 'sz');
+INSERT INTO `stock_dict` VALUES (2861, '广联航空', '300900', 'sz');
+INSERT INTO `stock_dict` VALUES (2862, '安奈儿', '002875', 'sz');
+INSERT INTO `stock_dict` VALUES (2863, '禾盛新材', '002290', 'sz');
+INSERT INTO `stock_dict` VALUES (2864, '立讯精密', '002475', 'sz');
+INSERT INTO `stock_dict` VALUES (2865, '崇达技术', '002815', 'sz');
+INSERT INTO `stock_dict` VALUES (2866, '深圳瑞捷', '300977', 'sz');
+INSERT INTO `stock_dict` VALUES (2867, '卓翼科技', '002369', 'sz');
+INSERT INTO `stock_dict` VALUES (2868, '盛视科技', '002990', 'sz');
+INSERT INTO `stock_dict` VALUES (2869, '北鼎股份', '300824', 'sz');
+INSERT INTO `stock_dict` VALUES (2870, '雷柏科技', '002577', 'sz');
+INSERT INTO `stock_dict` VALUES (2871, '川大智胜', '002253', 'sz');
+INSERT INTO `stock_dict` VALUES (2872, '南京聚隆', '300644', 'sz');
+INSERT INTO `stock_dict` VALUES (2873, '民德电子', '300656', 'sz');
+INSERT INTO `stock_dict` VALUES (2874, '南凌科技', '300921', 'sz');
+INSERT INTO `stock_dict` VALUES (2875, '海得控制', '002184', 'sz');
+INSERT INTO `stock_dict` VALUES (2876, '得利斯', '002330', 'sz');
+INSERT INTO `stock_dict` VALUES (2877, '三全食品', '002216', 'sz');
+INSERT INTO `stock_dict` VALUES (2878, '分众传媒', '002027', 'sz');
+INSERT INTO `stock_dict` VALUES (2879, '优博讯', '300531', 'sz');
+INSERT INTO `stock_dict` VALUES (2880, '恒实科技', '300513', 'sz');
+INSERT INTO `stock_dict` VALUES (2881, '机器人', '300024', 'sz');
+INSERT INTO `stock_dict` VALUES (2882, '日久光电', '003015', 'sz');
+INSERT INTO `stock_dict` VALUES (2883, '晓鸣股份', '300967', 'sz');
+INSERT INTO `stock_dict` VALUES (2884, '华瑞股份', '300626', 'sz');
+INSERT INTO `stock_dict` VALUES (2885, '北新建材', '000786', 'sz');
+INSERT INTO `stock_dict` VALUES (2886, '中联重科', '000157', 'sz');
+INSERT INTO `stock_dict` VALUES (2887, '双飞集团', '300817', 'sz');
+INSERT INTO `stock_dict` VALUES (2888, '绿盟科技', '300369', 'sz');
+INSERT INTO `stock_dict` VALUES (2889, '旋极信息', '300324', 'sz');
+INSERT INTO `stock_dict` VALUES (2890, '易天股份', '300812', 'sz');
+INSERT INTO `stock_dict` VALUES (2891, '浩云科技', '300448', 'sz');
+INSERT INTO `stock_dict` VALUES (2892, '奥瑞金', '002701', 'sz');
+INSERT INTO `stock_dict` VALUES (2893, '创新医疗', '002173', 'sz');
+INSERT INTO `stock_dict` VALUES (2894, '指南针', '300803', 'sz');
+INSERT INTO `stock_dict` VALUES (2895, '智信精密', '301512', 'sz');
+INSERT INTO `stock_dict` VALUES (2896, '智莱科技', '300771', 'sz');
+INSERT INTO `stock_dict` VALUES (2897, '云意电气', '300304', 'sz');
+INSERT INTO `stock_dict` VALUES (2898, '齐心集团', '002301', 'sz');
+INSERT INTO `stock_dict` VALUES (2899, '品渥食品', '300892', 'sz');
+INSERT INTO `stock_dict` VALUES (2900, '唯特偶', '301319', 'sz');
+INSERT INTO `stock_dict` VALUES (2901, '新国都', '300130', 'sz');
+INSERT INTO `stock_dict` VALUES (2902, '海融科技', '300915', 'sz');
+INSERT INTO `stock_dict` VALUES (2903, '天邑股份', '300504', 'sz');
+INSERT INTO `stock_dict` VALUES (2904, '凯旺科技', '301182', 'sz');
+INSERT INTO `stock_dict` VALUES (2905, '迪普科技', '300768', 'sz');
+INSERT INTO `stock_dict` VALUES (2906, '特发服务', '300917', 'sz');
+INSERT INTO `stock_dict` VALUES (2907, '五 粮 液', '000858', 'sz');
+INSERT INTO `stock_dict` VALUES (2908, '中元股份', '300018', 'sz');
+INSERT INTO `stock_dict` VALUES (2909, '中油资本', '000617', 'sz');
+INSERT INTO `stock_dict` VALUES (2910, '第一创业', '002797', 'sz');
+INSERT INTO `stock_dict` VALUES (2911, '彩讯股份', '300634', 'sz');
+INSERT INTO `stock_dict` VALUES (2912, '美好医疗', '301363', 'sz');
+INSERT INTO `stock_dict` VALUES (2913, '通光线缆', '300265', 'sz');
+INSERT INTO `stock_dict` VALUES (2914, '东方雨虹', '002271', 'sz');
+INSERT INTO `stock_dict` VALUES (2915, '华统股份', '002840', 'sz');
+INSERT INTO `stock_dict` VALUES (2916, '峨眉山Ａ', '000888', 'sz');
+INSERT INTO `stock_dict` VALUES (2917, '鼎龙股份', '300054', 'sz');
+INSERT INTO `stock_dict` VALUES (2918, '泰林生物', '300813', 'sz');
+INSERT INTO `stock_dict` VALUES (2919, '麦克奥迪', '300341', 'sz');
+INSERT INTO `stock_dict` VALUES (2920, '润和软件', '300339', 'sz');
+INSERT INTO `stock_dict` VALUES (2921, '信邦智能', '301112', 'sz');
+INSERT INTO `stock_dict` VALUES (2922, '海康威视', '002415', 'sz');
+INSERT INTO `stock_dict` VALUES (2923, '易华录', '300212', 'sz');
+INSERT INTO `stock_dict` VALUES (2924, '华特达因', '000915', 'sz');
+INSERT INTO `stock_dict` VALUES (2925, '亚康股份', '301085', 'sz');
+INSERT INTO `stock_dict` VALUES (2926, '同益股份', '300538', 'sz');
+INSERT INTO `stock_dict` VALUES (2927, '瑞德智能', '301135', 'sz');
+INSERT INTO `stock_dict` VALUES (2928, '朗特智能', '300916', 'sz');
+INSERT INTO `stock_dict` VALUES (2929, '迈赫股份', '301199', 'sz');
+INSERT INTO `stock_dict` VALUES (2930, '初灵信息', '300250', 'sz');
+INSERT INTO `stock_dict` VALUES (2931, '石基信息', '002153', 'sz');
+INSERT INTO `stock_dict` VALUES (2932, '宋城演艺', '300144', 'sz');
+INSERT INTO `stock_dict` VALUES (2933, '乖宝宠物', '301498', 'sz');
+INSERT INTO `stock_dict` VALUES (2934, '华力创通', '300045', 'sz');
+INSERT INTO `stock_dict` VALUES (2935, '信音电子', '301329', 'sz');
+INSERT INTO `stock_dict` VALUES (2936, '金字火腿', '002515', 'sz');
+INSERT INTO `stock_dict` VALUES (2937, '粤海饲料', '001313', 'sz');
+INSERT INTO `stock_dict` VALUES (2938, '恒锋信息', '300605', 'sz');
+INSERT INTO `stock_dict` VALUES (2939, '海伦钢琴', '300329', 'sz');
+INSERT INTO `stock_dict` VALUES (2940, '西安旅游', '000610', 'sz');
+INSERT INTO `stock_dict` VALUES (2941, '美格智能', '002881', 'sz');
+INSERT INTO `stock_dict` VALUES (2942, '众信旅游', '002707', 'sz');
+INSERT INTO `stock_dict` VALUES (2943, '海昌新材', '300885', 'sz');
+INSERT INTO `stock_dict` VALUES (2944, '锋龙股份', '002931', 'sz');
+INSERT INTO `stock_dict` VALUES (2945, '软控股份', '002073', 'sz');
+INSERT INTO `stock_dict` VALUES (2946, '通鼎互联', '002491', 'sz');
+INSERT INTO `stock_dict` VALUES (2947, '恒信东方', '300081', 'sz');
+INSERT INTO `stock_dict` VALUES (2948, '佳发教育', '300559', 'sz');
+INSERT INTO `stock_dict` VALUES (2949, '中信海直', '000099', 'sz');
+INSERT INTO `stock_dict` VALUES (2950, '世纪天鸿', '300654', 'sz');
+INSERT INTO `stock_dict` VALUES (2951, '蜂助手', '301382', 'sz');
+INSERT INTO `stock_dict` VALUES (2952, '宁波银行', '002142', 'sz');
+INSERT INTO `stock_dict` VALUES (2953, '杰创智能', '301248', 'sz');
+INSERT INTO `stock_dict` VALUES (2954, '石化机械', '000852', 'sz');
+INSERT INTO `stock_dict` VALUES (2955, '中基健康', '000972', 'sz');
+INSERT INTO `stock_dict` VALUES (2956, '中交地产', '000736', 'sz');
+INSERT INTO `stock_dict` VALUES (2957, '宁波东力', '002164', 'sz');
+INSERT INTO `stock_dict` VALUES (2958, '安妮股份', '002235', 'sz');
+INSERT INTO `stock_dict` VALUES (2959, '香雪制药', '300147', 'sz');
+INSERT INTO `stock_dict` VALUES (2960, '电科网安', '002268', 'sz');
+INSERT INTO `stock_dict` VALUES (2961, '天阳科技', '300872', 'sz');
+INSERT INTO `stock_dict` VALUES (2962, '远方信息', '300306', 'sz');
+INSERT INTO `stock_dict` VALUES (2963, '坚朗五金', '002791', 'sz');
+INSERT INTO `stock_dict` VALUES (2964, '朗科智能', '300543', 'sz');
+INSERT INTO `stock_dict` VALUES (2965, '新里程', '002219', 'sz');
+INSERT INTO `stock_dict` VALUES (2966, '梦网科技', '002123', 'sz');
+INSERT INTO `stock_dict` VALUES (2967, '创维数字', '000810', 'sz');
+INSERT INTO `stock_dict` VALUES (2968, '三友联众', '300932', 'sz');
+INSERT INTO `stock_dict` VALUES (2969, '华立科技', '301011', 'sz');
+INSERT INTO `stock_dict` VALUES (2970, '广田集团', '002482', 'sz');
+INSERT INTO `stock_dict` VALUES (2971, '杭氧股份', '002430', 'sz');
+INSERT INTO `stock_dict` VALUES (2972, '华峰超纤', '300180', 'sz');
+INSERT INTO `stock_dict` VALUES (2973, '北纬科技', '002148', 'sz');
+INSERT INTO `stock_dict` VALUES (2974, '鑫宏业', '301310', 'sz');
+INSERT INTO `stock_dict` VALUES (2975, '盛达资源', '000603', 'sz');
+INSERT INTO `stock_dict` VALUES (2976, '邵阳液压', '301079', 'sz');
+INSERT INTO `stock_dict` VALUES (2977, '森麒麟', '002984', 'sz');
+INSERT INTO `stock_dict` VALUES (2978, '通宇通讯', '002792', 'sz');
+INSERT INTO `stock_dict` VALUES (2979, '丝路视觉', '300556', 'sz');
+INSERT INTO `stock_dict` VALUES (2980, '河化股份', '000953', 'sz');
+INSERT INTO `stock_dict` VALUES (2981, '老板电器', '002508', 'sz');
+INSERT INTO `stock_dict` VALUES (2982, '蓝思科技', '300433', 'sz');
+INSERT INTO `stock_dict` VALUES (2983, '特锐德', '300001', 'sz');
+INSERT INTO `stock_dict` VALUES (2984, '贝泰妮', '300957', 'sz');
+INSERT INTO `stock_dict` VALUES (2985, '开勒股份', '301070', 'sz');
+INSERT INTO `stock_dict` VALUES (2986, '大洋生物', '003017', 'sz');
+INSERT INTO `stock_dict` VALUES (2987, '蓝箭电子', '301348', 'sz');
+INSERT INTO `stock_dict` VALUES (2988, '北摩高科', '002985', 'sz');
+INSERT INTO `stock_dict` VALUES (2989, '广立微', '301095', 'sz');
+INSERT INTO `stock_dict` VALUES (2990, '雄帝科技', '300546', 'sz');
+INSERT INTO `stock_dict` VALUES (2991, '飞龙股份', '002536', 'sz');
+INSERT INTO `stock_dict` VALUES (2992, '三六五网', '300295', 'sz');
+INSERT INTO `stock_dict` VALUES (2993, 'ST智云', '300097', 'sz');
+INSERT INTO `stock_dict` VALUES (2994, '准油股份', '002207', 'sz');
+INSERT INTO `stock_dict` VALUES (2995, '徐家汇', '002561', 'sz');
+INSERT INTO `stock_dict` VALUES (2996, '朗科科技', '300042', 'sz');
+INSERT INTO `stock_dict` VALUES (2997, '盈趣科技', '002925', 'sz');
+INSERT INTO `stock_dict` VALUES (2998, '天康生物', '002100', 'sz');
+INSERT INTO `stock_dict` VALUES (2999, '西部材料', '002149', 'sz');
+INSERT INTO `stock_dict` VALUES (3000, '天亿马', '301178', 'sz');
+INSERT INTO `stock_dict` VALUES (3001, '爱尔眼科', '300015', 'sz');
+INSERT INTO `stock_dict` VALUES (3002, '联诚精密', '002921', 'sz');
+INSERT INTO `stock_dict` VALUES (3003, '利安科技', '300784', 'sz');
+INSERT INTO `stock_dict` VALUES (3004, '商络电子', '300975', 'sz');
+INSERT INTO `stock_dict` VALUES (3005, '万  科Ａ', '000002', 'sz');
+INSERT INTO `stock_dict` VALUES (3006, '恒天海龙', '000677', 'sz');
+INSERT INTO `stock_dict` VALUES (3007, '泰祥股份', '301192', 'sz');
+INSERT INTO `stock_dict` VALUES (3008, '天虹股份', '002419', 'sz');
+INSERT INTO `stock_dict` VALUES (3009, '金逸影视', '002905', 'sz');
+INSERT INTO `stock_dict` VALUES (3010, '元隆雅图', '002878', 'sz');
+INSERT INTO `stock_dict` VALUES (3011, '波长光电', '301421', 'sz');
+INSERT INTO `stock_dict` VALUES (3012, '诺瓦星云', '301589', 'sz');
+INSERT INTO `stock_dict` VALUES (3013, '捷强装备', '300875', 'sz');
+INSERT INTO `stock_dict` VALUES (3014, '湖南投资', '000548', 'sz');
+INSERT INTO `stock_dict` VALUES (3015, '侨源股份', '301286', 'sz');
+INSERT INTO `stock_dict` VALUES (3016, '劲仔食品', '003000', 'sz');
+INSERT INTO `stock_dict` VALUES (3017, '南京公用', '000421', 'sz');
+INSERT INTO `stock_dict` VALUES (3018, '江丰电子', '300666', 'sz');
+INSERT INTO `stock_dict` VALUES (3019, '北斗星通', '002151', 'sz');
+INSERT INTO `stock_dict` VALUES (3020, '国瓷材料', '300285', 'sz');
+INSERT INTO `stock_dict` VALUES (3021, '宇环数控', '002903', 'sz');
+INSERT INTO `stock_dict` VALUES (3022, '威尔泰', '002058', 'sz');
+INSERT INTO `stock_dict` VALUES (3023, '中简科技', '300777', 'sz');
+INSERT INTO `stock_dict` VALUES (3024, '若羽臣', '003010', 'sz');
+INSERT INTO `stock_dict` VALUES (3025, '联动科技', '301369', 'sz');
+INSERT INTO `stock_dict` VALUES (3026, '德赛西威', '002920', 'sz');
+INSERT INTO `stock_dict` VALUES (3027, '森远股份', '300210', 'sz');
+INSERT INTO `stock_dict` VALUES (3028, '宏川智慧', '002930', 'sz');
+INSERT INTO `stock_dict` VALUES (3029, '洽洽食品', '002557', 'sz');
+INSERT INTO `stock_dict` VALUES (3030, '中京电子', '002579', 'sz');
+INSERT INTO `stock_dict` VALUES (3031, '豆神教育', '300010', 'sz');
+INSERT INTO `stock_dict` VALUES (3032, '二六三', '002467', 'sz');
+INSERT INTO `stock_dict` VALUES (3033, '苏大维格', '300331', 'sz');
+INSERT INTO `stock_dict` VALUES (3034, '国投智能', '300188', 'sz');
+INSERT INTO `stock_dict` VALUES (3035, '晶瑞电材', '300655', 'sz');
+INSERT INTO `stock_dict` VALUES (3036, '国脉科技', '002093', 'sz');
+INSERT INTO `stock_dict` VALUES (3037, '新元科技', '300472', 'sz');
+INSERT INTO `stock_dict` VALUES (3038, '青松股份', '300132', 'sz');
+INSERT INTO `stock_dict` VALUES (3039, '华蓝集团', '301027', 'sz');
+INSERT INTO `stock_dict` VALUES (3040, '广百股份', '002187', 'sz');
+INSERT INTO `stock_dict` VALUES (3041, '中成股份', '000151', 'sz');
+INSERT INTO `stock_dict` VALUES (3042, '世荣兆业', '002016', 'sz');
+INSERT INTO `stock_dict` VALUES (3043, '宣亚国际', '300612', 'sz');
+INSERT INTO `stock_dict` VALUES (3044, '顺网科技', '300113', 'sz');
+INSERT INTO `stock_dict` VALUES (3045, '昆船智能', '301311', 'sz');
+INSERT INTO `stock_dict` VALUES (3046, '迅游科技', '300467', 'sz');
+INSERT INTO `stock_dict` VALUES (3047, '潮宏基', '002345', 'sz');
+INSERT INTO `stock_dict` VALUES (3048, '铭利达', '301268', 'sz');
+INSERT INTO `stock_dict` VALUES (3049, '天威视讯', '002238', 'sz');
+INSERT INTO `stock_dict` VALUES (3050, '激智科技', '300566', 'sz');
+INSERT INTO `stock_dict` VALUES (3051, '欧陆通', '300870', 'sz');
+INSERT INTO `stock_dict` VALUES (3052, '先进数通', '300541', 'sz');
+INSERT INTO `stock_dict` VALUES (3053, '国光电器', '002045', 'sz');
+INSERT INTO `stock_dict` VALUES (3054, '金 融 街', '000402', 'sz');
+INSERT INTO `stock_dict` VALUES (3055, '卫宁健康', '300253', 'sz');
+INSERT INTO `stock_dict` VALUES (3056, '隆华科技', '300263', 'sz');
+INSERT INTO `stock_dict` VALUES (3057, '洪汇新材', '002802', 'sz');
+INSERT INTO `stock_dict` VALUES (3058, '国统股份', '002205', 'sz');
+INSERT INTO `stock_dict` VALUES (3059, '新迅达', '300518', 'sz');
+INSERT INTO `stock_dict` VALUES (3060, '普利特', '002324', 'sz');
+INSERT INTO `stock_dict` VALUES (3061, '电声股份', '300805', 'sz');
+INSERT INTO `stock_dict` VALUES (3062, '中仑新材', '301565', 'sz');
+INSERT INTO `stock_dict` VALUES (3063, '天山股份', '000877', 'sz');
+INSERT INTO `stock_dict` VALUES (3064, '润禾材料', '300727', 'sz');
+INSERT INTO `stock_dict` VALUES (3065, '烽火电子', '000561', 'sz');
+INSERT INTO `stock_dict` VALUES (3066, '百亚股份', '003006', 'sz');
+INSERT INTO `stock_dict` VALUES (3067, '南极光', '300940', 'sz');
+INSERT INTO `stock_dict` VALUES (3068, '大宏立', '300865', 'sz');
+INSERT INTO `stock_dict` VALUES (3069, '铭科精技', '001319', 'sz');
+INSERT INTO `stock_dict` VALUES (3070, '永兴材料', '002756', 'sz');
+INSERT INTO `stock_dict` VALUES (3071, '东方财富', '300059', 'sz');
+INSERT INTO `stock_dict` VALUES (3072, '伟星股份', '002003', 'sz');
+INSERT INTO `stock_dict` VALUES (3073, '广东宏大', '002683', 'sz');
+INSERT INTO `stock_dict` VALUES (3074, '恒宝股份', '002104', 'sz');
+INSERT INTO `stock_dict` VALUES (3075, '兆讯传媒', '301102', 'sz');
+INSERT INTO `stock_dict` VALUES (3076, '富满微', '300671', 'sz');
+INSERT INTO `stock_dict` VALUES (3077, '秦川机床', '000837', 'sz');
+INSERT INTO `stock_dict` VALUES (3078, '深桑达Ａ', '000032', 'sz');
+INSERT INTO `stock_dict` VALUES (3079, '博彦科技', '002649', 'sz');
+INSERT INTO `stock_dict` VALUES (3080, '金明精机', '300281', 'sz');
+INSERT INTO `stock_dict` VALUES (3081, '欧克科技', '001223', 'sz');
+INSERT INTO `stock_dict` VALUES (3082, '*ST围海', '002586', 'sz');
+INSERT INTO `stock_dict` VALUES (3083, '菲菱科思', '301191', 'sz');
+INSERT INTO `stock_dict` VALUES (3084, '兔 宝 宝', '002043', 'sz');
+INSERT INTO `stock_dict` VALUES (3085, '生 意 宝', '002095', 'sz');
+INSERT INTO `stock_dict` VALUES (3086, '银禧科技', '300221', 'sz');
+INSERT INTO `stock_dict` VALUES (3087, '盛路通信', '002446', 'sz');
+INSERT INTO `stock_dict` VALUES (3088, '华测检测', '300012', 'sz');
+INSERT INTO `stock_dict` VALUES (3089, '开立医疗', '300633', 'sz');
+INSERT INTO `stock_dict` VALUES (3090, '深 赛 格', '000058', 'sz');
+INSERT INTO `stock_dict` VALUES (3091, 'C英思特', '301622', 'sz');
+INSERT INTO `stock_dict` VALUES (3092, '玉禾田', '300815', 'sz');
+INSERT INTO `stock_dict` VALUES (3093, '酒鬼酒', '000799', 'sz');
+INSERT INTO `stock_dict` VALUES (3094, '美年健康', '002044', 'sz');
+INSERT INTO `stock_dict` VALUES (3095, '神火股份', '000933', 'sz');
+INSERT INTO `stock_dict` VALUES (3096, '金龙鱼', '300999', 'sz');
+INSERT INTO `stock_dict` VALUES (3097, '力源信息', '300184', 'sz');
+INSERT INTO `stock_dict` VALUES (3098, '本川智能', '300964', 'sz');
+INSERT INTO `stock_dict` VALUES (3099, '科顺股份', '300737', 'sz');
+INSERT INTO `stock_dict` VALUES (3100, '云铝股份', '000807', 'sz');
+INSERT INTO `stock_dict` VALUES (3101, '广农糖业', '000911', 'sz');
+INSERT INTO `stock_dict` VALUES (3102, '歌尔股份', '002241', 'sz');
+INSERT INTO `stock_dict` VALUES (3103, '超图软件', '300036', 'sz');
+INSERT INTO `stock_dict` VALUES (3104, '神农种业', '300189', 'sz');
+INSERT INTO `stock_dict` VALUES (3105, '中泰股份', '300435', 'sz');
+INSERT INTO `stock_dict` VALUES (3106, '富森美', '002818', 'sz');
+INSERT INTO `stock_dict` VALUES (3107, '丽江股份', '002033', 'sz');
+INSERT INTO `stock_dict` VALUES (3108, '翰博高新', '301321', 'sz');
+INSERT INTO `stock_dict` VALUES (3109, '新北洋', '002376', 'sz');
+INSERT INTO `stock_dict` VALUES (3110, '中宠股份', '002891', 'sz');
+INSERT INTO `stock_dict` VALUES (3111, '阳谷华泰', '300121', 'sz');
+INSERT INTO `stock_dict` VALUES (3112, '新乡化纤', '000949', 'sz');
+INSERT INTO `stock_dict` VALUES (3113, '信维通信', '300136', 'sz');
+INSERT INTO `stock_dict` VALUES (3114, '成都路桥', '002628', 'sz');
+INSERT INTO `stock_dict` VALUES (3115, '陕西华达', '301517', 'sz');
+INSERT INTO `stock_dict` VALUES (3116, '浙农股份', '002758', 'sz');
+INSERT INTO `stock_dict` VALUES (3117, '电广传媒', '000917', 'sz');
+INSERT INTO `stock_dict` VALUES (3118, '华峰化学', '002064', 'sz');
+INSERT INTO `stock_dict` VALUES (3119, '高德红外', '002414', 'sz');
+INSERT INTO `stock_dict` VALUES (3120, '赛维时代', '301381', 'sz');
+INSERT INTO `stock_dict` VALUES (3121, '魅视科技', '001229', 'sz');
+INSERT INTO `stock_dict` VALUES (3122, '君逸数码', '301172', 'sz');
+INSERT INTO `stock_dict` VALUES (3123, '信德新材', '301349', 'sz');
+INSERT INTO `stock_dict` VALUES (3124, '桂林旅游', '000978', 'sz');
+INSERT INTO `stock_dict` VALUES (3125, '高乐股份', '002348', 'sz');
+INSERT INTO `stock_dict` VALUES (3126, '友讯达', '300514', 'sz');
+INSERT INTO `stock_dict` VALUES (3127, '奥佳华', '002614', 'sz');
+INSERT INTO `stock_dict` VALUES (3128, '钒钛股份', '000629', 'sz');
+INSERT INTO `stock_dict` VALUES (3129, '格力电器', '000651', 'sz');
+INSERT INTO `stock_dict` VALUES (3130, '天山铝业', '002532', 'sz');
+INSERT INTO `stock_dict` VALUES (3131, '天汽模', '002510', 'sz');
+INSERT INTO `stock_dict` VALUES (3132, '航发控制', '000738', 'sz');
+INSERT INTO `stock_dict` VALUES (3133, '西域旅游', '300859', 'sz');
+INSERT INTO `stock_dict` VALUES (3134, '锐科激光', '300747', 'sz');
+INSERT INTO `stock_dict` VALUES (3135, '兆日科技', '300333', 'sz');
+INSERT INTO `stock_dict` VALUES (3136, '中富通', '300560', 'sz');
+INSERT INTO `stock_dict` VALUES (3137, '皮阿诺', '002853', 'sz');
+INSERT INTO `stock_dict` VALUES (3138, '熵基科技', '301330', 'sz');
+INSERT INTO `stock_dict` VALUES (3139, '阿石创', '300706', 'sz');
+INSERT INTO `stock_dict` VALUES (3140, '光威复材', '300699', 'sz');
+INSERT INTO `stock_dict` VALUES (3141, '长荣股份', '300195', 'sz');
+INSERT INTO `stock_dict` VALUES (3142, '元道通信', '301139', 'sz');
+INSERT INTO `stock_dict` VALUES (3143, '中天火箭', '003009', 'sz');
+INSERT INTO `stock_dict` VALUES (3144, '温氏股份', '300498', 'sz');
+INSERT INTO `stock_dict` VALUES (3145, '维宏股份', '300508', 'sz');
+INSERT INTO `stock_dict` VALUES (3146, '康斯特', '300445', 'sz');
+INSERT INTO `stock_dict` VALUES (3147, '宝明科技', '002992', 'sz');
+INSERT INTO `stock_dict` VALUES (3148, '华厦眼科', '301267', 'sz');
+INSERT INTO `stock_dict` VALUES (3149, '京东方Ａ', '000725', 'sz');
+INSERT INTO `stock_dict` VALUES (3150, '华策影视', '300133', 'sz');
+INSERT INTO `stock_dict` VALUES (3151, '力星股份', '300421', 'sz');
+INSERT INTO `stock_dict` VALUES (3152, '意华股份', '002897', 'sz');
+INSERT INTO `stock_dict` VALUES (3153, '华图山鼎', '300492', 'sz');
+INSERT INTO `stock_dict` VALUES (3154, '东港股份', '002117', 'sz');
+INSERT INTO `stock_dict` VALUES (3155, '久远银海', '002777', 'sz');
+INSERT INTO `stock_dict` VALUES (3156, '新余国科', '300722', 'sz');
+INSERT INTO `stock_dict` VALUES (3157, '川环科技', '300547', 'sz');
+INSERT INTO `stock_dict` VALUES (3158, '同有科技', '300302', 'sz');
+INSERT INTO `stock_dict` VALUES (3159, '莱宝高科', '002106', 'sz');
+INSERT INTO `stock_dict` VALUES (3160, '隆扬电子', '301389', 'sz');
+INSERT INTO `stock_dict` VALUES (3161, '荣盛发展', '002146', 'sz');
+INSERT INTO `stock_dict` VALUES (3162, '科拓生物', '300858', 'sz');
+INSERT INTO `stock_dict` VALUES (3163, '达利凯普', '301566', 'sz');
+INSERT INTO `stock_dict` VALUES (3164, '郑州银行', '002936', 'sz');
+INSERT INTO `stock_dict` VALUES (3165, '力诺药包', '301188', 'sz');
+INSERT INTO `stock_dict` VALUES (3166, '汤臣倍健', '300146', 'sz');
+INSERT INTO `stock_dict` VALUES (3167, '恒申新材', '000782', 'sz');
+INSERT INTO `stock_dict` VALUES (3168, '华侨城Ａ', '000069', 'sz');
+INSERT INTO `stock_dict` VALUES (3169, '深信服', '300454', 'sz');
+INSERT INTO `stock_dict` VALUES (3170, '苏州规划', '301505', 'sz');
+INSERT INTO `stock_dict` VALUES (3171, '仕净科技', '301030', 'sz');
+INSERT INTO `stock_dict` VALUES (3172, '西点药业', '301130', 'sz');
+INSERT INTO `stock_dict` VALUES (3173, '中铁装配', '300374', 'sz');
+INSERT INTO `stock_dict` VALUES (3174, 'ST世龙', '002748', 'sz');
+INSERT INTO `stock_dict` VALUES (3175, '青岛银行', '002948', 'sz');
+INSERT INTO `stock_dict` VALUES (3176, '伊之密', '300415', 'sz');
+INSERT INTO `stock_dict` VALUES (3177, '古井贡酒', '000596', 'sz');
+INSERT INTO `stock_dict` VALUES (3178, '冀东装备', '000856', 'sz');
+INSERT INTO `stock_dict` VALUES (3179, '中科江南', '301153', 'sz');
+INSERT INTO `stock_dict` VALUES (3180, '聚胶股份', '301283', 'sz');
+INSERT INTO `stock_dict` VALUES (3181, '唐人神', '002567', 'sz');
+INSERT INTO `stock_dict` VALUES (3182, '佳禾智能', '300793', 'sz');
+INSERT INTO `stock_dict` VALUES (3183, '航天彩虹', '002389', 'sz');
+INSERT INTO `stock_dict` VALUES (3184, '东瑞股份', '001201', 'sz');
+INSERT INTO `stock_dict` VALUES (3185, '新华联', '000620', 'sz');
+INSERT INTO `stock_dict` VALUES (3186, '华灿光电', '300323', 'sz');
+INSERT INTO `stock_dict` VALUES (3187, '亚威股份', '002559', 'sz');
+INSERT INTO `stock_dict` VALUES (3188, '南风股份', '300004', 'sz');
+INSERT INTO `stock_dict` VALUES (3189, '湘佳股份', '002982', 'sz');
+INSERT INTO `stock_dict` VALUES (3190, '胜蓝股份', '300843', 'sz');
+INSERT INTO `stock_dict` VALUES (3191, '大族数控', '301200', 'sz');
+INSERT INTO `stock_dict` VALUES (3192, '岭南控股', '000524', 'sz');
+INSERT INTO `stock_dict` VALUES (3193, '燕京啤酒', '000729', 'sz');
+INSERT INTO `stock_dict` VALUES (3194, '恒而达', '300946', 'sz');
+INSERT INTO `stock_dict` VALUES (3195, '安靠智电', '300617', 'sz');
+INSERT INTO `stock_dict` VALUES (3196, '祖名股份', '003030', 'sz');
+INSERT INTO `stock_dict` VALUES (3197, '德必集团', '300947', 'sz');
+INSERT INTO `stock_dict` VALUES (3198, '震安科技', '300767', 'sz');
+INSERT INTO `stock_dict` VALUES (3199, '海德股份', '000567', 'sz');
+INSERT INTO `stock_dict` VALUES (3200, '德迈仕', '301007', 'sz');
+INSERT INTO `stock_dict` VALUES (3201, '顺丰控股', '002352', 'sz');
+INSERT INTO `stock_dict` VALUES (3202, '宝利国际', '300135', 'sz');
+INSERT INTO `stock_dict` VALUES (3203, '雅本化学', '300261', 'sz');
+INSERT INTO `stock_dict` VALUES (3204, '欧普康视', '300595', 'sz');
+INSERT INTO `stock_dict` VALUES (3205, '承德露露', '000848', 'sz');
+INSERT INTO `stock_dict` VALUES (3206, '启明星辰', '002439', 'sz');
+INSERT INTO `stock_dict` VALUES (3207, '武商集团', '000501', 'sz');
+INSERT INTO `stock_dict` VALUES (3208, '中电环保', '300172', 'sz');
+INSERT INTO `stock_dict` VALUES (3209, '亿联网络', '300628', 'sz');
+INSERT INTO `stock_dict` VALUES (3210, '利君股份', '002651', 'sz');
+INSERT INTO `stock_dict` VALUES (3211, '百胜智能', '301083', 'sz');
+INSERT INTO `stock_dict` VALUES (3212, '星网锐捷', '002396', 'sz');
+INSERT INTO `stock_dict` VALUES (3213, '荣丰控股', '000668', 'sz');
+INSERT INTO `stock_dict` VALUES (3214, '康泰生物', '300601', 'sz');
+INSERT INTO `stock_dict` VALUES (3215, '迈瑞医疗', '300760', 'sz');
+INSERT INTO `stock_dict` VALUES (3216, '申昊科技', '300853', 'sz');
+INSERT INTO `stock_dict` VALUES (3217, '力合科技', '300800', 'sz');
+INSERT INTO `stock_dict` VALUES (3218, '江龙船艇', '300589', 'sz');
+INSERT INTO `stock_dict` VALUES (3219, '华研精机', '301138', 'sz');
+INSERT INTO `stock_dict` VALUES (3220, '登康口腔', '001328', 'sz');
+INSERT INTO `stock_dict` VALUES (3221, '贝瑞基因', '000710', 'sz');
+INSERT INTO `stock_dict` VALUES (3222, '深天马Ａ', '000050', 'sz');
+INSERT INTO `stock_dict` VALUES (3223, '*ST新宁', '300013', 'sz');
+INSERT INTO `stock_dict` VALUES (3224, '大华股份', '002236', 'sz');
+INSERT INTO `stock_dict` VALUES (3225, '拉卡拉', '300773', 'sz');
+INSERT INTO `stock_dict` VALUES (3226, '京泉华', '002885', 'sz');
+INSERT INTO `stock_dict` VALUES (3227, '奥士康', '002913', 'sz');
+INSERT INTO `stock_dict` VALUES (3228, '东阿阿胶', '000423', 'sz');
+INSERT INTO `stock_dict` VALUES (3229, '金达威', '002626', 'sz');
+INSERT INTO `stock_dict` VALUES (3230, '海新能科', '300072', 'sz');
+INSERT INTO `stock_dict` VALUES (3231, '尚品宅配', '300616', 'sz');
+INSERT INTO `stock_dict` VALUES (3232, '佩蒂股份', '300673', 'sz');
+INSERT INTO `stock_dict` VALUES (3233, '荣安地产', '000517', 'sz');
+INSERT INTO `stock_dict` VALUES (3234, '广电计量', '002967', 'sz');
+INSERT INTO `stock_dict` VALUES (3235, '全信股份', '300447', 'sz');
+INSERT INTO `stock_dict` VALUES (3236, '嘉曼服饰', '301276', 'sz');
+INSERT INTO `stock_dict` VALUES (3237, '华亚智能', '003043', 'sz');
+INSERT INTO `stock_dict` VALUES (3238, '久之洋', '300516', 'sz');
+INSERT INTO `stock_dict` VALUES (3239, '三利谱', '002876', 'sz');
+INSERT INTO `stock_dict` VALUES (3240, '大金重工', '002487', 'sz');
+INSERT INTO `stock_dict` VALUES (3241, '联特科技', '301205', 'sz');
+INSERT INTO `stock_dict` VALUES (3242, '航天科技', '000901', 'sz');
+INSERT INTO `stock_dict` VALUES (3243, '中石科技', '300684', 'sz');
+INSERT INTO `stock_dict` VALUES (3244, '广合科技', '001389', 'sz');
+INSERT INTO `stock_dict` VALUES (3245, '扬杰科技', '300373', 'sz');
+INSERT INTO `stock_dict` VALUES (3246, '博雅生物', '300294', 'sz');
+INSERT INTO `stock_dict` VALUES (3247, '锋尚文化', '300860', 'sz');
+INSERT INTO `stock_dict` VALUES (3248, '鸿利智汇', '300219', 'sz');
+INSERT INTO `stock_dict` VALUES (3249, '中船应急', '300527', 'sz');
+INSERT INTO `stock_dict` VALUES (3250, '航天发展', '000547', 'sz');
+INSERT INTO `stock_dict` VALUES (3251, '聚杰微纤', '300819', 'sz');
+INSERT INTO `stock_dict` VALUES (3252, '涪陵榨菜', '002507', 'sz');
+INSERT INTO `stock_dict` VALUES (3253, '我武生物', '300357', 'sz');
+INSERT INTO `stock_dict` VALUES (3254, '隆基机械', '002363', 'sz');
+INSERT INTO `stock_dict` VALUES (3255, '锡业股份', '000960', 'sz');
+INSERT INTO `stock_dict` VALUES (3256, '东信和平', '002017', 'sz');
+INSERT INTO `stock_dict` VALUES (3257, '威尔高', '301251', 'sz');
+INSERT INTO `stock_dict` VALUES (3258, '威星智能', '002849', 'sz');
+INSERT INTO `stock_dict` VALUES (3259, '广发证券', '000776', 'sz');
+INSERT INTO `stock_dict` VALUES (3260, '赛微电子', '300456', 'sz');
+INSERT INTO `stock_dict` VALUES (3261, '满坤科技', '301132', 'sz');
+INSERT INTO `stock_dict` VALUES (3262, '长春高新', '000661', 'sz');
+INSERT INTO `stock_dict` VALUES (3263, '爱乐达', '300696', 'sz');
+INSERT INTO `stock_dict` VALUES (3264, '箭牌家居', '001322', 'sz');
+INSERT INTO `stock_dict` VALUES (3265, '首华燃气', '300483', 'sz');
+INSERT INTO `stock_dict` VALUES (3266, '舒泰神', '300204', 'sz');
+INSERT INTO `stock_dict` VALUES (3267, '快可电子', '301278', 'sz');
+INSERT INTO `stock_dict` VALUES (3268, '英力股份', '300956', 'sz');
+INSERT INTO `stock_dict` VALUES (3269, '山水比德', '300844', 'sz');
+INSERT INTO `stock_dict` VALUES (3270, '向日葵', '300111', 'sz');
+INSERT INTO `stock_dict` VALUES (3271, '大立科技', '002214', 'sz');
+INSERT INTO `stock_dict` VALUES (3272, '网宿科技', '300017', 'sz');
+INSERT INTO `stock_dict` VALUES (3273, '三特索道', '002159', 'sz');
+INSERT INTO `stock_dict` VALUES (3274, '科大国创', '300520', 'sz');
+INSERT INTO `stock_dict` VALUES (3275, '好上好', '001298', 'sz');
+INSERT INTO `stock_dict` VALUES (3276, '招商积余', '001914', 'sz');
+INSERT INTO `stock_dict` VALUES (3277, '华宝股份', '300741', 'sz');
+INSERT INTO `stock_dict` VALUES (3278, '新筑股份', '002480', 'sz');
+INSERT INTO `stock_dict` VALUES (3279, '朗新集团', '300682', 'sz');
+INSERT INTO `stock_dict` VALUES (3280, '平安银行', '000001', 'sz');
+INSERT INTO `stock_dict` VALUES (3281, '顺络电子', '002138', 'sz');
+INSERT INTO `stock_dict` VALUES (3282, '天佑德酒', '002646', 'sz');
+INSERT INTO `stock_dict` VALUES (3283, '新媒股份', '300770', 'sz');
+INSERT INTO `stock_dict` VALUES (3284, '东土科技', '300353', 'sz');
+INSERT INTO `stock_dict` VALUES (3285, '盛通股份', '002599', 'sz');
+INSERT INTO `stock_dict` VALUES (3286, '海特高新', '002023', 'sz');
+INSERT INTO `stock_dict` VALUES (3287, '飞沃科技', '301232', 'sz');
+INSERT INTO `stock_dict` VALUES (3288, '大东南', '002263', 'sz');
+INSERT INTO `stock_dict` VALUES (3289, '瑞凌股份', '300154', 'sz');
+INSERT INTO `stock_dict` VALUES (3290, '吉大正元', '003029', 'sz');
+INSERT INTO `stock_dict` VALUES (3291, '合肥城建', '002208', 'sz');
+INSERT INTO `stock_dict` VALUES (3292, '英唐智控', '300131', 'sz');
+INSERT INTO `stock_dict` VALUES (3293, '四维图新', '002405', 'sz');
+INSERT INTO `stock_dict` VALUES (3294, 'ST步步高', '002251', 'sz');
+INSERT INTO `stock_dict` VALUES (3295, '永顺泰', '001338', 'sz');
+INSERT INTO `stock_dict` VALUES (3296, '骏成科技', '301106', 'sz');
+INSERT INTO `stock_dict` VALUES (3297, '黑芝麻', '000716', 'sz');
+INSERT INTO `stock_dict` VALUES (3298, '金银河', '300619', 'sz');
+INSERT INTO `stock_dict` VALUES (3299, '高新发展', '000628', 'sz');
+INSERT INTO `stock_dict` VALUES (3300, '天山电子', '301379', 'sz');
+INSERT INTO `stock_dict` VALUES (3301, '良信股份', '002706', 'sz');
+INSERT INTO `stock_dict` VALUES (3302, '宇晶股份', '002943', 'sz');
+INSERT INTO `stock_dict` VALUES (3303, '中航西飞', '000768', 'sz');
+INSERT INTO `stock_dict` VALUES (3304, '科翔股份', '300903', 'sz');
+INSERT INTO `stock_dict` VALUES (3305, '中兰环保', '300854', 'sz');
+INSERT INTO `stock_dict` VALUES (3306, '强力新材', '300429', 'sz');
+INSERT INTO `stock_dict` VALUES (3307, '正邦科技', '002157', 'sz');
+INSERT INTO `stock_dict` VALUES (3308, '全 聚 德', '002186', 'sz');
+INSERT INTO `stock_dict` VALUES (3309, '新雷能', '300593', 'sz');
+INSERT INTO `stock_dict` VALUES (3310, '天键股份', '301383', 'sz');
+INSERT INTO `stock_dict` VALUES (3311, '每日互动', '300766', 'sz');
+INSERT INTO `stock_dict` VALUES (3312, '赢时胜', '300377', 'sz');
+INSERT INTO `stock_dict` VALUES (3313, '永太科技', '002326', 'sz');
+INSERT INTO `stock_dict` VALUES (3314, '美的集团', '000333', 'sz');
+INSERT INTO `stock_dict` VALUES (3315, '绿岛风', '301043', 'sz');
+INSERT INTO `stock_dict` VALUES (3316, '线上线下', '300959', 'sz');
+INSERT INTO `stock_dict` VALUES (3317, '联合光电', '300691', 'sz');
+INSERT INTO `stock_dict` VALUES (3318, '泽宇智能', '301179', 'sz');
+INSERT INTO `stock_dict` VALUES (3319, '汉嘉设计', '300746', 'sz');
+INSERT INTO `stock_dict` VALUES (3320, '罗莱生活', '002293', 'sz');
+INSERT INTO `stock_dict` VALUES (3321, '汇源通信', '000586', 'sz');
+INSERT INTO `stock_dict` VALUES (3322, '任子行', '300311', 'sz');
+INSERT INTO `stock_dict` VALUES (3323, '美利云', '000815', 'sz');
+INSERT INTO `stock_dict` VALUES (3324, '伟星新材', '002372', 'sz');
+INSERT INTO `stock_dict` VALUES (3325, '常铝股份', '002160', 'sz');
+INSERT INTO `stock_dict` VALUES (3326, '光力科技', '300480', 'sz');
+INSERT INTO `stock_dict` VALUES (3327, '裕同科技', '002831', 'sz');
+INSERT INTO `stock_dict` VALUES (3328, '宁德时代', '300750', 'sz');
+INSERT INTO `stock_dict` VALUES (3329, '奥雅股份', '300949', 'sz');
+INSERT INTO `stock_dict` VALUES (3330, '贝仕达克', '300822', 'sz');
+INSERT INTO `stock_dict` VALUES (3331, '东富龙', '300171', 'sz');
+INSERT INTO `stock_dict` VALUES (3332, '赛托生物', '300583', 'sz');
+INSERT INTO `stock_dict` VALUES (3333, '元力股份', '300174', 'sz');
+INSERT INTO `stock_dict` VALUES (3334, '特  力Ａ', '000025', 'sz');
+INSERT INTO `stock_dict` VALUES (3335, '天海防务', '300008', 'sz');
+INSERT INTO `stock_dict` VALUES (3336, '海兰信', '300065', 'sz');
+INSERT INTO `stock_dict` VALUES (3337, '康力电梯', '002367', 'sz');
+INSERT INTO `stock_dict` VALUES (3338, '云南能投', '002053', 'sz');
+INSERT INTO `stock_dict` VALUES (3339, '荣旗科技', '301360', 'sz');
+INSERT INTO `stock_dict` VALUES (3340, '科蓝软件', '300663', 'sz');
+INSERT INTO `stock_dict` VALUES (3341, '科德教育', '300192', 'sz');
+INSERT INTO `stock_dict` VALUES (3342, '华润三九', '000999', 'sz');
+INSERT INTO `stock_dict` VALUES (3343, '国科恒泰', '301370', 'sz');
+INSERT INTO `stock_dict` VALUES (3344, '宏景科技', '301396', 'sz');
+INSERT INTO `stock_dict` VALUES (3345, '曼恩斯特', '301325', 'sz');
+INSERT INTO `stock_dict` VALUES (3346, '翔楼新材', '301160', 'sz');
+INSERT INTO `stock_dict` VALUES (3347, '运机集团', '001288', 'sz');
+INSERT INTO `stock_dict` VALUES (3348, '光大同创', '301387', 'sz');
+INSERT INTO `stock_dict` VALUES (3349, '美丽生态', '000010', 'sz');
+INSERT INTO `stock_dict` VALUES (3350, '民和股份', '002234', 'sz');
+INSERT INTO `stock_dict` VALUES (3351, '招商蛇口', '001979', 'sz');
+INSERT INTO `stock_dict` VALUES (3352, '中光防雷', '300414', 'sz');
+INSERT INTO `stock_dict` VALUES (3353, '麦捷科技', '300319', 'sz');
+INSERT INTO `stock_dict` VALUES (3354, '中环环保', '300692', 'sz');
+INSERT INTO `stock_dict` VALUES (3355, '孩子王', '301078', 'sz');
+INSERT INTO `stock_dict` VALUES (3356, '光环新网', '300383', 'sz');
+INSERT INTO `stock_dict` VALUES (3357, '上海新阳', '300236', 'sz');
+INSERT INTO `stock_dict` VALUES (3358, '恒锋工具', '300488', 'sz');
+INSERT INTO `stock_dict` VALUES (3359, '华谊兄弟', '300027', 'sz');
+INSERT INTO `stock_dict` VALUES (3360, '劲拓股份', '300400', 'sz');
+INSERT INTO `stock_dict` VALUES (3361, '亚世光电', '002952', 'sz');
+INSERT INTO `stock_dict` VALUES (3362, '川润股份', '002272', 'sz');
+INSERT INTO `stock_dict` VALUES (3363, '泰和新材', '002254', 'sz');
+INSERT INTO `stock_dict` VALUES (3364, '景嘉微', '300474', 'sz');
+INSERT INTO `stock_dict` VALUES (3365, '深深房Ａ', '000029', 'sz');
+INSERT INTO `stock_dict` VALUES (3366, '紫光国微', '002049', 'sz');
+INSERT INTO `stock_dict` VALUES (3367, '顺钠股份', '000533', 'sz');
+INSERT INTO `stock_dict` VALUES (3368, '国信证券', '002736', 'sz');
+INSERT INTO `stock_dict` VALUES (3369, '中科磁业', '301141', 'sz');
+INSERT INTO `stock_dict` VALUES (3370, '惠柏新材', '301555', 'sz');
+INSERT INTO `stock_dict` VALUES (3371, '华茂股份', '000850', 'sz');
+INSERT INTO `stock_dict` VALUES (3372, '博俊科技', '300926', 'sz');
+INSERT INTO `stock_dict` VALUES (3373, '北京君正', '300223', 'sz');
+INSERT INTO `stock_dict` VALUES (3374, '常山北明', '000158', 'sz');
+INSERT INTO `stock_dict` VALUES (3375, '联域股份', '001326', 'sz');
+INSERT INTO `stock_dict` VALUES (3376, '华天科技', '002185', 'sz');
+INSERT INTO `stock_dict` VALUES (3377, '华东数控', '002248', 'sz');
+INSERT INTO `stock_dict` VALUES (3378, '西部创业', '000557', 'sz');
+INSERT INTO `stock_dict` VALUES (3379, '正海磁材', '300224', 'sz');
+INSERT INTO `stock_dict` VALUES (3380, '中航电测', '300114', 'sz');
+INSERT INTO `stock_dict` VALUES (3381, '联泓新科', '003022', 'sz');
+INSERT INTO `stock_dict` VALUES (3382, '金沃股份', '300984', 'sz');
+INSERT INTO `stock_dict` VALUES (3383, '华源控股', '002787', 'sz');
+INSERT INTO `stock_dict` VALUES (3384, '菲利华', '300395', 'sz');
+INSERT INTO `stock_dict` VALUES (3385, '中能电气', '300062', 'sz');
+INSERT INTO `stock_dict` VALUES (3386, '华孚时尚', '002042', 'sz');
+INSERT INTO `stock_dict` VALUES (3387, '龙佰集团', '002601', 'sz');
+INSERT INTO `stock_dict` VALUES (3388, '德尔玛', '301332', 'sz');
+INSERT INTO `stock_dict` VALUES (3389, '荃银高科', '300087', 'sz');
+INSERT INTO `stock_dict` VALUES (3390, '鼎汉技术', '300011', 'sz');
+INSERT INTO `stock_dict` VALUES (3391, '国科微', '300672', 'sz');
+INSERT INTO `stock_dict` VALUES (3392, '民爆光电', '301362', 'sz');
+INSERT INTO `stock_dict` VALUES (3393, '通用电梯', '300931', 'sz');
+INSERT INTO `stock_dict` VALUES (3394, '精锻科技', '300258', 'sz');
+INSERT INTO `stock_dict` VALUES (3395, '征和工业', '003033', 'sz');
+INSERT INTO `stock_dict` VALUES (3396, '远 望 谷', '002161', 'sz');
+INSERT INTO `stock_dict` VALUES (3397, '新劲刚', '300629', 'sz');
+INSERT INTO `stock_dict` VALUES (3398, '精艺股份', '002295', 'sz');
+INSERT INTO `stock_dict` VALUES (3399, '横河精密', '300539', 'sz');
+INSERT INTO `stock_dict` VALUES (3400, '创元科技', '000551', 'sz');
+INSERT INTO `stock_dict` VALUES (3401, '银邦股份', '300337', 'sz');
+INSERT INTO `stock_dict` VALUES (3402, '江苏神通', '002438', 'sz');
+INSERT INTO `stock_dict` VALUES (3403, '名雕股份', '002830', 'sz');
+INSERT INTO `stock_dict` VALUES (3404, '三德科技', '300515', 'sz');
+INSERT INTO `stock_dict` VALUES (3405, '华软科技', '002453', 'sz');
+INSERT INTO `stock_dict` VALUES (3406, '滨江集团', '002244', 'sz');
+INSERT INTO `stock_dict` VALUES (3407, '迪阿股份', '301177', 'sz');
+INSERT INTO `stock_dict` VALUES (3408, '东亚机械', '301028', 'sz');
+INSERT INTO `stock_dict` VALUES (3409, '银宝山新', '002786', 'sz');
+INSERT INTO `stock_dict` VALUES (3410, '创益通', '300991', 'sz');
+INSERT INTO `stock_dict` VALUES (3411, '智能自控', '002877', 'sz');
+INSERT INTO `stock_dict` VALUES (3412, '华润材料', '301090', 'sz');
+INSERT INTO `stock_dict` VALUES (3413, '三角防务', '300775', 'sz');
+INSERT INTO `stock_dict` VALUES (3414, '创世纪', '300083', 'sz');
+INSERT INTO `stock_dict` VALUES (3415, '万里马', '300591', 'sz');
+INSERT INTO `stock_dict` VALUES (3416, '平治信息', '300571', 'sz');
+INSERT INTO `stock_dict` VALUES (3417, '赞宇科技', '002637', 'sz');
+INSERT INTO `stock_dict` VALUES (3418, '兰州银行', '001227', 'sz');
+INSERT INTO `stock_dict` VALUES (3419, '迪安诊断', '300244', 'sz');
+INSERT INTO `stock_dict` VALUES (3420, '川网传媒', '300987', 'sz');
+INSERT INTO `stock_dict` VALUES (3421, '苏州银行', '002966', 'sz');
+INSERT INTO `stock_dict` VALUES (3422, '矩阵股份', '301365', 'sz');
+INSERT INTO `stock_dict` VALUES (3423, '万达信息', '300168', 'sz');
+INSERT INTO `stock_dict` VALUES (3424, '强瑞技术', '301128', 'sz');
+INSERT INTO `stock_dict` VALUES (3425, '科源制药', '301281', 'sz');
+INSERT INTO `stock_dict` VALUES (3426, '掌趣科技', '300315', 'sz');
+INSERT INTO `stock_dict` VALUES (3427, '中南文化', '002445', 'sz');
+INSERT INTO `stock_dict` VALUES (3428, '致远新能', '300985', 'sz');
+INSERT INTO `stock_dict` VALUES (3429, '美新科技', '301588', 'sz');
+INSERT INTO `stock_dict` VALUES (3430, '海泰科', '301022', 'sz');
+INSERT INTO `stock_dict` VALUES (3431, '华测导航', '300627', 'sz');
+INSERT INTO `stock_dict` VALUES (3432, '科华数据', '002335', 'sz');
+INSERT INTO `stock_dict` VALUES (3433, '怡和嘉业', '301367', 'sz');
+INSERT INTO `stock_dict` VALUES (3434, '津滨发展', '000897', 'sz');
+INSERT INTO `stock_dict` VALUES (3435, '比亚迪', '002594', 'sz');
+INSERT INTO `stock_dict` VALUES (3436, '中荣股份', '301223', 'sz');
+INSERT INTO `stock_dict` VALUES (3437, '新易盛', '300502', 'sz');
+INSERT INTO `stock_dict` VALUES (3438, '百洋医药', '301015', 'sz');
+INSERT INTO `stock_dict` VALUES (3439, 'ST天山', '300313', 'sz');
+INSERT INTO `stock_dict` VALUES (3440, '浙江正特', '001238', 'sz');
+INSERT INTO `stock_dict` VALUES (3441, '金马游乐', '300756', 'sz');
+INSERT INTO `stock_dict` VALUES (3442, '佳隆股份', '002495', 'sz');
+INSERT INTO `stock_dict` VALUES (3443, '利和兴', '301013', 'sz');
+INSERT INTO `stock_dict` VALUES (3444, '南山控股', '002314', 'sz');
+INSERT INTO `stock_dict` VALUES (3445, '朗源股份', '300175', 'sz');
+INSERT INTO `stock_dict` VALUES (3446, '万隆光电', '300710', 'sz');
+INSERT INTO `stock_dict` VALUES (3447, '四会富仕', '300852', 'sz');
+INSERT INTO `stock_dict` VALUES (3448, '洋河股份', '002304', 'sz');
+INSERT INTO `stock_dict` VALUES (3449, '三诺生物', '300298', 'sz');
+INSERT INTO `stock_dict` VALUES (3450, '正业科技', '300410', 'sz');
+INSERT INTO `stock_dict` VALUES (3451, '达 意 隆', '002209', 'sz');
+INSERT INTO `stock_dict` VALUES (3452, '中船汉光', '300847', 'sz');
+INSERT INTO `stock_dict` VALUES (3453, '长江证券', '000783', 'sz');
+INSERT INTO `stock_dict` VALUES (3454, 'ST先河', '300137', 'sz');
+INSERT INTO `stock_dict` VALUES (3455, 'ST先锋', '300163', 'sz');
+INSERT INTO `stock_dict` VALUES (3456, '久吾高科', '300631', 'sz');
+INSERT INTO `stock_dict` VALUES (3457, '江阴银行', '002807', 'sz');
+INSERT INTO `stock_dict` VALUES (3458, '众生药业', '002317', 'sz');
+INSERT INTO `stock_dict` VALUES (3459, '凯发电气', '300407', 'sz');
+INSERT INTO `stock_dict` VALUES (3460, '海联讯', '300277', 'sz');
+INSERT INTO `stock_dict` VALUES (3461, '长城证券', '002939', 'sz');
+INSERT INTO `stock_dict` VALUES (3462, '博创科技', '300548', 'sz');
+INSERT INTO `stock_dict` VALUES (3463, '金鹰重工', '301048', 'sz');
+INSERT INTO `stock_dict` VALUES (3464, '益生股份', '002458', 'sz');
+INSERT INTO `stock_dict` VALUES (3465, '富士莱', '301258', 'sz');
+INSERT INTO `stock_dict` VALUES (3466, '江南奕帆', '301023', 'sz');
+INSERT INTO `stock_dict` VALUES (3467, '春兴精工', '002547', 'sz');
+INSERT INTO `stock_dict` VALUES (3468, '四方精创', '300468', 'sz');
+INSERT INTO `stock_dict` VALUES (3469, '冀东水泥', '000401', 'sz');
+INSERT INTO `stock_dict` VALUES (3470, '长虹美菱', '000521', 'sz');
+INSERT INTO `stock_dict` VALUES (3471, '上海艾录', '301062', 'sz');
+INSERT INTO `stock_dict` VALUES (3472, '派瑞股份', '300831', 'sz');
+INSERT INTO `stock_dict` VALUES (3473, '鸥玛软件', '301185', 'sz');
+INSERT INTO `stock_dict` VALUES (3474, '联盛化学', '301212', 'sz');
+INSERT INTO `stock_dict` VALUES (3475, '捷安高科', '300845', 'sz');
+INSERT INTO `stock_dict` VALUES (3476, '何氏眼科', '301103', 'sz');
+INSERT INTO `stock_dict` VALUES (3477, '康盛股份', '002418', 'sz');
+INSERT INTO `stock_dict` VALUES (3478, '中原传媒', '000719', 'sz');
+INSERT INTO `stock_dict` VALUES (3479, '钢研高纳', '300034', 'sz');
+INSERT INTO `stock_dict` VALUES (3480, '晨光生物', '300138', 'sz');
+INSERT INTO `stock_dict` VALUES (3481, '越秀资本', '000987', 'sz');
+INSERT INTO `stock_dict` VALUES (3482, '凯格精机', '301338', 'sz');
+INSERT INTO `stock_dict` VALUES (3483, '炬华科技', '300360', 'sz');
+INSERT INTO `stock_dict` VALUES (3484, '大北农', '002385', 'sz');
+INSERT INTO `stock_dict` VALUES (3485, '唐源电气', '300789', 'sz');
+INSERT INTO `stock_dict` VALUES (3486, '塔牌集团', '002233', 'sz');
+INSERT INTO `stock_dict` VALUES (3487, 'ST加加', '002650', 'sz');
+INSERT INTO `stock_dict` VALUES (3488, '中旗新材', '001212', 'sz');
+INSERT INTO `stock_dict` VALUES (3489, '崧盛股份', '301002', 'sz');
+INSERT INTO `stock_dict` VALUES (3490, '显盈科技', '301067', 'sz');
+INSERT INTO `stock_dict` VALUES (3491, '建科院', '300675', 'sz');
+INSERT INTO `stock_dict` VALUES (3492, '梅安森', '300275', 'sz');
+INSERT INTO `stock_dict` VALUES (3493, '瑞丰高材', '300243', 'sz');
+INSERT INTO `stock_dict` VALUES (3494, '宝馨科技', '002514', 'sz');
+INSERT INTO `stock_dict` VALUES (3495, '广弘控股', '000529', 'sz');
+INSERT INTO `stock_dict` VALUES (3496, '渝 开 发', '000514', 'sz');
+INSERT INTO `stock_dict` VALUES (3497, '大族激光', '002008', 'sz');
+INSERT INTO `stock_dict` VALUES (3498, '青农商行', '002958', 'sz');
+INSERT INTO `stock_dict` VALUES (3499, '中国武夷', '000797', 'sz');
+INSERT INTO `stock_dict` VALUES (3500, '万祥科技', '301180', 'sz');
+INSERT INTO `stock_dict` VALUES (3501, '英可瑞', '300713', 'sz');
+INSERT INTO `stock_dict` VALUES (3502, '海默科技', '300084', 'sz');
+INSERT INTO `stock_dict` VALUES (3503, 'ST佳沃', '300268', 'sz');
+INSERT INTO `stock_dict` VALUES (3504, '上峰水泥', '000672', 'sz');
+INSERT INTO `stock_dict` VALUES (3505, '海森药业', '001367', 'sz');
+INSERT INTO `stock_dict` VALUES (3506, '中国稀土', '000831', 'sz');
+INSERT INTO `stock_dict` VALUES (3507, '中钢天源', '002057', 'sz');
+INSERT INTO `stock_dict` VALUES (3508, '博亚精工', '300971', 'sz');
+INSERT INTO `stock_dict` VALUES (3509, '粤宏远Ａ', '000573', 'sz');
+INSERT INTO `stock_dict` VALUES (3510, '深科技', '000021', 'sz');
+INSERT INTO `stock_dict` VALUES (3511, '和而泰', '002402', 'sz');
+INSERT INTO `stock_dict` VALUES (3512, '润泽科技', '300442', 'sz');
+INSERT INTO `stock_dict` VALUES (3513, '泰嘉股份', '002843', 'sz');
+INSERT INTO `stock_dict` VALUES (3514, '鸿路钢构', '002541', 'sz');
+INSERT INTO `stock_dict` VALUES (3515, '风华高科', '000636', 'sz');
+INSERT INTO `stock_dict` VALUES (3516, '花园生物', '300401', 'sz');
+INSERT INTO `stock_dict` VALUES (3517, '节能国祯', '300388', 'sz');
+INSERT INTO `stock_dict` VALUES (3518, '川恒股份', '002895', 'sz');
+INSERT INTO `stock_dict` VALUES (3519, '吉峰科技', '300022', 'sz');
+INSERT INTO `stock_dict` VALUES (3520, '京山轻机', '000821', 'sz');
+INSERT INTO `stock_dict` VALUES (3521, '三柏硕', '001300', 'sz');
+INSERT INTO `stock_dict` VALUES (3522, '兴齐眼药', '300573', 'sz');
+INSERT INTO `stock_dict` VALUES (3523, '鼎泰高科', '301377', 'sz');
+INSERT INTO `stock_dict` VALUES (3524, '长信科技', '300088', 'sz');
+INSERT INTO `stock_dict` VALUES (3525, '挖金客', '301380', 'sz');
+INSERT INTO `stock_dict` VALUES (3526, '福瑞股份', '300049', 'sz');
+INSERT INTO `stock_dict` VALUES (3527, '朗姿股份', '002612', 'sz');
+INSERT INTO `stock_dict` VALUES (3528, '安利股份', '300218', 'sz');
+INSERT INTO `stock_dict` VALUES (3529, '辰奕智能', '301578', 'sz');
+INSERT INTO `stock_dict` VALUES (3530, '鲍斯股份', '300441', 'sz');
+INSERT INTO `stock_dict` VALUES (3531, '新莱应材', '300260', 'sz');
+INSERT INTO `stock_dict` VALUES (3532, '开普检测', '003008', 'sz');
+INSERT INTO `stock_dict` VALUES (3533, '新城市', '300778', 'sz');
+INSERT INTO `stock_dict` VALUES (3534, '中文在线', '300364', 'sz');
+INSERT INTO `stock_dict` VALUES (3535, '珠江啤酒', '002461', 'sz');
+INSERT INTO `stock_dict` VALUES (3536, '泰坦股份', '003036', 'sz');
+INSERT INTO `stock_dict` VALUES (3537, '申万宏源', '000166', 'sz');
+INSERT INTO `stock_dict` VALUES (3538, '天融信', '002212', 'sz');
+INSERT INTO `stock_dict` VALUES (3539, '中洲控股', '000042', 'sz');
+INSERT INTO `stock_dict` VALUES (3540, '中顺洁柔', '002511', 'sz');
+INSERT INTO `stock_dict` VALUES (3541, '华天酒店', '000428', 'sz');
+INSERT INTO `stock_dict` VALUES (3542, '欣天科技', '300615', 'sz');
+INSERT INTO `stock_dict` VALUES (3543, '隆平高科', '000998', 'sz');
+INSERT INTO `stock_dict` VALUES (3544, '天箭科技', '002977', 'sz');
+INSERT INTO `stock_dict` VALUES (3545, '九典制药', '300705', 'sz');
+INSERT INTO `stock_dict` VALUES (3546, 'ST高鸿', '000851', 'sz');
+INSERT INTO `stock_dict` VALUES (3547, '富邦股份', '300387', 'sz');
+INSERT INTO `stock_dict` VALUES (3548, '万年青', '000789', 'sz');
+INSERT INTO `stock_dict` VALUES (3549, '万凯新材', '301216', 'sz');
+INSERT INTO `stock_dict` VALUES (3550, '实益达', '002137', 'sz');
+INSERT INTO `stock_dict` VALUES (3551, '中英科技', '300936', 'sz');
+INSERT INTO `stock_dict` VALUES (3552, '康强电子', '002119', 'sz');
+INSERT INTO `stock_dict` VALUES (3553, '万得凯', '301309', 'sz');
+INSERT INTO `stock_dict` VALUES (3554, '万顺新材', '300057', 'sz');
+INSERT INTO `stock_dict` VALUES (3555, '健帆生物', '300529', 'sz');
+INSERT INTO `stock_dict` VALUES (3556, '哈焊华通', '301137', 'sz');
+INSERT INTO `stock_dict` VALUES (3557, '华兰生物', '002007', 'sz');
+INSERT INTO `stock_dict` VALUES (3558, '南天信息', '000948', 'sz');
+INSERT INTO `stock_dict` VALUES (3559, '新 希 望', '000876', 'sz');
+INSERT INTO `stock_dict` VALUES (3560, '晶盛机电', '300316', 'sz');
+INSERT INTO `stock_dict` VALUES (3561, '锦盛新材', '300849', 'sz');
+INSERT INTO `stock_dict` VALUES (3562, '海南海药', '000566', 'sz');
+INSERT INTO `stock_dict` VALUES (3563, '振芯科技', '300101', 'sz');
+INSERT INTO `stock_dict` VALUES (3564, '云南旅游', '002059', 'sz');
+INSERT INTO `stock_dict` VALUES (3565, '云南锗业', '002428', 'sz');
+INSERT INTO `stock_dict` VALUES (3566, '飞力达', '300240', 'sz');
+INSERT INTO `stock_dict` VALUES (3567, '盛帮股份', '301233', 'sz');
+INSERT INTO `stock_dict` VALUES (3568, '荣信文化', '301231', 'sz');
+INSERT INTO `stock_dict` VALUES (3569, '英威腾', '002334', 'sz');
+INSERT INTO `stock_dict` VALUES (3570, '力量钻石', '301071', 'sz');
+INSERT INTO `stock_dict` VALUES (3571, '银轮股份', '002126', 'sz');
+INSERT INTO `stock_dict` VALUES (3572, '大连电瓷', '002606', 'sz');
+INSERT INTO `stock_dict` VALUES (3573, '牧原股份', '002714', 'sz');
+INSERT INTO `stock_dict` VALUES (3574, '康平科技', '300907', 'sz');
+INSERT INTO `stock_dict` VALUES (3575, '中胤时尚', '300901', 'sz');
+INSERT INTO `stock_dict` VALUES (3576, '华绿生物', '300970', 'sz');
+INSERT INTO `stock_dict` VALUES (3577, '拓新药业', '301089', 'sz');
+INSERT INTO `stock_dict` VALUES (3578, '安居宝', '300155', 'sz');
+INSERT INTO `stock_dict` VALUES (3579, '游族网络', '002174', 'sz');
+INSERT INTO `stock_dict` VALUES (3580, '利仁科技', '001259', 'sz');
+INSERT INTO `stock_dict` VALUES (3581, '协鑫能科', '002015', 'sz');
+INSERT INTO `stock_dict` VALUES (3582, '中富电路', '300814', 'sz');
+INSERT INTO `stock_dict` VALUES (3583, '米奥会展', '300795', 'sz');
+INSERT INTO `stock_dict` VALUES (3584, '蠡湖股份', '300694', 'sz');
+INSERT INTO `stock_dict` VALUES (3585, '雅艺科技', '301113', 'sz');
+INSERT INTO `stock_dict` VALUES (3586, '龙利得', '300883', 'sz');
+INSERT INTO `stock_dict` VALUES (3587, '紫光股份', '000938', 'sz');
+INSERT INTO `stock_dict` VALUES (3588, '天元股份', '003003', 'sz');
+INSERT INTO `stock_dict` VALUES (3589, '万事利', '301066', 'sz');
+INSERT INTO `stock_dict` VALUES (3590, '香农芯创', '300475', 'sz');
+INSERT INTO `stock_dict` VALUES (3591, '华融化学', '301256', 'sz');
+INSERT INTO `stock_dict` VALUES (3592, '融捷股份', '002192', 'sz');
+INSERT INTO `stock_dict` VALUES (3593, '琏升科技', '300051', 'sz');
+INSERT INTO `stock_dict` VALUES (3594, '远光软件', '002063', 'sz');
+INSERT INTO `stock_dict` VALUES (3595, '中晶科技', '003026', 'sz');
+INSERT INTO `stock_dict` VALUES (3596, '汇成真空', '301392', 'sz');
+INSERT INTO `stock_dict` VALUES (3597, '川宁生物', '301301', 'sz');
+INSERT INTO `stock_dict` VALUES (3598, '铜冠铜箔', '301217', 'sz');
+INSERT INTO `stock_dict` VALUES (3599, '万孚生物', '300482', 'sz');
+INSERT INTO `stock_dict` VALUES (3600, '中机认检', '301508', 'sz');
+INSERT INTO `stock_dict` VALUES (3601, '张家港行', '002839', 'sz');
+INSERT INTO `stock_dict` VALUES (3602, '天健集团', '000090', 'sz');
+INSERT INTO `stock_dict` VALUES (3603, '大禹节水', '300021', 'sz');
+INSERT INTO `stock_dict` VALUES (3604, '联得装备', '300545', 'sz');
+INSERT INTO `stock_dict` VALUES (3605, '耐普矿机', '300818', 'sz');
+INSERT INTO `stock_dict` VALUES (3606, '国缆检测', '301289', 'sz');
+INSERT INTO `stock_dict` VALUES (3607, '汇川技术', '300124', 'sz');
+INSERT INTO `stock_dict` VALUES (3608, '天秦装备', '300922', 'sz');
+INSERT INTO `stock_dict` VALUES (3609, '立华股份', '300761', 'sz');
+INSERT INTO `stock_dict` VALUES (3610, '振华科技', '000733', 'sz');
+INSERT INTO `stock_dict` VALUES (3611, '九安医疗', '002432', 'sz');
+INSERT INTO `stock_dict` VALUES (3612, '亿帆医药', '002019', 'sz');
+INSERT INTO `stock_dict` VALUES (3613, '科士达', '002518', 'sz');
+INSERT INTO `stock_dict` VALUES (3614, '北化股份', '002246', 'sz');
+INSERT INTO `stock_dict` VALUES (3615, '新 和 成', '002001', 'sz');
+INSERT INTO `stock_dict` VALUES (3616, '太阳纸业', '002078', 'sz');
+INSERT INTO `stock_dict` VALUES (3617, '仟源医药', '300254', 'sz');
+INSERT INTO `stock_dict` VALUES (3618, '华人健康', '301408', 'sz');
+INSERT INTO `stock_dict` VALUES (3619, '东方钽业', '000962', 'sz');
+INSERT INTO `stock_dict` VALUES (3620, '南大光电', '300346', 'sz');
+INSERT INTO `stock_dict` VALUES (3621, '康冠科技', '001308', 'sz');
+INSERT INTO `stock_dict` VALUES (3622, '锦浪科技', '300763', 'sz');
+INSERT INTO `stock_dict` VALUES (3623, '中国宝安', '000009', 'sz');
+INSERT INTO `stock_dict` VALUES (3624, '*ST恒宇', '300965', 'sz');
+INSERT INTO `stock_dict` VALUES (3625, '中集车辆', '301039', 'sz');
+INSERT INTO `stock_dict` VALUES (3626, '浪潮信息', '000977', 'sz');
+INSERT INTO `stock_dict` VALUES (3627, '稳健医疗', '300888', 'sz');
+INSERT INTO `stock_dict` VALUES (3628, '交大思诺', '300851', 'sz');
+INSERT INTO `stock_dict` VALUES (3629, '曼卡龙', '300945', 'sz');
+INSERT INTO `stock_dict` VALUES (3630, '广信材料', '300537', 'sz');
+INSERT INTO `stock_dict` VALUES (3631, '艾德生物', '300685', 'sz');
+INSERT INTO `stock_dict` VALUES (3632, '云南白药', '000538', 'sz');
+INSERT INTO `stock_dict` VALUES (3633, '辉丰股份', '002496', 'sz');
+INSERT INTO `stock_dict` VALUES (3634, '张家界', '000430', 'sz');
+INSERT INTO `stock_dict` VALUES (3635, '信濠光电', '301051', 'sz');
+INSERT INTO `stock_dict` VALUES (3636, '华是科技', '301218', 'sz');
+INSERT INTO `stock_dict` VALUES (3637, '慧博云通', '301316', 'sz');
+INSERT INTO `stock_dict` VALUES (3638, '漳州发展', '000753', 'sz');
+INSERT INTO `stock_dict` VALUES (3639, '联建光电', '300269', 'sz');
+INSERT INTO `stock_dict` VALUES (3640, '京北方', '002987', 'sz');
+INSERT INTO `stock_dict` VALUES (3641, '直真科技', '003007', 'sz');
+INSERT INTO `stock_dict` VALUES (3642, '苏宁环球', '000718', 'sz');
+INSERT INTO `stock_dict` VALUES (3643, '鼎捷数智', '300378', 'sz');
+INSERT INTO `stock_dict` VALUES (3644, '大港股份', '002077', 'sz');
+INSERT INTO `stock_dict` VALUES (3645, '怡 亚 通', '002183', 'sz');
+INSERT INTO `stock_dict` VALUES (3646, '弘亚数控', '002833', 'sz');
+INSERT INTO `stock_dict` VALUES (3647, '盈建科', '300935', 'sz');
+INSERT INTO `stock_dict` VALUES (3648, '韵达股份', '002120', 'sz');
+INSERT INTO `stock_dict` VALUES (3649, '通行宝', '301339', 'sz');
+INSERT INTO `stock_dict` VALUES (3650, '润都股份', '002923', 'sz');
+INSERT INTO `stock_dict` VALUES (3651, '康泰医学', '300869', 'sz');
+INSERT INTO `stock_dict` VALUES (3652, '保龄宝', '002286', 'sz');
+INSERT INTO `stock_dict` VALUES (3653, '派林生物', '000403', 'sz');
+INSERT INTO `stock_dict` VALUES (3654, '横店东磁', '002056', 'sz');
+INSERT INTO `stock_dict` VALUES (3655, '川金诺', '300505', 'sz');
+INSERT INTO `stock_dict` VALUES (3656, '长亮科技', '300348', 'sz');
+INSERT INTO `stock_dict` VALUES (3657, '金龙机电', '300032', 'sz');
+INSERT INTO `stock_dict` VALUES (3658, '顺鑫农业', '000860', 'sz');
+INSERT INTO `stock_dict` VALUES (3659, '三羊马', '001317', 'sz');
+INSERT INTO `stock_dict` VALUES (3660, '钱江摩托', '000913', 'sz');
+INSERT INTO `stock_dict` VALUES (3661, '科泰电源', '300153', 'sz');
+INSERT INTO `stock_dict` VALUES (3662, '盘龙药业', '002864', 'sz');
+INSERT INTO `stock_dict` VALUES (3663, '铭普光磁', '002902', 'sz');
+INSERT INTO `stock_dict` VALUES (3664, '电连技术', '300679', 'sz');
+INSERT INTO `stock_dict` VALUES (3665, '中矿资源', '002738', 'sz');
+INSERT INTO `stock_dict` VALUES (3666, '华西证券', '002926', 'sz');
+INSERT INTO `stock_dict` VALUES (3667, '华阳集团', '002906', 'sz');
+INSERT INTO `stock_dict` VALUES (3668, '九强生物', '300406', 'sz');
+INSERT INTO `stock_dict` VALUES (3669, '鹏鹞环保', '300664', 'sz');
+INSERT INTO `stock_dict` VALUES (3670, '瑞丰光电', '300241', 'sz');
+INSERT INTO `stock_dict` VALUES (3671, '蒙娜丽莎', '002918', 'sz');
+INSERT INTO `stock_dict` VALUES (3672, '腾亚精工', '301125', 'sz');
+INSERT INTO `stock_dict` VALUES (3673, '立中集团', '300428', 'sz');
+INSERT INTO `stock_dict` VALUES (3674, '甘肃能源', '000791', 'sz');
+INSERT INTO `stock_dict` VALUES (3675, '西部证券', '002673', 'sz');
+INSERT INTO `stock_dict` VALUES (3676, '岱勒新材', '300700', 'sz');
+INSERT INTO `stock_dict` VALUES (3677, '光智科技', '300489', 'sz');
+INSERT INTO `stock_dict` VALUES (3678, '乐普医疗', '300003', 'sz');
+INSERT INTO `stock_dict` VALUES (3679, '奥普光电', '002338', 'sz');
+INSERT INTO `stock_dict` VALUES (3680, '振邦智能', '003028', 'sz');
+INSERT INTO `stock_dict` VALUES (3681, 'ST天邦', '002124', 'sz');
+INSERT INTO `stock_dict` VALUES (3682, '和远气体', '002971', 'sz');
+INSERT INTO `stock_dict` VALUES (3683, '华林证券', '002945', 'sz');
+INSERT INTO `stock_dict` VALUES (3684, '恒逸石化', '000703', 'sz');
+INSERT INTO `stock_dict` VALUES (3685, '西菱动力', '300733', 'sz');
+INSERT INTO `stock_dict` VALUES (3686, '启迪设计', '300500', 'sz');
+INSERT INTO `stock_dict` VALUES (3687, '双成药业', '002693', 'sz');
+INSERT INTO `stock_dict` VALUES (3688, '冀凯股份', '002691', 'sz');
+INSERT INTO `stock_dict` VALUES (3689, '国轩高科', '002074', 'sz');
+INSERT INTO `stock_dict` VALUES (3690, '华兰疫苗', '301207', 'sz');
+INSERT INTO `stock_dict` VALUES (3691, '奥尼电子', '301189', 'sz');
+INSERT INTO `stock_dict` VALUES (3692, '吉大通信', '300597', 'sz');
+INSERT INTO `stock_dict` VALUES (3693, '天晟新材', '300169', 'sz');
+INSERT INTO `stock_dict` VALUES (3694, '安洁科技', '002635', 'sz');
+INSERT INTO `stock_dict` VALUES (3695, '雅克科技', '002409', 'sz');
+INSERT INTO `stock_dict` VALUES (3696, '华星创业', '300025', 'sz');
+INSERT INTO `stock_dict` VALUES (3697, '广联达', '002410', 'sz');
+INSERT INTO `stock_dict` VALUES (3698, '万向钱潮', '000559', 'sz');
+INSERT INTO `stock_dict` VALUES (3699, '东鹏控股', '003012', 'sz');
+INSERT INTO `stock_dict` VALUES (3700, '山西证券', '002500', 'sz');
+INSERT INTO `stock_dict` VALUES (3701, '海波重科', '300517', 'sz');
+INSERT INTO `stock_dict` VALUES (3702, '永新股份', '002014', 'sz');
+INSERT INTO `stock_dict` VALUES (3703, '北信源', '300352', 'sz');
+INSERT INTO `stock_dict` VALUES (3704, '锦鸡股份', '300798', 'sz');
+INSERT INTO `stock_dict` VALUES (3705, '金杯电工', '002533', 'sz');
+INSERT INTO `stock_dict` VALUES (3706, '海联金汇', '002537', 'sz');
+INSERT INTO `stock_dict` VALUES (3707, '红棉股份', '000523', 'sz');
+INSERT INTO `stock_dict` VALUES (3708, '华瓷股份', '001216', 'sz');
+INSERT INTO `stock_dict` VALUES (3709, '润贝航科', '001316', 'sz');
+INSERT INTO `stock_dict` VALUES (3710, '北方国际', '000065', 'sz');
+INSERT INTO `stock_dict` VALUES (3711, '德冠新材', '001378', 'sz');
+INSERT INTO `stock_dict` VALUES (3712, '凌玮科技', '301373', 'sz');
+INSERT INTO `stock_dict` VALUES (3713, '凌霄泵业', '002884', 'sz');
+INSERT INTO `stock_dict` VALUES (3714, '怡达股份', '300721', 'sz');
+INSERT INTO `stock_dict` VALUES (3715, '扬子新材', '002652', 'sz');
+INSERT INTO `stock_dict` VALUES (3716, '凯美特气', '002549', 'sz');
+INSERT INTO `stock_dict` VALUES (3717, '中来股份', '300393', 'sz');
+INSERT INTO `stock_dict` VALUES (3718, '金力泰', '300225', 'sz');
+INSERT INTO `stock_dict` VALUES (3719, '达瑞电子', '300976', 'sz');
+INSERT INTO `stock_dict` VALUES (3720, '海达股份', '300320', 'sz');
+INSERT INTO `stock_dict` VALUES (3721, 'TCL智家', '002668', 'sz');
+INSERT INTO `stock_dict` VALUES (3722, '诚迈科技', '300598', 'sz');
+INSERT INTO `stock_dict` VALUES (3723, '飞天诚信', '300386', 'sz');
+INSERT INTO `stock_dict` VALUES (3724, '粤万年青', '301111', 'sz');
+INSERT INTO `stock_dict` VALUES (3725, '浩通科技', '301026', 'sz');
+INSERT INTO `stock_dict` VALUES (3726, '天源环保', '301127', 'sz');
+INSERT INTO `stock_dict` VALUES (3727, '博深股份', '002282', 'sz');
+INSERT INTO `stock_dict` VALUES (3728, '柳    工', '000528', 'sz');
+INSERT INTO `stock_dict` VALUES (3729, '远信工业', '301053', 'sz');
+INSERT INTO `stock_dict` VALUES (3730, '协昌科技', '301418', 'sz');
+INSERT INTO `stock_dict` VALUES (3731, '百川畅银', '300614', 'sz');
+INSERT INTO `stock_dict` VALUES (3732, '鸿富瀚', '301086', 'sz');
+INSERT INTO `stock_dict` VALUES (3733, '泰胜风能', '300129', 'sz');
+INSERT INTO `stock_dict` VALUES (3734, '祥鑫科技', '002965', 'sz');
+INSERT INTO `stock_dict` VALUES (3735, '华宏科技', '002645', 'sz');
+INSERT INTO `stock_dict` VALUES (3736, 'ST恒久', '002808', 'sz');
+INSERT INTO `stock_dict` VALUES (3737, '旺能环境', '002034', 'sz');
+INSERT INTO `stock_dict` VALUES (3738, '中亚股份', '300512', 'sz');
+INSERT INTO `stock_dict` VALUES (3739, '新开普', '300248', 'sz');
+INSERT INTO `stock_dict` VALUES (3740, '赛为智能', '300044', 'sz');
+INSERT INTO `stock_dict` VALUES (3741, '瑞晨环保', '301273', 'sz');
+INSERT INTO `stock_dict` VALUES (3742, '云图控股', '002539', 'sz');
+INSERT INTO `stock_dict` VALUES (3743, '赫美集团', '002356', 'sz');
+INSERT INTO `stock_dict` VALUES (3744, '密封科技', '301020', 'sz');
+INSERT INTO `stock_dict` VALUES (3745, '渤海租赁', '000415', 'sz');
+INSERT INTO `stock_dict` VALUES (3746, '硅宝科技', '300019', 'sz');
+INSERT INTO `stock_dict` VALUES (3747, '三维化学', '002469', 'sz');
+INSERT INTO `stock_dict` VALUES (3748, '东北证券', '000686', 'sz');
+INSERT INTO `stock_dict` VALUES (3749, '恩威医药', '301331', 'sz');
+INSERT INTO `stock_dict` VALUES (3750, '雪榕生物', '300511', 'sz');
+INSERT INTO `stock_dict` VALUES (3751, '山金国际', '000975', 'sz');
+INSERT INTO `stock_dict` VALUES (3752, '和科达', '002816', 'sz');
+INSERT INTO `stock_dict` VALUES (3753, '和顺科技', '301237', 'sz');
+INSERT INTO `stock_dict` VALUES (3754, '嘉应制药', '002198', 'sz');
+INSERT INTO `stock_dict` VALUES (3755, '浔兴股份', '002098', 'sz');
+INSERT INTO `stock_dict` VALUES (3756, '国元证券', '000728', 'sz');
+INSERT INTO `stock_dict` VALUES (3757, '朗威股份', '301202', 'sz');
+INSERT INTO `stock_dict` VALUES (3758, '卡倍亿', '300863', 'sz');
+INSERT INTO `stock_dict` VALUES (3759, '飞凯材料', '300398', 'sz');
+INSERT INTO `stock_dict` VALUES (3760, '清新环境', '002573', 'sz');
+INSERT INTO `stock_dict` VALUES (3761, '中航光电', '002179', 'sz');
+INSERT INTO `stock_dict` VALUES (3762, '中兴通讯', '000063', 'sz');
+INSERT INTO `stock_dict` VALUES (3763, '宝塔实业', '000595', 'sz');
+INSERT INTO `stock_dict` VALUES (3764, '华媒控股', '000607', 'sz');
+INSERT INTO `stock_dict` VALUES (3765, '三博脑科', '301293', 'sz');
+INSERT INTO `stock_dict` VALUES (3766, '光弘科技', '300735', 'sz');
+INSERT INTO `stock_dict` VALUES (3767, '南网能源', '003035', 'sz');
+INSERT INTO `stock_dict` VALUES (3768, '义翘神州', '301047', 'sz');
+INSERT INTO `stock_dict` VALUES (3769, 'ST中泰', '002092', 'sz');
+INSERT INTO `stock_dict` VALUES (3770, '华菱钢铁', '000932', 'sz');
+INSERT INTO `stock_dict` VALUES (3771, '金卡智能', '300349', 'sz');
+INSERT INTO `stock_dict` VALUES (3772, '长川科技', '300604', 'sz');
+INSERT INTO `stock_dict` VALUES (3773, '中绿电', '000537', 'sz');
+INSERT INTO `stock_dict` VALUES (3774, '海 利 得', '002206', 'sz');
+INSERT INTO `stock_dict` VALUES (3775, '金禾实业', '002597', 'sz');
+INSERT INTO `stock_dict` VALUES (3776, '国海证券', '000750', 'sz');
+INSERT INTO `stock_dict` VALUES (3777, '迈克生物', '300463', 'sz');
+INSERT INTO `stock_dict` VALUES (3778, '福赛科技', '301529', 'sz');
+INSERT INTO `stock_dict` VALUES (3779, '荣盛石化', '002493', 'sz');
+INSERT INTO `stock_dict` VALUES (3780, '海马汽车', '000572', 'sz');
+INSERT INTO `stock_dict` VALUES (3781, '雷尔伟', '301016', 'sz');
+INSERT INTO `stock_dict` VALUES (3782, '捷佳伟创', '300724', 'sz');
+INSERT INTO `stock_dict` VALUES (3783, '北京利尔', '002392', 'sz');
+INSERT INTO `stock_dict` VALUES (3784, '瑞普生物', '300119', 'sz');
+INSERT INTO `stock_dict` VALUES (3785, '华骐环保', '300929', 'sz');
+INSERT INTO `stock_dict` VALUES (3786, '登海种业', '002041', 'sz');
+INSERT INTO `stock_dict` VALUES (3787, '易成新能', '300080', 'sz');
+INSERT INTO `stock_dict` VALUES (3788, '太阳能', '000591', 'sz');
+INSERT INTO `stock_dict` VALUES (3789, '蕾奥规划', '300989', 'sz');
+INSERT INTO `stock_dict` VALUES (3790, '绿联科技', '301606', 'sz');
+INSERT INTO `stock_dict` VALUES (3791, '百通能源', '001376', 'sz');
+INSERT INTO `stock_dict` VALUES (3792, '康达新材', '002669', 'sz');
+INSERT INTO `stock_dict` VALUES (3793, '科思股份', '300856', 'sz');
+INSERT INTO `stock_dict` VALUES (3794, '荣科科技', '300290', 'sz');
+INSERT INTO `stock_dict` VALUES (3795, '锐捷网络', '301165', 'sz');
+INSERT INTO `stock_dict` VALUES (3796, '大博医疗', '002901', 'sz');
+INSERT INTO `stock_dict` VALUES (3797, '合康新能', '300048', 'sz');
+INSERT INTO `stock_dict` VALUES (3798, '濮阳惠成', '300481', 'sz');
+INSERT INTO `stock_dict` VALUES (3799, '华康医疗', '301235', 'sz');
+INSERT INTO `stock_dict` VALUES (3800, '冰轮环境', '000811', 'sz');
+INSERT INTO `stock_dict` VALUES (3801, '华信新材', '300717', 'sz');
+INSERT INTO `stock_dict` VALUES (3802, '星源材质', '300568', 'sz');
+INSERT INTO `stock_dict` VALUES (3803, '紫建电子', '301121', 'sz');
+INSERT INTO `stock_dict` VALUES (3804, '银星能源', '000862', 'sz');
+INSERT INTO `stock_dict` VALUES (3805, '学大教育', '000526', 'sz');
+INSERT INTO `stock_dict` VALUES (3806, '创业慧康', '300451', 'sz');
+INSERT INTO `stock_dict` VALUES (3807, '仙乐健康', '300791', 'sz');
+INSERT INTO `stock_dict` VALUES (3808, '依依股份', '001206', 'sz');
+INSERT INTO `stock_dict` VALUES (3809, '珠海港', '000507', 'sz');
+INSERT INTO `stock_dict` VALUES (3810, '中粮科工', '301058', 'sz');
+INSERT INTO `stock_dict` VALUES (3811, '利安隆', '300596', 'sz');
+INSERT INTO `stock_dict` VALUES (3812, '康华生物', '300841', 'sz');
+INSERT INTO `stock_dict` VALUES (3813, '弘宇股份', '002890', 'sz');
+INSERT INTO `stock_dict` VALUES (3814, '杰瑞股份', '002353', 'sz');
+INSERT INTO `stock_dict` VALUES (3815, '保立佳', '301037', 'sz');
+INSERT INTO `stock_dict` VALUES (3816, '翔腾新材', '001373', 'sz');
+INSERT INTO `stock_dict` VALUES (3817, '仁和药业', '000650', 'sz');
+INSERT INTO `stock_dict` VALUES (3818, '广和通', '300638', 'sz');
+INSERT INTO `stock_dict` VALUES (3819, '东方通', '300379', 'sz');
+INSERT INTO `stock_dict` VALUES (3820, '理工光科', '300557', 'sz');
+INSERT INTO `stock_dict` VALUES (3821, '豪尔赛', '002963', 'sz');
+INSERT INTO `stock_dict` VALUES (3822, '中亦科技', '301208', 'sz');
+INSERT INTO `stock_dict` VALUES (3823, '仙坛股份', '002746', 'sz');
+INSERT INTO `stock_dict` VALUES (3824, '光华股份', '001333', 'sz');
+INSERT INTO `stock_dict` VALUES (3825, '嘉欣丝绸', '002404', 'sz');
+INSERT INTO `stock_dict` VALUES (3826, '九洲集团', '300040', 'sz');
+INSERT INTO `stock_dict` VALUES (3827, '卓创资讯', '301299', 'sz');
+INSERT INTO `stock_dict` VALUES (3828, '佛塑科技', '000973', 'sz');
+INSERT INTO `stock_dict` VALUES (3829, '罗 牛 山', '000735', 'sz');
+INSERT INTO `stock_dict` VALUES (3830, '尤洛卡', '300099', 'sz');
+INSERT INTO `stock_dict` VALUES (3831, '普联软件', '300996', 'sz');
+INSERT INTO `stock_dict` VALUES (3832, '泓淋电力', '301439', 'sz');
+INSERT INTO `stock_dict` VALUES (3833, '弘信电子', '300657', 'sz');
+INSERT INTO `stock_dict` VALUES (3834, '东方日升', '300118', 'sz');
+INSERT INTO `stock_dict` VALUES (3835, '信质集团', '002664', 'sz');
+INSERT INTO `stock_dict` VALUES (3836, '一心堂', '002727', 'sz');
+INSERT INTO `stock_dict` VALUES (3837, '沃森生物', '300142', 'sz');
+INSERT INTO `stock_dict` VALUES (3838, '北方华创', '002371', 'sz');
+INSERT INTO `stock_dict` VALUES (3839, '顶固集创', '300749', 'sz');
+INSERT INTO `stock_dict` VALUES (3840, '国药一致', '000028', 'sz');
+INSERT INTO `stock_dict` VALUES (3841, '上海莱士', '002252', 'sz');
+INSERT INTO `stock_dict` VALUES (3842, '正丹股份', '300641', 'sz');
+INSERT INTO `stock_dict` VALUES (3843, '双鹭药业', '002038', 'sz');
+INSERT INTO `stock_dict` VALUES (3844, '众兴菌业', '002772', 'sz');
+INSERT INTO `stock_dict` VALUES (3845, '海科新源', '301292', 'sz');
+INSERT INTO `stock_dict` VALUES (3846, 'ST聆达', '300125', 'sz');
+INSERT INTO `stock_dict` VALUES (3847, '农 产 品', '000061', 'sz');
+INSERT INTO `stock_dict` VALUES (3848, '恒工精密', '301261', 'sz');
+INSERT INTO `stock_dict` VALUES (3849, '美硕科技', '301295', 'sz');
+INSERT INTO `stock_dict` VALUES (3850, '双环科技', '000707', 'sz');
+INSERT INTO `stock_dict` VALUES (3851, '长高电新', '002452', 'sz');
+INSERT INTO `stock_dict` VALUES (3852, '中水渔业', '000798', 'sz');
+INSERT INTO `stock_dict` VALUES (3853, '瑞尔特', '002790', 'sz');
+INSERT INTO `stock_dict` VALUES (3854, '众业达', '002441', 'sz');
+INSERT INTO `stock_dict` VALUES (3855, '智微智能', '001339', 'sz');
+INSERT INTO `stock_dict` VALUES (3856, '山西焦煤', '000983', 'sz');
+INSERT INTO `stock_dict` VALUES (3857, '莱茵生物', '002166', 'sz');
+INSERT INTO `stock_dict` VALUES (3858, '华夏航空', '002928', 'sz');
+INSERT INTO `stock_dict` VALUES (3859, '诚志股份', '000990', 'sz');
+INSERT INTO `stock_dict` VALUES (3860, '中远海科', '002401', 'sz');
+INSERT INTO `stock_dict` VALUES (3861, '三联虹普', '300384', 'sz');
+INSERT INTO `stock_dict` VALUES (3862, '盐湖股份', '000792', 'sz');
+INSERT INTO `stock_dict` VALUES (3863, '国星光电', '002449', 'sz');
+INSERT INTO `stock_dict` VALUES (3864, '力生制药', '002393', 'sz');
+INSERT INTO `stock_dict` VALUES (3865, '成飞集成', '002190', 'sz');
+INSERT INTO `stock_dict` VALUES (3866, '趣睡科技', '301336', 'sz');
+INSERT INTO `stock_dict` VALUES (3867, '锡装股份', '001332', 'sz');
+INSERT INTO `stock_dict` VALUES (3868, '富安娜', '002327', 'sz');
+INSERT INTO `stock_dict` VALUES (3869, '威孚高科', '000581', 'sz');
+INSERT INTO `stock_dict` VALUES (3870, '帝科股份', '300842', 'sz');
+INSERT INTO `stock_dict` VALUES (3871, '欧晶科技', '001269', 'sz');
+INSERT INTO `stock_dict` VALUES (3872, '苏文电能', '300982', 'sz');
+INSERT INTO `stock_dict` VALUES (3873, '瑜欣电子', '301107', 'sz');
+INSERT INTO `stock_dict` VALUES (3874, '德生科技', '002908', 'sz');
+INSERT INTO `stock_dict` VALUES (3875, '立方制药', '003020', 'sz');
+INSERT INTO `stock_dict` VALUES (3876, '开山股份', '300257', 'sz');
+INSERT INTO `stock_dict` VALUES (3877, '申通快递', '002468', 'sz');
+INSERT INTO `stock_dict` VALUES (3878, '飞荣达', '300602', 'sz');
+INSERT INTO `stock_dict` VALUES (3879, '新大正', '002968', 'sz');
+INSERT INTO `stock_dict` VALUES (3880, '津荣天宇', '300988', 'sz');
+INSERT INTO `stock_dict` VALUES (3881, '新天药业', '002873', 'sz');
+INSERT INTO `stock_dict` VALUES (3882, '芯瑞达', '002983', 'sz');
+INSERT INTO `stock_dict` VALUES (3883, '中国海诚', '002116', 'sz');
+INSERT INTO `stock_dict` VALUES (3884, '飞亚达', '000026', 'sz');
+INSERT INTO `stock_dict` VALUES (3885, '奇正藏药', '002287', 'sz');
+INSERT INTO `stock_dict` VALUES (3886, '经纬股份', '301390', 'sz');
+INSERT INTO `stock_dict` VALUES (3887, '一博科技', '301366', 'sz');
+INSERT INTO `stock_dict` VALUES (3888, '东方嘉盛', '002889', 'sz');
+INSERT INTO `stock_dict` VALUES (3889, '张  裕Ａ', '000869', 'sz');
+INSERT INTO `stock_dict` VALUES (3890, '德明利', '001309', 'sz');
+INSERT INTO `stock_dict` VALUES (3891, '鑫磊股份', '301317', 'sz');
+INSERT INTO `stock_dict` VALUES (3892, '扬电科技', '301012', 'sz');
+INSERT INTO `stock_dict` VALUES (3893, '电工合金', '300697', 'sz');
+INSERT INTO `stock_dict` VALUES (3894, '铂科新材', '300811', 'sz');
+INSERT INTO `stock_dict` VALUES (3895, '宏德股份', '301163', 'sz');
+INSERT INTO `stock_dict` VALUES (3896, '中一科技', '301150', 'sz');
+INSERT INTO `stock_dict` VALUES (3897, '华工科技', '000988', 'sz');
+INSERT INTO `stock_dict` VALUES (3898, '雅化集团', '002497', 'sz');
+INSERT INTO `stock_dict` VALUES (3899, '浙江世宝', '002703', 'sz');
+INSERT INTO `stock_dict` VALUES (3900, '宸展光电', '003019', 'sz');
+INSERT INTO `stock_dict` VALUES (3901, '七彩化学', '300758', 'sz');
+INSERT INTO `stock_dict` VALUES (3902, '潍柴动力', '000338', 'sz');
+INSERT INTO `stock_dict` VALUES (3903, '欧菲光', '002456', 'sz');
+INSERT INTO `stock_dict` VALUES (3904, '光启技术', '002625', 'sz');
+INSERT INTO `stock_dict` VALUES (3905, '斯迪克', '300806', 'sz');
+INSERT INTO `stock_dict` VALUES (3906, '格力博', '301260', 'sz');
+INSERT INTO `stock_dict` VALUES (3907, '瑞达期货', '002961', 'sz');
+INSERT INTO `stock_dict` VALUES (3908, '锦龙股份', '000712', 'sz');
+INSERT INTO `stock_dict` VALUES (3909, '新华制药', '000756', 'sz');
+INSERT INTO `stock_dict` VALUES (3910, '四川双马', '000935', 'sz');
+INSERT INTO `stock_dict` VALUES (3911, '福晶科技', '002222', 'sz');
+INSERT INTO `stock_dict` VALUES (3912, '吉林敖东', '000623', 'sz');
+INSERT INTO `stock_dict` VALUES (3913, '金刚光伏', '300093', 'sz');
+INSERT INTO `stock_dict` VALUES (3914, '华塑科技', '301157', 'sz');
+INSERT INTO `stock_dict` VALUES (3915, '永福股份', '300712', 'sz');
+INSERT INTO `stock_dict` VALUES (3916, '博硕科技', '300951', 'sz');
+INSERT INTO `stock_dict` VALUES (3917, '丽珠集团', '000513', 'sz');
+INSERT INTO `stock_dict` VALUES (3918, '致尚科技', '301486', 'sz');
+INSERT INTO `stock_dict` VALUES (3919, '豪鹏科技', '001283', 'sz');
+INSERT INTO `stock_dict` VALUES (3920, '博苑股份', '301617', 'sz');
+INSERT INTO `stock_dict` VALUES (3921, 'N博科', '301598', 'sz');
+INSERT INTO `stock_dict` VALUES (3922, 'N蓝宇', '301585', 'sz');
+INSERT INTO `stock_dict` VALUES (3923, '贝隆精密', '301567', 'sz');
+INSERT INTO `stock_dict` VALUES (3924, '中集环科', '301559', 'sz');
+INSERT INTO `stock_dict` VALUES (3925, '丰茂股份', '301459', 'sz');
+INSERT INTO `stock_dict` VALUES (3926, '汉仪股份', '301270', 'sz');
+INSERT INTO `stock_dict` VALUES (3927, '招标股份', '301136', 'sz');
+INSERT INTO `stock_dict` VALUES (3928, '达嘉维康', '301126', 'sz');
+INSERT INTO `stock_dict` VALUES (3929, '汇隆新材', '301057', 'sz');
+INSERT INTO `stock_dict` VALUES (3930, '能辉科技', '301046', 'sz');
+INSERT INTO `stock_dict` VALUES (3931, '迈普医学', '301033', 'sz');
+INSERT INTO `stock_dict` VALUES (3932, '英诺激光', '301021', 'sz');
+INSERT INTO `stock_dict` VALUES (3933, '漱玉平民', '301017', 'sz');
+INSERT INTO `stock_dict` VALUES (3934, '玉马遮阳', '300993', 'sz');
+INSERT INTO `stock_dict` VALUES (3935, '首都在线', '300846', 'sz');
+INSERT INTO `stock_dict` VALUES (3936, '东岳硅材', '300821', 'sz');
+INSERT INTO `stock_dict` VALUES (3937, '左江退', '300799', 'sz');
+INSERT INTO `stock_dict` VALUES (3938, '钢研纳克', '300797', 'sz');
+INSERT INTO `stock_dict` VALUES (3939, '越博退', '300742', 'sz');
+INSERT INTO `stock_dict` VALUES (3940, '设研院', '300732', 'sz');
+INSERT INTO `stock_dict` VALUES (3941, '乐歌股份', '300729', 'sz');
+INSERT INTO `stock_dict` VALUES (3942, '天宇股份', '300702', 'sz');
+INSERT INTO `stock_dict` VALUES (3943, '盛弘股份', '300693', 'sz');
+INSERT INTO `stock_dict` VALUES (3944, '创业黑马', '300688', 'sz');
+INSERT INTO `stock_dict` VALUES (3945, '飞鹿股份', '300665', 'sz');
+INSERT INTO `stock_dict` VALUES (3946, '万通智控', '300643', 'sz');
+INSERT INTO `stock_dict` VALUES (3947, '中潜退', '300526', 'sz');
+INSERT INTO `stock_dict` VALUES (3948, '海顺新材', '300501', 'sz');
+INSERT INTO `stock_dict` VALUES (3949, '*ST美尚', '300495', 'sz');
+INSERT INTO `stock_dict` VALUES (3950, '杭州高新', '300478', 'sz');
+INSERT INTO `stock_dict` VALUES (3951, '暴风退', '300431', 'sz');
+INSERT INTO `stock_dict` VALUES (3952, '五洋自控', '300420', 'sz');
+INSERT INTO `stock_dict` VALUES (3953, '腾信退', '300392', 'sz');
+INSERT INTO `stock_dict` VALUES (3954, '欣泰退', '300372', 'sz');
+INSERT INTO `stock_dict` VALUES (3955, '汇中股份', '300371', 'sz');
+INSERT INTO `stock_dict` VALUES (3956, '网力退', '300367', 'sz');
+INSERT INTO `stock_dict` VALUES (3957, '天翔退', '300362', 'sz');
+INSERT INTO `stock_dict` VALUES (3958, '光一退', '300356', 'sz');
+INSERT INTO `stock_dict` VALUES (3959, '新文退', '300336', 'sz');
+INSERT INTO `stock_dict` VALUES (3960, '计通退', '300330', 'sz');
+INSERT INTO `stock_dict` VALUES (3961, '德威退', '300325', 'sz');
+INSERT INTO `stock_dict` VALUES (3962, '邦讯退', '300312', 'sz');
+INSERT INTO `stock_dict` VALUES (3963, '吉艾退', '300309', 'sz');
+INSERT INTO `stock_dict` VALUES (3964, '蓝盾退', '300297', 'sz');
+INSERT INTO `stock_dict` VALUES (3965, '三盛退', '300282', 'sz');
+INSERT INTO `stock_dict` VALUES (3966, '和佳退', '300273', 'sz');
+INSERT INTO `stock_dict` VALUES (3967, '*ST巴安', '300262', 'sz');
+INSERT INTO `stock_dict` VALUES (3968, '永利股份', '300230', 'sz');
+INSERT INTO `stock_dict` VALUES (3969, '千山退', '300216', 'sz');
+INSERT INTO `stock_dict` VALUES (3970, '亿通科技', '300211', 'sz');
+INSERT INTO `stock_dict` VALUES (3971, '聚龙退', '300202', 'sz');
+INSERT INTO `stock_dict` VALUES (3972, '长海股份', '300196', 'sz');
+INSERT INTO `stock_dict` VALUES (3973, '永清环保', '300187', 'sz');
+INSERT INTO `stock_dict` VALUES (3974, '大华农', '300186', 'sz');
+INSERT INTO `stock_dict` VALUES (3975, '腾邦退', '300178', 'sz');
+INSERT INTO `stock_dict` VALUES (3976, '*ST迪威', '300167', 'sz');
+INSERT INTO `stock_dict` VALUES (3977, '神雾退', '300156', 'sz');
+INSERT INTO `stock_dict` VALUES (3978, '锐奇股份', '300126', 'sz');
+INSERT INTO `stock_dict` VALUES (3979, '*ST保力', '300116', 'sz');
+INSERT INTO `stock_dict` VALUES (3980, '*ST吉药', '300108', 'sz');
+INSERT INTO `stock_dict` VALUES (3981, '乐视退', '300104', 'sz');
+INSERT INTO `stock_dict` VALUES (3982, '华伍股份', '300095', 'sz');
+INSERT INTO `stock_dict` VALUES (3983, '盛运退', '300090', 'sz');
+INSERT INTO `stock_dict` VALUES (3984, '文化退', '300089', 'sz');
+INSERT INTO `stock_dict` VALUES (3985, '华平股份', '300074', 'sz');
+INSERT INTO `stock_dict` VALUES (3986, '碧水源', '300070', 'sz');
+INSERT INTO `stock_dict` VALUES (3987, '三川智慧', '300066', 'sz');
+INSERT INTO `stock_dict` VALUES (3988, '金刚退', '300064', 'sz');
+INSERT INTO `stock_dict` VALUES (3989, '蓝色光标', '300058', 'sz');
+INSERT INTO `stock_dict` VALUES (3990, '数知退', '300038', 'sz');
+INSERT INTO `stock_dict` VALUES (3991, '金亚退', '300028', 'sz');
+INSERT INTO `stock_dict` VALUES (3992, '宝德退', '300023', 'sz');
+INSERT INTO `stock_dict` VALUES (3993, '博杰股份', '002975', 'sz');
+INSERT INTO `stock_dict` VALUES (3994, '中新赛克', '002912', 'sz');
+INSERT INTO `stock_dict` VALUES (3995, '瀛通通讯', '002861', 'sz');
+INSERT INTO `stock_dict` VALUES (3996, '美芝股份', '002856', 'sz');
+INSERT INTO `stock_dict` VALUES (3997, '和胜股份', '002824', 'sz');
+INSERT INTO `stock_dict` VALUES (3998, '华锋股份', '002806', 'sz');
+INSERT INTO `stock_dict` VALUES (3999, '丰元股份', '002805', 'sz');
+INSERT INTO `stock_dict` VALUES (4000, '天顺股份', '002800', 'sz');
+INSERT INTO `stock_dict` VALUES (4001, '奇信退', '002781', 'sz');
+INSERT INTO `stock_dict` VALUES (4002, '*ST柏龙', '002776', 'sz');
+INSERT INTO `stock_dict` VALUES (4003, '科迪退', '002770', 'sz');
+INSERT INTO `stock_dict` VALUES (4004, '易尚退', '002751', 'sz');
+INSERT INTO `stock_dict` VALUES (4005, '国光股份', '002749', 'sz');
+INSERT INTO `stock_dict` VALUES (4006, '富煌钢构', '002743', 'sz');
+INSERT INTO `stock_dict` VALUES (4007, '*ST爱迪', '002740', 'sz');
+INSERT INTO `stock_dict` VALUES (4008, '思美传媒', '002712', 'sz');
+INSERT INTO `stock_dict` VALUES (4009, '欧浦退', '002711', 'sz');
+INSERT INTO `stock_dict` VALUES (4010, '*ST美盛', '002699', 'sz');
+INSERT INTO `stock_dict` VALUES (4011, '猛狮退', '002684', 'sz');
+INSERT INTO `stock_dict` VALUES (4012, '龙洲股份', '002682', 'sz');
+INSERT INTO `stock_dict` VALUES (4013, '长生退', '002680', 'sz');
+INSERT INTO `stock_dict` VALUES (4014, '威领股份', '002667', 'sz');
+INSERT INTO `stock_dict` VALUES (4015, 'ST航高', '002665', 'sz');
+INSERT INTO `stock_dict` VALUES (4016, '普邦股份', '002663', 'sz');
+INSERT INTO `stock_dict` VALUES (4017, 'ST摩登', '002656', 'sz');
+INSERT INTO `stock_dict` VALUES (4018, '仁东控股', '002647', 'sz');
+INSERT INTO `stock_dict` VALUES (4019, '*ST美吉', '002621', 'sz');
+INSERT INTO `stock_dict` VALUES (4020, '*ST艾格', '002619', 'sz');
+INSERT INTO `stock_dict` VALUES (4021, '丹邦退', '002618', 'sz');
+INSERT INTO `stock_dict` VALUES (4022, 'ST爱康', '002610', 'sz');
+INSERT INTO `stock_dict` VALUES (4023, '龙力退', '002604', 'sz');
+INSERT INTO `stock_dict` VALUES (4024, '圣阳股份', '002580', 'sz');
+INSERT INTO `stock_dict` VALUES (4025, '顺灏股份', '002565', 'sz');
+INSERT INTO `stock_dict` VALUES (4026, '辉隆股份', '002556', 'sz');
+INSERT INTO `stock_dict` VALUES (4027, '西子洁能', '002534', 'sz');
+INSERT INTO `stock_dict` VALUES (4028, '天茂退', '002509', 'sz');
+INSERT INTO `stock_dict` VALUES (4029, '鹏都农牧', '002505', 'sz');
+INSERT INTO `stock_dict` VALUES (4030, '*ST弘高', '002504', 'sz');
+INSERT INTO `stock_dict` VALUES (4031, '*ST搜特', '002503', 'sz');
+INSERT INTO `stock_dict` VALUES (4032, 'ST鼎龙', '002502', 'sz');
+INSERT INTO `stock_dict` VALUES (4033, '科林退', '002499', 'sz');
+INSERT INTO `stock_dict` VALUES (4034, '雏鹰退', '002477', 'sz');
+INSERT INTO `stock_dict` VALUES (4035, '圣莱退', '002473', 'sz');
+INSERT INTO `stock_dict` VALUES (4036, '众应退', '002464', 'sz');
+INSERT INTO `stock_dict` VALUES (4037, '康得退', '002450', 'sz');
+INSERT INTO `stock_dict` VALUES (4038, '晨鑫退', '002447', 'sz');
+INSERT INTO `stock_dict` VALUES (4039, 'ST长康', '002435', 'sz');
+INSERT INTO `stock_dict` VALUES (4040, '太安退', '002433', 'sz');
+INSERT INTO `stock_dict` VALUES (4041, '尤夫股份', '002427', 'sz');
+INSERT INTO `stock_dict` VALUES (4042, '深南退', '002417', 'sz');
+INSERT INTO `stock_dict` VALUES (4043, '必康退', '002411', 'sz');
+INSERT INTO `stock_dict` VALUES (4044, '天原股份', '002386', 'sz');
+INSERT INTO `stock_dict` VALUES (4045, '宏创控股', '002379', 'sz');
+INSERT INTO `stock_dict` VALUES (4046, '北讯退', '002359', 'sz');
+INSERT INTO `stock_dict` VALUES (4047, 'ST新纶', '002341', 'sz');
+INSERT INTO `stock_dict` VALUES (4048, '格林美', '002340', 'sz');
+INSERT INTO `stock_dict` VALUES (4049, '罗普斯金', '002333', 'sz');
+INSERT INTO `stock_dict` VALUES (4050, '*ST洪涛', '002325', 'sz');
+INSERT INTO `stock_dict` VALUES (4051, '*ST中利', '002309', 'sz');
+INSERT INTO `stock_dict` VALUES (4052, '*ST威创', '002308', 'sz');
+INSERT INTO `stock_dict` VALUES (4053, '*ST超华', '002288', 'sz');
+INSERT INTO `stock_dict` VALUES (4054, 'ST联络', '002280', 'sz');
+INSERT INTO `stock_dict` VALUES (4055, '友阿股份', '002277', 'sz');
+INSERT INTO `stock_dict` VALUES (4056, '桂林三金', '002275', 'sz');
+INSERT INTO `stock_dict` VALUES (4057, '德奥退', '002260', 'sz');
+INSERT INTO `stock_dict` VALUES (4058, '蔚蓝锂芯', '002245', 'sz');
+INSERT INTO `stock_dict` VALUES (4059, '恒邦股份', '002237', 'sz');
+INSERT INTO `stock_dict` VALUES (4060, '东华能源', '002221', 'sz');
+INSERT INTO `stock_dict` VALUES (4061, '天宝退', '002220', 'sz');
+INSERT INTO `stock_dict` VALUES (4062, '大连重工', '002204', 'sz');
+INSERT INTO `stock_dict` VALUES (4063, '中光学', '002189', 'sz');
+INSERT INTO `stock_dict` VALUES (4064, '楚江新材', '002171', 'sz');
+INSERT INTO `stock_dict` VALUES (4065, '智光电气', '002169', 'sz');
+INSERT INTO `stock_dict` VALUES (4066, 'ST惠程', '002168', 'sz');
+INSERT INTO `stock_dict` VALUES (4067, '通富微电', '002156', 'sz');
+INSERT INTO `stock_dict` VALUES (4068, '新光退', '002147', 'sz');
+INSERT INTO `stock_dict` VALUES (4069, '印纪退', '002143', 'sz');
+INSERT INTO `stock_dict` VALUES (4070, '*ST紫鑫', '002118', 'sz');
+INSERT INTO `stock_dict` VALUES (4071, '*ST天润', '002113', 'sz');
+INSERT INTO `stock_dict` VALUES (4072, '沃华医药', '002107', 'sz');
+INSERT INTO `stock_dict` VALUES (4073, '新海退', '002089', 'sz');
+INSERT INTO `stock_dict` VALUES (4074, '新纺退', '002087', 'sz');
+INSERT INTO `stock_dict` VALUES (4075, '长城退', '002071', 'sz');
+INSERT INTO `stock_dict` VALUES (4076, '众和退', '002070', 'sz');
+INSERT INTO `stock_dict` VALUES (4077, '东华软件', '002065', 'sz');
+INSERT INTO `stock_dict` VALUES (4078, '七 匹 狼', '002029', 'sz');
+INSERT INTO `stock_dict` VALUES (4079, '华信退', '002018', 'sz');
+INSERT INTO `stock_dict` VALUES (4080, '中航机电', '002013', 'sz');
+INSERT INTO `stock_dict` VALUES (4081, 'ST鸿达', '002002', 'sz');
+INSERT INTO `stock_dict` VALUES (4082, '立新能源', '001258', 'sz');
+INSERT INTO `stock_dict` VALUES (4083, '中期退', '000996', 'sz');
+INSERT INTO `stock_dict` VALUES (4084, 'ST九芝', '000989', 'sz');
+INSERT INTO `stock_dict` VALUES (4085, '中银绒业', '000982', 'sz');
+INSERT INTO `stock_dict` VALUES (4086, '中弘退', '000979', 'sz');
+INSERT INTO `stock_dict` VALUES (4087, '*ST华铁', '000976', 'sz');
+INSERT INTO `stock_dict` VALUES (4088, '*ST高升', '000971', 'sz');
+INSERT INTO `stock_dict` VALUES (4089, 'ST中南', '000961', 'sz');
+INSERT INTO `stock_dict` VALUES (4090, '中原油气', '000956', 'sz');
+INSERT INTO `stock_dict` VALUES (4091, '凯迪退', '000939', 'sz');
+INSERT INTO `stock_dict` VALUES (4092, '华西股份', '000936', 'sz');
+INSERT INTO `stock_dict` VALUES (4093, '*ST嘉凯', '000918', 'sz');
+INSERT INTO `stock_dict` VALUES (4094, '华北高速', '000916', 'sz');
+INSERT INTO `stock_dict` VALUES (4095, '大亚圣象', '000910', 'sz');
+INSERT INTO `stock_dict` VALUES (4096, 'ST数源', '000909', 'sz');
+INSERT INTO `stock_dict` VALUES (4097, '吉电股份', '000875', 'sz');
+INSERT INTO `stock_dict` VALUES (4098, '扬子石化', '000866', 'sz');
+INSERT INTO `stock_dict` VALUES (4099, '三湘印象', '000863', 'sz');
+INSERT INTO `stock_dict` VALUES (4100, '海印股份', '000861', 'sz');
+INSERT INTO `stock_dict` VALUES (4101, '国风新材', '000859', 'sz');
+INSERT INTO `stock_dict` VALUES (4102, 'ST富通', '000836', 'sz');
+INSERT INTO `stock_dict` VALUES (4103, '长动退', '000835', 'sz');
+INSERT INTO `stock_dict` VALUES (4104, '*ST龙涤', '000832', 'sz');
+INSERT INTO `stock_dict` VALUES (4105, '*ST长兴', '000827', 'sz');
+INSERT INTO `stock_dict` VALUES (4106, '航锦科技', '000818', 'sz');
+INSERT INTO `stock_dict` VALUES (4107, '辽河油田', '000817', 'sz');
+INSERT INTO `stock_dict` VALUES (4108, '银河退', '000806', 'sz');
+INSERT INTO `stock_dict` VALUES (4109, '*ST炎黄', '000805', 'sz');
+INSERT INTO `stock_dict` VALUES (4110, '*ST创智', '000787', 'sz');
+INSERT INTO `stock_dict` VALUES (4111, 'ST平能', '000780', 'sz');
+INSERT INTO `stock_dict` VALUES (4112, '*ST大菲', '000769', 'sz');
+INSERT INTO `stock_dict` VALUES (4113, '*ST华信', '000765', 'sz');
+INSERT INTO `stock_dict` VALUES (4114, '锦州石化', '000763', 'sz');
+INSERT INTO `stock_dict` VALUES (4115, '斯太退', '000760', 'sz');
+INSERT INTO `stock_dict` VALUES (4116, '长城信息', '000748', 'sz');
+INSERT INTO `stock_dict` VALUES (4117, 'ST泰禾', '000732', 'sz');
+INSERT INTO `stock_dict` VALUES (4118, '*ST环保', '000730', 'sz');
+INSERT INTO `stock_dict` VALUES (4119, '中信特钢', '000708', 'sz');
+INSERT INTO `stock_dict` VALUES (4120, '模塑科技', '000700', 'sz');
+INSERT INTO `stock_dict` VALUES (4121, 'S*ST佳纸', '000699', 'sz');
+INSERT INTO `stock_dict` VALUES (4122, '华泽退', '000693', 'sz');
+INSERT INTO `stock_dict` VALUES (4123, 'ST宏业', '000689', 'sz');
+INSERT INTO `stock_dict` VALUES (4124, '华讯退', '000687', 'sz');
+INSERT INTO `stock_dict` VALUES (4125, '中山公用', '000685', 'sz');
+INSERT INTO `stock_dict` VALUES (4126, 'ST银山', '000675', 'sz');
+INSERT INTO `stock_dict` VALUES (4127, '当代退', '000673', 'sz');
+INSERT INTO `stock_dict` VALUES (4128, 'ST阳光城', '000671', 'sz');
+INSERT INTO `stock_dict` VALUES (4129, 'ST美置', '000667', 'sz');
+INSERT INTO `stock_dict` VALUES (4130, '经纬纺机', '000666', 'sz');
+INSERT INTO `stock_dict` VALUES (4131, '天夏退', '000662', 'sz');
+INSERT INTO `stock_dict` VALUES (4132, '*ST南华', '000660', 'sz');
+INSERT INTO `stock_dict` VALUES (4133, 'ST海洋', '000658', 'sz');
+INSERT INTO `stock_dict` VALUES (4134, '*ST金科', '000656', 'sz');
+INSERT INTO `stock_dict` VALUES (4135, 'ST九州', '000653', 'sz');
+INSERT INTO `stock_dict` VALUES (4136, '泰达股份', '000652', 'sz');
+INSERT INTO `stock_dict` VALUES (4137, '合金投资', '000633', 'sz');
+INSERT INTO `stock_dict` VALUES (4138, '铜陵有色', '000630', 'sz');
+INSERT INTO `stock_dict` VALUES (4139, '*ST比特', '000621', 'sz');
+INSERT INTO `stock_dict` VALUES (4140, '吉林化工', '000618', 'sz');
+INSERT INTO `stock_dict` VALUES (4141, '*ST海投', '000616', 'sz');
+INSERT INTO `stock_dict` VALUES (4142, '东海A退', '000613', 'sz');
+INSERT INTO `stock_dict` VALUES (4143, '焦作万方', '000612', 'sz');
+INSERT INTO `stock_dict` VALUES (4144, '天首退', '000611', 'sz');
+INSERT INTO `stock_dict` VALUES (4145, '顺利退', '000606', 'sz');
+INSERT INTO `stock_dict` VALUES (4146, '金马集团', '000602', 'sz');
+INSERT INTO `stock_dict` VALUES (4147, '国恒退', '000594', 'sz');
+INSERT INTO `stock_dict` VALUES (4148, 'PT粤金曼', '000588', 'sz');
+INSERT INTO `stock_dict` VALUES (4149, '*ST金洲', '000587', 'sz');
+INSERT INTO `stock_dict` VALUES (4150, '东电退', '000585', 'sz');
+INSERT INTO `stock_dict` VALUES (4151, 'S*ST托普', '000583', 'sz');
+INSERT INTO `stock_dict` VALUES (4152, '盐湖集团', '000578', 'sz');
+INSERT INTO `stock_dict` VALUES (4153, '长城股份', '000569', 'sz');
+INSERT INTO `stock_dict` VALUES (4154, '陕国投Ａ', '000563', 'sz');
+INSERT INTO `stock_dict` VALUES (4155, '宏源证券', '000562', 'sz');
+INSERT INTO `stock_dict` VALUES (4156, 'PT南洋', '000556', 'sz');
+INSERT INTO `stock_dict` VALUES (4157, 'S湘火炬', '000549', 'sz');
+INSERT INTO `stock_dict` VALUES (4158, 'TCL通讯', '000542', 'sz');
+INSERT INTO `stock_dict` VALUES (4159, '佛山照明', '000541', 'sz');
+INSERT INTO `stock_dict` VALUES (4160, '*ST中天', '000540', 'sz');
+INSERT INTO `stock_dict` VALUES (4161, '*ST猴王', '000535', 'sz');
+INSERT INTO `stock_dict` VALUES (4162, '穗恒运Ａ', '000531', 'sz');
+INSERT INTO `stock_dict` VALUES (4163, '美的电器', '000527', 'sz');
+INSERT INTO `stock_dict` VALUES (4164, 'ST红太阳', '000525', 'sz');
+INSERT INTO `stock_dict` VALUES (4165, '白云山A', '000522', 'sz');
+INSERT INTO `stock_dict` VALUES (4166, '攀渝钛业', '000515', 'sz');
+INSERT INTO `stock_dict` VALUES (4167, '烯碳退', '000511', 'sz');
+INSERT INTO `stock_dict` VALUES (4168, '琼民源A', '000508', 'sz');
+INSERT INTO `stock_dict` VALUES (4169, '京粮控股', '000505', 'sz');
+INSERT INTO `stock_dict` VALUES (4170, '绿景退', '000502', 'sz');
+INSERT INTO `stock_dict` VALUES (4171, '兴业银锡', '000426', 'sz');
+INSERT INTO `stock_dict` VALUES (4172, '徐工机械', '000425', 'sz');
+INSERT INTO `stock_dict` VALUES (4173, '小天鹅A', '000418', 'sz');
+INSERT INTO `stock_dict` VALUES (4174, '*ST民控', '000416', 'sz');
+INSERT INTO `stock_dict` VALUES (4175, 'ST旭电', '000413', 'sz');
+INSERT INTO `stock_dict` VALUES (4176, 'ST五环', '000412', 'sz');
+INSERT INTO `stock_dict` VALUES (4177, '石油大明', '000406', 'sz');
+INSERT INTO `stock_dict` VALUES (4178, 'ST鑫光', '000405', 'sz');
+INSERT INTO `stock_dict` VALUES (4179, '*ST宜康', '000150', 'sz');
+INSERT INTO `stock_dict` VALUES (4180, '中金岭南', '000060', 'sz');
+INSERT INTO `stock_dict` VALUES (4181, '德赛电池', '000049', 'sz');
+INSERT INTO `stock_dict` VALUES (4182, 'ST中侨', '000047', 'sz');
+INSERT INTO `stock_dict` VALUES (4183, '*ST泛海', '000046', 'sz');
+INSERT INTO `stock_dict` VALUES (4184, '大通退', '000038', 'sz');
+INSERT INTO `stock_dict` VALUES (4185, '新都退', '000033', 'sz');
+INSERT INTO `stock_dict` VALUES (4186, '招商地产', '000024', 'sz');
+INSERT INTO `stock_dict` VALUES (4187, '*ST深天', '000023', 'sz');
+INSERT INTO `stock_dict` VALUES (4188, '神城A退', '000018', 'sz');
+INSERT INTO `stock_dict` VALUES (4189, 'PT中浩A', '000015', 'sz');
+INSERT INTO `stock_dict` VALUES (4190, '*ST石化A', '000013', 'sz');
+INSERT INTO `stock_dict` VALUES (4191, '南  玻Ａ', '000012', 'sz');
+INSERT INTO `stock_dict` VALUES (4192, '深振业Ａ', '000006', 'sz');
+INSERT INTO `stock_dict` VALUES (4193, 'ST星源', '000005', 'sz');
+INSERT INTO `stock_dict` VALUES (4194, 'PT金田A', '000003', 'sz');
+INSERT INTO `stock_dict` VALUES (4195, '银之杰', '300085', 'sz');
+INSERT INTO `stock_dict` VALUES (4196, '科瑞思', '301314', 'sz');
+INSERT INTO `stock_dict` VALUES (4197, '同飞股份', '300990', 'sz');
+INSERT INTO `stock_dict` VALUES (4198, '信立泰', '002294', 'sz');
+INSERT INTO `stock_dict` VALUES (4199, '海力风电', '301155', 'sz');
+INSERT INTO `stock_dict` VALUES (4200, '华中数控', '300161', 'sz');
+INSERT INTO `stock_dict` VALUES (4201, '通灵股份', '301168', 'sz');
+INSERT INTO `stock_dict` VALUES (4202, '华盛昌', '002980', 'sz');
+INSERT INTO `stock_dict` VALUES (4203, '巨星科技', '002444', 'sz');
+INSERT INTO `stock_dict` VALUES (4204, '盟固利', '301487', 'sz');
+INSERT INTO `stock_dict` VALUES (4205, '蜀道装备', '300540', 'sz');
+INSERT INTO `stock_dict` VALUES (4206, '金禄电子', '301282', 'sz');
+INSERT INTO `stock_dict` VALUES (4207, '宇邦新材', '301266', 'sz');
+INSERT INTO `stock_dict` VALUES (4208, '惠威科技', '002888', 'sz');
+INSERT INTO `stock_dict` VALUES (4209, '森鹰窗业', '301227', 'sz');
+INSERT INTO `stock_dict` VALUES (4210, '军信股份', '301109', 'sz');
+INSERT INTO `stock_dict` VALUES (4211, '东软载波', '300183', 'sz');
+INSERT INTO `stock_dict` VALUES (4212, '炜冈科技', '001256', 'sz');
+INSERT INTO `stock_dict` VALUES (4213, '尚太科技', '001301', 'sz');
+INSERT INTO `stock_dict` VALUES (4214, '秋田微', '300939', 'sz');
+INSERT INTO `stock_dict` VALUES (4215, '普洛药业', '000739', 'sz');
+INSERT INTO `stock_dict` VALUES (4216, '金利华电', '300069', 'sz');
+INSERT INTO `stock_dict` VALUES (4217, '松原股份', '300893', 'sz');
+INSERT INTO `stock_dict` VALUES (4218, '盛新锂能', '002240', 'sz');
+INSERT INTO `stock_dict` VALUES (4219, '豪迈科技', '002595', 'sz');
+INSERT INTO `stock_dict` VALUES (4220, '瑞纳智能', '301129', 'sz');
+INSERT INTO `stock_dict` VALUES (4221, '浙江恒威', '301222', 'sz');
+INSERT INTO `stock_dict` VALUES (4222, '长安汽车', '000625', 'sz');
+INSERT INTO `stock_dict` VALUES (4223, '春晖智控', '300943', 'sz');
+INSERT INTO `stock_dict` VALUES (4224, '城发环境', '000885', 'sz');
+INSERT INTO `stock_dict` VALUES (4225, '金城医药', '300233', 'sz');
+INSERT INTO `stock_dict` VALUES (4226, '广东鸿图', '002101', 'sz');
+INSERT INTO `stock_dict` VALUES (4227, '明月镜片', '301101', 'sz');
+INSERT INTO `stock_dict` VALUES (4228, '可立克', '002782', 'sz');
+INSERT INTO `stock_dict` VALUES (4229, '世名科技', '300522', 'sz');
+INSERT INTO `stock_dict` VALUES (4230, '粤高速Ａ', '000429', 'sz');
+INSERT INTO `stock_dict` VALUES (4231, '博盈特焊', '301468', 'sz');
+INSERT INTO `stock_dict` VALUES (4232, '采纳股份', '301122', 'sz');
+INSERT INTO `stock_dict` VALUES (4233, '卓胜微', '300782', 'sz');
+INSERT INTO `stock_dict` VALUES (4234, '东方电子', '000682', 'sz');
+INSERT INTO `stock_dict` VALUES (4235, '蓝黛科技', '002765', 'sz');
+INSERT INTO `stock_dict` VALUES (4236, '翔丰华', '300890', 'sz');
+INSERT INTO `stock_dict` VALUES (4237, '优宁维', '301166', 'sz');
+INSERT INTO `stock_dict` VALUES (4238, '港通医疗', '301515', 'sz');
+INSERT INTO `stock_dict` VALUES (4239, '拓维信息', '002261', 'sz');
+INSERT INTO `stock_dict` VALUES (4240, '盈康生命', '300143', 'sz');
+INSERT INTO `stock_dict` VALUES (4241, '兴业科技', '002674', 'sz');
+INSERT INTO `stock_dict` VALUES (4242, '金富科技', '003018', 'sz');
+INSERT INTO `stock_dict` VALUES (4243, '容大感光', '300576', 'sz');
+INSERT INTO `stock_dict` VALUES (4244, '杰美特', '300868', 'sz');
+INSERT INTO `stock_dict` VALUES (4245, '超声电子', '000823', 'sz');
+INSERT INTO `stock_dict` VALUES (4246, '万马科技', '300698', 'sz');
+INSERT INTO `stock_dict` VALUES (4247, '富乐德', '301297', 'sz');
+INSERT INTO `stock_dict` VALUES (4248, '中工国际', '002051', 'sz');
+INSERT INTO `stock_dict` VALUES (4249, '木林森', '002745', 'sz');
+INSERT INTO `stock_dict` VALUES (4250, '中威电子', '300270', 'sz');
+INSERT INTO `stock_dict` VALUES (4251, '楚天科技', '300358', 'sz');
+INSERT INTO `stock_dict` VALUES (4252, '慈星股份', '300307', 'sz');
+INSERT INTO `stock_dict` VALUES (4253, '中金辐照', '300962', 'sz');
+INSERT INTO `stock_dict` VALUES (4254, '光迅科技', '002281', 'sz');
+INSERT INTO `stock_dict` VALUES (4255, '山河智能', '002097', 'sz');
+INSERT INTO `stock_dict` VALUES (4256, '中集集团', '000039', 'sz');
+INSERT INTO `stock_dict` VALUES (4257, '中瓷电子', '003031', 'sz');
+INSERT INTO `stock_dict` VALUES (4258, '国泰环保', '301203', 'sz');
+INSERT INTO `stock_dict` VALUES (4259, '欣旺达', '300207', 'sz');
+INSERT INTO `stock_dict` VALUES (4260, '北部湾港', '000582', 'sz');
+INSERT INTO `stock_dict` VALUES (4261, '泰恩康', '301263', 'sz');
+INSERT INTO `stock_dict` VALUES (4262, '捷捷微电', '300623', 'sz');
+INSERT INTO `stock_dict` VALUES (4263, '中红医疗', '300981', 'sz');
+INSERT INTO `stock_dict` VALUES (4264, '达刚控股', '300103', 'sz');
+INSERT INTO `stock_dict` VALUES (4265, '新宝股份', '002705', 'sz');
+INSERT INTO `stock_dict` VALUES (4266, '海辰药业', '300584', 'sz');
+INSERT INTO `stock_dict` VALUES (4267, '亚钾国际', '000893', 'sz');
+INSERT INTO `stock_dict` VALUES (4268, '中辰股份', '300933', 'sz');
+INSERT INTO `stock_dict` VALUES (4269, '深圳机场', '000089', 'sz');
+INSERT INTO `stock_dict` VALUES (4270, '德艺文创', '300640', 'sz');
+INSERT INTO `stock_dict` VALUES (4271, '腾远钴业', '301219', 'sz');
+INSERT INTO `stock_dict` VALUES (4272, '佳创视讯', '300264', 'sz');
+INSERT INTO `stock_dict` VALUES (4273, '雪迪龙', '002658', 'sz');
+INSERT INTO `stock_dict` VALUES (4274, '深南电路', '002916', 'sz');
+INSERT INTO `stock_dict` VALUES (4275, '深粮控股', '000019', 'sz');
+INSERT INTO `stock_dict` VALUES (4276, '嘉事堂', '002462', 'sz');
+INSERT INTO `stock_dict` VALUES (4277, '开能健康', '300272', 'sz');
+INSERT INTO `stock_dict` VALUES (4278, '苏试试验', '300416', 'sz');
+INSERT INTO `stock_dict` VALUES (4279, '新宙邦', '300037', 'sz');
+INSERT INTO `stock_dict` VALUES (4280, '汉钟精机', '002158', 'sz');
+INSERT INTO `stock_dict` VALUES (4281, '云南铜业', '000878', 'sz');
+INSERT INTO `stock_dict` VALUES (4282, '传智教育', '003032', 'sz');
+INSERT INTO `stock_dict` VALUES (4283, '雅创电子', '301099', 'sz');
+INSERT INTO `stock_dict` VALUES (4284, '华利集团', '300979', 'sz');
+INSERT INTO `stock_dict` VALUES (4285, '日科化学', '300214', 'sz');
+INSERT INTO `stock_dict` VALUES (4286, '天壕能源', '300332', 'sz');
+INSERT INTO `stock_dict` VALUES (4287, '上海凯鑫', '300899', 'sz');
+INSERT INTO `stock_dict` VALUES (4288, '新朋股份', '002328', 'sz');
+INSERT INTO `stock_dict` VALUES (4289, 'ST特信', '000070', 'sz');
+INSERT INTO `stock_dict` VALUES (4290, '智飞生物', '300122', 'sz');
+INSERT INTO `stock_dict` VALUES (4291, '通业科技', '300960', 'sz');
+INSERT INTO `stock_dict` VALUES (4292, '岳阳兴长', '000819', 'sz');
+INSERT INTO `stock_dict` VALUES (4293, '测绘股份', '300826', 'sz');
+INSERT INTO `stock_dict` VALUES (4294, '西藏矿业', '000762', 'sz');
+INSERT INTO `stock_dict` VALUES (4295, '蒙泰高新', '300876', 'sz');
+INSERT INTO `stock_dict` VALUES (4296, 'ST天龙', '300029', 'sz');
+INSERT INTO `stock_dict` VALUES (4297, '兴森科技', '002436', 'sz');
+INSERT INTO `stock_dict` VALUES (4298, '东方电热', '300217', 'sz');
+INSERT INTO `stock_dict` VALUES (4299, '福事特', '301446', 'sz');
+INSERT INTO `stock_dict` VALUES (4300, '以岭药业', '002603', 'sz');
+INSERT INTO `stock_dict` VALUES (4301, '海能达', '002583', 'sz');
+INSERT INTO `stock_dict` VALUES (4302, '纳思达', '002180', 'sz');
+INSERT INTO `stock_dict` VALUES (4303, '天能重工', '300569', 'sz');
+INSERT INTO `stock_dict` VALUES (4304, '亿道信息', '001314', 'sz');
+INSERT INTO `stock_dict` VALUES (4305, '隆华新材', '301149', 'sz');
+INSERT INTO `stock_dict` VALUES (4306, '明牌珠宝', '002574', 'sz');
+INSERT INTO `stock_dict` VALUES (4307, '争光股份', '301092', 'sz');
+INSERT INTO `stock_dict` VALUES (4308, '智度股份', '000676', 'sz');
+INSERT INTO `stock_dict` VALUES (4309, '宏鑫科技', '301539', 'sz');
+INSERT INTO `stock_dict` VALUES (4310, '伟隆股份', '002871', 'sz');
+INSERT INTO `stock_dict` VALUES (4311, '深圳华强', '000062', 'sz');
+INSERT INTO `stock_dict` VALUES (4312, '多浦乐', '301528', 'sz');
+INSERT INTO `stock_dict` VALUES (4313, '德力股份', '002571', 'sz');
+INSERT INTO `stock_dict` VALUES (4314, '孚日股份', '002083', 'sz');
+INSERT INTO `stock_dict` VALUES (4315, '芒果超媒', '300413', 'sz');
+INSERT INTO `stock_dict` VALUES (4316, '世纪瑞尔', '300150', 'sz');
+INSERT INTO `stock_dict` VALUES (4317, '雷科防务', '002413', 'sz');
+INSERT INTO `stock_dict` VALUES (4318, '安宁股份', '002978', 'sz');
+INSERT INTO `stock_dict` VALUES (4319, '晶雪节能', '301010', 'sz');
+INSERT INTO `stock_dict` VALUES (4320, '凯撒旅业', '000796', 'sz');
+INSERT INTO `stock_dict` VALUES (4321, '德福科技', '301511', 'sz');
+INSERT INTO `stock_dict` VALUES (4322, '山西高速', '000755', 'sz');
+INSERT INTO `stock_dict` VALUES (4323, '美畅股份', '300861', 'sz');
+INSERT INTO `stock_dict` VALUES (4324, '三 力 士', '002224', 'sz');
+INSERT INTO `stock_dict` VALUES (4325, '卫光生物', '002880', 'sz');
+INSERT INTO `stock_dict` VALUES (4326, '普莱得', '301353', 'sz');
+INSERT INTO `stock_dict` VALUES (4327, '新强联', '300850', 'sz');
+INSERT INTO `stock_dict` VALUES (4328, '寒锐钴业', '300618', 'sz');
+INSERT INTO `stock_dict` VALUES (4329, '姚记科技', '002605', 'sz');
+INSERT INTO `stock_dict` VALUES (4330, '森赫股份', '301056', 'sz');
+INSERT INTO `stock_dict` VALUES (4331, '东方盛虹', '000301', 'sz');
+INSERT INTO `stock_dict` VALUES (4332, '美瑞新材', '300848', 'sz');
+INSERT INTO `stock_dict` VALUES (4333, '新联电子', '002546', 'sz');
+INSERT INTO `stock_dict` VALUES (4334, '浙江众成', '002522', 'sz');
+INSERT INTO `stock_dict` VALUES (4335, '森泰股份', '301429', 'sz');
+INSERT INTO `stock_dict` VALUES (4336, '金新农', '002548', 'sz');
+INSERT INTO `stock_dict` VALUES (4337, '中熔电气', '301031', 'sz');
+INSERT INTO `stock_dict` VALUES (4338, '渤海股份', '000605', 'sz');
+INSERT INTO `stock_dict` VALUES (4339, '卫星化学', '002648', 'sz');
+INSERT INTO `stock_dict` VALUES (4340, '建工修复', '300958', 'sz');
+INSERT INTO `stock_dict` VALUES (4341, '国际复材', '301526', 'sz');
+INSERT INTO `stock_dict` VALUES (4342, '北方铜业', '000737', 'sz');
+INSERT INTO `stock_dict` VALUES (4343, '广电运通', '002152', 'sz');
+INSERT INTO `stock_dict` VALUES (4344, '仁智股份', '002629', 'sz');
+INSERT INTO `stock_dict` VALUES (4345, 'ST华通', '002602', 'sz');
+INSERT INTO `stock_dict` VALUES (4346, '茂化实华', '000637', 'sz');
+INSERT INTO `stock_dict` VALUES (4347, '汉邦高科', '300449', 'sz');
+INSERT INTO `stock_dict` VALUES (4348, '哈尔斯', '002615', 'sz');
+INSERT INTO `stock_dict` VALUES (4349, '豪江智能', '301320', 'sz');
+INSERT INTO `stock_dict` VALUES (4350, '科远智慧', '002380', 'sz');
+INSERT INTO `stock_dict` VALUES (4351, '鸿特科技', '300176', 'sz');
+INSERT INTO `stock_dict` VALUES (4352, '东箭科技', '300978', 'sz');
+INSERT INTO `stock_dict` VALUES (4353, '康弘药业', '002773', 'sz');
+INSERT INTO `stock_dict` VALUES (4354, '久祺股份', '300994', 'sz');
+INSERT INTO `stock_dict` VALUES (4355, '新天科技', '300259', 'sz');
+INSERT INTO `stock_dict` VALUES (4356, '视源股份', '002841', 'sz');
+INSERT INTO `stock_dict` VALUES (4357, '英派斯', '002899', 'sz');
+INSERT INTO `stock_dict` VALUES (4358, '国际实业', '000159', 'sz');
+INSERT INTO `stock_dict` VALUES (4359, '宝莱特', '300246', 'sz');
+INSERT INTO `stock_dict` VALUES (4360, '双杰电气', '300444', 'sz');
+INSERT INTO `stock_dict` VALUES (4361, '四川美丰', '000731', 'sz');
+INSERT INTO `stock_dict` VALUES (4362, '华数传媒', '000156', 'sz');
+INSERT INTO `stock_dict` VALUES (4363, '新莱福', '301323', 'sz');
+INSERT INTO `stock_dict` VALUES (4364, '富瑞特装', '300228', 'sz');
+INSERT INTO `stock_dict` VALUES (4365, '联合精密', '001268', 'sz');
+INSERT INTO `stock_dict` VALUES (4366, '尤安设计', '300983', 'sz');
+INSERT INTO `stock_dict` VALUES (4367, '史丹利', '002588', 'sz');
+INSERT INTO `stock_dict` VALUES (4368, '先导智能', '300450', 'sz');
+INSERT INTO `stock_dict` VALUES (4369, '中设股份', '002883', 'sz');
+INSERT INTO `stock_dict` VALUES (4370, '润阳科技', '300920', 'sz');
+INSERT INTO `stock_dict` VALUES (4371, '盾安环境', '002011', 'sz');
+INSERT INTO `stock_dict` VALUES (4372, '兰卫医学', '301060', 'sz');
+INSERT INTO `stock_dict` VALUES (4373, '兴化股份', '002109', 'sz');
+INSERT INTO `stock_dict` VALUES (4374, '恩捷股份', '002812', 'sz');
+INSERT INTO `stock_dict` VALUES (4375, '中科三环', '000970', 'sz');
+INSERT INTO `stock_dict` VALUES (4376, '恒达新材', '301469', 'sz');
+INSERT INTO `stock_dict` VALUES (4377, '锡南科技', '301170', 'sz');
+INSERT INTO `stock_dict` VALUES (4378, '建研设计', '301167', 'sz');
+INSERT INTO `stock_dict` VALUES (4379, '国华网安', '000004', 'sz');
+INSERT INTO `stock_dict` VALUES (4380, '天保基建', '000965', 'sz');
+INSERT INTO `stock_dict` VALUES (4381, '中信国安', '000839', 'sz');
+INSERT INTO `stock_dict` VALUES (4382, '山东威达', '002026', 'sz');
+INSERT INTO `stock_dict` VALUES (4383, '千方科技', '002373', 'sz');
+INSERT INTO `stock_dict` VALUES (4384, '晓程科技', '300139', 'sz');
+INSERT INTO `stock_dict` VALUES (4385, '德固特', '300950', 'sz');
+INSERT INTO `stock_dict` VALUES (4386, '科净源', '301372', 'sz');
+INSERT INTO `stock_dict` VALUES (4387, '辰安科技', '300523', 'sz');
+INSERT INTO `stock_dict` VALUES (4388, '好利科技', '002729', 'sz');
+INSERT INTO `stock_dict` VALUES (4389, '中锐股份', '002374', 'sz');
+INSERT INTO `stock_dict` VALUES (4390, '中钢国际', '000928', 'sz');
+INSERT INTO `stock_dict` VALUES (4391, '新产业', '300832', 'sz');
+INSERT INTO `stock_dict` VALUES (4392, '天禾股份', '002999', 'sz');
+INSERT INTO `stock_dict` VALUES (4393, '巨人网络', '002558', 'sz');
+INSERT INTO `stock_dict` VALUES (4394, '天齐锂业', '002466', 'sz');
+INSERT INTO `stock_dict` VALUES (4395, '上海凯宝', '300039', 'sz');
+INSERT INTO `stock_dict` VALUES (4396, '江海股份', '002484', 'sz');
+INSERT INTO `stock_dict` VALUES (4397, '中汽股份', '301215', 'sz');
+INSERT INTO `stock_dict` VALUES (4398, '朝阳科技', '002981', 'sz');
+INSERT INTO `stock_dict` VALUES (4399, '海南高速', '000886', 'sz');
+INSERT INTO `stock_dict` VALUES (4400, '志特新材', '300986', 'sz');
+INSERT INTO `stock_dict` VALUES (4401, '光库科技', '300620', 'sz');
+INSERT INTO `stock_dict` VALUES (4402, 'TCL中环', '002129', 'sz');
+INSERT INTO `stock_dict` VALUES (4403, '首钢股份', '000959', 'sz');
+INSERT INTO `stock_dict` VALUES (4404, '中农联合', '003042', 'sz');
+INSERT INTO `stock_dict` VALUES (4405, '方正电机', '002196', 'sz');
+INSERT INTO `stock_dict` VALUES (4406, '信息发展', '300469', 'sz');
+INSERT INTO `stock_dict` VALUES (4407, '恩华药业', '002262', 'sz');
+INSERT INTO `stock_dict` VALUES (4408, '光韵达', '300227', 'sz');
+INSERT INTO `stock_dict` VALUES (4409, '雪祺电气', '001387', 'sz');
+INSERT INTO `stock_dict` VALUES (4410, '通化金马', '000766', 'sz');
+INSERT INTO `stock_dict` VALUES (4411, '敷尔佳', '301371', 'sz');
+INSERT INTO `stock_dict` VALUES (4412, '国际医学', '000516', 'sz');
+INSERT INTO `stock_dict` VALUES (4413, '美利信', '301307', 'sz');
+INSERT INTO `stock_dict` VALUES (4414, '中科电气', '300035', 'sz');
+INSERT INTO `stock_dict` VALUES (4415, '延江股份', '300658', 'sz');
+INSERT INTO `stock_dict` VALUES (4416, '海特生物', '300683', 'sz');
+INSERT INTO `stock_dict` VALUES (4417, '安科生物', '300009', 'sz');
+INSERT INTO `stock_dict` VALUES (4418, '协鑫集成', '002506', 'sz');
+INSERT INTO `stock_dict` VALUES (4419, '正威新材', '002201', 'sz');
+INSERT INTO `stock_dict` VALUES (4420, '河钢资源', '000923', 'sz');
+INSERT INTO `stock_dict` VALUES (4421, '阳光电源', '300274', 'sz');
+INSERT INTO `stock_dict` VALUES (4422, '奥美医疗', '002950', 'sz');
+INSERT INTO `stock_dict` VALUES (4423, '世纪恒通', '301428', 'sz');
+INSERT INTO `stock_dict` VALUES (4424, '同大股份', '300321', 'sz');
+INSERT INTO `stock_dict` VALUES (4425, '皇台酒业', '000995', 'sz');
+INSERT INTO `stock_dict` VALUES (4426, '读客文化', '301025', 'sz');
+INSERT INTO `stock_dict` VALUES (4427, '锦富技术', '300128', 'sz');
+INSERT INTO `stock_dict` VALUES (4428, '同和药业', '300636', 'sz');
+INSERT INTO `stock_dict` VALUES (4429, '卡莱特', '301391', 'sz');
+INSERT INTO `stock_dict` VALUES (4430, '美力科技', '300611', 'sz');
+INSERT INTO `stock_dict` VALUES (4431, '勤上股份', '002638', 'sz');
+INSERT INTO `stock_dict` VALUES (4432, '甘肃能化', '000552', 'sz');
+INSERT INTO `stock_dict` VALUES (4433, '湘潭电化', '002125', 'sz');
+INSERT INTO `stock_dict` VALUES (4434, '芭田股份', '002170', 'sz');
+INSERT INTO `stock_dict` VALUES (4435, '亨迪药业', '301211', 'sz');
+INSERT INTO `stock_dict` VALUES (4436, '昇兴股份', '002752', 'sz');
+INSERT INTO `stock_dict` VALUES (4437, '诺思格', '301333', 'sz');
+INSERT INTO `stock_dict` VALUES (4438, '圣元环保', '300867', 'sz');
+INSERT INTO `stock_dict` VALUES (4439, '金三江', '301059', 'sz');
+INSERT INTO `stock_dict` VALUES (4440, '清水源', '300437', 'sz');
+INSERT INTO `stock_dict` VALUES (4441, '龙源电力', '001289', 'sz');
+INSERT INTO `stock_dict` VALUES (4442, '兆龙互连', '300913', 'sz');
+INSERT INTO `stock_dict` VALUES (4443, '凯恩股份', '002012', 'sz');
+INSERT INTO `stock_dict` VALUES (4444, '佳力奇', '301586', 'sz');
+INSERT INTO `stock_dict` VALUES (4445, '博士眼镜', '300622', 'sz');
+INSERT INTO `stock_dict` VALUES (4446, '青龙管业', '002457', 'sz');
+INSERT INTO `stock_dict` VALUES (4447, '哈三联', '002900', 'sz');
+INSERT INTO `stock_dict` VALUES (4448, '凯文教育', '002659', 'sz');
+INSERT INTO `stock_dict` VALUES (4449, '三峡旅游', '002627', 'sz');
+INSERT INTO `stock_dict` VALUES (4450, '朗坤环境', '301305', 'sz');
+INSERT INTO `stock_dict` VALUES (4451, '格林精密', '300968', 'sz');
+INSERT INTO `stock_dict` VALUES (4452, '贝斯美', '300796', 'sz');
+INSERT INTO `stock_dict` VALUES (4453, '高澜股份', '300499', 'sz');
+INSERT INTO `stock_dict` VALUES (4454, '正虹科技', '000702', 'sz');
+INSERT INTO `stock_dict` VALUES (4455, '上大股份', '301522', 'sz');
+INSERT INTO `stock_dict` VALUES (4456, 'GQY视讯', '300076', 'sz');
+INSERT INTO `stock_dict` VALUES (4457, '得润电子', '002055', 'sz');
+INSERT INTO `stock_dict` VALUES (4458, '浙江美大', '002677', 'sz');
+INSERT INTO `stock_dict` VALUES (4459, '慈文传媒', '002343', 'sz');
+INSERT INTO `stock_dict` VALUES (4460, '兴欣新材', '001358', 'sz');
+INSERT INTO `stock_dict` VALUES (4461, '中色股份', '000758', 'sz');
+INSERT INTO `stock_dict` VALUES (4462, '会畅通讯', '300578', 'sz');
+INSERT INTO `stock_dict` VALUES (4463, '中粮资本', '002423', 'sz');
+INSERT INTO `stock_dict` VALUES (4464, '德尔未来', '002631', 'sz');
+INSERT INTO `stock_dict` VALUES (4465, '东利机械', '301298', 'sz');
+INSERT INTO `stock_dict` VALUES (4466, '藏格矿业', '000408', 'sz');
+INSERT INTO `stock_dict` VALUES (4467, '博云新材', '002297', 'sz');
+INSERT INTO `stock_dict` VALUES (4468, '海南发展', '002163', 'sz');
+INSERT INTO `stock_dict` VALUES (4469, '今飞凯达', '002863', 'sz');
+INSERT INTO `stock_dict` VALUES (4470, '红 宝 丽', '002165', 'sz');
+INSERT INTO `stock_dict` VALUES (4471, '德联集团', '002666', 'sz');
+INSERT INTO `stock_dict` VALUES (4472, '建科智能', '300823', 'sz');
+INSERT INTO `stock_dict` VALUES (4473, '盛天网络', '300494', 'sz');
+INSERT INTO `stock_dict` VALUES (4474, '天舟文化', '300148', 'sz');
+INSERT INTO `stock_dict` VALUES (4475, '天铁股份', '300587', 'sz');
+INSERT INTO `stock_dict` VALUES (4476, '中天精装', '002989', 'sz');
+INSERT INTO `stock_dict` VALUES (4477, '万里石', '002785', 'sz');
+INSERT INTO `stock_dict` VALUES (4478, 'ST天圣', '002872', 'sz');
+INSERT INTO `stock_dict` VALUES (4479, '英华特', '301272', 'sz');
+INSERT INTO `stock_dict` VALUES (4480, '航天电器', '002025', 'sz');
+INSERT INTO `stock_dict` VALUES (4481, '康力源', '301287', 'sz');
+INSERT INTO `stock_dict` VALUES (4482, '恺英网络', '002517', 'sz');
+INSERT INTO `stock_dict` VALUES (4483, '*ST恒立', '000622', 'sz');
+INSERT INTO `stock_dict` VALUES (4484, '共同药业', '300966', 'sz');
+INSERT INTO `stock_dict` VALUES (4485, '祥源新材', '300980', 'sz');
+INSERT INTO `stock_dict` VALUES (4486, '因赛集团', '300781', 'sz');
+INSERT INTO `stock_dict` VALUES (4487, '宝新能源', '000690', 'sz');
+INSERT INTO `stock_dict` VALUES (4488, '欣锐科技', '300745', 'sz');
+INSERT INTO `stock_dict` VALUES (4489, '美康生物', '300439', 'sz');
+INSERT INTO `stock_dict` VALUES (4490, '永贵电器', '300351', 'sz');
+INSERT INTO `stock_dict` VALUES (4491, '汇创达', '300909', 'sz');
+INSERT INTO `stock_dict` VALUES (4492, '威海广泰', '002111', 'sz');
+INSERT INTO `stock_dict` VALUES (4493, '富瀚微', '300613', 'sz');
+INSERT INTO `stock_dict` VALUES (4494, '招商港口', '001872', 'sz');
+INSERT INTO `stock_dict` VALUES (4495, '研奥股份', '300923', 'sz');
+INSERT INTO `stock_dict` VALUES (4496, '亚太实业', '000691', 'sz');
+INSERT INTO `stock_dict` VALUES (4497, '南大环境', '300864', 'sz');
+INSERT INTO `stock_dict` VALUES (4498, '联合化学', '301209', 'sz');
+INSERT INTO `stock_dict` VALUES (4499, '安道麦A', '000553', 'sz');
+INSERT INTO `stock_dict` VALUES (4500, '道氏技术', '300409', 'sz');
+INSERT INTO `stock_dict` VALUES (4501, '同兴达', '002845', 'sz');
+INSERT INTO `stock_dict` VALUES (4502, '平安电工', '001359', 'sz');
+INSERT INTO `stock_dict` VALUES (4503, '名臣健康', '002919', 'sz');
+INSERT INTO `stock_dict` VALUES (4504, '兴瑞科技', '002937', 'sz');
+INSERT INTO `stock_dict` VALUES (4505, '节能环境', '300140', 'sz');
+INSERT INTO `stock_dict` VALUES (4506, '天顺风能', '002531', 'sz');
+INSERT INTO `stock_dict` VALUES (4507, 'ST中装', '002822', 'sz');
+INSERT INTO `stock_dict` VALUES (4508, '深圳能源', '000027', 'sz');
+INSERT INTO `stock_dict` VALUES (4509, '建科股份', '301115', 'sz');
+INSERT INTO `stock_dict` VALUES (4510, '东方锆业', '002167', 'sz');
+INSERT INTO `stock_dict` VALUES (4511, '宝武镁业', '002182', 'sz');
+INSERT INTO `stock_dict` VALUES (4512, '环球印务', '002799', 'sz');
+INSERT INTO `stock_dict` VALUES (4513, '北大医药', '000788', 'sz');
+INSERT INTO `stock_dict` VALUES (4514, '江苏博云', '301003', 'sz');
+INSERT INTO `stock_dict` VALUES (4515, '永安药业', '002365', 'sz');
+INSERT INTO `stock_dict` VALUES (4516, '百川股份', '002455', 'sz');
+INSERT INTO `stock_dict` VALUES (4517, '达安基因', '002030', 'sz');
+INSERT INTO `stock_dict` VALUES (4518, '新金路', '000510', 'sz');
+INSERT INTO `stock_dict` VALUES (4519, '新农股份', '002942', 'sz');
+INSERT INTO `stock_dict` VALUES (4520, '中铁特货', '001213', 'sz');
+INSERT INTO `stock_dict` VALUES (4521, '博晖创新', '300318', 'sz');
+INSERT INTO `stock_dict` VALUES (4522, '苏 泊 尔', '002032', 'sz');
+INSERT INTO `stock_dict` VALUES (4523, '新洋丰', '000902', 'sz');
+INSERT INTO `stock_dict` VALUES (4524, '多瑞医药', '301075', 'sz');
+INSERT INTO `stock_dict` VALUES (4525, '天地数码', '300743', 'sz');
+INSERT INTO `stock_dict` VALUES (4526, '昂利康', '002940', 'sz');
+INSERT INTO `stock_dict` VALUES (4527, '润丰股份', '301035', 'sz');
+INSERT INTO `stock_dict` VALUES (4528, '云鼎科技', '000409', 'sz');
+INSERT INTO `stock_dict` VALUES (4529, '科新机电', '300092', 'sz');
+INSERT INTO `stock_dict` VALUES (4530, '霍普股份', '301024', 'sz');
+INSERT INTO `stock_dict` VALUES (4531, '恒帅股份', '300969', 'sz');
+INSERT INTO `stock_dict` VALUES (4532, '帝尔激光', '300776', 'sz');
+INSERT INTO `stock_dict` VALUES (4533, '地铁设计', '003013', 'sz');
+INSERT INTO `stock_dict` VALUES (4534, '儒竞科技', '301525', 'sz');
+INSERT INTO `stock_dict` VALUES (4535, '瑞和股份', '002620', 'sz');
+INSERT INTO `stock_dict` VALUES (4536, '岭南股份', '002717', 'sz');
+INSERT INTO `stock_dict` VALUES (4537, 'ST百灵', '002424', 'sz');
+INSERT INTO `stock_dict` VALUES (4538, '华森制药', '002907', 'sz');
+INSERT INTO `stock_dict` VALUES (4539, '中国广核', '003816', 'sz');
+INSERT INTO `stock_dict` VALUES (4540, '新兴铸管', '000778', 'sz');
+INSERT INTO `stock_dict` VALUES (4541, '华仁药业', '300110', 'sz');
+INSERT INTO `stock_dict` VALUES (4542, '锐新科技', '300828', 'sz');
+INSERT INTO `stock_dict` VALUES (4543, '海陆重工', '002255', 'sz');
+INSERT INTO `stock_dict` VALUES (4544, '中粮科技', '000930', 'sz');
+INSERT INTO `stock_dict` VALUES (4545, '源飞宠物', '001222', 'sz');
+INSERT INTO `stock_dict` VALUES (4546, '沈阳机床', '000410', 'sz');
+INSERT INTO `stock_dict` VALUES (4547, '速达股份', '001277', 'sz');
+INSERT INTO `stock_dict` VALUES (4548, '中环海陆', '301040', 'sz');
+INSERT INTO `stock_dict` VALUES (4549, '海翔药业', '002099', 'sz');
+INSERT INTO `stock_dict` VALUES (4550, '同星科技', '301252', 'sz');
+INSERT INTO `stock_dict` VALUES (4551, '华安鑫创', '300928', 'sz');
+INSERT INTO `stock_dict` VALUES (4552, '陇神戎发', '300534', 'sz');
+INSERT INTO `stock_dict` VALUES (4553, '新能泰山', '000720', 'sz');
+INSERT INTO `stock_dict` VALUES (4554, '大叶股份', '300879', 'sz');
+INSERT INTO `stock_dict` VALUES (4555, '海洋王', '002724', 'sz');
+INSERT INTO `stock_dict` VALUES (4556, '奥拓电子', '002587', 'sz');
+INSERT INTO `stock_dict` VALUES (4557, '陕西能源', '001286', 'sz');
+INSERT INTO `stock_dict` VALUES (4558, '华菱线缆', '001208', 'sz');
+INSERT INTO `stock_dict` VALUES (4559, '湖北宜化', '000422', 'sz');
+INSERT INTO `stock_dict` VALUES (4560, '万邦达', '300055', 'sz');
+INSERT INTO `stock_dict` VALUES (4561, '维峰电子', '301328', 'sz');
+INSERT INTO `stock_dict` VALUES (4562, '德石股份', '301158', 'sz');
+INSERT INTO `stock_dict` VALUES (4563, '巨力索具', '002342', 'sz');
+INSERT INTO `stock_dict` VALUES (4564, '维业股份', '300621', 'sz');
+INSERT INTO `stock_dict` VALUES (4565, '安科瑞', '300286', 'sz');
+INSERT INTO `stock_dict` VALUES (4566, 'ST天喻', '300205', 'sz');
+INSERT INTO `stock_dict` VALUES (4567, '三七互娱', '002555', 'sz');
+INSERT INTO `stock_dict` VALUES (4568, '严牌股份', '301081', 'sz');
+INSERT INTO `stock_dict` VALUES (4569, '雪浪环境', '300385', 'sz');
+INSERT INTO `stock_dict` VALUES (4570, '丰乐种业', '000713', 'sz');
+INSERT INTO `stock_dict` VALUES (4571, '长虹华意', '000404', 'sz');
+INSERT INTO `stock_dict` VALUES (4572, '富临运业', '002357', 'sz');
+INSERT INTO `stock_dict` VALUES (4573, 'ST浩丰', '300419', 'sz');
+INSERT INTO `stock_dict` VALUES (4574, '澳洋健康', '002172', 'sz');
+INSERT INTO `stock_dict` VALUES (4575, '通达动力', '002576', 'sz');
+INSERT INTO `stock_dict` VALUES (4576, '善水科技', '301190', 'sz');
+INSERT INTO `stock_dict` VALUES (4577, '江波龙', '301308', 'sz');
+INSERT INTO `stock_dict` VALUES (4578, '广博股份', '002103', 'sz');
+INSERT INTO `stock_dict` VALUES (4579, '国民技术', '300077', 'sz');
+INSERT INTO `stock_dict` VALUES (4580, '美信科技', '301577', 'sz');
+INSERT INTO `stock_dict` VALUES (4581, '南王科技', '301355', 'sz');
+INSERT INTO `stock_dict` VALUES (4582, '运达股份', '300772', 'sz');
+INSERT INTO `stock_dict` VALUES (4583, '戎美股份', '301088', 'sz');
+INSERT INTO `stock_dict` VALUES (4584, '易点天下', '301171', 'sz');
+INSERT INTO `stock_dict` VALUES (4585, '未来电器', '301386', 'sz');
+INSERT INTO `stock_dict` VALUES (4586, '沙河股份', '000014', 'sz');
+INSERT INTO `stock_dict` VALUES (4587, '金道科技', '301279', 'sz');
+INSERT INTO `stock_dict` VALUES (4588, '许继电气', '000400', 'sz');
+INSERT INTO `stock_dict` VALUES (4589, '中国天楹', '000035', 'sz');
+INSERT INTO `stock_dict` VALUES (4590, '常宝股份', '002478', 'sz');
+INSERT INTO `stock_dict` VALUES (4591, '汇洁股份', '002763', 'sz');
+INSERT INTO `stock_dict` VALUES (4592, '鹭燕医药', '002788', 'sz');
+INSERT INTO `stock_dict` VALUES (4593, '泰福泵业', '300992', 'sz');
+INSERT INTO `stock_dict` VALUES (4594, '开尔新材', '300234', 'sz');
+INSERT INTO `stock_dict` VALUES (4595, '中化岩土', '002542', 'sz');
+INSERT INTO `stock_dict` VALUES (4596, '万和电气', '002543', 'sz');
+INSERT INTO `stock_dict` VALUES (4597, '中旗股份', '300575', 'sz');
+INSERT INTO `stock_dict` VALUES (4598, '华大基因', '300676', 'sz');
+INSERT INTO `stock_dict` VALUES (4599, '金雷股份', '300443', 'sz');
+INSERT INTO `stock_dict` VALUES (4600, '清研环境', '301288', 'sz');
+INSERT INTO `stock_dict` VALUES (4601, '上海钢联', '300226', 'sz');
+INSERT INTO `stock_dict` VALUES (4602, '道明光学', '002632', 'sz');
+INSERT INTO `stock_dict` VALUES (4603, '丽臣实业', '001218', 'sz');
+INSERT INTO `stock_dict` VALUES (4604, '华锦股份', '000059', 'sz');
+INSERT INTO `stock_dict` VALUES (4605, '电投产融', '000958', 'sz');
+INSERT INTO `stock_dict` VALUES (4606, '强邦新材', '001279', 'sz');
+INSERT INTO `stock_dict` VALUES (4607, '东田微', '301183', 'sz');
+INSERT INTO `stock_dict` VALUES (4608, '兆驰股份', '002429', 'sz');
+INSERT INTO `stock_dict` VALUES (4609, '众合科技', '000925', 'sz');
+INSERT INTO `stock_dict` VALUES (4610, '浙江永强', '002489', 'sz');
+INSERT INTO `stock_dict` VALUES (4611, '优彩资源', '002998', 'sz');
+INSERT INTO `stock_dict` VALUES (4612, '江特电机', '002176', 'sz');
+INSERT INTO `stock_dict` VALUES (4613, '美锦能源', '000723', 'sz');
+INSERT INTO `stock_dict` VALUES (4614, '三晖电气', '002857', 'sz');
+INSERT INTO `stock_dict` VALUES (4615, '中原内配', '002448', 'sz');
+INSERT INTO `stock_dict` VALUES (4616, '浙富控股', '002266', 'sz');
+INSERT INTO `stock_dict` VALUES (4617, '绿康生化', '002868', 'sz');
+INSERT INTO `stock_dict` VALUES (4618, '福安药业', '300194', 'sz');
+INSERT INTO `stock_dict` VALUES (4619, '厦门港务', '000905', 'sz');
+INSERT INTO `stock_dict` VALUES (4620, '星源卓镁', '301398', 'sz');
+INSERT INTO `stock_dict` VALUES (4621, '盐 田 港', '000088', 'sz');
+INSERT INTO `stock_dict` VALUES (4622, '中钨高新', '000657', 'sz');
+INSERT INTO `stock_dict` VALUES (4623, '标榜股份', '301181', 'sz');
+INSERT INTO `stock_dict` VALUES (4624, '洁雅股份', '301108', 'sz');
+INSERT INTO `stock_dict` VALUES (4625, '英杰电气', '300820', 'sz');
+INSERT INTO `stock_dict` VALUES (4626, '天和防务', '300397', 'sz');
+INSERT INTO `stock_dict` VALUES (4627, '柘中股份', '002346', 'sz');
+INSERT INTO `stock_dict` VALUES (4628, '富春环保', '002479', 'sz');
+INSERT INTO `stock_dict` VALUES (4629, '广济药业', '000952', 'sz');
+INSERT INTO `stock_dict` VALUES (4630, '万安科技', '002590', 'sz');
+INSERT INTO `stock_dict` VALUES (4631, '长源电力', '000966', 'sz');
+INSERT INTO `stock_dict` VALUES (4632, '华联控股', '000036', 'sz');
+INSERT INTO `stock_dict` VALUES (4633, '宝色股份', '300402', 'sz');
+INSERT INTO `stock_dict` VALUES (4634, '东南网架', '002135', 'sz');
+INSERT INTO `stock_dict` VALUES (4635, '赛升药业', '300485', 'sz');
+INSERT INTO `stock_dict` VALUES (4636, '东诚药业', '002675', 'sz');
+INSERT INTO `stock_dict` VALUES (4637, '科创新源', '300731', 'sz');
+INSERT INTO `stock_dict` VALUES (4638, '三环集团', '300408', 'sz');
+INSERT INTO `stock_dict` VALUES (4639, '贝肯能源', '002828', 'sz');
+INSERT INTO `stock_dict` VALUES (4640, '明阳电路', '300739', 'sz');
+INSERT INTO `stock_dict` VALUES (4641, '珠海中富', '000659', 'sz');
+INSERT INTO `stock_dict` VALUES (4642, '纳尔股份', '002825', 'sz');
+INSERT INTO `stock_dict` VALUES (4643, '中电兴发', '002298', 'sz');
+INSERT INTO `stock_dict` VALUES (4644, '中颖电子', '300327', 'sz');
+INSERT INTO `stock_dict` VALUES (4645, '中核科技', '000777', 'sz');
+INSERT INTO `stock_dict` VALUES (4646, '东江环保', '002672', 'sz');
+INSERT INTO `stock_dict` VALUES (4647, '路畅科技', '002813', 'sz');
+INSERT INTO `stock_dict` VALUES (4648, '千红制药', '002550', 'sz');
+INSERT INTO `stock_dict` VALUES (4649, '泸天化', '000912', 'sz');
+INSERT INTO `stock_dict` VALUES (4650, '海能实业', '300787', 'sz');
+INSERT INTO `stock_dict` VALUES (4651, '宁波色母', '301019', 'sz');
+INSERT INTO `stock_dict` VALUES (4652, '昌红科技', '300151', 'sz');
+INSERT INTO `stock_dict` VALUES (4653, '维海德', '301318', 'sz');
+INSERT INTO `stock_dict` VALUES (4654, '乐心医疗', '300562', 'sz');
+INSERT INTO `stock_dict` VALUES (4655, '金洲管道', '002443', 'sz');
+INSERT INTO `stock_dict` VALUES (4656, '亿利达', '002686', 'sz');
+INSERT INTO `stock_dict` VALUES (4657, '山东海化', '000822', 'sz');
+INSERT INTO `stock_dict` VALUES (4658, '维康药业', '300878', 'sz');
+INSERT INTO `stock_dict` VALUES (4659, '粤电力Ａ', '000539', 'sz');
+INSERT INTO `stock_dict` VALUES (4660, '东南电子', '301359', 'sz');
+INSERT INTO `stock_dict` VALUES (4661, '思进智能', '003025', 'sz');
+INSERT INTO `stock_dict` VALUES (4662, '劲嘉股份', '002191', 'sz');
+INSERT INTO `stock_dict` VALUES (4663, '黑猫股份', '002068', 'sz');
+INSERT INTO `stock_dict` VALUES (4664, '纽泰格', '301229', 'sz');
+INSERT INTO `stock_dict` VALUES (4665, '高盟新材', '300200', 'sz');
+INSERT INTO `stock_dict` VALUES (4666, '毅昌科技', '002420', 'sz');
+INSERT INTO `stock_dict` VALUES (4667, '东方中科', '002819', 'sz');
+INSERT INTO `stock_dict` VALUES (4668, '永安林业', '000663', 'sz');
+INSERT INTO `stock_dict` VALUES (4669, '中伟股份', '300919', 'sz');
+INSERT INTO `stock_dict` VALUES (4670, '实朴检测', '301228', 'sz');
+INSERT INTO `stock_dict` VALUES (4671, '双星新材', '002585', 'sz');
+INSERT INTO `stock_dict` VALUES (4672, '新天地', '301277', 'sz');
+INSERT INTO `stock_dict` VALUES (4673, '盈方微', '000670', 'sz');
+INSERT INTO `stock_dict` VALUES (4674, '电投能源', '002128', 'sz');
+INSERT INTO `stock_dict` VALUES (4675, '润建股份', '002929', 'sz');
+INSERT INTO `stock_dict` VALUES (4676, '三超新材', '300554', 'sz');
+INSERT INTO `stock_dict` VALUES (4677, '中科创达', '300496', 'sz');
+INSERT INTO `stock_dict` VALUES (4678, '探路者', '300005', 'sz');
+INSERT INTO `stock_dict` VALUES (4679, '中捷精工', '301072', 'sz');
+INSERT INTO `stock_dict` VALUES (4680, '珈伟新能', '300317', 'sz');
+INSERT INTO `stock_dict` VALUES (4681, '恒勃股份', '301225', 'sz');
+INSERT INTO `stock_dict` VALUES (4682, '宇信科技', '300674', 'sz');
+INSERT INTO `stock_dict` VALUES (4683, '斯莱克', '300382', 'sz');
+INSERT INTO `stock_dict` VALUES (4684, '回天新材', '300041', 'sz');
+INSERT INTO `stock_dict` VALUES (4685, '龙源技术', '300105', 'sz');
+INSERT INTO `stock_dict` VALUES (4686, '明德生物', '002932', 'sz');
+INSERT INTO `stock_dict` VALUES (4687, '通达创智', '001368', 'sz');
+INSERT INTO `stock_dict` VALUES (4688, '物产金轮', '002722', 'sz');
+INSERT INTO `stock_dict` VALUES (4689, '新铝时代', '301613', 'sz');
+INSERT INTO `stock_dict` VALUES (4690, '利民股份', '002734', 'sz');
+INSERT INTO `stock_dict` VALUES (4691, '四川黄金', '001337', 'sz');
+INSERT INTO `stock_dict` VALUES (4692, '南华生物', '000504', 'sz');
+INSERT INTO `stock_dict` VALUES (4693, '新光药业', '300519', 'sz');
+INSERT INTO `stock_dict` VALUES (4694, '*ST和展', '000809', 'sz');
+INSERT INTO `stock_dict` VALUES (4695, '长缆科技', '002879', 'sz');
+INSERT INTO `stock_dict` VALUES (4696, '透景生命', '300642', 'sz');
+INSERT INTO `stock_dict` VALUES (4697, '鸿合科技', '002955', 'sz');
+INSERT INTO `stock_dict` VALUES (4698, '康芝药业', '300086', 'sz');
+INSERT INTO `stock_dict` VALUES (4699, '北京文化', '000802', 'sz');
+INSERT INTO `stock_dict` VALUES (4700, '神开股份', '002278', 'sz');
+INSERT INTO `stock_dict` VALUES (4701, '中远通', '301516', 'sz');
+INSERT INTO `stock_dict` VALUES (4702, '金房能源', '001210', 'sz');
+INSERT INTO `stock_dict` VALUES (4703, '金陵体育', '300651', 'sz');
+INSERT INTO `stock_dict` VALUES (4704, '旷达科技', '002516', 'sz');
+INSERT INTO `stock_dict` VALUES (4705, '金钟股份', '301133', 'sz');
+INSERT INTO `stock_dict` VALUES (4706, '方大集团', '000055', 'sz');
+INSERT INTO `stock_dict` VALUES (4707, '道恩股份', '002838', 'sz');
+INSERT INTO `stock_dict` VALUES (4708, '三雄极光', '300625', 'sz');
+INSERT INTO `stock_dict` VALUES (4709, '红相股份', '300427', 'sz');
+INSERT INTO `stock_dict` VALUES (4710, '盛航股份', '001205', 'sz');
+INSERT INTO `stock_dict` VALUES (4711, '银信科技', '300231', 'sz');
+INSERT INTO `stock_dict` VALUES (4712, '松芝股份', '002454', 'sz');
+INSERT INTO `stock_dict` VALUES (4713, '山推股份', '000680', 'sz');
+INSERT INTO `stock_dict` VALUES (4714, '佳士科技', '300193', 'sz');
+INSERT INTO `stock_dict` VALUES (4715, '深中华A', '000017', 'sz');
+INSERT INTO `stock_dict` VALUES (4716, '思源电气', '002028', 'sz');
+INSERT INTO `stock_dict` VALUES (4717, '家联科技', '301193', 'sz');
+INSERT INTO `stock_dict` VALUES (4718, '北陆药业', '300016', 'sz');
+INSERT INTO `stock_dict` VALUES (4719, '双箭股份', '002381', 'sz');
+INSERT INTO `stock_dict` VALUES (4720, '隆盛科技', '300680', 'sz');
+INSERT INTO `stock_dict` VALUES (4721, '长华化学', '301518', 'sz');
+INSERT INTO `stock_dict` VALUES (4722, '英 力 特', '000635', 'sz');
+INSERT INTO `stock_dict` VALUES (4723, '金安国纪', '002636', 'sz');
+INSERT INTO `stock_dict` VALUES (4724, '迈拓股份', '301006', 'sz');
+INSERT INTO `stock_dict` VALUES (4725, '百洋股份', '002696', 'sz');
+INSERT INTO `stock_dict` VALUES (4726, '奥联电子', '300585', 'sz');
+INSERT INTO `stock_dict` VALUES (4727, '和顺电气', '300141', 'sz');
+INSERT INTO `stock_dict` VALUES (4728, '平潭发展', '000592', 'sz');
+INSERT INTO `stock_dict` VALUES (4729, '海锅股份', '301063', 'sz');
+INSERT INTO `stock_dict` VALUES (4730, 'ST新亚', '002388', 'sz');
+INSERT INTO `stock_dict` VALUES (4731, '可靠股份', '301009', 'sz');
+INSERT INTO `stock_dict` VALUES (4732, '思创医惠', '300078', 'sz');
+INSERT INTO `stock_dict` VALUES (4733, '中国长城', '000066', 'sz');
+INSERT INTO `stock_dict` VALUES (4734, '泓博医药', '301230', 'sz');
+INSERT INTO `stock_dict` VALUES (4735, '中科环保', '301175', 'sz');
+INSERT INTO `stock_dict` VALUES (4736, '红日药业', '300026', 'sz');
+INSERT INTO `stock_dict` VALUES (4737, '开创电气', '301448', 'sz');
+INSERT INTO `stock_dict` VALUES (4738, '苏常柴Ａ', '000570', 'sz');
+INSERT INTO `stock_dict` VALUES (4739, '齐翔腾达', '002408', 'sz');
+INSERT INTO `stock_dict` VALUES (4740, '金力永磁', '300748', 'sz');
+INSERT INTO `stock_dict` VALUES (4741, '谱尼测试', '300887', 'sz');
+INSERT INTO `stock_dict` VALUES (4742, '迪森股份', '300335', 'sz');
+INSERT INTO `stock_dict` VALUES (4743, '武汉凡谷', '002194', 'sz');
+INSERT INTO `stock_dict` VALUES (4744, '博汇股份', '300839', 'sz');
+INSERT INTO `stock_dict` VALUES (4745, '蓝焰控股', '000968', 'sz');
+INSERT INTO `stock_dict` VALUES (4746, '倍杰特', '300774', 'sz');
+INSERT INTO `stock_dict` VALUES (4747, '赢合科技', '300457', 'sz');
+INSERT INTO `stock_dict` VALUES (4748, '厚普股份', '300471', 'sz');
+INSERT INTO `stock_dict` VALUES (4749, '通达股份', '002560', 'sz');
+INSERT INTO `stock_dict` VALUES (4750, '全通教育', '300359', 'sz');
+INSERT INTO `stock_dict` VALUES (4751, '星辉环材', '300834', 'sz');
+INSERT INTO `stock_dict` VALUES (4752, '瑞泰新材', '301238', 'sz');
+INSERT INTO `stock_dict` VALUES (4753, '中广核技', '000881', 'sz');
+INSERT INTO `stock_dict` VALUES (4754, '宏昌科技', '301008', 'sz');
+INSERT INTO `stock_dict` VALUES (4755, '正海生物', '300653', 'sz');
+INSERT INTO `stock_dict` VALUES (4756, '永达股份', '001239', 'sz');
+INSERT INTO `stock_dict` VALUES (4757, '江铃汽车', '000550', 'sz');
+INSERT INTO `stock_dict` VALUES (4758, '广东建工', '002060', 'sz');
+INSERT INTO `stock_dict` VALUES (4759, '金埔园林', '301098', 'sz');
+INSERT INTO `stock_dict` VALUES (4760, '裕兴股份', '300305', 'sz');
+INSERT INTO `stock_dict` VALUES (4761, '沧州明珠', '002108', 'sz');
+INSERT INTO `stock_dict` VALUES (4762, '鞍钢股份', '000898', 'sz');
+INSERT INTO `stock_dict` VALUES (4763, '维信诺', '002387', 'sz');
+INSERT INTO `stock_dict` VALUES (4764, '保利联合', '002037', 'sz');
+INSERT INTO `stock_dict` VALUES (4765, '拓山重工', '001226', 'sz');
+INSERT INTO `stock_dict` VALUES (4766, '山河药辅', '300452', 'sz');
+INSERT INTO `stock_dict` VALUES (4767, '雄塑科技', '300599', 'sz');
+INSERT INTO `stock_dict` VALUES (4768, '青岛金王', '002094', 'sz');
+INSERT INTO `stock_dict` VALUES (4769, '大地海洋', '301068', 'sz');
+INSERT INTO `stock_dict` VALUES (4770, '凯中精密', '002823', 'sz');
+INSERT INTO `stock_dict` VALUES (4771, '青岛双星', '000599', 'sz');
+INSERT INTO `stock_dict` VALUES (4772, '海普瑞', '002399', 'sz');
+INSERT INTO `stock_dict` VALUES (4773, '利尔化学', '002258', 'sz');
+INSERT INTO `stock_dict` VALUES (4774, '太钢不锈', '000825', 'sz');
+INSERT INTO `stock_dict` VALUES (4775, '沈阳化工', '000698', 'sz');
+INSERT INTO `stock_dict` VALUES (4776, '黔源电力', '002039', 'sz');
+INSERT INTO `stock_dict` VALUES (4777, '和仁科技', '300550', 'sz');
+INSERT INTO `stock_dict` VALUES (4778, '凯伦股份', '300715', 'sz');
+INSERT INTO `stock_dict` VALUES (4779, '益盛药业', '002566', 'sz');
+INSERT INTO `stock_dict` VALUES (4780, '浙矿股份', '300837', 'sz');
+INSERT INTO `stock_dict` VALUES (4781, '金冠股份', '300510', 'sz');
+INSERT INTO `stock_dict` VALUES (4782, '三钢闽光', '002110', 'sz');
+INSERT INTO `stock_dict` VALUES (4783, '湖北能源', '000883', 'sz');
+INSERT INTO `stock_dict` VALUES (4784, '艾比森', '300389', 'sz');
+INSERT INTO `stock_dict` VALUES (4785, '赛意信息', '300687', 'sz');
+INSERT INTO `stock_dict` VALUES (4786, '洁美科技', '002859', 'sz');
+INSERT INTO `stock_dict` VALUES (4787, '美能能源', '001299', 'sz');
+INSERT INTO `stock_dict` VALUES (4788, '威马农机', '301533', 'sz');
+INSERT INTO `stock_dict` VALUES (4789, '深水规院', '301038', 'sz');
+INSERT INTO `stock_dict` VALUES (4790, '中金环境', '300145', 'sz');
+INSERT INTO `stock_dict` VALUES (4791, '播恩集团', '001366', 'sz');
+INSERT INTO `stock_dict` VALUES (4792, '亚太科技', '002540', 'sz');
+INSERT INTO `stock_dict` VALUES (4793, '科安达', '002972', 'sz');
+INSERT INTO `stock_dict` VALUES (4794, '章源钨业', '002378', 'sz');
+INSERT INTO `stock_dict` VALUES (4795, '迈为股份', '300751', 'sz');
+INSERT INTO `stock_dict` VALUES (4796, '昊帆生物', '301393', 'sz');
+INSERT INTO `stock_dict` VALUES (4797, '神州数码', '000034', 'sz');
+INSERT INTO `stock_dict` VALUES (4798, '申菱环境', '301018', 'sz');
+INSERT INTO `stock_dict` VALUES (4799, '德龙汇能', '000593', 'sz');
+INSERT INTO `stock_dict` VALUES (4800, '澄天伟业', '300689', 'sz');
+INSERT INTO `stock_dict` VALUES (4801, '美农生物', '301156', 'sz');
+INSERT INTO `stock_dict` VALUES (4802, '湖南发展', '000722', 'sz');
+INSERT INTO `stock_dict` VALUES (4803, '三鑫医疗', '300453', 'sz');
+INSERT INTO `stock_dict` VALUES (4804, '陕天然气', '002267', 'sz');
+INSERT INTO `stock_dict` VALUES (4805, '铜牛信息', '300895', 'sz');
+INSERT INTO `stock_dict` VALUES (4806, '通合科技', '300491', 'sz');
+INSERT INTO `stock_dict` VALUES (4807, '雪人股份', '002639', 'sz');
+INSERT INTO `stock_dict` VALUES (4808, '鲁西化工', '000830', 'sz');
+INSERT INTO `stock_dict` VALUES (4809, '湖北广电', '000665', 'sz');
+INSERT INTO `stock_dict` VALUES (4810, '光莆股份', '300632', 'sz');
+INSERT INTO `stock_dict` VALUES (4811, '超达装备', '301186', 'sz');
+INSERT INTO `stock_dict` VALUES (4812, '天迈科技', '300807', 'sz');
+INSERT INTO `stock_dict` VALUES (4813, '金凯生科', '301509', 'sz');
+INSERT INTO `stock_dict` VALUES (4814, '郑中设计', '002811', 'sz');
+INSERT INTO `stock_dict` VALUES (4815, '本立科技', '301065', 'sz');
+INSERT INTO `stock_dict` VALUES (4816, '科华生物', '002022', 'sz');
+INSERT INTO `stock_dict` VALUES (4817, '天元宠物', '301335', 'sz');
+INSERT INTO `stock_dict` VALUES (4818, '台基股份', '300046', 'sz');
+INSERT INTO `stock_dict` VALUES (4819, 'ST步森', '002569', 'sz');
+INSERT INTO `stock_dict` VALUES (4820, '亚华电子', '301337', 'sz');
+INSERT INTO `stock_dict` VALUES (4821, '智迪科技', '301503', 'sz');
+INSERT INTO `stock_dict` VALUES (4822, '林州重机', '002535', 'sz');
+INSERT INTO `stock_dict` VALUES (4823, '天力锂能', '301152', 'sz');
+INSERT INTO `stock_dict` VALUES (4824, 'ST亚联', '002316', 'sz');
+INSERT INTO `stock_dict` VALUES (4825, '狄耐克', '300884', 'sz');
+INSERT INTO `stock_dict` VALUES (4826, '特一药业', '002728', 'sz');
+INSERT INTO `stock_dict` VALUES (4827, '联发股份', '002394', 'sz');
+INSERT INTO `stock_dict` VALUES (4828, '顾地科技', '002694', 'sz');
+INSERT INTO `stock_dict` VALUES (4829, '海源复材', '002529', 'sz');
+INSERT INTO `stock_dict` VALUES (4830, '金岭矿业', '000655', 'sz');
+INSERT INTO `stock_dict` VALUES (4831, '闰土股份', '002440', 'sz');
+INSERT INTO `stock_dict` VALUES (4832, '艾可蓝', '300816', 'sz');
+INSERT INTO `stock_dict` VALUES (4833, '华西能源', '002630', 'sz');
+INSERT INTO `stock_dict` VALUES (4834, '迪瑞医疗', '300396', 'sz');
+INSERT INTO `stock_dict` VALUES (4835, '惠伦晶体', '300460', 'sz');
+INSERT INTO `stock_dict` VALUES (4836, '欣灵电气', '301388', 'sz');
+INSERT INTO `stock_dict` VALUES (4837, '新特电气', '301120', 'sz');
+INSERT INTO `stock_dict` VALUES (4838, '恒基达鑫', '002492', 'sz');
+INSERT INTO `stock_dict` VALUES (4839, '东莞控股', '000828', 'sz');
+INSERT INTO `stock_dict` VALUES (4840, '周大生', '002867', 'sz');
+INSERT INTO `stock_dict` VALUES (4841, '丰原药业', '000153', 'sz');
+INSERT INTO `stock_dict` VALUES (4842, '江苏国泰', '002091', 'sz');
+INSERT INTO `stock_dict` VALUES (4843, '潍柴重机', '000880', 'sz');
+INSERT INTO `stock_dict` VALUES (4844, '深华发Ａ', '000020', 'sz');
+INSERT INTO `stock_dict` VALUES (4845, '绿茵生态', '002887', 'sz');
+INSERT INTO `stock_dict` VALUES (4846, '中材科技', '002080', 'sz');
+INSERT INTO `stock_dict` VALUES (4847, '晨鸣纸业', '000488', 'sz');
+INSERT INTO `stock_dict` VALUES (4848, '新开源', '300109', 'sz');
+INSERT INTO `stock_dict` VALUES (4849, '华兰股份', '301093', 'sz');
+INSERT INTO `stock_dict` VALUES (4850, '罗欣药业', '002793', 'sz');
+INSERT INTO `stock_dict` VALUES (4851, '一汽解放', '000800', 'sz');
+INSERT INTO `stock_dict` VALUES (4852, '广康生化', '300804', 'sz');
+INSERT INTO `stock_dict` VALUES (4853, '惠城环保', '300779', 'sz');
+INSERT INTO `stock_dict` VALUES (4854, '爱迪特', '301580', 'sz');
+INSERT INTO `stock_dict` VALUES (4855, '晨化股份', '300610', 'sz');
+INSERT INTO `stock_dict` VALUES (4856, '浙江震元', '000705', 'sz');
+INSERT INTO `stock_dict` VALUES (4857, '神州泰岳', '300002', 'sz');
+INSERT INTO `stock_dict` VALUES (4858, '国科天成', '301571', 'sz');
+INSERT INTO `stock_dict` VALUES (4859, '德尔股份', '300473', 'sz');
+INSERT INTO `stock_dict` VALUES (4860, '福建金森', '002679', 'sz');
+INSERT INTO `stock_dict` VALUES (4861, '民生健康', '301507', 'sz');
+INSERT INTO `stock_dict` VALUES (4862, '京基智农', '000048', 'sz');
+INSERT INTO `stock_dict` VALUES (4863, '新宏泽', '002836', 'sz');
+INSERT INTO `stock_dict` VALUES (4864, '山东路桥', '000498', 'sz');
+INSERT INTO `stock_dict` VALUES (4865, '华东重机', '002685', 'sz');
+INSERT INTO `stock_dict` VALUES (4866, '精华制药', '002349', 'sz');
+INSERT INTO `stock_dict` VALUES (4867, '真视通', '002771', 'sz');
+INSERT INTO `stock_dict` VALUES (4868, 'ST八菱', '002592', 'sz');
+INSERT INTO `stock_dict` VALUES (4869, '贵州轮胎', '000589', 'sz');
+INSERT INTO `stock_dict` VALUES (4870, '金丹科技', '300829', 'sz');
+INSERT INTO `stock_dict` VALUES (4871, '久量股份', '300808', 'sz');
+INSERT INTO `stock_dict` VALUES (4872, '启迪药业', '000590', 'sz');
+INSERT INTO `stock_dict` VALUES (4873, '泰格医药', '300347', 'sz');
+INSERT INTO `stock_dict` VALUES (4874, '星帅尔', '002860', 'sz');
+INSERT INTO `stock_dict` VALUES (4875, '弘业期货', '001236', 'sz');
+INSERT INTO `stock_dict` VALUES (4876, '新诺威', '300765', 'sz');
+INSERT INTO `stock_dict` VALUES (4877, '华昌化工', '002274', 'sz');
+INSERT INTO `stock_dict` VALUES (4878, '兴蓉环境', '000598', 'sz');
+INSERT INTO `stock_dict` VALUES (4879, '通裕重工', '300185', 'sz');
+INSERT INTO `stock_dict` VALUES (4880, '南 京 港', '002040', 'sz');
+INSERT INTO `stock_dict` VALUES (4881, '阳普医疗', '300030', 'sz');
+INSERT INTO `stock_dict` VALUES (4882, '领湃科技', '300530', 'sz');
+INSERT INTO `stock_dict` VALUES (4883, '宜安科技', '300328', 'sz');
+INSERT INTO `stock_dict` VALUES (4884, '大烨智能', '300670', 'sz');
+INSERT INTO `stock_dict` VALUES (4885, '龙磁科技', '300835', 'sz');
+INSERT INTO `stock_dict` VALUES (4886, '福星股份', '000926', 'sz');
+INSERT INTO `stock_dict` VALUES (4887, '佳电股份', '000922', 'sz');
+INSERT INTO `stock_dict` VALUES (4888, '双枪科技', '001211', 'sz');
+INSERT INTO `stock_dict` VALUES (4889, '黄山胶囊', '002817', 'sz');
+INSERT INTO `stock_dict` VALUES (4890, '国新健康', '000503', 'sz');
+INSERT INTO `stock_dict` VALUES (4891, '飞南资源', '301500', 'sz');
+INSERT INTO `stock_dict` VALUES (4892, '华新环保', '301265', 'sz');
+INSERT INTO `stock_dict` VALUES (4893, '中原环保', '000544', 'sz');
+INSERT INTO `stock_dict` VALUES (4894, '同花顺', '300033', 'sz');
+INSERT INTO `stock_dict` VALUES (4895, '金风科技', '002202', 'sz');
+INSERT INTO `stock_dict` VALUES (4896, '华映科技', '000536', 'sz');
+INSERT INTO `stock_dict` VALUES (4897, '溢多利', '300381', 'sz');
+INSERT INTO `stock_dict` VALUES (4898, '星星科技', '300256', 'sz');
+INSERT INTO `stock_dict` VALUES (4899, '金 螳 螂', '002081', 'sz');
+INSERT INTO `stock_dict` VALUES (4900, '凯普生物', '300639', 'sz');
+INSERT INTO `stock_dict` VALUES (4901, '力盛体育', '002858', 'sz');
+INSERT INTO `stock_dict` VALUES (4902, '鲁  泰Ａ', '000726', 'sz');
+INSERT INTO `stock_dict` VALUES (4903, '津膜科技', '300334', 'sz');
+INSERT INTO `stock_dict` VALUES (4904, '拓日新能', '002218', 'sz');
+INSERT INTO `stock_dict` VALUES (4905, '三花智控', '002050', 'sz');
+INSERT INTO `stock_dict` VALUES (4906, '中国铁物', '000927', 'sz');
+INSERT INTO `stock_dict` VALUES (4907, '中建环能', '300425', 'sz');
+INSERT INTO `stock_dict` VALUES (4908, '湖南白银', '002716', 'sz');
+INSERT INTO `stock_dict` VALUES (4909, '正元智慧', '300645', 'sz');
+INSERT INTO `stock_dict` VALUES (4910, '华邦健康', '002004', 'sz');
+INSERT INTO `stock_dict` VALUES (4911, '蓝帆医疗', '002382', 'sz');
+INSERT INTO `stock_dict` VALUES (4912, '中核钛白', '002145', 'sz');
+INSERT INTO `stock_dict` VALUES (4913, '温州宏丰', '300283', 'sz');
+INSERT INTO `stock_dict` VALUES (4914, '盛德鑫泰', '300881', 'sz');
+INSERT INTO `stock_dict` VALUES (4915, '顺控发展', '003039', 'sz');
+INSERT INTO `stock_dict` VALUES (4916, '朗进科技', '300594', 'sz');
+INSERT INTO `stock_dict` VALUES (4917, '晋控电力', '000767', 'sz');
+INSERT INTO `stock_dict` VALUES (4918, '汉森制药', '002412', 'sz');
+INSERT INTO `stock_dict` VALUES (4919, '杭州园林', '300649', 'sz');
+INSERT INTO `stock_dict` VALUES (4920, '现代投资', '000900', 'sz');
+INSERT INTO `stock_dict` VALUES (4921, '金河生物', '002688', 'sz');
+INSERT INTO `stock_dict` VALUES (4922, '润邦股份', '002483', 'sz');
+INSERT INTO `stock_dict` VALUES (4923, '帝欧家居', '002798', 'sz');
+INSERT INTO `stock_dict` VALUES (4924, '日海智能', '002313', 'sz');
+INSERT INTO `stock_dict` VALUES (4925, '万邦医药', '301520', 'sz');
+INSERT INTO `stock_dict` VALUES (4926, '海峡股份', '002320', 'sz');
+INSERT INTO `stock_dict` VALUES (4927, '兴源环境', '300266', 'sz');
+INSERT INTO `stock_dict` VALUES (4928, '富祥药业', '300497', 'sz');
+INSERT INTO `stock_dict` VALUES (4929, '超越科技', '301049', 'sz');
+INSERT INTO `stock_dict` VALUES (4930, '安 纳 达', '002136', 'sz');
+INSERT INTO `stock_dict` VALUES (4931, '慕思股份', '001323', 'sz');
+INSERT INTO `stock_dict` VALUES (4932, '潜能恒信', '300191', 'sz');
+INSERT INTO `stock_dict` VALUES (4933, '远大控股', '000626', 'sz');
+INSERT INTO `stock_dict` VALUES (4934, '全新好', '000007', 'sz');
+INSERT INTO `stock_dict` VALUES (4935, '高斯贝尔', '002848', 'sz');
+INSERT INTO `stock_dict` VALUES (4936, '茂硕电源', '002660', 'sz');
+INSERT INTO `stock_dict` VALUES (4937, '博世科', '300422', 'sz');
+INSERT INTO `stock_dict` VALUES (4938, '崇德科技', '301548', 'sz');
+INSERT INTO `stock_dict` VALUES (4939, '兰州黄河', '000929', 'sz');
+INSERT INTO `stock_dict` VALUES (4940, '海象新材', '003011', 'sz');
+INSERT INTO `stock_dict` VALUES (4941, '本钢板材', '000761', 'sz');
+INSERT INTO `stock_dict` VALUES (4942, '宁波华翔', '002048', 'sz');
+INSERT INTO `stock_dict` VALUES (4943, '金陵药业', '000919', 'sz');
+INSERT INTO `stock_dict` VALUES (4944, '金春股份', '300877', 'sz');
+INSERT INTO `stock_dict` VALUES (4945, '恒光股份', '301118', 'sz');
+INSERT INTO `stock_dict` VALUES (4946, '回盛生物', '300871', 'sz');
+INSERT INTO `stock_dict` VALUES (4947, '通润装备', '002150', 'sz');
+INSERT INTO `stock_dict` VALUES (4948, '赛隆药业', '002898', 'sz');
+INSERT INTO `stock_dict` VALUES (4949, '京新药业', '002020', 'sz');
+INSERT INTO `stock_dict` VALUES (4950, '海看股份', '301262', 'sz');
+INSERT INTO `stock_dict` VALUES (4951, '英联股份', '002846', 'sz');
+INSERT INTO `stock_dict` VALUES (4952, '中天服务', '002188', 'sz');
+INSERT INTO `stock_dict` VALUES (4953, '鸿铭股份', '301105', 'sz');
+INSERT INTO `stock_dict` VALUES (4954, '*ST农尚', '300536', 'sz');
+INSERT INTO `stock_dict` VALUES (4955, '王子新材', '002735', 'sz');
+INSERT INTO `stock_dict` VALUES (4956, '三夫户外', '002780', 'sz');
+INSERT INTO `stock_dict` VALUES (4957, '诚达药业', '301201', 'sz');
+INSERT INTO `stock_dict` VALUES (4958, '泰慕士', '001234', 'sz');
+INSERT INTO `stock_dict` VALUES (4959, '浙江力诺', '300838', 'sz');
+INSERT INTO `stock_dict` VALUES (4960, '佐力药业', '300181', 'sz');
+INSERT INTO `stock_dict` VALUES (4961, 'ST凯文', '002425', 'sz');
+INSERT INTO `stock_dict` VALUES (4962, '沃顿科技', '000920', 'sz');
+INSERT INTO `stock_dict` VALUES (4963, '长药控股', '300391', 'sz');
+INSERT INTO `stock_dict` VALUES (4964, '万方发展', '000638', 'sz');
+INSERT INTO `stock_dict` VALUES (4965, '凯莱英', '002821', 'sz');
+INSERT INTO `stock_dict` VALUES (4966, '太龙股份', '300650', 'sz');
+INSERT INTO `stock_dict` VALUES (4967, '新巨丰', '301296', 'sz');
+INSERT INTO `stock_dict` VALUES (4968, '雄韬股份', '002733', 'sz');
+INSERT INTO `stock_dict` VALUES (4969, '南山智尚', '300918', 'sz');
+INSERT INTO `stock_dict` VALUES (4970, 'ST金一', '002721', 'sz');
+INSERT INTO `stock_dict` VALUES (4971, '东宝生物', '300239', 'sz');
+INSERT INTO `stock_dict` VALUES (4972, '瑞迪智驱', '301596', 'sz');
+INSERT INTO `stock_dict` VALUES (4973, '京威股份', '002662', 'sz');
+INSERT INTO `stock_dict` VALUES (4974, '奥特佳', '002239', 'sz');
+INSERT INTO `stock_dict` VALUES (4975, '葵花药业', '002737', 'sz');
+INSERT INTO `stock_dict` VALUES (4976, '积成电子', '002339', 'sz');
+INSERT INTO `stock_dict` VALUES (4977, '北京科锐', '002350', 'sz');
+INSERT INTO `stock_dict` VALUES (4978, '普蕊斯', '301257', 'sz');
+INSERT INTO `stock_dict` VALUES (4979, '大洋电机', '002249', 'sz');
+INSERT INTO `stock_dict` VALUES (4980, '先锋电子', '002767', 'sz');
+INSERT INTO `stock_dict` VALUES (4981, '维尔利', '300190', 'sz');
+INSERT INTO `stock_dict` VALUES (4982, '鹏辉能源', '300438', 'sz');
+INSERT INTO `stock_dict` VALUES (4983, '双汇发展', '000895', 'sz');
+INSERT INTO `stock_dict` VALUES (4984, 'ST宇顺', '002289', 'sz');
+INSERT INTO `stock_dict` VALUES (4985, '华明装备', '002270', 'sz');
+INSERT INTO `stock_dict` VALUES (4986, '延华智能', '002178', 'sz');
+INSERT INTO `stock_dict` VALUES (4987, '联科科技', '001207', 'sz');
+INSERT INTO `stock_dict` VALUES (4988, '顺发恒业', '000631', 'sz');
+INSERT INTO `stock_dict` VALUES (4989, '利德曼', '300289', 'sz');
+INSERT INTO `stock_dict` VALUES (4990, '世纪鼎利', '300050', 'sz');
+INSERT INTO `stock_dict` VALUES (4991, '万邦德', '002082', 'sz');
+INSERT INTO `stock_dict` VALUES (4992, '同德化工', '002360', 'sz');
+INSERT INTO `stock_dict` VALUES (4993, '宝莫股份', '002476', 'sz');
+INSERT INTO `stock_dict` VALUES (4994, '科隆股份', '300405', 'sz');
+INSERT INTO `stock_dict` VALUES (4995, '华自科技', '300490', 'sz');
+INSERT INTO `stock_dict` VALUES (4996, '赣能股份', '000899', 'sz');
+INSERT INTO `stock_dict` VALUES (4997, '滨海能源', '000695', 'sz');
+INSERT INTO `stock_dict` VALUES (4998, '长青集团', '002616', 'sz');
+INSERT INTO `stock_dict` VALUES (4999, '宁波方正', '300998', 'sz');
+INSERT INTO `stock_dict` VALUES (5000, '金龙羽', '002882', 'sz');
+INSERT INTO `stock_dict` VALUES (5001, '多氟多', '002407', 'sz');
+INSERT INTO `stock_dict` VALUES (5002, '龙星化工', '002442', 'sz');
+INSERT INTO `stock_dict` VALUES (5003, '凯龙股份', '002783', 'sz');
+INSERT INTO `stock_dict` VALUES (5004, '天禄科技', '301045', 'sz');
+INSERT INTO `stock_dict` VALUES (5005, '唯万密封', '301161', 'sz');
+INSERT INTO `stock_dict` VALUES (5006, '三和管桩', '003037', 'sz');
+INSERT INTO `stock_dict` VALUES (5007, '河钢股份', '000709', 'sz');
+INSERT INTO `stock_dict` VALUES (5008, '英科医疗', '300677', 'sz');
+INSERT INTO `stock_dict` VALUES (5009, '富奥股份', '000030', 'sz');
+INSERT INTO `stock_dict` VALUES (5010, '悦心健康', '002162', 'sz');
+INSERT INTO `stock_dict` VALUES (5011, '华控赛格', '000068', 'sz');
+INSERT INTO `stock_dict` VALUES (5012, '鲁阳节能', '002088', 'sz');
+INSERT INTO `stock_dict` VALUES (5013, '佛燃能源', '002911', 'sz');
+INSERT INTO `stock_dict` VALUES (5014, '顺博合金', '002996', 'sz');
+INSERT INTO `stock_dict` VALUES (5015, '光庭信息', '301221', 'sz');
+INSERT INTO `stock_dict` VALUES (5016, '光正眼科', '002524', 'sz');
+INSERT INTO `stock_dict` VALUES (5017, '长青股份', '002391', 'sz');
+INSERT INTO `stock_dict` VALUES (5018, '维科精密', '301499', 'sz');
+INSERT INTO `stock_dict` VALUES (5019, '东方铁塔', '002545', 'sz');
+INSERT INTO `stock_dict` VALUES (5020, '彩虹集团', '003023', 'sz');
+INSERT INTO `stock_dict` VALUES (5021, '亚太股份', '002284', 'sz');
+INSERT INTO `stock_dict` VALUES (5022, '宝通科技', '300031', 'sz');
+INSERT INTO `stock_dict` VALUES (5023, '胜宏科技', '300476', 'sz');
+INSERT INTO `stock_dict` VALUES (5024, '电光科技', '002730', 'sz');
+INSERT INTO `stock_dict` VALUES (5025, '冠中生态', '300948', 'sz');
+INSERT INTO `stock_dict` VALUES (5026, '完美世界', '002624', 'sz');
+INSERT INTO `stock_dict` VALUES (5027, 'ST证通', '002197', 'sz');
+INSERT INTO `stock_dict` VALUES (5028, '中 关 村', '000931', 'sz');
+INSERT INTO `stock_dict` VALUES (5029, '科达利', '002850', 'sz');
+INSERT INTO `stock_dict` VALUES (5030, '江天化学', '300927', 'sz');
+INSERT INTO `stock_dict` VALUES (5031, '*ST中润', '000506', 'sz');
+INSERT INTO `stock_dict` VALUES (5032, '星云股份', '300648', 'sz');
+INSERT INTO `stock_dict` VALUES (5033, '理工能科', '002322', 'sz');
+INSERT INTO `stock_dict` VALUES (5034, '戴维医疗', '300314', 'sz');
+INSERT INTO `stock_dict` VALUES (5035, '鹏翎股份', '300375', 'sz');
+INSERT INTO `stock_dict` VALUES (5036, '通达海', '301378', 'sz');
+INSERT INTO `stock_dict` VALUES (5037, '南矿集团', '001360', 'sz');
+INSERT INTO `stock_dict` VALUES (5038, '海王生物', '000078', 'sz');
+INSERT INTO `stock_dict` VALUES (5039, '欣贺股份', '003016', 'sz');
+INSERT INTO `stock_dict` VALUES (5040, '盘古智能', '301456', 'sz');
+INSERT INTO `stock_dict` VALUES (5041, '莱美药业', '300006', 'sz');
+INSERT INTO `stock_dict` VALUES (5042, '世嘉科技', '002796', 'sz');
+INSERT INTO `stock_dict` VALUES (5043, '北玻股份', '002613', 'sz');
+INSERT INTO `stock_dict` VALUES (5044, '数码视讯', '300079', 'sz');
+INSERT INTO `stock_dict` VALUES (5045, '华业香料', '300886', 'sz');
+INSERT INTO `stock_dict` VALUES (5046, '太阳电缆', '002300', 'sz');
+INSERT INTO `stock_dict` VALUES (5047, '长联科技', '301618', 'sz');
+INSERT INTO `stock_dict` VALUES (5048, '韶能股份', '000601', 'sz');
+INSERT INTO `stock_dict` VALUES (5049, '新柴股份', '301032', 'sz');
+INSERT INTO `stock_dict` VALUES (5050, '金奥博', '002917', 'sz');
+INSERT INTO `stock_dict` VALUES (5051, '能特科技', '002102', 'sz');
+INSERT INTO `stock_dict` VALUES (5052, '奥克股份', '300082', 'sz');
+INSERT INTO `stock_dict` VALUES (5053, '振东制药', '300158', 'sz');
+INSERT INTO `stock_dict` VALUES (5054, '公元股份', '002641', 'sz');
+INSERT INTO `stock_dict` VALUES (5055, '众智科技', '301361', 'sz');
+INSERT INTO `stock_dict` VALUES (5056, '仙琚制药', '002332', 'sz');
+INSERT INTO `stock_dict` VALUES (5057, '奥 特 迅', '002227', 'sz');
+INSERT INTO `stock_dict` VALUES (5058, '浙江交科', '002061', 'sz');
+INSERT INTO `stock_dict` VALUES (5059, '奥赛康', '002755', 'sz');
+INSERT INTO `stock_dict` VALUES (5060, '信测标准', '300938', 'sz');
+INSERT INTO `stock_dict` VALUES (5061, '天华新能', '300390', 'sz');
+INSERT INTO `stock_dict` VALUES (5062, '汉缆股份', '002498', 'sz');
+INSERT INTO `stock_dict` VALUES (5063, '绿通科技', '301322', 'sz');
+INSERT INTO `stock_dict` VALUES (5064, '兆新股份', '002256', 'sz');
+INSERT INTO `stock_dict` VALUES (5065, '江南化工', '002226', 'sz');
+INSERT INTO `stock_dict` VALUES (5066, '百诚医药', '301096', 'sz');
+INSERT INTO `stock_dict` VALUES (5067, '西陇科学', '002584', 'sz');
+INSERT INTO `stock_dict` VALUES (5068, '泰山石油', '000554', 'sz');
+INSERT INTO `stock_dict` VALUES (5069, '天津普林', '002134', 'sz');
+INSERT INTO `stock_dict` VALUES (5070, '明阳电气', '301291', 'sz');
+INSERT INTO `stock_dict` VALUES (5071, '亿纬锂能', '300014', 'sz');
+INSERT INTO `stock_dict` VALUES (5072, '嘉益股份', '301004', 'sz');
+INSERT INTO `stock_dict` VALUES (5073, '五洲医疗', '301234', 'sz');
+INSERT INTO `stock_dict` VALUES (5074, '上能电气', '300827', 'sz');
+INSERT INTO `stock_dict` VALUES (5075, '深南电A', '000037', 'sz');
+INSERT INTO `stock_dict` VALUES (5076, '瑞泰科技', '002066', 'sz');
+INSERT INTO `stock_dict` VALUES (5077, '嘉美包装', '002969', 'sz');
+INSERT INTO `stock_dict` VALUES (5078, '泰永长征', '002927', 'sz');
+INSERT INTO `stock_dict` VALUES (5079, '中瑞股份', '301587', 'sz');
+INSERT INTO `stock_dict` VALUES (5080, '爱克股份', '300889', 'sz');
+INSERT INTO `stock_dict` VALUES (5081, '伊戈尔', '002922', 'sz');
+INSERT INTO `stock_dict` VALUES (5082, '宏润建设', '002062', 'sz');
+INSERT INTO `stock_dict` VALUES (5083, '闽发铝业', '002578', 'sz');
+INSERT INTO `stock_dict` VALUES (5084, '豪恩汽电', '301488', 'sz');
+INSERT INTO `stock_dict` VALUES (5085, '远翔新材', '301300', 'sz');
+INSERT INTO `stock_dict` VALUES (5086, '乐通股份', '002319', 'sz');
+INSERT INTO `stock_dict` VALUES (5087, '方直科技', '300235', 'sz');
+INSERT INTO `stock_dict` VALUES (5088, '思泉新材', '301489', 'sz');
+INSERT INTO `stock_dict` VALUES (5089, 'ST雪发', '002485', 'sz');
+INSERT INTO `stock_dict` VALUES (5090, '楚环科技', '001336', 'sz');
+INSERT INTO `stock_dict` VALUES (5091, '腾达科技', '001379', 'sz');
+INSERT INTO `stock_dict` VALUES (5092, '海南瑞泽', '002596', 'sz');
+INSERT INTO `stock_dict` VALUES (5093, '赣锋锂业', '002460', 'sz');
+INSERT INTO `stock_dict` VALUES (5094, '联创电子', '002036', 'sz');
+INSERT INTO `stock_dict` VALUES (5095, '仁信新材', '301395', 'sz');
+INSERT INTO `stock_dict` VALUES (5096, '东华科技', '002140', 'sz');
+INSERT INTO `stock_dict` VALUES (5097, '皖通科技', '002331', 'sz');
+INSERT INTO `stock_dict` VALUES (5098, '星宸科技', '301536', 'sz');
+INSERT INTO `stock_dict` VALUES (5099, '恒大高新', '002591', 'sz');
+INSERT INTO `stock_dict` VALUES (5100, '药石科技', '300725', 'sz');
+INSERT INTO `stock_dict` VALUES (5101, 'ST英飞拓', '002528', 'sz');
+INSERT INTO `stock_dict` VALUES (5102, '泰和科技', '300801', 'sz');
+INSERT INTO `stock_dict` VALUES (5103, 'ST升达', '002259', 'sz');
+INSERT INTO `stock_dict` VALUES (5104, '达实智能', '002421', 'sz');
+INSERT INTO `stock_dict` VALUES (5105, '舜禹股份', '301519', 'sz');
+INSERT INTO `stock_dict` VALUES (5106, '国能日新', '301162', 'sz');
+INSERT INTO `stock_dict` VALUES (5107, '乔锋智能', '301603', 'sz');
+INSERT INTO `stock_dict` VALUES (5108, '奕东电子', '301123', 'sz');
+INSERT INTO `stock_dict` VALUES (5109, '欧圣电气', '301187', 'sz');
+INSERT INTO `stock_dict` VALUES (5110, 'ST易联众', '300096', 'sz');
+INSERT INTO `stock_dict` VALUES (5111, '快意电梯', '002774', 'sz');
+INSERT INTO `stock_dict` VALUES (5112, '传化智联', '002010', 'sz');
+INSERT INTO `stock_dict` VALUES (5113, '锌业股份', '000751', 'sz');
+INSERT INTO `stock_dict` VALUES (5114, '宝鼎科技', '002552', 'sz');
+INSERT INTO `stock_dict` VALUES (5115, '开润股份', '300577', 'sz');
+INSERT INTO `stock_dict` VALUES (5116, '华神科技', '000790', 'sz');
+INSERT INTO `stock_dict` VALUES (5117, '宇新股份', '002986', 'sz');
+INSERT INTO `stock_dict` VALUES (5118, '合兴包装', '002228', 'sz');
+INSERT INTO `stock_dict` VALUES (5119, '睿智医药', '300149', 'sz');
+INSERT INTO `stock_dict` VALUES (5120, '远程股份', '002692', 'sz');
+INSERT INTO `stock_dict` VALUES (5121, '华斯股份', '002494', 'sz');
+INSERT INTO `stock_dict` VALUES (5122, '宇瞳光学', '300790', 'sz');
+INSERT INTO `stock_dict` VALUES (5123, '强达电路', '301628', 'sz');
+INSERT INTO `stock_dict` VALUES (5124, '捷顺科技', '002609', 'sz');
+INSERT INTO `stock_dict` VALUES (5125, '冠龙节能', '301151', 'sz');
+INSERT INTO `stock_dict` VALUES (5126, '梦洁股份', '002397', 'sz');
+INSERT INTO `stock_dict` VALUES (5127, '凯龙高科', '300912', 'sz');
+INSERT INTO `stock_dict` VALUES (5128, '筑博设计', '300564', 'sz');
+INSERT INTO `stock_dict` VALUES (5129, '恒星科技', '002132', 'sz');
+INSERT INTO `stock_dict` VALUES (5130, '智慧农业', '000816', 'sz');
+INSERT INTO `stock_dict` VALUES (5131, '惠天热电', '000692', 'sz');
+INSERT INTO `stock_dict` VALUES (5132, '中际旭创', '300308', 'sz');
+INSERT INTO `stock_dict` VALUES (5133, '龙泉股份', '002671', 'sz');
+INSERT INTO `stock_dict` VALUES (5134, '海川智能', '300720', 'sz');
+INSERT INTO `stock_dict` VALUES (5135, '晶澳科技', '002459', 'sz');
+INSERT INTO `stock_dict` VALUES (5136, '东星医疗', '301290', 'sz');
+INSERT INTO `stock_dict` VALUES (5137, '永东股份', '002753', 'sz');
+INSERT INTO `stock_dict` VALUES (5138, '浙江建投', '002761', 'sz');
+INSERT INTO `stock_dict` VALUES (5139, '宜通世纪', '300310', 'sz');
+INSERT INTO `stock_dict` VALUES (5140, '森源电气', '002358', 'sz');
+INSERT INTO `stock_dict` VALUES (5141, '凡拓数创', '301313', 'sz');
+INSERT INTO `stock_dict` VALUES (5142, '甘咨询', '000779', 'sz');
+INSERT INTO `stock_dict` VALUES (5143, '英洛华', '000795', 'sz');
+INSERT INTO `stock_dict` VALUES (5144, '东晶电子', '002199', 'sz');
+INSERT INTO `stock_dict` VALUES (5145, '齐峰新材', '002521', 'sz');
+INSERT INTO `stock_dict` VALUES (5146, '大为股份', '002213', 'sz');
+INSERT INTO `stock_dict` VALUES (5147, '港迪技术', '301633', 'sz');
+INSERT INTO `stock_dict` VALUES (5148, '未名医药', '002581', 'sz');
+INSERT INTO `stock_dict` VALUES (5149, '万胜智能', '300882', 'sz');
+INSERT INTO `stock_dict` VALUES (5150, '天益医疗', '301097', 'sz');
+INSERT INTO `stock_dict` VALUES (5151, '惠云钛业', '300891', 'sz');
+INSERT INTO `stock_dict` VALUES (5152, '圣邦股份', '300661', 'sz');
+INSERT INTO `stock_dict` VALUES (5153, '胜利股份', '000407', 'sz');
+INSERT INTO `stock_dict` VALUES (5154, '獐子岛', '002069', 'sz');
+INSERT INTO `stock_dict` VALUES (5155, '通源石油', '300164', 'sz');
+INSERT INTO `stock_dict` VALUES (5156, '胜通能源', '001331', 'sz');
+INSERT INTO `stock_dict` VALUES (5157, '逸豪新材', '301176', 'sz');
+INSERT INTO `stock_dict` VALUES (5158, 'ST瑞科', '300600', 'sz');
+INSERT INTO `stock_dict` VALUES (5159, '博济医药', '300404', 'sz');
+INSERT INTO `stock_dict` VALUES (5160, '药易购', '300937', 'sz');
+INSERT INTO `stock_dict` VALUES (5161, '天赐材料', '002709', 'sz');
+INSERT INTO `stock_dict` VALUES (5162, '移为通信', '300590', 'sz');
+INSERT INTO `stock_dict` VALUES (5163, '达威股份', '300535', 'sz');
+INSERT INTO `stock_dict` VALUES (5164, '金圆股份', '000546', 'sz');
+INSERT INTO `stock_dict` VALUES (5165, '广宇集团', '002133', 'sz');
+INSERT INTO `stock_dict` VALUES (5166, '康龙化成', '300759', 'sz');
+INSERT INTO `stock_dict` VALUES (5167, '日月明', '300906', 'sz');
+INSERT INTO `stock_dict` VALUES (5168, '海鸥住工', '002084', 'sz');
+INSERT INTO `stock_dict` VALUES (5169, '无线传媒', '301551', 'sz');
+INSERT INTO `stock_dict` VALUES (5170, '劲旅环境', '001230', 'sz');
+INSERT INTO `stock_dict` VALUES (5171, '湖南黄金', '002155', 'sz');
+INSERT INTO `stock_dict` VALUES (5172, 'ST交投', '002200', 'sz');
+INSERT INTO `stock_dict` VALUES (5173, '运达科技', '300440', 'sz');
+INSERT INTO `stock_dict` VALUES (5174, '万润科技', '002654', 'sz');
+INSERT INTO `stock_dict` VALUES (5175, '广聚能源', '000096', 'sz');
+INSERT INTO `stock_dict` VALUES (5176, '英特集团', '000411', 'sz');
+INSERT INTO `stock_dict` VALUES (5177, '威唐工业', '300707', 'sz');
+INSERT INTO `stock_dict` VALUES (5178, '*ST合泰', '002217', 'sz');
+INSERT INTO `stock_dict` VALUES (5179, '洪兴股份', '001209', 'sz');
+INSERT INTO `stock_dict` VALUES (5180, '东北制药', '000597', 'sz');
+INSERT INTO `stock_dict` VALUES (5181, '银河磁体', '300127', 'sz');
+INSERT INTO `stock_dict` VALUES (5182, '京能热力', '002893', 'sz');
+INSERT INTO `stock_dict` VALUES (5183, '一品红', '300723', 'sz');
+INSERT INTO `stock_dict` VALUES (5184, 'ST易事特', '300376', 'sz');
+INSERT INTO `stock_dict` VALUES (5185, '启明信息', '002232', 'sz');
+INSERT INTO `stock_dict` VALUES (5186, '华金资本', '000532', 'sz');
+INSERT INTO `stock_dict` VALUES (5187, '华塑控股', '000509', 'sz');
+INSERT INTO `stock_dict` VALUES (5188, '秀强股份', '300160', 'sz');
+INSERT INTO `stock_dict` VALUES (5189, '壹连科技', '301631', 'sz');
+INSERT INTO `stock_dict` VALUES (5190, '易瑞生物', '300942', 'sz');
+INSERT INTO `stock_dict` VALUES (5191, '高争民爆', '002827', 'sz');
+INSERT INTO `stock_dict` VALUES (5192, '迦南智能', '300880', 'sz');
+INSERT INTO `stock_dict` VALUES (5193, '盈峰环境', '000967', 'sz');
+INSERT INTO `stock_dict` VALUES (5194, '冰山冷热', '000530', 'sz');
+INSERT INTO `stock_dict` VALUES (5195, '匠心家居', '301061', 'sz');
+INSERT INTO `stock_dict` VALUES (5196, '誉衡药业', '002437', 'sz');
+INSERT INTO `stock_dict` VALUES (5197, '顺威股份', '002676', 'sz');
+INSERT INTO `stock_dict` VALUES (5198, '亚厦股份', '002375', 'sz');
+INSERT INTO `stock_dict` VALUES (5199, '联化科技', '002250', 'sz');
+INSERT INTO `stock_dict` VALUES (5200, '川能动力', '000155', 'sz');
+INSERT INTO `stock_dict` VALUES (5201, 'ST墨龙', '002490', 'sz');
+INSERT INTO `stock_dict` VALUES (5202, '国创高新', '002377', 'sz');
+INSERT INTO `stock_dict` VALUES (5203, '启迪环境', '000826', 'sz');
+INSERT INTO `stock_dict` VALUES (5204, '蓝海华腾', '300484', 'sz');
+INSERT INTO `stock_dict` VALUES (5205, '景兴纸业', '002067', 'sz');
+INSERT INTO `stock_dict` VALUES (5206, '金溢科技', '002869', 'sz');
+INSERT INTO `stock_dict` VALUES (5207, '三木集团', '000632', 'sz');
+INSERT INTO `stock_dict` VALUES (5208, '中通客车', '000957', 'sz');
+INSERT INTO `stock_dict` VALUES (5209, '富特科技', '301607', 'sz');
+INSERT INTO `stock_dict` VALUES (5210, '珂玛科技', '301611', 'sz');
+INSERT INTO `stock_dict` VALUES (5211, '司尔特', '002538', 'sz');
+INSERT INTO `stock_dict` VALUES (5212, '新大洲A', '000571', 'sz');
+INSERT INTO `stock_dict` VALUES (5213, '中创环保', '300056', 'sz');
+INSERT INTO `stock_dict` VALUES (5214, '招商公路', '001965', 'sz');
+INSERT INTO `stock_dict` VALUES (5215, '天孚通信', '300394', 'sz');
+INSERT INTO `stock_dict` VALUES (5216, '*ST工智', '000584', 'sz');
+INSERT INTO `stock_dict` VALUES (5217, '太辰光', '300570', 'sz');
+INSERT INTO `stock_dict` VALUES (5218, '闽东电力', '000993', 'sz');
+INSERT INTO `stock_dict` VALUES (5219, '棒杰股份', '002634', 'sz');
+INSERT INTO `stock_dict` VALUES (5220, '捷荣技术', '002855', 'sz');
+INSERT INTO `stock_dict` VALUES (5221, '隆利科技', '300752', 'sz');
+INSERT INTO `stock_dict` VALUES (5222, '合纵科技', '300477', 'sz');
+INSERT INTO `stock_dict` VALUES (5223, '重药控股', '000950', 'sz');
+INSERT INTO `stock_dict` VALUES (5224, '托普云农', '301556', 'sz');
+INSERT INTO `stock_dict` VALUES (5225, '骏鼎达', '301538', 'sz');
+INSERT INTO `stock_dict` VALUES (5226, '法尔胜', '000890', 'sz');
+INSERT INTO `stock_dict` VALUES (5227, '翔鹭钨业', '002842', 'sz');
+INSERT INTO `stock_dict` VALUES (5228, '农心科技', '001231', 'sz');
+INSERT INTO `stock_dict` VALUES (5229, '华尔泰', '001217', 'sz');
+INSERT INTO `stock_dict` VALUES (5230, '万兴科技', '300624', 'sz');
+INSERT INTO `stock_dict` VALUES (5231, '*ST嘉寓', '300117', 'sz');
+INSERT INTO `stock_dict` VALUES (5232, '沙钢股份', '002075', 'sz');
+INSERT INTO `stock_dict` VALUES (5233, '华东医药', '000963', 'sz');
+INSERT INTO `stock_dict` VALUES (5234, '联创股份', '300343', 'sz');
+INSERT INTO `stock_dict` VALUES (5235, 'ST旭蓝', '000040', 'sz');
+INSERT INTO `stock_dict` VALUES (5236, '集智股份', '300553', 'sz');
+INSERT INTO `stock_dict` VALUES (5237, '科力装备', '301552', 'sz');
+INSERT INTO `stock_dict` VALUES (5238, '南都电源', '300068', 'sz');
+INSERT INTO `stock_dict` VALUES (5239, '摩恩电气', '002451', 'sz');
+INSERT INTO `stock_dict` VALUES (5240, '陕西金叶', '000812', 'sz');
+INSERT INTO `stock_dict` VALUES (5241, '*ST中迪', '000609', 'sz');
+INSERT INTO `stock_dict` VALUES (5242, '中科云网', '002306', 'sz');
+INSERT INTO `stock_dict` VALUES (5243, '传艺科技', '002866', 'sz');
+INSERT INTO `stock_dict` VALUES (5244, '国林科技', '300786', 'sz');
+INSERT INTO `stock_dict` VALUES (5245, '*ST长方', '300301', 'sz');
+INSERT INTO `stock_dict` VALUES (5246, '三联锻造', '001282', 'sz');
+INSERT INTO `stock_dict` VALUES (5247, '坤泰股份', '001260', 'sz');
+INSERT INTO `stock_dict` VALUES (5248, '中恒电气', '002364', 'sz');
+INSERT INTO `stock_dict` VALUES (5249, '金杨股份', '301210', 'sz');
+INSERT INTO `stock_dict` VALUES (5250, '凯瑞德', '002072', 'sz');
+INSERT INTO `stock_dict` VALUES (5251, '江苏国信', '002608', 'sz');
+INSERT INTO `stock_dict` VALUES (5252, '安控科技', '300370', 'sz');
+INSERT INTO `stock_dict` VALUES (5253, '瑞康医药', '002589', 'sz');
+INSERT INTO `stock_dict` VALUES (5254, '南国置业', '002305', 'sz');
+INSERT INTO `stock_dict` VALUES (5255, '安硕信息', '300380', 'sz');
+INSERT INTO `stock_dict` VALUES (5256, '桂发祥', '002820', 'sz');
+INSERT INTO `stock_dict` VALUES (5257, '阳光股份', '000608', 'sz');
+INSERT INTO `stock_dict` VALUES (5258, '冀中能源', '000937', 'sz');
+INSERT INTO `stock_dict` VALUES (5259, '多利科技', '001311', 'sz');
+INSERT INTO `stock_dict` VALUES (5260, '中兵红箭', '000519', 'sz');
+INSERT INTO `stock_dict` VALUES (5261, 'ST汇金', '300368', 'sz');
+INSERT INTO `stock_dict` VALUES (5262, '*ST开元', '300338', 'sz');
+INSERT INTO `stock_dict` VALUES (5263, '久立特材', '002318', 'sz');
+INSERT INTO `stock_dict` VALUES (5264, '豫能控股', '001896', 'sz');
+INSERT INTO `stock_dict` VALUES (5265, '迦南科技', '300412', 'sz');
+INSERT INTO `stock_dict` VALUES (5266, '海宁皮城', '002344', 'sz');
+INSERT INTO `stock_dict` VALUES (5267, '安凯客车', '000868', 'sz');
+INSERT INTO `stock_dict` VALUES (5268, '永泰运', '001228', 'sz');
+INSERT INTO `stock_dict` VALUES (5269, '安车检测', '300572', 'sz');
+INSERT INTO `stock_dict` VALUES (5270, '金通灵', '300091', 'sz');
+INSERT INTO `stock_dict` VALUES (5271, '报 喜 鸟', '002154', 'sz');
+INSERT INTO `stock_dict` VALUES (5272, '当升科技', '300073', 'sz');
+INSERT INTO `stock_dict` VALUES (5273, '金石亚药', '300434', 'sz');
+INSERT INTO `stock_dict` VALUES (5274, '山高环能', '000803', 'sz');
+INSERT INTO `stock_dict` VALUES (5275, '科恒股份', '300340', 'sz');
+INSERT INTO `stock_dict` VALUES (5276, '美盈森', '002303', 'sz');
+INSERT INTO `stock_dict` VALUES (5277, 'ST易购', '002024', 'sz');
+INSERT INTO `stock_dict` VALUES (5278, '尔康制药', '300267', 'sz');
+INSERT INTO `stock_dict` VALUES (5279, '昇辉科技', '300423', 'sz');
+INSERT INTO `stock_dict` VALUES (5280, '辉煌科技', '002296', 'sz');
+INSERT INTO `stock_dict` VALUES (5281, '厦门信达', '000701', 'sz');
+INSERT INTO `stock_dict` VALUES (5282, '雅博股份', '002323', 'sz');
+INSERT INTO `stock_dict` VALUES (5283, '英特科技', '301399', 'sz');
+INSERT INTO `stock_dict` VALUES (5284, '凤形股份', '002760', 'sz');
+INSERT INTO `stock_dict` VALUES (5285, '浩物股份', '000757', 'sz');
+INSERT INTO `stock_dict` VALUES (5286, '蓝丰生化', '002513', 'sz');
+INSERT INTO `stock_dict` VALUES (5287, '凯利泰', '300326', 'sz');
+INSERT INTO `stock_dict` VALUES (5288, '棕榈股份', '002431', 'sz');
+INSERT INTO `stock_dict` VALUES (5289, '古鳌科技', '300551', 'sz');
+INSERT INTO `stock_dict` VALUES (5290, '金浦钛业', '000545', 'sz');
+INSERT INTO `stock_dict` VALUES (5291, '莱茵体育', '000558', 'sz');
+INSERT INTO `stock_dict` VALUES (5292, '宏达高科', '002144', 'sz');
+INSERT INTO `stock_dict` VALUES (5293, '博腾股份', '300363', 'sz');
+INSERT INTO `stock_dict` VALUES (5294, '德方纳米', '300769', 'sz');
+INSERT INTO `stock_dict` VALUES (5295, '天源迪科', '300047', 'sz');
+INSERT INTO `stock_dict` VALUES (5296, '钧达股份', '002865', 'sz');
+INSERT INTO `stock_dict` VALUES (5297, '万集科技', '300552', 'sz');
+INSERT INTO `stock_dict` VALUES (5298, 'ST峡创', '300300', 'sz');
+INSERT INTO `stock_dict` VALUES (5299, '易明医药', '002826', 'sz');
+INSERT INTO `stock_dict` VALUES (5300, '电科院', '300215', 'sz');
+INSERT INTO `stock_dict` VALUES (5301, '聚力文化', '002247', 'sz');
+INSERT INTO `stock_dict` VALUES (5302, '天际股份', '002759', 'sz');
+INSERT INTO `stock_dict` VALUES (5303, '融发核电', '002366', 'sz');
+INSERT INTO `stock_dict` VALUES (5304, '凤凰航运', '000520', 'sz');
+INSERT INTO `stock_dict` VALUES (5305, '跃岭股份', '002725', 'sz');
+INSERT INTO `stock_dict` VALUES (5306, '六九一二', '301592', 'sz');
+INSERT INTO `stock_dict` VALUES (5307, 'ST中嘉', '000889', 'sz');
+INSERT INTO `stock_dict` VALUES (5308, '南华仪器', '300417', 'sz');
+INSERT INTO `stock_dict` VALUES (5309, '长盈精密', '300115', 'sz');
+INSERT INTO `stock_dict` VALUES (5310, '*ST银江', '300020', 'sz');
+INSERT INTO `stock_dict` VALUES (5311, '海晨股份', '300873', 'sz');
+INSERT INTO `stock_dict` VALUES (5312, '西王食品', '000639', 'sz');
+INSERT INTO `stock_dict` VALUES (5313, '浙商中拓', '000906', 'sz');
+INSERT INTO `stock_dict` VALUES (5314, '川发龙蟒', '002312', 'sz');
+INSERT INTO `stock_dict` VALUES (5315, '大庆华科', '000985', 'sz');
+INSERT INTO `stock_dict` VALUES (5316, '金正大', '002470', 'sz');
+INSERT INTO `stock_dict` VALUES (5317, '*ST名家', '300506', 'sz');
+INSERT INTO `stock_dict` VALUES (5318, '科伦药业', '002422', 'sz');
+INSERT INTO `stock_dict` VALUES (5319, '蒙草生态', '300355', 'sz');
+INSERT INTO `stock_dict` VALUES (5320, '同兴环保', '003027', 'sz');
+INSERT INTO `stock_dict` VALUES (5321, '飞马国际', '002210', 'sz');
+INSERT INTO `stock_dict` VALUES (5322, '红墙股份', '002809', 'sz');
+INSERT INTO `stock_dict` VALUES (5323, '众泰汽车', '000980', 'sz');
+INSERT INTO `stock_dict` VALUES (5324, '高伟达', '300465', 'sz');
+INSERT INTO `stock_dict` VALUES (5325, '建投能源', '000600', 'sz');
+INSERT INTO `stock_dict` VALUES (5326, '嘉麟杰', '002486', 'sz');
+INSERT INTO `stock_dict` VALUES (5327, '森马服饰', '002563', 'sz');
+INSERT INTO `stock_dict` VALUES (5328, '融捷健康', '300247', 'sz');
+INSERT INTO `stock_dict` VALUES (5329, '宝鹰股份', '002047', 'sz');
+INSERT INTO `stock_dict` VALUES (5330, '中达安', '300635', 'sz');
+INSERT INTO `stock_dict` VALUES (5331, '尚荣医疗', '002551', 'sz');
+INSERT INTO `stock_dict` VALUES (5332, '泉为科技', '300716', 'sz');
+INSERT INTO `stock_dict` VALUES (5333, '普利制药', '300630', 'sz');
+INSERT INTO `stock_dict` VALUES (5334, '冠捷科技', '000727', 'sz');
+INSERT INTO `stock_dict` VALUES (5335, '惠博普', '002554', 'sz');
+INSERT INTO `stock_dict` VALUES (5336, '华铭智能', '300462', 'sz');
+INSERT INTO `stock_dict` VALUES (5337, 'ST德豪', '002005', 'sz');
+INSERT INTO `stock_dict` VALUES (5338, '华闻集团', '000793', 'sz');
+INSERT INTO `stock_dict` VALUES (5339, '沃尔核材', '002130', 'sz');
+INSERT INTO `stock_dict` VALUES (5340, '皖能电力', '000543', 'sz');
+INSERT INTO `stock_dict` VALUES (5341, '兴民智通', '002355', 'sz');
+INSERT INTO `stock_dict` VALUES (5342, '溯联股份', '301397', 'sz');
+INSERT INTO `stock_dict` VALUES (5343, '喜悦智行', '301198', 'sz');
+INSERT INTO `stock_dict` VALUES (5344, '*ST有树', '300209', 'sz');
+INSERT INTO `stock_dict` VALUES (5345, '*ST中程', '300208', 'sz');
+INSERT INTO `stock_dict` VALUES (5346, '威士顿', '301315', 'sz');
+INSERT INTO `stock_dict` VALUES (5347, '福石控股', '300071', 'sz');
+INSERT INTO `stock_dict` VALUES (5348, '新锦动力', '300157', 'sz');
+INSERT INTO `stock_dict` VALUES (5349, '垒知集团', '002398', 'sz');
+INSERT INTO `stock_dict` VALUES (5350, '*ST贤丰', '002141', 'sz');
+INSERT INTO `stock_dict` VALUES (5351, '酷特智能', '300840', 'sz');
+INSERT INTO `stock_dict` VALUES (5352, '*ST东园', '002310', 'sz');
+INSERT INTO `stock_dict` VALUES (5353, '英维克', '002837', 'sz');
+INSERT INTO `stock_dict` VALUES (5354, '昆仑万维', '300418', 'sz');
+INSERT INTO `stock_dict` VALUES (5355, '*ST龙津', '002750', 'sz');
+INSERT INTO `stock_dict` VALUES (5356, '皓宸医疗', '002622', 'sz');
+INSERT INTO `stock_dict` VALUES (5357, '沪电股份', '002463', 'sz');
+INSERT INTO `stock_dict` VALUES (5358, '旗天科技', '300061', 'sz');
+INSERT INTO `stock_dict` VALUES (5359, '集泰股份', '002909', 'sz');
+INSERT INTO `stock_dict` VALUES (5360, '渝三峡Ａ', '000565', 'sz');
+INSERT INTO `stock_dict` VALUES (5361, '节能铁汉', '300197', 'sz');
+INSERT INTO `stock_dict` VALUES (5362, '美晨科技', '300237', 'sz');
+INSERT INTO `stock_dict` VALUES (5363, '贝达药业', '300558', 'sz');
+INSERT INTO `stock_dict` VALUES (5364, '登云股份', '002715', 'sz');
+INSERT INTO `stock_dict` VALUES (5365, '中公教育', '002607', 'sz');
+INSERT INTO `stock_dict` VALUES (5366, '国联水产', '300094', 'sz');
+INSERT INTO `stock_dict` VALUES (5367, '佳云科技', '300242', 'sz');
+INSERT INTO `stock_dict` VALUES (5368, '国机精工', '002046', 'sz');
+INSERT INTO `stock_dict` VALUES (5369, '湖南裕能', '301358', 'sz');
+INSERT INTO `stock_dict` VALUES (5370, '*ST京蓝', '000711', 'sz');
+INSERT INTO `stock_dict` VALUES (5371, '东易日盛', '002713', 'sz');
+INSERT INTO `stock_dict` VALUES (5372, '中晟高科', '002778', 'sz');
+INSERT INTO `stock_dict` VALUES (5373, '纳川股份', '300198', 'sz');
+INSERT INTO `stock_dict` VALUES (5374, '同为股份', '002835', 'sz');
+INSERT INTO `stock_dict` VALUES (5375, '一彬科技', '001278', 'sz');
+INSERT INTO `stock_dict` VALUES (5376, '利源股份', '002501', 'sz');
+INSERT INTO `stock_dict` VALUES (5377, '汇洲智能', '002122', 'sz');
+INSERT INTO `stock_dict` VALUES (5378, '海思科', '002653', 'sz');
+INSERT INTO `stock_dict` VALUES (5379, '神州高铁', '000008', 'sz');
+INSERT INTO `stock_dict` VALUES (5380, '三变科技', '002112', 'sz');
+INSERT INTO `stock_dict` VALUES (5381, 'ST路通', '300555', 'sz');
+INSERT INTO `stock_dict` VALUES (5382, '粤桂股份', '000833', 'sz');
+INSERT INTO `stock_dict` VALUES (5383, '艾布鲁', '301259', 'sz');
+INSERT INTO `stock_dict` VALUES (5384, '亚太药业', '002370', 'sz');
+INSERT INTO `stock_dict` VALUES (5385, '神宇股份', '300563', 'sz');
+INSERT INTO `stock_dict` VALUES (5386, '申科股份', '002633', 'sz');
+INSERT INTO `stock_dict` VALUES (5387, '炬申股份', '001202', 'sz');
+INSERT INTO `stock_dict` VALUES (5388, '如意集团', '002193', 'sz');
+INSERT INTO `stock_dict` VALUES (5389, '云内动力', '000903', 'sz');
+INSERT INTO `stock_dict` VALUES (5390, '四环生物', '000518', 'sz');
+INSERT INTO `stock_dict` VALUES (5391, '欣龙控股', '000955', 'sz');
+INSERT INTO `stock_dict` VALUES (5392, '协创数据', '300857', 'sz');
+INSERT INTO `stock_dict` VALUES (5393, '豪美新材', '002988', 'sz');
+INSERT INTO `stock_dict` VALUES (5394, '佛慈制药', '002644', 'sz');
+INSERT INTO `stock_dict` VALUES (5395, '博菲电气', '001255', 'sz');
+INSERT INTO `stock_dict` VALUES (5396, '四方达', '300179', 'sz');
+INSERT INTO `stock_dict` VALUES (5397, '视觉中国', '000681', 'sz');
+INSERT INTO `stock_dict` VALUES (5398, '麦格米特', '002851', 'sz');
+INSERT INTO `stock_dict` VALUES (5399, '中南股份', '000717', 'sz');
+INSERT INTO `stock_dict` VALUES (5400, '慧翰股份', '301600', 'sz');
+INSERT INTO `stock_dict` VALUES (5401, '皇庭国际', '000056', 'sz');
+INSERT INTO `stock_dict` VALUES (5402, '跨境通', '002640', 'sz');
+INSERT INTO `stock_dict` VALUES (5403, '岩山科技', '002195', 'sz');
+INSERT INTO `stock_dict` VALUES (5404, '利欧股份', '002131', 'sz');
+INSERT INTO `stock_dict` VALUES (5405, '日发精机', '002520', 'sz');
+INSERT INTO `stock_dict` VALUES (5406, 'ST天瑞', '300165', 'sz');
+INSERT INTO `stock_dict` VALUES (5407, '富士达', '835640', 'bj');
+INSERT INTO `stock_dict` VALUES (5408, '五新隧装', '835174', 'bj');
+INSERT INTO `stock_dict` VALUES (5409, '威博液压', '871245', 'bj');
+INSERT INTO `stock_dict` VALUES (5410, '盖世食品', '836826', 'bj');
+INSERT INTO `stock_dict` VALUES (5411, '优机股份', '833943', 'bj');
+INSERT INTO `stock_dict` VALUES (5412, '安徽凤凰', '832000', 'bj');
+INSERT INTO `stock_dict` VALUES (5413, '辰光医疗', '430300', 'bj');
+INSERT INTO `stock_dict` VALUES (5414, '豪声电子', '838701', 'bj');
+INSERT INTO `stock_dict` VALUES (5415, '许昌智能', '831396', 'bj');
+INSERT INTO `stock_dict` VALUES (5416, '美登科技', '838227', 'bj');
+INSERT INTO `stock_dict` VALUES (5417, '殷图网联', '835508', 'bj');
+INSERT INTO `stock_dict` VALUES (5418, '纬达光电', '873001', 'bj');
+INSERT INTO `stock_dict` VALUES (5419, '威贸电子', '833346', 'bj');
+INSERT INTO `stock_dict` VALUES (5420, '德源药业', '832735', 'bj');
+INSERT INTO `stock_dict` VALUES (5421, '夜光明', '873527', 'bj');
+INSERT INTO `stock_dict` VALUES (5422, '万通液压', '830839', 'bj');
+INSERT INTO `stock_dict` VALUES (5423, '铁大科技', '872541', 'bj');
+INSERT INTO `stock_dict` VALUES (5424, '海达尔', '836699', 'bj');
+INSERT INTO `stock_dict` VALUES (5425, '慧为智能', '832876', 'bj');
+INSERT INTO `stock_dict` VALUES (5426, '鑫汇科', '831167', 'bj');
+INSERT INTO `stock_dict` VALUES (5427, '并行科技', '839493', 'bj');
+INSERT INTO `stock_dict` VALUES (5428, '博迅生物', '836504', 'bj');
+INSERT INTO `stock_dict` VALUES (5429, '汉鑫科技', '837092', 'bj');
+INSERT INTO `stock_dict` VALUES (5430, '凯德石英', '835179', 'bj');
+INSERT INTO `stock_dict` VALUES (5431, '西磁科技', '836961', 'bj');
+INSERT INTO `stock_dict` VALUES (5432, '恒太照明', '873339', 'bj');
+INSERT INTO `stock_dict` VALUES (5433, '戈碧迦', '835438', 'bj');
+INSERT INTO `stock_dict` VALUES (5434, '邦德股份', '838171', 'bj');
+INSERT INTO `stock_dict` VALUES (5435, '则成电子', '837821', 'bj');
+INSERT INTO `stock_dict` VALUES (5436, '欧福蛋业', '839371', 'bj');
+INSERT INTO `stock_dict` VALUES (5437, '骑士乳业', '832786', 'bj');
+INSERT INTO `stock_dict` VALUES (5438, '华岭股份', '430139', 'bj');
+INSERT INTO `stock_dict` VALUES (5439, '创远信科', '831961', 'bj');
+INSERT INTO `stock_dict` VALUES (5440, '锦波生物', '832982', 'bj');
+INSERT INTO `stock_dict` VALUES (5441, '一致魔芋', '839273', 'bj');
+INSERT INTO `stock_dict` VALUES (5442, '广脉科技', '838924', 'bj');
+INSERT INTO `stock_dict` VALUES (5443, '朱老六', '831726', 'bj');
+INSERT INTO `stock_dict` VALUES (5444, '雅葆轩', '870357', 'bj');
+INSERT INTO `stock_dict` VALUES (5445, '保丽洁', '832802', 'bj');
+INSERT INTO `stock_dict` VALUES (5446, '华光源海', '872351', 'bj');
+INSERT INTO `stock_dict` VALUES (5447, '青矩技术', '836208', 'bj');
+INSERT INTO `stock_dict` VALUES (5448, '康比特', '833429', 'bj');
+INSERT INTO `stock_dict` VALUES (5449, '智新电子', '837212', 'bj');
+INSERT INTO `stock_dict` VALUES (5450, '同惠电子', '833509', 'bj');
+INSERT INTO `stock_dict` VALUES (5451, '曙光数创', '872808', 'bj');
+INSERT INTO `stock_dict` VALUES (5452, '阿为特', '873693', 'bj');
+INSERT INTO `stock_dict` VALUES (5453, '田野股份', '832023', 'bj');
+INSERT INTO `stock_dict` VALUES (5454, '晶赛科技', '871981', 'bj');
+INSERT INTO `stock_dict` VALUES (5455, '颖泰生物', '833819', 'bj');
+INSERT INTO `stock_dict` VALUES (5456, '路斯股份', '832419', 'bj');
+INSERT INTO `stock_dict` VALUES (5457, '科拜尔', '920066', 'bj');
+INSERT INTO `stock_dict` VALUES (5458, '雷神科技', '872190', 'bj');
+INSERT INTO `stock_dict` VALUES (5459, '康普化学', '834033', 'bj');
+INSERT INTO `stock_dict` VALUES (5460, '中裕科技', '871694', 'bj');
+INSERT INTO `stock_dict` VALUES (5461, '康乐卫士', '833575', 'bj');
+INSERT INTO `stock_dict` VALUES (5462, '林泰新材', '920106', 'bj');
+INSERT INTO `stock_dict` VALUES (5463, '东和新材', '839792', 'bj');
+INSERT INTO `stock_dict` VALUES (5464, '天马新材', '838971', 'bj');
+INSERT INTO `stock_dict` VALUES (5465, '翰博高新', '833994', 'bj');
+INSERT INTO `stock_dict` VALUES (5466, '泰祥股份', '833874', 'bj');
+INSERT INTO `stock_dict` VALUES (5467, '观典防务', '832317', 'bj');
+INSERT INTO `stock_dict` VALUES (5468, '派诺科技', '831175', 'bj');
+INSERT INTO `stock_dict` VALUES (5469, '建邦科技', '837242', 'bj');
+INSERT INTO `stock_dict` VALUES (5470, '中设咨询', '833873', 'bj');
+INSERT INTO `stock_dict` VALUES (5471, '民士达', '833394', 'bj');
+INSERT INTO `stock_dict` VALUES (5472, '克莱特', '831689', 'bj');
+INSERT INTO `stock_dict` VALUES (5473, '凯华材料', '831526', 'bj');
+INSERT INTO `stock_dict` VALUES (5474, '流金科技', '834021', 'bj');
+INSERT INTO `stock_dict` VALUES (5475, '大地电气', '870436', 'bj');
+INSERT INTO `stock_dict` VALUES (5476, '九菱科技', '873305', 'bj');
+INSERT INTO `stock_dict` VALUES (5477, '德瑞锂电', '833523', 'bj');
+INSERT INTO `stock_dict` VALUES (5478, '国源科技', '835184', 'bj');
+INSERT INTO `stock_dict` VALUES (5479, '球冠电缆', '834682', 'bj');
+INSERT INTO `stock_dict` VALUES (5480, '国航远洋', '833171', 'bj');
+INSERT INTO `stock_dict` VALUES (5481, '卓兆点胶', '873726', 'bj');
+INSERT INTO `stock_dict` VALUES (5482, '铜冠矿建', '920019', 'bj');
+INSERT INTO `stock_dict` VALUES (5483, '同辉信息', '430090', 'bj');
+INSERT INTO `stock_dict` VALUES (5484, '荣亿精密', '873223', 'bj');
+INSERT INTO `stock_dict` VALUES (5485, '泓禧科技', '871857', 'bj');
+INSERT INTO `stock_dict` VALUES (5486, '永顺生物', '839729', 'bj');
+INSERT INTO `stock_dict` VALUES (5487, '广道数字', '839680', 'bj');
+INSERT INTO `stock_dict` VALUES (5488, '广咨国际', '836892', 'bj');
+INSERT INTO `stock_dict` VALUES (5489, '连城数控', '835368', 'bj');
+INSERT INTO `stock_dict` VALUES (5490, '海泰新能', '835985', 'bj');
+INSERT INTO `stock_dict` VALUES (5491, '云创数据', '835305', 'bj');
+INSERT INTO `stock_dict` VALUES (5492, '朗鸿科技', '836395', 'bj');
+INSERT INTO `stock_dict` VALUES (5493, '利尔达', '832149', 'bj');
+INSERT INTO `stock_dict` VALUES (5494, '海希通讯', '831305', 'bj');
+INSERT INTO `stock_dict` VALUES (5495, '凯大催化', '830974', 'bj');
+INSERT INTO `stock_dict` VALUES (5496, '中航泰达', '836263', 'bj');
+INSERT INTO `stock_dict` VALUES (5497, '星辰科技', '832885', 'bj');
+INSERT INTO `stock_dict` VALUES (5498, '春光药装', '838810', 'bj');
+INSERT INTO `stock_dict` VALUES (5499, '海昇药业', '870656', 'bj');
+INSERT INTO `stock_dict` VALUES (5500, '奔朗新材', '836807', 'bj');
+INSERT INTO `stock_dict` VALUES (5501, '云里物里', '872374', 'bj');
+INSERT INTO `stock_dict` VALUES (5502, '泰德股份', '831278', 'bj');
+INSERT INTO `stock_dict` VALUES (5503, '佳先股份', '430489', 'bj');
+INSERT INTO `stock_dict` VALUES (5504, '三元基因', '837344', 'bj');
+INSERT INTO `stock_dict` VALUES (5505, '吉林碳谷', '836077', 'bj');
+INSERT INTO `stock_dict` VALUES (5506, '微创光电', '430198', 'bj');
+INSERT INTO `stock_dict` VALUES (5507, '天力复合', '873576', 'bj');
+INSERT INTO `stock_dict` VALUES (5508, '亿能电力', '837046', 'bj');
+INSERT INTO `stock_dict` VALUES (5509, '禾昌聚合', '832089', 'bj');
+INSERT INTO `stock_dict` VALUES (5510, '云星宇', '873806', 'bj');
+INSERT INTO `stock_dict` VALUES (5511, '沪江材料', '870204', 'bj');
+INSERT INTO `stock_dict` VALUES (5512, '瑞华技术', '920099', 'bj');
+INSERT INTO `stock_dict` VALUES (5513, '路桥信息', '837748', 'bj');
+INSERT INTO `stock_dict` VALUES (5514, '硅烷科技', '838402', 'bj');
+INSERT INTO `stock_dict` VALUES (5515, '东方碳素', '832175', 'bj');
+INSERT INTO `stock_dict` VALUES (5516, '欧普泰', '836414', 'bj');
+INSERT INTO `stock_dict` VALUES (5517, '贝特瑞', '835185', 'bj');
+INSERT INTO `stock_dict` VALUES (5518, '恒拓开源', '834415', 'bj');
+INSERT INTO `stock_dict` VALUES (5519, '国义招标', '831039', 'bj');
+INSERT INTO `stock_dict` VALUES (5520, '新威凌', '871634', 'bj');
+INSERT INTO `stock_dict` VALUES (5521, '基康仪器', '830879', 'bj');
+INSERT INTO `stock_dict` VALUES (5522, '美邦科技', '832471', 'bj');
+INSERT INTO `stock_dict` VALUES (5523, '科创新材', '833580', 'bj');
+INSERT INTO `stock_dict` VALUES (5524, '聚星科技', '920111', 'bj');
+INSERT INTO `stock_dict` VALUES (5525, '富恒新材', '832469', 'bj');
+INSERT INTO `stock_dict` VALUES (5526, '易实精密', '836221', 'bj');
+INSERT INTO `stock_dict` VALUES (5527, '开特股份', '832978', 'bj');
+INSERT INTO `stock_dict` VALUES (5528, '无锡晶海', '836547', 'bj');
+INSERT INTO `stock_dict` VALUES (5529, '诺思兰德', '430047', 'bj');
+INSERT INTO `stock_dict` VALUES (5530, '艾融软件', '830799', 'bj');
+INSERT INTO `stock_dict` VALUES (5531, '方大新材', '838163', 'bj');
+INSERT INTO `stock_dict` VALUES (5532, '七丰精工', '873169', 'bj');
+INSERT INTO `stock_dict` VALUES (5533, '万源通', '920060', 'bj');
+INSERT INTO `stock_dict` VALUES (5534, '前进科技', '873679', 'bj');
+INSERT INTO `stock_dict` VALUES (5535, '广厦环能', '873703', 'bj');
+INSERT INTO `stock_dict` VALUES (5536, '丰安股份', '870508', 'bj');
+INSERT INTO `stock_dict` VALUES (5537, '同享科技', '839167', 'bj');
+INSERT INTO `stock_dict` VALUES (5538, '恒合股份', '832145', 'bj');
+INSERT INTO `stock_dict` VALUES (5539, '汇隆活塞', '833455', 'bj');
+INSERT INTO `stock_dict` VALUES (5540, '星昊医药', '430017', 'bj');
+INSERT INTO `stock_dict` VALUES (5541, '通易航天', '871642', 'bj');
+INSERT INTO `stock_dict` VALUES (5542, '生物谷', '833266', 'bj');
+INSERT INTO `stock_dict` VALUES (5543, '远航精密', '833914', 'bj');
+INSERT INTO `stock_dict` VALUES (5544, '机科股份', '835579', 'bj');
+INSERT INTO `stock_dict` VALUES (5545, '花溪科技', '872895', 'bj');
+INSERT INTO `stock_dict` VALUES (5546, '恒立钻具', '836942', 'bj');
+INSERT INTO `stock_dict` VALUES (5547, '新芝生物', '430685', 'bj');
+INSERT INTO `stock_dict` VALUES (5548, '同力股份', '834599', 'bj');
+INSERT INTO `stock_dict` VALUES (5549, '捷众科技', '873690', 'bj');
+INSERT INTO `stock_dict` VALUES (5550, '百甲科技', '835857', 'bj');
+INSERT INTO `stock_dict` VALUES (5551, '派特尔', '836871', 'bj');
+INSERT INTO `stock_dict` VALUES (5552, '成电光信', '920008', 'bj');
+INSERT INTO `stock_dict` VALUES (5553, '驱动力', '838275', 'bj');
+INSERT INTO `stock_dict` VALUES (5554, '铁拓机械', '873706', 'bj');
+INSERT INTO `stock_dict` VALUES (5555, '绿亨科技', '870866', 'bj');
+INSERT INTO `stock_dict` VALUES (5556, '安达科技', '830809', 'bj');
+INSERT INTO `stock_dict` VALUES (5557, '浙江大农', '831855', 'bj');
+INSERT INTO `stock_dict` VALUES (5558, '宏裕包材', '837174', 'bj');
+INSERT INTO `stock_dict` VALUES (5559, '齐鲁华信', '830832', 'bj');
+INSERT INTO `stock_dict` VALUES (5560, '瑞星股份', '836717', 'bj');
+INSERT INTO `stock_dict` VALUES (5561, '长虹能源', '836239', 'bj');
+INSERT INTO `stock_dict` VALUES (5562, '昆工科技', '831152', 'bj');
+INSERT INTO `stock_dict` VALUES (5563, '特瑞斯', '834014', 'bj');
+INSERT INTO `stock_dict` VALUES (5564, '鹿得医疗', '832278', 'bj');
+INSERT INTO `stock_dict` VALUES (5565, '秋乐种业', '831087', 'bj');
+INSERT INTO `stock_dict` VALUES (5566, '国子软件', '872953', 'bj');
+INSERT INTO `stock_dict` VALUES (5567, '晨光电缆', '834639', 'bj');
+INSERT INTO `stock_dict` VALUES (5568, '大禹生物', '871970', 'bj');
+INSERT INTO `stock_dict` VALUES (5569, '新安洁', '831370', 'bj');
+INSERT INTO `stock_dict` VALUES (5570, '康农种业', '837403', 'bj');
+INSERT INTO `stock_dict` VALUES (5571, '泰鹏智能', '873132', 'bj');
+INSERT INTO `stock_dict` VALUES (5572, '明阳科技', '837663', 'bj');
+INSERT INTO `stock_dict` VALUES (5573, '惠同新材', '833751', 'bj');
+INSERT INTO `stock_dict` VALUES (5574, '力王股份', '831627', 'bj');
+INSERT INTO `stock_dict` VALUES (5575, '科强股份', '873665', 'bj');
+INSERT INTO `stock_dict` VALUES (5576, '华洋赛车', '834058', 'bj');
+INSERT INTO `stock_dict` VALUES (5577, '锦好医疗', '872925', 'bj');
+INSERT INTO `stock_dict` VALUES (5578, '灿能电力', '870299', 'bj');
+INSERT INTO `stock_dict` VALUES (5579, '纳科诺尔', '832522', 'bj');
+INSERT INTO `stock_dict` VALUES (5580, '德众汽车', '838030', 'bj');
+INSERT INTO `stock_dict` VALUES (5581, '中纺标', '873122', 'bj');
+INSERT INTO `stock_dict` VALUES (5582, '梓橦宫', '832566', 'bj');
+INSERT INTO `stock_dict` VALUES (5583, '华阳变速', '839946', 'bj');
+INSERT INTO `stock_dict` VALUES (5584, '力佳科技', '835237', 'bj');
+INSERT INTO `stock_dict` VALUES (5585, '格利尔', '831641', 'bj');
+INSERT INTO `stock_dict` VALUES (5586, '旭杰科技', '836149', 'bj');
+INSERT INTO `stock_dict` VALUES (5587, '天纺标', '871753', 'bj');
+INSERT INTO `stock_dict` VALUES (5588, '华维设计', '833427', 'bj');
+INSERT INTO `stock_dict` VALUES (5589, '秉扬科技', '836675', 'bj');
+INSERT INTO `stock_dict` VALUES (5590, '中科美菱', '835892', 'bj');
+INSERT INTO `stock_dict` VALUES (5591, '科力股份', '920088', 'bj');
+INSERT INTO `stock_dict` VALUES (5592, '美之高', '834765', 'bj');
+INSERT INTO `stock_dict` VALUES (5593, '吉冈精密', '836720', 'bj');
+INSERT INTO `stock_dict` VALUES (5594, '龙竹科技', '831445', 'bj');
+INSERT INTO `stock_dict` VALUES (5595, '雅达股份', '430556', 'bj');
+INSERT INTO `stock_dict` VALUES (5596, '科润智控', '834062', 'bj');
+INSERT INTO `stock_dict` VALUES (5597, '常辅股份', '871396', 'bj');
+INSERT INTO `stock_dict` VALUES (5598, '立方控股', '833030', 'bj');
+INSERT INTO `stock_dict` VALUES (5599, '胜业电气', '920128', 'bj');
+INSERT INTO `stock_dict` VALUES (5600, '拾比佰', '831768', 'bj');
+INSERT INTO `stock_dict` VALUES (5601, '天润科技', '430564', 'bj');
+INSERT INTO `stock_dict` VALUES (5602, '方盛股份', '832662', 'bj');
+INSERT INTO `stock_dict` VALUES (5603, '艾能聚', '834770', 'bj');
+INSERT INTO `stock_dict` VALUES (5604, '润普食品', '836422', 'bj');
+INSERT INTO `stock_dict` VALUES (5605, '太湖远大', '920118', 'bj');
+INSERT INTO `stock_dict` VALUES (5606, '美心翼申', '873833', 'bj');
+INSERT INTO `stock_dict` VALUES (5607, '华原股份', '838837', 'bj');
+INSERT INTO `stock_dict` VALUES (5608, '天铭科技', '836270', 'bj');
+INSERT INTO `stock_dict` VALUES (5609, '三祥科技', '831195', 'bj');
+INSERT INTO `stock_dict` VALUES (5610, '无锡鼎邦', '872931', 'bj');
+INSERT INTO `stock_dict` VALUES (5611, '迪尔化工', '831304', 'bj');
+INSERT INTO `stock_dict` VALUES (5612, '华信永道', '837592', 'bj');
+INSERT INTO `stock_dict` VALUES (5613, '视声智能', '870976', 'bj');
+INSERT INTO `stock_dict` VALUES (5614, '一诺威', '834261', 'bj');
+INSERT INTO `stock_dict` VALUES (5615, '润农节水', '830964', 'bj');
+INSERT INTO `stock_dict` VALUES (5616, '万德股份', '836419', 'bj');
+INSERT INTO `stock_dict` VALUES (5617, '倍益康', '870199', 'bj');
+INSERT INTO `stock_dict` VALUES (5618, '海能技术', '430476', 'bj');
+INSERT INTO `stock_dict` VALUES (5619, '数字人', '835670', 'bj');
+INSERT INTO `stock_dict` VALUES (5620, '宁新新材', '839719', 'bj');
+INSERT INTO `stock_dict` VALUES (5621, '中草香料', '920016', 'bj');
+INSERT INTO `stock_dict` VALUES (5622, '森萱医药', '830946', 'bj');
+INSERT INTO `stock_dict` VALUES (5623, '瑞奇智造', '833781', 'bj');
+INSERT INTO `stock_dict` VALUES (5624, '利通科技', '832225', 'bj');
+INSERT INTO `stock_dict` VALUES (5625, '科达自控', '831832', 'bj');
+INSERT INTO `stock_dict` VALUES (5626, '浩淼科技', '831856', 'bj');
+INSERT INTO `stock_dict` VALUES (5627, '三维股份', '831834', 'bj');
+INSERT INTO `stock_dict` VALUES (5628, '天罡股份', '832651', 'bj');
+INSERT INTO `stock_dict` VALUES (5629, '汉维科技', '836957', 'bj');
+INSERT INTO `stock_dict` VALUES (5630, '联迪信息', '839790', 'bj');
+INSERT INTO `stock_dict` VALUES (5631, '雷特科技', '832110', 'bj');
+INSERT INTO `stock_dict` VALUES (5632, '凯添燃气', '831010', 'bj');
+INSERT INTO `stock_dict` VALUES (5633, '莱赛激光', '871263', 'bj');
+INSERT INTO `stock_dict` VALUES (5634, '佳合科技', '872392', 'bj');
+INSERT INTO `stock_dict` VALUES (5635, '凯腾精工', '871553', 'bj');
+INSERT INTO `stock_dict` VALUES (5636, '灵鸽科技', '833284', 'bj');
+INSERT INTO `stock_dict` VALUES (5637, '中寰股份', '836260', 'bj');
+INSERT INTO `stock_dict` VALUES (5638, '三友科技', '834475', 'bj');
+INSERT INTO `stock_dict` VALUES (5639, '大唐药业', '836433', 'bj');
+INSERT INTO `stock_dict` VALUES (5640, '旺成科技', '830896', 'bj');
+INSERT INTO `stock_dict` VALUES (5641, '晟楠科技', '837006', 'bj');
+INSERT INTO `stock_dict` VALUES (5642, '苏轴股份', '430418', 'bj');
+INSERT INTO `stock_dict` VALUES (5643, '同心传动', '833454', 'bj');
+INSERT INTO `stock_dict` VALUES (5644, '志晟信息', '832171', 'bj');
+INSERT INTO `stock_dict` VALUES (5645, '太湖雪', '838262', 'bj');
+INSERT INTO `stock_dict` VALUES (5646, '众诚科技', '835207', 'bj');
+INSERT INTO `stock_dict` VALUES (5647, '乐创技术', '430425', 'bj');
+INSERT INTO `stock_dict` VALUES (5648, '武汉蓝电', '830779', 'bj');
+INSERT INTO `stock_dict` VALUES (5649, '坤博精工', '873570', 'bj');
+INSERT INTO `stock_dict` VALUES (5650, '奥迪威', '832491', 'bj');
+INSERT INTO `stock_dict` VALUES (5651, '华密新材', '836247', 'bj');
+INSERT INTO `stock_dict` VALUES (5652, '柏星龙', '833075', 'bj');
+INSERT INTO `stock_dict` VALUES (5653, '天宏锂电', '873152', 'bj');
+INSERT INTO `stock_dict` VALUES (5654, '迅安科技', '834950', 'bj');
+INSERT INTO `stock_dict` VALUES (5655, '鼎智科技', '873593', 'bj');
+INSERT INTO `stock_dict` VALUES (5656, '新赣江', '873167', 'bj');
+INSERT INTO `stock_dict` VALUES (5657, '峆一药业', '430478', 'bj');
+INSERT INTO `stock_dict` VALUES (5658, '丰光精密', '430510', 'bj');
+INSERT INTO `stock_dict` VALUES (5659, '骏创科技', '833533', 'bj');
+INSERT INTO `stock_dict` VALUES (5660, '合肥高科', '430718', 'bj');
+INSERT INTO `stock_dict` VALUES (5661, '巨能股份', '871478', 'bj');
+INSERT INTO `stock_dict` VALUES (5662, '欧康医药', '833230', 'bj');
+INSERT INTO `stock_dict` VALUES (5663, '科隆新材', '920098', 'bj');
+INSERT INTO `stock_dict` VALUES (5664, '鸿智科技', '870726', 'bj');
+INSERT INTO `stock_dict` VALUES (5665, '恒进感应', '838670', 'bj');
+INSERT INTO `stock_dict` VALUES (5666, '舜宇精工', '831906', 'bj');
+INSERT INTO `stock_dict` VALUES (5667, '万达轴承', '920002', 'bj');
+INSERT INTO `stock_dict` VALUES (5668, '芭薇股份', '837023', 'bj');
+INSERT INTO `stock_dict` VALUES (5669, '驰诚股份', '834407', 'bj');
+INSERT INTO `stock_dict` VALUES (5670, '惠丰钻石', '839725', 'bj');
+INSERT INTO `stock_dict` VALUES (5671, '天和磁材', '603072', 'sh');
+INSERT INTO `stock_dict` VALUES (5672, '国货航', '001391', 'sz');
+INSERT INTO `stock_dict` VALUES (5673, '方正阀门', '920082', 'bj');
+INSERT INTO `stock_dict` VALUES (5674, '黄山谷捷', '301581', 'sz');
+INSERT INTO `stock_dict` VALUES (5675, '赛分科技', '688758', 'sh');
+INSERT INTO `stock_dict` VALUES (5676, '钧崴电子', '301458', 'sz');
+
+-- ----------------------------
 -- Table structure for stock_position_plan
 -- ----------------------------
 DROP TABLE IF EXISTS `stock_position_plan`;
 CREATE TABLE `stock_position_plan`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  `trace_id` bigint NULL DEFAULT NULL COMMENT '追踪id',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `trace_id` bigint(20) NULL DEFAULT NULL COMMENT '追踪id',
   `advice_price` decimal(24, 3) NULL DEFAULT NULL COMMENT '触发价格',
   `gridding_amount` decimal(24, 3) NULL DEFAULT NULL COMMENT '网格持仓',
   `gridding_percent` decimal(24, 3) NULL DEFAULT NULL COMMENT '网格持仓百分比',
-  `advice_date` datetime(0) NULL DEFAULT NULL COMMENT '触发日期',
+  `advice_date` datetime NULL DEFAULT NULL COMMENT '触发日期',
   `advice_amount` decimal(24, 3) NULL DEFAULT NULL COMMENT '定投持仓金额',
   `advice_percent` decimal(24, 3) NULL DEFAULT NULL COMMENT '定投持仓百分比',
   `trade_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '交易类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6775 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '股票持仓计划' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6775 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '股票持仓计划' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of stock_position_plan
@@ -1576,12 +7279,12 @@ INSERT INTO `stock_position_plan` VALUES (6775, '0', NULL, '2023-12-07 16:55:56'
 -- ----------------------------
 DROP TABLE IF EXISTS `stock_trace`;
 CREATE TABLE `stock_trace`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '名称',
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '代码',
   `cost_price` decimal(24, 3) NULL DEFAULT NULL COMMENT '成本价格',
@@ -1596,12 +7299,12 @@ CREATE TABLE `stock_trace`  (
   `assessmen_max` decimal(24, 3) NULL DEFAULT NULL COMMENT '预计最高估值指标',
   `assessmen_fit` decimal(24, 3) NULL DEFAULT NULL COMMENT '预计合理估值指标',
   `safe_span` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '安全边际, 合理指标与最低指标之间百分比计算买入点',
-  `start_time` datetime(0) NULL DEFAULT NULL COMMENT '开始持有时间',
-  `keep_data` datetime(0) NULL DEFAULT NULL COMMENT '目标持有时间',
+  `start_time` datetime NULL DEFAULT NULL COMMENT '开始持有时间',
+  `keep_data` datetime NULL DEFAULT NULL COMMENT '目标持有时间',
   `time_span` decimal(24, 3) NULL DEFAULT NULL COMMENT '时间弹性,超过定投目标范围',
-  `plan_id` bigint NULL DEFAULT NULL COMMENT '计划id',
+  `plan_id` bigint(20) NULL DEFAULT NULL COMMENT '计划id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '股票追踪' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '股票追踪' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of stock_trace
@@ -1624,13 +7327,13 @@ INSERT INTO `stock_trace` VALUES (13, '0', NULL, NULL, NULL, NULL, '联瑞新材
 -- ----------------------------
 DROP TABLE IF EXISTS `stockaall_pb`;
 CREATE TABLE `stockaall_pb`  (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `equal_weight_averagepb` double NULL DEFAULT NULL,
   `middlepb` double NULL DEFAULT NULL,
   `quantile_in_recent10years_equal_weight_averagepb` double NULL DEFAULT NULL,
   `quantile_in_recent10years_middlepb` double NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of stockaall_pb
@@ -1641,18 +7344,18 @@ CREATE TABLE `stockaall_pb`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_config`;
 CREATE TABLE `sys_config`  (
-  `config_id` int NOT NULL AUTO_INCREMENT COMMENT '参数主键',
+  `config_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
   `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数名称',
   `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数键名',
   `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '参数键值',
   `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_config
@@ -1668,22 +7371,22 @@ INSERT INTO `sys_config` VALUES (5, '账号自助-是否开启用户注册功能
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept`  (
-  `dept_id` bigint NOT NULL AUTO_INCREMENT COMMENT '部门id',
-  `parent_id` bigint NULL DEFAULT 0 COMMENT '父部门id',
+  `dept_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '部门id',
+  `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '父部门id',
   `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '祖级列表',
   `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '部门名称',
-  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+  `order_num` int(11) NULL DEFAULT 0 COMMENT '显示顺序',
   `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '负责人',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '联系电话',
   `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '邮箱',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '部门表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dept
@@ -1704,8 +7407,8 @@ INSERT INTO `sys_dept` VALUES (109, 102, '0,100,102', '财务部门', 2, '若依
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`  (
-  `dict_code` bigint NOT NULL AUTO_INCREMENT COMMENT '字典编码',
-  `dict_sort` int NULL DEFAULT 0 COMMENT '字典排序',
+  `dict_code` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典编码',
+  `dict_sort` int(11) NULL DEFAULT 0 COMMENT '字典排序',
   `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典标签',
   `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典键值',
   `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
@@ -1714,12 +7417,12 @@ CREATE TABLE `sys_dict_data`  (
   `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -1772,18 +7475,18 @@ INSERT INTO `sys_dict_data` VALUES (113, 0, '走势分析', 'TREND', 'trace_log_
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type`  (
-  `dict_id` bigint NOT NULL AUTO_INCREMENT COMMENT '字典主键',
+  `dict_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典主键',
   `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典名称',
   `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '字典类型',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`dict_id`) USING BTREE,
-  UNIQUE INDEX `dict_type`(`dict_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典类型表' ROW_FORMAT = Dynamic;
+  UNIQUE INDEX `dict_type`(`dict_type` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 104 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '字典类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dict_type
@@ -1809,7 +7512,7 @@ INSERT INTO `sys_dict_type` VALUES (104, '追踪日志类型', 'trace_log_type',
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_job`;
 CREATE TABLE `sys_job`  (
-  `job_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务ID',
+  `job_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务ID',
   `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '任务名称',
   `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'DEFAULT' COMMENT '任务组名',
   `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调用目标字符串',
@@ -1818,12 +7521,12 @@ CREATE TABLE `sys_job`  (
   `concurrent` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '状态（0正常 1暂停）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注信息',
   PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_job
@@ -1831,33 +7534,52 @@ CREATE TABLE `sys_job`  (
 INSERT INTO `sys_job` VALUES (1, '系统默认（无参）', 'DEFAULT', 'ryTask.ryNoParams', '0/10 * * * * ?', '3', '1', '1', 'admin', '2022-11-24 10:14:25', '', NULL, '');
 INSERT INTO `sys_job` VALUES (2, '系统默认（有参）', 'DEFAULT', 'ryTask.ryParams(\'ry\')', '0/15 * * * * ?', '3', '1', '1', 'admin', '2022-11-24 10:14:25', '', NULL, '');
 INSERT INTO `sys_job` VALUES (3, '系统默认（多参）', 'DEFAULT', 'ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)', '0/20 * * * * ?', '3', '1', '1', 'admin', '2022-11-24 10:14:25', '', NULL, '');
+INSERT INTO `sys_job` VALUES (4, '更新金融指标', 'DEFAULT', 'indicatorService.updateDaysIndicators', '0 0 4 * * ? *', '1', '1', '0', 'admin', '2024-12-10 17:03:55', 'admin', '2024-12-17 12:39:33', '');
+INSERT INTO `sys_job` VALUES (5, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '0 0 3 * * ? *', '1', '1', '0', 'admin', '2024-12-17 12:40:32', '', '2024-12-17 12:40:50', '');
 
 -- ----------------------------
 -- Table structure for sys_job_log
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_job_log`;
 CREATE TABLE `sys_job_log`  (
-  `job_log_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
+  `job_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
   `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务名称',
   `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '任务组名',
   `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '调用目标字符串',
   `job_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日志信息',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
   `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '异常信息',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_log_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_job_log
 -- ----------------------------
+INSERT INTO `sys_job_log` VALUES (1, '拉取股票字典', 'DEFAULT', 'stockDictService', '拉取股票字典 总共耗时：3毫秒', '1', 'java.lang.NoSuchMethodException: com.ruoyi.hemerdinger.finance.service.impl.StockDictServiceImpl.()\r\n	at java.lang.Class.getDeclaredMethod(Class.java:2158)\r\n	at com.ruoyi.quartz.util.JobInvokeUtil.invokeMethod(JobInvokeUtil.java:60)\r\n	at com.ruoyi.quartz.util.JobInvokeUtil.invokeMethod(JobInvokeUtil.java:33)\r\n	at com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution.doExecute(QuartzDisallowConcurrentExecution.java:19)\r\n	at com.ruoyi.quartz.util.AbstractQuartzJob.execute(AbstractQuartzJob.java:43)\r\n	at org.quartz.core.JobRunShell.run(JobRunShell.java:202)\r\n	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573)\r\n', '2024-12-10 17:04:22');
+INSERT INTO `sys_job_log` VALUES (2, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：47457毫秒', '1', 'java.lang.reflect.InvocationTargetException\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at com.ruoyi.quartz.util.JobInvokeUtil.invokeMethod(JobInvokeUtil.java:61)\r\n	at com.ruoyi.quartz.util.JobInvokeUtil.invokeMethod(JobInvokeUtil.java:33)\r\n	at com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution.doExecute(QuartzDisallowConcurrentExecution.java:19)\r\n	at com.ruoyi.quartz.util.AbstractQuartzJob.execute(AbstractQuartzJob.java:43)\r\n	at org.quartz.core.JobRunShell.run(JobRunShell.java:202)\r\n	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573)\r\nCaused by: java.lang.NullPointerException\r\n	at com.ruoyi.hemerdinger.finance.service.impl.StockDictServiceImpl.doSave(StockDictServiceImpl.java:120)\r\n	at com.ruoyi.hemerdinger.finance.service.impl.StockDictServiceImpl.saveStockList(StockDictServiceImpl.java:111)\r\n	... 10 more\r\n', '2024-12-10 17:07:58');
+INSERT INTO `sys_job_log` VALUES (3, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：16417毫秒', '1', 'java.lang.reflect.InvocationTargetException\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\r\n	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\r\n	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\r\n	at java.lang.reflect.Method.invoke(Method.java:498)\r\n	at com.ruoyi.quartz.util.JobInvokeUtil.invokeMethod(JobInvokeUtil.java:61)\r\n	at com.ruoyi.quartz.util.JobInvokeUtil.invokeMethod(JobInvokeUtil.java:33)\r\n	at com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution.doExecute(QuartzDisallowConcurrentExecution.java:19)\r\n	at com.ruoyi.quartz.util.AbstractQuartzJob.execute(AbstractQuartzJob.java:43)\r\n	at org.quartz.core.JobRunShell.run(JobRunShell.java:202)\r\n	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:573)\r\nCaused by: java.lang.NullPointerException\r\n	at com.ruoyi.hemerdinger.finance.service.impl.StockDictServiceImpl.doSave(StockDictServiceImpl.java:122)\r\n	at com.ruoyi.hemerdinger.finance.service.impl.StockDictServiceImpl.saveStockList(StockDictServiceImpl.java:113)\r\n	... 10 more\r\n', '2024-12-11 15:47:35');
+INSERT INTO `sys_job_log` VALUES (4, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：39198毫秒', '0', '', '2024-12-11 15:55:40');
+INSERT INTO `sys_job_log` VALUES (5, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：20382毫秒', '0', '', '2024-12-11 15:56:42');
+INSERT INTO `sys_job_log` VALUES (6, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：34070毫秒', '0', '', '2024-12-11 15:58:22');
+INSERT INTO `sys_job_log` VALUES (7, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：17569毫秒', '0', '', '2024-12-11 15:59:57');
+INSERT INTO `sys_job_log` VALUES (8, '更新金融指标', 'DEFAULT', 'indicatorService.updateDaysIndicators', '更新金融指标 总共耗时：72708毫秒', '0', '', '2024-12-17 12:42:32');
+INSERT INTO `sys_job_log` VALUES (9, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：24803毫秒', '0', '', '2024-12-17 12:45:21');
+INSERT INTO `sys_job_log` VALUES (10, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：25724毫秒', '0', '', '2024-12-18 03:00:47');
+INSERT INTO `sys_job_log` VALUES (11, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：26032毫秒', '0', '', '2024-12-19 10:57:02');
+INSERT INTO `sys_job_log` VALUES (12, '更新金融指标', 'DEFAULT', 'indicatorService.updateDaysIndicators', '更新金融指标 总共耗时：67981毫秒', '0', '', '2024-12-19 10:57:44');
+INSERT INTO `sys_job_log` VALUES (13, '更新金融指标', 'DEFAULT', 'indicatorService.updateDaysIndicators', '更新金融指标 总共耗时：67990毫秒', '0', '', '2024-12-19 10:58:52');
+INSERT INTO `sys_job_log` VALUES (14, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：31069毫秒', '0', '', '2024-12-20 12:46:13');
+INSERT INTO `sys_job_log` VALUES (15, '更新金融指标', 'DEFAULT', 'indicatorService.updateDaysIndicators', '更新金融指标 总共耗时：130792毫秒', '0', '', '2024-12-20 12:47:53');
+INSERT INTO `sys_job_log` VALUES (16, '拉取股票字典', 'DEFAULT', 'stockDictService.saveStockList', '拉取股票字典 总共耗时：22764毫秒', '0', '', '2024-12-22 03:00:22');
+INSERT INTO `sys_job_log` VALUES (17, '更新金融指标', 'DEFAULT', 'indicatorService.updateDaysIndicators', '更新金融指标 总共耗时：66163毫秒', '0', '', '2024-12-22 04:01:06');
 
 -- ----------------------------
 -- Table structure for sys_logininfor
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_logininfor`;
 CREATE TABLE `sys_logininfor`  (
-  `info_id` bigint NOT NULL AUTO_INCREMENT COMMENT '访问ID',
+  `info_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '访问ID',
   `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '用户账号',
   `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '登录IP地址',
   `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '登录地点',
@@ -1865,9 +7587,9 @@ CREATE TABLE `sys_logininfor`  (
   `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '操作系统',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '提示消息',
-  `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
+  `login_time` datetime NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 209 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 225 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1982,33 +7704,49 @@ INSERT INTO `sys_logininfor` VALUES (206, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (207, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '1', '用户不存在/密码错误', '2024-05-27 08:31:08');
 INSERT INTO `sys_logininfor` VALUES (208, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-05-27 08:31:14');
 INSERT INTO `sys_logininfor` VALUES (209, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-05-27 09:02:06');
+INSERT INTO `sys_logininfor` VALUES (210, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2024-12-03 10:34:14');
+INSERT INTO `sys_logininfor` VALUES (211, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2024-12-03 10:34:19');
+INSERT INTO `sys_logininfor` VALUES (212, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-03 10:34:23');
+INSERT INTO `sys_logininfor` VALUES (213, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-03 12:06:50');
+INSERT INTO `sys_logininfor` VALUES (214, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2024-12-10 16:14:14');
+INSERT INTO `sys_logininfor` VALUES (215, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2024-12-10 16:15:02');
+INSERT INTO `sys_logininfor` VALUES (216, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-10 16:15:10');
+INSERT INTO `sys_logininfor` VALUES (217, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-11 15:45:56');
+INSERT INTO `sys_logininfor` VALUES (218, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-12 13:01:08');
+INSERT INTO `sys_logininfor` VALUES (219, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-15 22:22:25');
+INSERT INTO `sys_logininfor` VALUES (220, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-16 15:15:30');
+INSERT INTO `sys_logininfor` VALUES (221, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-16 18:25:34');
+INSERT INTO `sys_logininfor` VALUES (222, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-21 20:27:02');
+INSERT INTO `sys_logininfor` VALUES (223, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-21 22:30:09');
+INSERT INTO `sys_logininfor` VALUES (224, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-21 23:08:44');
+INSERT INTO `sys_logininfor` VALUES (225, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-21 23:08:46');
 
 -- ----------------------------
 -- Table structure for sys_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
-  `menu_id` bigint NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+  `menu_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
   `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '菜单名称',
-  `parent_id` bigint NULL DEFAULT 0 COMMENT '父菜单ID',
-  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+  `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '父菜单ID',
+  `order_num` int(11) NULL DEFAULT 0 COMMENT '显示顺序',
   `path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '路由地址',
   `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '组件路径',
   `query` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '路由参数',
-  `is_frame` int NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
-  `is_cache` int NULL DEFAULT 0 COMMENT '是否缓存（0缓存 1不缓存）',
+  `is_frame` int(11) NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
+  `is_cache` int(11) NULL DEFAULT 0 COMMENT '是否缓存（0缓存 1不缓存）',
   `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
   `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '菜单状态（0正常 1停用）',
   `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '权限标识',
   `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '#' COMMENT '菜单图标',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2043 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2050 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -2129,24 +7867,31 @@ INSERT INTO `sys_menu` VALUES (2040, '小说数据新增', 2038, 2, '#', '', NUL
 INSERT INTO `sys_menu` VALUES (2041, '小说数据修改', 2038, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'gpt:fictionData:edit', '#', 'admin', '2024-05-27 09:18:49', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2042, '小说数据删除', 2038, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'gpt:fictionData:remove', '#', 'admin', '2024-05-27 09:18:49', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2043, '小说数据导出', 2038, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'gpt:fictionData:export', '#', 'admin', '2024-05-27 09:18:49', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2044, '股票字典', 2018, 1, 'stockDict', 'finance/stockDict/index', NULL, 1, 0, 'C', '0', '0', 'finance:stockDict:list', '#', 'admin', '2024-12-10 16:23:16', '', NULL, '股票字典菜单');
+INSERT INTO `sys_menu` VALUES (2045, '股票字典查询', 2044, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'finance:stockDict:query', '#', 'admin', '2024-12-10 16:23:16', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2046, '股票字典新增', 2044, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'finance:stockDict:add', '#', 'admin', '2024-12-10 16:23:16', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2047, '股票字典修改', 2044, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'finance:stockDict:edit', '#', 'admin', '2024-12-10 16:23:17', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2048, '股票字典删除', 2044, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'finance:stockDict:remove', '#', 'admin', '2024-12-10 16:23:17', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2049, '股票字典导出', 2044, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'finance:stockDict:export', '#', 'admin', '2024-12-10 16:23:17', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2050, '股票概念', 2011, 1, 'subjectSearch', 'finance/stockDict/subjectSearch', NULL, 1, 0, 'C', '0', '0', '', 'search', 'admin', '2024-12-21 20:43:44', 'admin', '2024-12-21 20:44:19', '');
 
 -- ----------------------------
 -- Table structure for sys_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notice`;
 CREATE TABLE `sys_notice`  (
-  `notice_id` int NOT NULL AUTO_INCREMENT COMMENT '公告ID',
+  `notice_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
   `notice_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公告标题',
   `notice_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公告类型（1通知 2公告）',
   `notice_content` longblob NULL COMMENT '公告内容',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notice
@@ -2159,12 +7904,12 @@ INSERT INTO `sys_notice` VALUES (2, '维护通知：2018-07-01 若依系统凌�
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_oper_log`;
 CREATE TABLE `sys_oper_log`  (
-  `oper_id` bigint NOT NULL AUTO_INCREMENT COMMENT '日志主键',
+  `oper_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
   `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '模块标题',
-  `business_type` int NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+  `business_type` int(11) NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
   `method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '方法名称',
   `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '请求方式',
-  `operator_type` int NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
+  `operator_type` int(11) NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
   `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '操作人员',
   `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '部门名称',
   `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '请求URL',
@@ -2172,11 +7917,11 @@ CREATE TABLE `sys_oper_log`  (
   `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '操作地点',
   `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '请求参数',
   `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '返回参数',
-  `status` int NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
+  `status` int(11) NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
   `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '错误消息',
-  `oper_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
+  `oper_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 532 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 557 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2614,24 +8359,49 @@ INSERT INTO `sys_oper_log` VALUES (529, '代码生成', 2, 'com.ruoyi.generator.
 INSERT INTO `sys_oper_log` VALUES (530, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.synchDb()', 'GET', 1, 'admin', NULL, '/tool/gen/synchDb/gpt_fiction_paragraph', '127.0.0.1', '内网IP', '{tableName=gpt_fiction_paragraph}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-05-27 14:38:20');
 INSERT INTO `sys_oper_log` VALUES (531, '代码生成', 8, 'com.ruoyi.generator.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{}', NULL, 0, NULL, '2024-05-27 14:44:34');
 INSERT INTO `sys_oper_log` VALUES (532, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.synchDb()', 'GET', 1, 'admin', NULL, '/tool/gen/synchDb/gpt_fiction_data', '127.0.0.1', '内网IP', '{tableName=gpt_fiction_data}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-05-27 14:45:58');
+INSERT INTO `sys_oper_log` VALUES (533, '代码生成', 6, 'com.ruoyi.generator.controller.GenController.importTableSave()', 'POST', 1, 'admin', NULL, '/tool/gen/importTable', '127.0.0.1', '内网IP', 'stock_dict', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-10 16:16:46');
+INSERT INTO `sys_oper_log` VALUES (534, '代码生成', 8, 'com.ruoyi.generator.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{}', NULL, 0, NULL, '2024-12-10 16:16:52');
+INSERT INTO `sys_oper_log` VALUES (535, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', NULL, '/tool/gen', '127.0.0.1', '内网IP', '{\"sub\":false,\"functionAuthor\":\"lijingxiang\",\"columns\":[{\"capJavaField\":\"Id\",\"usableColumn\":false,\"columnId\":200,\"isIncrement\":\"1\",\"increment\":true,\"insert\":true,\"dictType\":\"\",\"required\":false,\"superColumn\":false,\"updateBy\":\"\",\"isInsert\":\"1\",\"javaField\":\"id\",\"htmlType\":\"input\",\"edit\":false,\"query\":false,\"columnComment\":\"id\",\"sort\":1,\"list\":false,\"params\":{},\"javaType\":\"Long\",\"queryType\":\"EQ\",\"columnType\":\"bigint(20)\",\"createBy\":\"admin\",\"isPk\":\"1\",\"createTime\":1733818606000,\"tableId\":14,\"pk\":true,\"columnName\":\"id\"},{\"capJavaField\":\"Name\",\"usableColumn\":false,\"columnId\":201,\"isIncrement\":\"0\",\"increment\":false,\"insert\":true,\"isList\":\"1\",\"dictType\":\"\",\"required\":false,\"superColumn\":false,\"updateBy\":\"\",\"isInsert\":\"1\",\"javaField\":\"name\",\"htmlType\":\"input\",\"edit\":true,\"query\":true,\"columnComment\":\"名称\",\"isQuery\":\"1\",\"sort\":2,\"list\":true,\"params\":{},\"javaType\":\"String\",\"queryType\":\"LIKE\",\"columnType\":\"varchar(255)\",\"createBy\":\"admin\",\"isPk\":\"0\",\"createTime\":1733818606000,\"isEdit\":\"1\",\"tableId\":14,\"pk\":false,\"columnName\":\"name\"},{\"capJavaField\":\"Code\",\"usableColumn\":false,\"columnId\":202,\"isIncrement\":\"0\",\"increment\":false,\"insert\":true,\"isList\":\"1\",\"dictType\":\"\",\"required\":false,\"superColumn\":false,\"updateBy\":\"\",\"isInsert\":\"1\",\"javaField\":\"code\",\"htmlType\":\"input\",\"edit\":true,\"query\":true,\"columnComment\":\"代码\",\"isQuery\":\"1\",\"sort\":3,\"list\":true,\"params\":{},\"javaType\":\"String\",\"queryType\":\"EQ\",\"columnType\":\"varchar(255)\",\"createBy\":\"admin\",\"isPk\":\"0\",\"createTime\":1733818606000,\"isEdit\":\"1\",\"tableId\":14,\"pk\":false,\"columnName\":\"code\"},{\"capJavaField\":\"Bourse\",\"usableColumn\":false,\"columnId\":203,\"isIncrement\":\"0\",\"increment\":false,\"insert\":true,\"isList\":\"1\",\"dictType\":\"\",\"required\":false,\"superColumn\":false,\"updateBy\":\"\",\"isInsert\":\"1\",\"javaField\":\"bourse\",\"htmlType\":\"input\",\"edit\":true,\"query\":true,\"columnComment\":\"交易所\",\"isQuery\":\"1\",\"sort\":4,\"list\":true,\"params\":{},\"javaType\":\"String\",\"queryType\":\"EQ\",\"columnType\":\"varchar(255)\",\"createBy\":\"admin\",\"isPk\":\"0\",\"createTime\":1733818', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-10 16:19:53');
+INSERT INTO `sys_oper_log` VALUES (536, '代码生成', 8, 'com.ruoyi.generator.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{}', NULL, 0, NULL, '2024-12-10 16:19:57');
+INSERT INTO `sys_oper_log` VALUES (537, '定时任务', 1, 'com.ruoyi.quartz.controller.SysJobController.add()', 'POST', 1, 'admin', NULL, '/monitor/job', '127.0.0.1', '内网IP', '{\"jobName\":\"拉取股票字典\",\"concurrent\":\"1\",\"params\":{},\"cronExpression\":\"0 0 0 L 1/1 ?\",\"jobId\":4,\"createBy\":\"admin\",\"nextValidTime\":1735574400000,\"invokeTarget\":\"stockDictService\",\"misfirePolicy\":\"1\",\"status\":\"1\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-10 17:03:55');
+INSERT INTO `sys_oper_log` VALUES (538, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-10 17:04:05');
+INSERT INTO `sys_oper_log` VALUES (539, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.edit()', 'PUT', 1, 'admin', NULL, '/monitor/job', '127.0.0.1', '内网IP', '{\"jobName\":\"拉取股票字典\",\"concurrent\":\"1\",\"remark\":\"\",\"jobGroup\":\"DEFAULT\",\"params\":{},\"cronExpression\":\"0 0 0 L 1/1 ?\",\"jobId\":4,\"createBy\":\"admin\",\"nextValidTime\":1735574400000,\"createTime\":1733821435000,\"updateBy\":\"admin\",\"invokeTarget\":\"stockDictService.saveStockList\",\"misfirePolicy\":\"1\",\"status\":\"1\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-10 17:06:42');
+INSERT INTO `sys_oper_log` VALUES (540, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-10 17:06:52');
+INSERT INTO `sys_oper_log` VALUES (541, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-11 15:47:05');
+INSERT INTO `sys_oper_log` VALUES (542, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-11 15:51:31');
+INSERT INTO `sys_oper_log` VALUES (543, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-11 15:54:59');
+INSERT INTO `sys_oper_log` VALUES (544, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-11 15:56:04');
+INSERT INTO `sys_oper_log` VALUES (545, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-11 15:57:29');
+INSERT INTO `sys_oper_log` VALUES (546, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-11 15:59:20');
+INSERT INTO `sys_oper_log` VALUES (547, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.edit()', 'PUT', 1, 'admin', NULL, '/monitor/job', '127.0.0.1', '内网IP', '{\"jobName\":\"拉取股票字典\",\"concurrent\":\"1\",\"remark\":\"\",\"jobGroup\":\"DEFAULT\",\"params\":{},\"cronExpression\":\"0 0 0 * * ? *\",\"jobId\":4,\"createBy\":\"admin\",\"nextValidTime\":1734451200000,\"createTime\":1733821435000,\"updateBy\":\"admin\",\"invokeTarget\":\"indicatorService.updateDaysIndicators\",\"misfirePolicy\":\"1\",\"status\":\"1\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:36:47');
+INSERT INTO `sys_oper_log` VALUES (548, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.edit()', 'PUT', 1, 'admin', NULL, '/monitor/job', '127.0.0.1', '内网IP', '{\"jobName\":\"更新金融指标\",\"concurrent\":\"1\",\"remark\":\"\",\"jobGroup\":\"DEFAULT\",\"params\":{},\"cronExpression\":\"0 0 4 * * ? *\",\"jobId\":4,\"createBy\":\"admin\",\"nextValidTime\":1734465600000,\"createTime\":1733821435000,\"updateBy\":\"admin\",\"invokeTarget\":\"indicatorService.updateDaysIndicators\",\"misfirePolicy\":\"1\",\"status\":\"1\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:39:25');
+INSERT INTO `sys_oper_log` VALUES (549, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.changeStatus()', 'PUT', 1, 'admin', NULL, '/monitor/job/changeStatus', '127.0.0.1', '内网IP', '{\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\",\"status\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:39:33');
+INSERT INTO `sys_oper_log` VALUES (550, '定时任务', 1, 'com.ruoyi.quartz.controller.SysJobController.add()', 'POST', 1, 'admin', NULL, '/monitor/job', '127.0.0.1', '内网IP', '{\"jobName\":\"拉取股票字典\",\"concurrent\":\"1\",\"jobGroup\":\"DEFAULT\",\"params\":{},\"cronExpression\":\"0 0 3 * * ? *\",\"jobId\":5,\"createBy\":\"admin\",\"nextValidTime\":1734462000000,\"invokeTarget\":\"stockDictService.saveStockList\",\"misfirePolicy\":\"1\",\"status\":\"1\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:40:32');
+INSERT INTO `sys_oper_log` VALUES (551, '定时任务', 1, 'com.ruoyi.quartz.controller.SysJobController.add()', 'POST', 1, 'admin', NULL, '/monitor/job', '127.0.0.1', '内网IP', '{\"jobName\":\"拉取股票字典\",\"concurrent\":\"1\",\"jobGroup\":\"DEFAULT\",\"params\":{},\"cronExpression\":\"0 0 3 * * ? *\",\"jobId\":6,\"createBy\":\"admin\",\"nextValidTime\":1734462000000,\"invokeTarget\":\"stockDictService.saveStockList\",\"misfirePolicy\":\"1\",\"status\":\"1\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:40:33');
+INSERT INTO `sys_oper_log` VALUES (552, '定时任务', 3, 'com.ruoyi.quartz.controller.SysJobController.remove()', 'DELETE', 1, 'admin', NULL, '/monitor/job/6', '127.0.0.1', '内网IP', '{jobIds=6}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:40:38');
+INSERT INTO `sys_oper_log` VALUES (553, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.changeStatus()', 'PUT', 1, 'admin', NULL, '/monitor/job/changeStatus', '127.0.0.1', '内网IP', '{\"params\":{},\"jobId\":5,\"misfirePolicy\":\"0\",\"status\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:40:50');
+INSERT INTO `sys_oper_log` VALUES (554, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":4,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:40:56');
+INSERT INTO `sys_oper_log` VALUES (555, '定时任务', 2, 'com.ruoyi.quartz.controller.SysJobController.run()', 'PUT', 1, 'admin', NULL, '/monitor/job/run', '127.0.0.1', '内网IP', '{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":5,\"misfirePolicy\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-17 12:44:56');
+INSERT INTO `sys_oper_log` VALUES (556, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"visible\":\"0\",\"icon\":\"search\",\"orderNum\":\"1\",\"menuName\":\"股票概念\",\"params\":{},\"parentId\":2011,\"isCache\":\"0\",\"path\":\"finance/subjectSearch\",\"component\":\"finance/stockDict/subjectSearch\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"C\",\"status\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-21 20:43:44');
+INSERT INTO `sys_oper_log` VALUES (557, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"visible\":\"0\",\"icon\":\"search\",\"orderNum\":\"1\",\"menuName\":\"股票概念\",\"params\":{},\"parentId\":2011,\"isCache\":\"0\",\"path\":\"subjectSearch\",\"component\":\"finance/stockDict/subjectSearch\",\"children\":[],\"createTime\":1734785024000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2050,\"menuType\":\"C\",\"perms\":\"\",\"status\":\"0\"}', '{\"code\":200,\"msg\":\"操作成功\"}', 0, NULL, '2024-12-21 20:44:19');
 
 -- ----------------------------
 -- Table structure for sys_post
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_post`;
 CREATE TABLE `sys_post`  (
-  `post_id` bigint NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
+  `post_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
   `post_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '岗位编码',
   `post_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '岗位名称',
-  `post_sort` int NOT NULL COMMENT '显示顺序',
+  `post_sort` int(11) NOT NULL COMMENT '显示顺序',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态（0正常 1停用）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '岗位信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_post
@@ -2646,22 +8416,22 @@ INSERT INTO `sys_post` VALUES (4, 'user', '普通员工', 4, '0', 'admin', '2022
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-  `role_id` bigint NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+  `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
   `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色名称',
   `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色权限字符串',
-  `role_sort` int NOT NULL COMMENT '显示顺序',
+  `role_sort` int(11) NOT NULL COMMENT '显示顺序',
   `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
   `menu_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '菜单树选择项是否关联显示',
   `dept_check_strictly` tinyint(1) NULL DEFAULT 1 COMMENT '部门树选择项是否关联显示',
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '角色状态（0正常 1停用）',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role
@@ -2674,10 +8444,10 @@ INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_dept`;
 CREATE TABLE `sys_role_dept`  (
-  `role_id` bigint NOT NULL COMMENT '角色ID',
-  `dept_id` bigint NOT NULL COMMENT '部门ID',
+  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
+  `dept_id` bigint(20) NOT NULL COMMENT '部门ID',
   PRIMARY KEY (`role_id`, `dept_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和部门关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和部门关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_dept
@@ -2691,10 +8461,10 @@ INSERT INTO `sys_role_dept` VALUES (2, 105);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`  (
-  `role_id` bigint NOT NULL COMMENT '角色ID',
-  `menu_id` bigint NOT NULL COMMENT '菜单ID',
+  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
+  `menu_id` bigint(20) NOT NULL COMMENT '菜单ID',
   PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '角色和菜单关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -2787,8 +8557,8 @@ INSERT INTO `sys_role_menu` VALUES (2, 1060);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-  `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-  `dept_id` bigint NULL DEFAULT NULL COMMENT '部门ID',
+  `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
   `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户账号',
   `nick_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户昵称',
   `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '00' COMMENT '用户类型（00系统用户）',
@@ -2800,19 +8570,19 @@ CREATE TABLE `sys_user`  (
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '最后登录IP',
-  `login_date` datetime(0) NULL DEFAULT NULL COMMENT '最后登录时间',
+  `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '更新者',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 105 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 105 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-05-27 17:02:07', 'admin', '2022-11-24 10:14:24', '', '2024-05-27 09:02:06', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-12-21 23:08:46', 'admin', '2022-11-24 10:14:24', '', '2024-12-21 23:08:46', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2022-11-24 10:14:24', 'admin', '2022-11-24 10:14:24', '', NULL, '测试员');
 INSERT INTO `sys_user` VALUES (102, 105, 'ceshiyuan', '测试员', '00', '', '', '0', '', '$2a$10$3XHl2gHeP2ljHsc6VEGAE.el34bsMVFQ3T1GoTZMC8BfRaGIlbX0u', '0', '0', '127.0.0.1', '2021-10-08 16:44:01', 'admin', '2021-10-08 12:31:31', '', '2021-10-08 16:44:01', NULL);
 INSERT INTO `sys_user` VALUES (103, 105, 'ceshizuzhang', '测试组长', '00', '', '', '0', '', '$2a$10$llYpK5VSXo9ycD6z/pWdnud6q97zxoSwxY78OAPgTguxkZmDjlbRi', '0', '0', '127.0.0.1', '2021-10-08 15:28:45', 'admin', '2021-10-08 12:32:38', '', '2021-10-08 15:28:45', NULL);
@@ -2823,10 +8593,10 @@ INSERT INTO `sys_user` VALUES (105, 105, 'renshi', 'renshi', '00', '', '', '0', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_post`;
 CREATE TABLE `sys_user_post`  (
-  `user_id` bigint NOT NULL COMMENT '用户ID',
-  `post_id` bigint NOT NULL COMMENT '岗位ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `post_id` bigint(20) NOT NULL COMMENT '岗位ID',
   PRIMARY KEY (`user_id`, `post_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户与岗位关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_post
@@ -2839,10 +8609,10 @@ INSERT INTO `sys_user_post` VALUES (2, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-  `user_id` bigint NOT NULL COMMENT '用户ID',
-  `role_id` bigint NOT NULL COMMENT '角色ID',
+  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
+  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`user_id`, `role_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户和角色关联表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户和角色关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -2858,17 +8628,17 @@ INSERT INTO `sys_user_role` VALUES (105, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `trace_log`;
 CREATE TABLE `trace_log`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
   `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `content` varchar(10000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '内容',
   `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '股票编码',
   `log_type` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日志类型',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '追踪日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '追踪日志' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of trace_log
@@ -2888,21 +8658,21 @@ INSERT INTO `trace_log` VALUES (10, '0', NULL, '2023-12-06 14:26:42', NULL, NULL
 -- ----------------------------
 DROP TABLE IF EXISTS `workflow_leave`;
 CREATE TABLE `workflow_leave`  (
-  `id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '主键ID',
-  `type` char(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '请假类型',
-  `title` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `reason` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '原因',
+  `id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键ID',
+  `type` char(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请假类型',
+  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `reason` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '原因',
   `leave_start_time` date NULL DEFAULT NULL COMMENT '开始时间',
   `leave_end_time` date NULL DEFAULT NULL COMMENT '结束时间',
-  `attachment_link` varchar(2048) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '附件',
-  `instance_id` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '流程实例ID',
-  `state` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '状态',
-  `create_name` varchar(36) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '创建者名称',
-  `create_by` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '' COMMENT '创建者',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `attachment_link` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '附件',
+  `instance_id` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '流程实例ID',
+  `state` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
+  `create_name` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建者名称',
+  `create_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '请假' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '请假' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of workflow_leave

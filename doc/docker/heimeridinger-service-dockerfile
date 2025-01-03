@@ -1,0 +1,15 @@
+# 基础镜像 heimeridinger-service:1.0
+FROM java:8
+# author
+MAINTAINER lijingxiang
+
+# 挂载目录
+VOLUME /home/ljx/ruoyi
+# 创建目录
+RUN mkdir -p /home/ljx/ruoyi
+# 指定路径
+WORKDIR /home/ljx/ruoyi
+# 复制jar文件到路径
+COPY ./release/ruoyi-admin.jar /home/ljx/ruoyi/ruoyi-admin.jar
+# 启动应用
+ENTRYPOINT ["java","-jar","-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=11005","ruoyi-admin.jar"]

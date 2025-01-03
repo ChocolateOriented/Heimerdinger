@@ -1,40 +1,90 @@
 package com.ruoyi.dev;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.RuoYiApplication;
-import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.hemerdinger.finance.domain.StockReport;
 import com.ruoyi.hemerdinger.finance.manager.AkShareManager;
-import com.ruoyi.hemerdinger.finance.service.IIndicatorService;
 import com.ruoyi.hemerdinger.finance.service.impl.IndicatorServiceImpl;
-import io.swagger.util.Json;
-import org.apache.commons.collections.CollectionUtils;
+import com.ruoyi.hemerdinger.finance.service.impl.StockReportServiceImpl;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
+
 @SpringBootTest(classes = RuoYiApplication.class)
 @RunWith(SpringRunner.class)
-public class IndicatorTest {
+public class Indicator {
 
     @Autowired
     IndicatorServiceImpl indicatorService;
+
+    @Autowired
+    StockReportServiceImpl stockReportService;
+
     @Autowired
     private AkShareManager akShareManager;
 
+    @Autowired
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
+
     @Test
     public void saveOrUpdateIndicator(){
-//        indicatorService.updateChinaCPI();
-        indicatorService.updateStockMarginSse();
+//        indicatorService.updateDaysIndicators();
+        indicatorService.updateSupplyMoney();
+    }
+    @Test
+    public void stockReportService(){
+//        indicatorService.updateDaysIndicators();
+        stockReportService.updateStockReport();
+    }
+
+    @Test
+    public void stockReportEs(){
+        // count 为数据的别名
+
+        MatchQueryBuilder matchQueryBuilder = matchQuery("BUSINESS_REVIEW", "ASIC");
+        NativeSearchQuery build = new NativeSearchQueryBuilder()
+                //查询前1000条
+                .withPageable(org.springframework.data.domain.PageRequest.of(0, 1000))
+                .withQuery(matchQueryBuilder).build();
+        SearchHits<StockReport> searchHits = elasticsearchRestTemplate.search(build, StockReport.class);
+        List<SearchHit<StockReport>> searchHitList = searchHits.getSearchHits();
+        // 将结果以SECURITY_CODE分组统计, 算平均分值, 降序排列
+        Map<String, List<SearchHit<StockReport>>> codeMap = new HashMap<>();
+        searchHitList.forEach(searchHit -> {
+            String SECURITY_CODE = searchHit.getContent().getSECURITY_CODE();
+            List<SearchHit<StockReport>> hits = codeMap.getOrDefault(SECURITY_CODE, new ArrayList<>());
+            hits.add(searchHit);
+            codeMap.put(SECURITY_CODE, hits);
+        });
+        Map<String, Double> scoreMap = new HashMap<>();
+        Set<String> codes = codeMap.keySet();
+        for (String code : codes) {
+            // 计算平均值
+            List<SearchHit<StockReport>> stockReports = codeMap.get(code);
+            double avg = stockReports.stream().mapToDouble(SearchHit::getScore).average().orElse(0);
+            scoreMap.put(code, avg);
+        }
+
+        // 将scoreMap降序排列
+        List<Map.Entry<String, Double>> entries = scoreMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toList());
+        System.out.println("scoreMap:"+ entries);
     }
 
     @Test
